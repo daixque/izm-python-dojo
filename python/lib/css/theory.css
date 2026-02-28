@@ -37,6 +37,34 @@ body {
 .lesson-meta {
     font-size: 14px;
     opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* 言語切り替え */
+.language-switcher {
+    display: inline-block;
+}
+
+.language-select {
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-select:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.language-select option {
+    background: #667eea;
+    color: white;
 }
 
 /* コンテンツ */

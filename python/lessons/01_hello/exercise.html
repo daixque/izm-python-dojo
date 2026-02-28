@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="../../lib/css/exercise.css">
     <!-- Monaco Editor -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+    <script src="../../lib/js/i18n.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- ヘッダー -->
         <header class="header">
             <h1 id="lesson-title">📝 演習課題</h1>
-            <div class="status">
-                <span id="status">準備中...</span>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher-container"></div>
             </div>
         </header>
 
@@ -23,18 +27,18 @@
             <!-- 左側：タスクパネル -->
             <aside class="task-panel">
                 <div class="task-header">
-                    <h2>課題</h2>
+                    <h2 id="task-header-title">課題</h2>
                 </div>
                 <div class="task-content">
                     <div class="task-description" id="task-description">
-                        <p>課題を読み込んでいます...</p>
+                        <p id="task-loading">課題を読み込んでいます...</p>
                     </div>
                     <div class="instructions" id="instructions" style="display: none;">
-                        <h4>✏️ やること</h4>
+                        <h4 id="instructions-title">✏️ やること</h4>
                         <ul id="instructions-list"></ul>
                     </div>
                     <div class="hints" id="hints" style="display: none;">
-                        <h4>💡 ヒント</h4>
+                        <h4 id="hints-title">💡 ヒント</h4>
                         <ul id="hints-list"></ul>
                     </div>
                 </div>
@@ -45,7 +49,7 @@
                 <!-- コードエディタ -->
                 <div class="editor-container">
                     <div class="editor-header">
-                        <span class="editor-label">📝 コードエディタ</span>
+                        <span class="editor-label" id="editor-label">📝 コードエディタ</span>
                         <div class="button-group">
                             <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
                             <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
@@ -58,7 +62,7 @@
                 <!-- 出力コンソール -->
                 <div class="console-container">
                     <div class="console-header">
-                        <span class="console-label">💻 実行結果</span>
+                        <span class="console-label" id="console-label">💻 実行結果</span>
                         <button id="btn-clear" class="btn btn-small">クリア</button>
                     </div>
                     <div id="console" class="console"></div>
@@ -69,8 +73,8 @@
         <!-- フッター -->
         <footer class="footer">
             <div class="footer-nav">
-                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
-                <a href="theory.html" class="btn btn-link">📚 理論に戻る</a>
+                <a href="../../index.html" class="btn btn-secondary" id="btn-back-menu">← 目次に戻る</a>
+                <a href="theory.html" class="btn btn-link" id="btn-back-theory">📚 理論に戻る</a>
             </div>
             <div class="footer-next">
                 <!-- 次のレッスンがある場合はここに追加 -->
@@ -83,7 +87,7 @@
     <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
         <div class="test-results-container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 style="margin: 0;">テスト結果</h3>
+                <h3 style="margin: 0;" id="test-results-title">テスト結果</h3>
                 <button id="btn-close-results" class="btn btn-small">閉じる</button>
             </div>
             <div id="test-results"></div>
@@ -106,20 +110,40 @@
     <script>
         let currentLesson = null;
         
+        // UI要素を翻訳
+        function updateUITexts() {
+            document.getElementById('task-header-title').textContent = window.i18n.t('label_task');
+            document.getElementById('task-loading').textContent = window.i18n.t('msg_loading');
+            document.getElementById('instructions-title').textContent = window.i18n.t('section_instructions');
+            document.getElementById('hints-title').textContent = window.i18n.t('section_hints');
+            document.getElementById('editor-label').textContent = window.i18n.t('label_codeEditor');
+            document.getElementById('console-label').textContent = window.i18n.t('label_console');
+            document.getElementById('test-results-title').textContent = window.i18n.t('test_results');
+            document.getElementById('btn-run').textContent = window.i18n.t('btn_run');
+            document.getElementById('btn-test').textContent = window.i18n.t('btn_test');
+            document.getElementById('btn-reset').textContent = window.i18n.t('btn_reset');
+            document.getElementById('btn-clear').textContent = window.i18n.t('btn_clear');
+            document.getElementById('btn-back-menu').textContent = window.i18n.t('btn_backToMenu');
+            document.getElementById('btn-back-theory').textContent = window.i18n.t('btn_backToTheory');
+            document.getElementById('btn-close-results').textContent = window.i18n.t('btn_close');
+            document.getElementById('status').textContent = window.i18n.t('status_loading');
+        }
+        
         // レッスンデータを読み込んで表示
         async function loadLesson() {
             try {
-                const response = await fetch('lesson.json');
+                const lessonFile = window.i18n.getLessonFilePath();
+                const response = await fetch(lessonFile);
                 const lesson = await response.json();
                 currentLesson = lesson;
                 
                 // タイトル
                 document.getElementById('lesson-title').textContent = lesson.title;
-                document.title = `演習課題 - ${lesson.title}`;
+                document.title = `${window.i18n.t('label_exercise')} - ${lesson.title}`;
                 
                 // タスク説明
                 document.getElementById('task-description').innerHTML = `
-                    <h3>📋 課題内容</h3>
+                    <h3>📋 ${window.i18n.t('section_task')}</h3>
                     <p>${lesson.exercise.task}</p>
                 `;
                 
@@ -139,7 +163,7 @@
                 
                 // エディタの初期化
                 await window.monacoEditor.init({
-                    value: lesson.exercise.initialCode || '# ここにコードを書いてみよう\n'
+                    value: lesson.exercise.initialCode || window.i18n.t('section_task') + '\n'
                 });
                 
                 // テストを設定
@@ -153,7 +177,7 @@
             } catch (error) {
                 console.error('Failed to load lesson:', error);
                 document.getElementById('task-description').innerHTML = `
-                    <p style="color: red;">エラー: レッスンデータの読み込みに失敗しました。</p>
+                    <p style="color: red;">${window.i18n.t('msg_loadError')}</p>
                     <p>${error.message}</p>
                 `;
             }
@@ -166,18 +190,18 @@
                 const code = window.monacoEditor.getContent();
                 if (code.trim()) {
                     clearConsole();
-                    appendToConsole('>>> プログラムを実行中...', 'info');
+                    appendToConsole(window.i18n.t('msg_executing'), 'info');
                     try {
                         const result = await window.pyodideRunner.run(code);
                         if (result !== undefined && result !== null) {
-                            appendToConsole(`戻り値: ${result}`, 'output');
+                            appendToConsole(`${window.i18n.t('msg_returnValue')} ${result}`, 'output');
                         }
-                        appendToConsole('>>> 実行完了', 'info');
+                        appendToConsole(window.i18n.t('msg_executionComplete'), 'info');
                     } catch (error) {
                         // エラーは runner.js で表示される
                     }
                 } else {
-                    appendToConsole('⚠ コードを入力してください', 'info');
+                    appendToConsole(window.i18n.t('msg_enterCode'), 'info');
                 }
             });
             
@@ -186,7 +210,7 @@
                 const code = window.monacoEditor.getContent();
                 if (code.trim()) {
                     clearConsole();
-                    appendToConsole('>>> テストを実行中...', 'info');
+                    appendToConsole(window.i18n.t('msg_testing'), 'info');
                     
                     const testResult = await window.tester.runAll(code);
                     window.tester.displayResults(testResult);
@@ -194,9 +218,9 @@
                     // テスト結果を表示
                     document.getElementById('test-results-overlay').style.display = 'block';
                     
-                    appendToConsole('>>> テスト完了', 'info');
+                    appendToConsole(window.i18n.t('msg_testComplete'), 'info');
                 } else {
-                    appendToConsole('⚠ コードを入力してください', 'info');
+                    appendToConsole(window.i18n.t('msg_enterCode'), 'info');
                 }
             });
             
@@ -205,7 +229,7 @@
                 if (currentLesson && currentLesson.exercise.initialCode) {
                     window.monacoEditor.setContent(currentLesson.exercise.initialCode);
                     clearConsole();
-                    appendToConsole('✓ コードをリセットしました', 'info');
+                    appendToConsole(window.i18n.t('msg_codeReset'), 'info');
                 }
             });
             
@@ -220,6 +244,12 @@
         
         // 初期化
         window.addEventListener('DOMContentLoaded', () => {
+            window.i18n.init();
+            window.i18n.createLanguageSwitcher('language-switcher-container', () => {
+                updateUITexts();
+                loadLesson();
+            });
+            updateUITexts();
             setupButtons();
             loadLesson();
         });

@@ -1,0 +1,72 @@
+{
+  "id": "lesson01",
+  "title": "Lesson 1: First Steps with Python",
+  "theory": {
+    "title": "First Steps with Python",
+    "sections": [
+      {
+        "heading": "Your First Program",
+        "content": [
+          "In the programming world, it's a tradition to display 'Hello, World!' as your first program when learning a new language.",
+          "Through this simple program, you can experience the basic flow of writing and running code."
+        ]
+      },
+      {
+        "heading": "What is the print Function?",
+        "content": [
+          "In Python, you can use the <code>print()</code> function to display text and numbers on the screen.",
+          "When you write what you want to display inside the parentheses, that content will appear in the output."
+        ]
+      },
+      {
+        "heading": "How to Write Strings",
+        "content": [
+          "When displaying strings (text), you need to enclose them in double quotes (<code>\"</code>) or single quotes (<code>'</code>).",
+          "Either works the same way, but it's recommended to use them consistently."
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "title": "Basic Usage",
+        "code": "print(\"Hello, World!\")",
+        "explanation": "Display a string enclosed in double quotes."
+      },
+      {
+        "title": "Single Quotes Work Too",
+        "code": "print('Hello, Python!')",
+        "explanation": "Single quotes work the same way."
+      },
+      {
+        "title": "Display Multiple Lines",
+        "code": "print(\"Hello\")\nprint(\"Python!\")",
+        "explanation": "Multiple print statements will each display on a new line."
+      },
+      {
+        "title": "Display Numbers",
+        "code": "print(123)\nprint(3 + 5)",
+        "explanation": "Numbers can be displayed without quotes. You can also display calculation results."
+      }
+    ]
+  },
+  "exercise": {
+    "task": "Write a program to display 'Hello, World!'",
+    "instructions": [
+      "Use the <code>print()</code> function",
+      "Inside the parentheses, write 'Hello, World!' enclosed in double quotes",
+      "Don't forget to close the parentheses!"
+    ],
+    "initialCode": "# Write your code here\n",
+    "hints": [
+      "Inside the print() parentheses, write text enclosed in double quotes",
+      "Example answer: print(\"Hello, World!\")"
+    ],
+    "tests": [
+      {
+        "name": "Test 1: Display Hello, World!",
+        "description": "Check if 'Hello, World!' is displayed correctly",
+        "code": "import sys\nfrom io import StringIO\n\n# Capture standard output\nold_stdout = sys.stdout\nsys.stdout = StringIO()\n\ntry:\n    exec(user_code)\n    output = sys.stdout.getvalue()\nfinally:\n    sys.stdout = old_stdout\n\n# Check output\nexpected = \"Hello, World!\\n\"\nif output == expected:\n    result = {\"passed\": True, \"message\": \"✓ Correct!\"}\nelse:\n    result = {\"passed\": False, \"message\": f\"✗ Output is different.\\nExpected: {repr(expected)}\\nActual: {repr(output)}\"}\n\nresult"
+      }
+    ]
+  }
+}

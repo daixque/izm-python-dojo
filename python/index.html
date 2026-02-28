@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python学習環境 - プログラミング入門</title>
+    <script src="lib/js/i18n.js"></script>
     <style>
         * {
             margin: 0;
@@ -27,6 +28,35 @@
             text-align: center;
             color: white;
             margin-bottom: 48px;
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        
+        .language-select {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .language-select:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .language-select option {
+            background: #764ba2;
+            color: white;
         }
         
         .header h1 {
@@ -137,8 +167,9 @@
     <div class="container">
         <!-- ヘッダー -->
         <header class="header">
-            <h1>🐍 Python学習環境</h1>
-            <p>中学生向けプログラミング入門教材</p>
+            <div class="language-switcher" id="language-switcher"></div>
+            <h1 id="page-title">🐍 Python学習環境</h1>
+            <p id="page-subtitle">中学生向けプログラミング入門教材</p>
         </header>
 
         <!-- レッスン一覧 -->
@@ -146,45 +177,84 @@
             <!-- レッスン1 -->
             <div class="lesson-card">
                 <div class="lesson-number">1</div>
-                <h2>はじめてのPython</h2>
-                <p>print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。</p>
+                <h2 id="lesson1-title">はじめてのPython</h2>
+                <p id="lesson1-desc">print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。</p>
                 <div class="lesson-links">
-                    <a href="lessons/01_hello/theory.html" class="btn btn-secondary">📚 理論</a>
-                    <a href="lessons/01_hello/exercise.html" class="btn btn-primary">✏️ 演習</a>
+                    <a href="lessons/01_hello/theory.html" class="btn btn-secondary" id="lesson1-theory-btn">📚 理論</a>
+                    <a href="lessons/01_hello/exercise.html" class="btn btn-primary" id="lesson1-exercise-btn">✏️ 演習</a>
                 </div>
             </div>
 
             <!-- 今後のレッスン用プレースホルダー -->
             <div class="lesson-card" style="opacity: 0.5;">
                 <div class="lesson-number">2</div>
-                <h2>変数と計算</h2>
-                <p>変数を使ってデータを保存し、計算をしてみよう。</p>
+                <h2 id="lesson2-title">変数と計算</h2>
+                <p id="lesson2-desc">変数を使ってデータを保存し、計算をしてみよう。</p>
                 <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled>📚 理論</button>
-                    <button class="btn btn-primary" disabled>✏️ 演習</button>
+                    <button class="btn btn-secondary" disabled id="lesson2-theory-btn">📚 理論</button>
+                    <button class="btn btn-primary" disabled id="lesson2-exercise-btn">✏️ 演習</button>
                 </div>
             </div>
 
             <div class="lesson-card" style="opacity: 0.5;">
                 <div class="lesson-number">3</div>
-                <h2>条件分岐（if文）</h2>
-                <p>条件によって処理を変える方法を学ぼう。</p>
+                <h2 id="lesson3-title">条件分岐（if文）</h2>
+                <p id="lesson3-desc">条件によって処理を変える方法を学ぼう。</p>
                 <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled>📚 理論</button>
-                    <button class="btn btn-primary" disabled>✏️ 演習</button>
+                    <button class="btn btn-secondary" disabled id="lesson3-theory-btn">📚 理論</button>
+                    <button class="btn btn-primary" disabled id="lesson3-exercise-btn">✏️ 演習</button>
                 </div>
             </div>
 
             <div class="lesson-card" style="opacity: 0.5;">
                 <div class="lesson-number">4</div>
-                <h2>繰り返し（for文）</h2>
-                <p>同じ処理を繰り返し実行する方法を学ぼう。</p>
+                <h2 id="lesson4-title">繰り返し（for文）</h2>
+                <p id="lesson4-desc">同じ処理を繰り返し実行する方法を学ぼう。</p>
                 <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled>📚 理論</button>
-                    <button class="btn btn-primary" disabled>✏️ 演習</button>
+                    <button class="btn btn-secondary" disabled id="lesson4-theory-btn">📚 理論</button>
+                    <button class="btn btn-primary" disabled id="lesson4-exercise-btn">✏️ 演習</button>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        // 多言語UIの更新
+        function updateUITexts() {
+            document.getElementById('page-title').textContent = `🐍 ${window.i18n.t('appTitle')}`;
+            document.getElementById('page-subtitle').textContent = window.i18n.t('subtitle');
+            
+            // Lesson 1
+            document.getElementById('lesson1-title').textContent = window.i18n.t('lesson1_title');
+            document.getElementById('lesson1-desc').textContent = window.i18n.t('lesson1_desc');
+            document.getElementById('lesson1-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
+            document.getElementById('lesson1-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
+            
+            // Lesson 2
+            document.getElementById('lesson2-title').textContent = window.i18n.t('lesson2_title');
+            document.getElementById('lesson2-desc').textContent = window.i18n.t('lesson2_desc');
+            document.getElementById('lesson2-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
+            document.getElementById('lesson2-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
+            
+            // Lesson 3
+            document.getElementById('lesson3-title').textContent = window.i18n.t('lesson3_title');
+            document.getElementById('lesson3-desc').textContent = window.i18n.t('lesson3_desc');
+            document.getElementById('lesson3-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
+            document.getElementById('lesson3-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
+            
+            // Lesson 4
+            document.getElementById('lesson4-title').textContent = window.i18n.t('lesson4_title');
+            document.getElementById('lesson4-desc').textContent = window.i18n.t('lesson4_desc');
+            document.getElementById('lesson4-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
+            document.getElementById('lesson4-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
+        }
+        
+        // 初期化
+        window.addEventListener('DOMContentLoaded', () => {
+            window.i18n.init();
+            window.i18n.createLanguageSwitcher('language-switcher', updateUITexts);
+            updateUITexts();
+        });
+    </script>
 </body>
 </html>

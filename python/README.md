@@ -12,6 +12,7 @@
 - Pyodide（WebAssembly版Python 3.12）
 - Monaco Editor（VS Codeと同じエディタ）
 - 完全クライアントサイド実行（サーバー不要）
+- 多言語対応（日本語・英語）
 
 ## フォルダ構成
 
@@ -24,6 +25,7 @@ python/
       theory.css         # 理論説明ページ用スタイル
       exercise.css       # 演習課題ページ用スタイル
     js/
+      i18n.js            # 多言語対応ライブラリ
       runner.js          # Pyodide実行エンジン
       editor.js          # Monaco Editor制御
       tester.js          # 自動テスト機能
@@ -31,7 +33,8 @@ python/
     01_hello/            # レッスン1: はじめてのPython
       theory.html        # 理論説明ページ
       exercise.html      # 演習課題ページ
-      lesson.json        # レッスンデータ
+      lesson.ja.json     # レッスンデータ（日本語）
+      lesson.en.json     # レッスンデータ（英語）
     02_variables/        # (今後追加予定)
     03_if/               # (今後追加予定)
 ```
@@ -55,6 +58,68 @@ python3 -m http.server 8080
 2. **理論説明ページ**で概念を学習
 3. **演習課題ページ**でコードを記述し、実行・テスト
 
+## 多言語対応
+
+このプロジェクトは日本語と英語に対応しています。
+
+### 言語の切り替え方法
+
+各ページの右上にある言語セレクターで日本語⇄英語を切り替えできます。選択した言語は自動的に記憶され、次回アクセス時も同じ言語が表示されます。
+
+また、URL パラメータを使用して直接言語を指定することもできます：
+- 日本語: `http://localhost:8080/?lang=ja`
+- 英語: `http://localhost:8080/?lang=en`
+
+### 翻訳の仕組み
+
+多言語対応は2層構造で実現されています：
+
+1. **UI要素の翻訳**（`lib/js/i18n.js`）
+   - ボタンラベル、メッセージ、エラーテキストなど
+   - すべてのページで共通のUI文字列を管理
+   
+2. **レッスンコンテンツの翻訳**（`lesson.{lang}.json`）
+   - 理論説明、課題、ヒント、テストメッセージなど
+   - レッスンごとに言語別のJSONファイルで管理
+   - 例: `lesson.ja.json`（日本語）、`lesson.en.json`（英語）
+
+### 新しい言語を追加する方法
+
+#### 1. UIテキストの翻訳
+
+`lib/js/i18n.js` の `translations` オブジェクトに新しい言語コードを追加：
+
+```javascript
+const translations = {
+    ja: { /* 日本語翻訳 */ },
+    en: { /* 英語翻訳 */ },
+    fr: { /* 新しい言語（例：フランス語） */ }
+};
+```
+
+#### 2. レッスンコンテンツの翻訳
+
+各レッスンフォルダに `lesson.{lang}.json` ファイルを作成：
+
+```bash
+lessons/01_hello/
+  lesson.ja.json  # 日本語
+  lesson.en.json  # 英語
+  lesson.fr.json  # 新しい言語
+```
+
+#### 3. 言語セレクターへの追加
+
+`i18n.js` の `lang_*` キーに新しい言語名を追加：
+
+```javascript
+ja: {
+    lang_ja: "日本語",
+    lang_en: "English",
+    lang_fr: "Français"  // 追加
+}
+```
+
 
 ## レッスンの構成
 
@@ -72,7 +137,7 @@ python3 -m http.server 8080
 
 ### レッスンデータ形式
 
-各レッスンは `lesson.json` に以下の形式で記述します：
+各レッスンは言語ごとに `lesson.{lang}.json` ファイルを持ち、以下の形式で記述します：
 
 ```json
 {
@@ -96,3 +161,5 @@ python3 -m http.server 8080
   }
 }
 ```
+
+**注意**: `lesson.json` という名前のファイルは使用しません。必ず `lesson.ja.json`、`lesson.en.json` のように言語コードを含めてください。

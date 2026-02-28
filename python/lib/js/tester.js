@@ -11,14 +11,14 @@ async function runAllTests(userCode) {
     if (!window.pyodideRunner.isReady()) {
         return {
             success: false,
-            message: 'Pythonがまだ準備できていません'
+            message: window.i18n.t('msg_pyodideNotReady')
         };
     }
     
     if (currentTests.length === 0) {
         return {
             success: false,
-            message: 'テストが設定されていません'
+            message: window.i18n.t('msg_noTestsConfigured')
         };
     }
     
@@ -59,7 +59,7 @@ async function runSingleTest(userCode, test, testNumber) {
         
         return {
             testNumber: testNumber,
-            name: test.name || `テスト${testNumber}`,
+            name: test.name || `${window.i18n.t('test_label')}${testNumber}`,
             description: test.description || '',
             passed: resultObj.passed,
             message: resultObj.message || ''
@@ -67,10 +67,10 @@ async function runSingleTest(userCode, test, testNumber) {
     } catch (error) {
         return {
             testNumber: testNumber,
-            name: test.name || `テスト${testNumber}`,
+            name: test.name || `${window.i18n.t('test_label')}${testNumber}`,
             description: test.description || '',
             passed: false,
-            message: `テスト実行エラー: ${error.message}`
+            message: `${window.i18n.t('msg_testExecutionError')}: ${error.message}`
         };
     }
 }
@@ -85,7 +85,7 @@ function displayTestResults(testResult) {
     if (!testResult.success) {
         resultContainer.innerHTML = `
             <div class="test-error">
-                <strong>エラー:</strong> ${testResult.message}
+                <strong>${window.i18n.t('test_error')}:</strong> ${testResult.message}
             </div>
         `;
         return;
@@ -94,9 +94,11 @@ function displayTestResults(testResult) {
     // 全体の結果
     const summaryClass = testResult.allPassed ? 'test-summary-success' : 'test-summary-failure';
     const summaryIcon = testResult.allPassed ? '✓' : '✗';
+    const passedCount = testResult.results.filter(r => r.passed).length;
+    const totalCount = testResult.results.length;
     const summaryText = testResult.allPassed 
-        ? `すべてのテストに合格しました！ (${testResult.results.length}/${testResult.results.length})` 
-        : `一部のテストに失敗しました (${testResult.results.filter(r => r.passed).length}/${testResult.results.length})`;
+        ? `${window.i18n.t('test_allPassed')} (${totalCount}/${totalCount})` 
+        : `${window.i18n.t('test_someFailed')} (${passedCount}/${totalCount})`;
     
     const summaryHTML = `
         <div class="${summaryClass}">
