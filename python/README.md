@@ -1,58 +1,61 @@
 ## このプロジェクトについて
 
 このプロジェクトでは、中学生程度の子ども向けのPythonプログラミング教材を提供します。
-教材は、Pythonの基本的な文法や構文を学ぶことができ、子どもたちが楽しく学べるように、実際にコードを書いて動かすことができるようになっています。
+ブラウザ上で動作するインタラクティブな学習環境で、学習者はブラウザ内でPythonコードを記述・実行・テストできます。
 
-最終的な成果物は、HTML形式の教材で、ブラウザ上で閲覧できるようになります。
-各セクションで、まず理論的な説明があり、その後に実際のコード例が示されます。次に演習課題が提供され、子どもたちが自分でコードを書いてみることができます。
-
-ブラウザ上で動作するインタラクティブな学習環境を提供します。学習者はブラウザ内でPythonコードを記述・実行・テストできます。
-
-**主な技術：**
-- Pyodide（WebAssembly版Python 3.12）
-- Monaco Editor（VS Codeと同じエディタ）
-- 完全クライアントサイド実行（サーバー不要）
-- 多言語対応（日本語・英語）
+**主な特徴：**
+- 📝 **完全なHTMLドキュメント**: 各ページにコンテンツが直接埋め込まれており、1つのURLで完結
+- 🌐 **GitHub Pages対応**: サーバーサイドロジック不要で静的ホスティング可能
+- 🚀 **ブラウザ内Python実行**: Pyodide（WebAssembly版Python 3.12）を使用
+- ✏️ **高品質エディタ**: Monaco Editor（VS Codeと同じエディタ）を搭載
+- 🌍 **多言語対応**: 日本語・英語の完全対応
 
 ## フォルダ構成
 
 ```text
 python/
-  README.md              # プロジェクト概要
-  index.html             # 目次ページ（レッスン一覧）
-  lib/                   # 共通ライブラリ
-    css/
-      theory.css         # 理論説明ページ用スタイル
-      exercise.css       # 演習課題ページ用スタイル
-    js/
-      i18n.js            # 多言語対応ライブラリ（共通UIのみ）
-      runner.js          # Pyodide実行エンジン
-      editor.js          # Monaco Editor制御
-      tester.js          # 自動テスト機能
-  lessons/               # レッスンデータ
-    metadata.ja.json     # レッスンメタデータ（日本語）
-    metadata.en.json     # レッスンメタデータ（英語）
-    01_hello/            # レッスン1: はじめてのPython
-      theory.html        # 理論説明ページ
-      exercise.html      # 演習課題ページ
-      lesson.ja.json     # レッスンデータ（日本語）
-      lesson.en.json     # レッスンデータ（英語）
-    02_variables/        # (今後追加予定)
-    03_if/               # (今後追加予定)
+  README.md                        # プロジェクト概要
+  docs/                            # Webコンテンツ（GitHub Pages公開用）
+    index.html                     # 目次ページ（レッスン一覧）
+    lib/                           # 共通ライブラリ
+      css/
+        theory.css                 # 理論説明ページ用スタイル
+        exercise.css               # 演習課題ページ用スタイル
+      js/
+        i18n.js                    # 多言語対応（index.htmlのみ使用）
+        runner.js                  # Pyodide実行エンジン
+        editor.js                  # Monaco Editor制御
+        tester.js                  # 自動テスト機能
+    lessons/                       # レッスンデータ
+      metadata.ja.json             # レッスンメタデータ（日本語）
+      metadata.en.json             # レッスンメタデータ（英語）
+      01_hello/                    # レッスン1: はじめてのPython
+        theory.ja.html             # 理論説明ページ（日本語）
+        theory.en.html             # 理論説明ページ（英語）
+        exercise.ja.html           # 演習課題ページ（日本語）
+        exercise.en.html           # 演習課題ページ（英語）
+      02_variables/                # (今後追加予定)
+      03_if/                       # (今後追加予定)
 ```
 
 ## 使い方
 
-### ローカルサーバーで起動（推奨）
-
-ブラウザのセキュリティ制約（CORS）対策のため、ローカルサーバーで起動してください：
+### ローカルサーバーで起動
 
 ```bash
-cd python
+cd python/docs
 python3 -m http.server 8080
 ```
 
-その後、ブラウザで `http://localhost:8080` を開きます。
+ブラウザで `http://localhost:8080` を開きます。
+
+### GitHub Pagesでの公開
+
+1. GitHubリポジトリの Settings → Pages を開く
+2. Source で `main` ブランチと `/docs` フォルダを選択
+3. Save をクリック
+
+数分後、`https://<username>.github.io/<repository>/` でアクセス可能になります。
 
 ### 学習の流れ
 
@@ -62,106 +65,61 @@ python3 -m http.server 8080
 
 ## 多言語対応
 
-このプロジェクトは日本語と英語に対応しています。
+### 基本概念
+
+このプロジェクトでは、**言語ごとに独立したHTMLファイル**を持つ設計を採用しています：
+
+- `theory.ja.html` / `theory.en.html` - 理論ページ
+- `exercise.ja.html` / `exercise.en.html` - 演習ページ
+
+各HTMLファイルには全てのコンテンツが直接埋め込まれており、JavaScriptなしでも内容が読めます。
 
 ### 言語の切り替え方法
 
-各ページの右上にある言語セレクターで日本語⇄英語を切り替えできます。選択した言語は自動的に記憶され、次回アクセス時も同じ言語が表示されます。
+**目次ページ（docs/index.html）:**
+- 右上の言語セレクターで切り替え
+- 選択した言語は記憶され、適切な言語のページへリンク
 
-また、URL パラメータを使用して直接言語を指定することもできます：
-- 日本語: `http://localhost:8080/?lang=ja`
-- 英語: `http://localhost:8080/?lang=en`
+**レッスンページ:**
+- 各ページ右上に言語切り替えリンクを配置
+- 例: 日本語ページには「English」リンク、英語ページには「日本語」リンク
 
-### 翻訳の仕組み
+### 翻訳が必要なファイル
 
-多言語対応は階層的な構造で実現されています：
+新しい言語を追加する際に編集が必要なファイル：
 
-#### 1. 共通UIラベル（`lib/js/i18n.js`）
-すべてのページで共通して使用されるUI要素の翻訳を管理します：
-- ボタンラベル（実行、テスト、リセットなど）
-- ステータスメッセージ（準備中、実行完了など）
-- エラーメッセージ
-- セクションラベル（理論、演習など）
+#### 1. 目次ページの共通UI（`docs/lib/js/i18n.js`）
+- ボタンラベル（理論、演習など）
+- システムメッセージ
 
-**編集が必要な場面**: 新しい共通UIコンポーネントやメッセージを追加する場合のみ
+#### 2. レッスンメタデータ（`docs/lessons/metadata.{lang}.json`）
+目次ページに表示されるレッスン一覧：
 
-#### 2. レッスンメタデータ（`lessons/metadata.{lang}.json`）
-目次ページで表示されるレッスンの一覧情報を管理します：
-- レッスン番号
-- レッスンタイトル
-- レッスンの説明
-- 公開状態（available: true/false）
-
-**編集が必要な場面**: 新しいレッスンを追加する場合
-
-#### 3. レッスンコンテンツ（`lessons/{id}/lesson.{lang}.json`）
-各レッスン固有のコンテンツを管理します：
-- 理論説明（sections, examples）
-- 演習課題（task, instructions, hints）
-- テストケース（tests）
-
-**編集が必要な場面**: レッスンの内容を作成・編集する場合
-
-### 新しい言語を追加する方法
-
-#### 1. 共通UIテキストの翻訳
-
-`lib/js/i18n.js` の `translations` オブジェクトに新しい言語コードを追加：
-
-```javascript
-const translations = {
-    ja: { /* 日本語翻訳 */ },
-    en: { /* 英語翻訳 */ },
-    fr: { /* 新しい言語（例：フランス語） */ }
-};
+```json
+{
+  "lessons": [
+    {
+      "id": "01_hello",
+      "number": 1,
+      "title": "はじめてのPython",
+      "description": "print関数を使って「Hello, World!」を表示してみよう。",
+      "available": true
+    }
+  ]
+}
 ```
 
-#### 2. レッスンメタデータの翻訳
-
-`lessons/metadata.{lang}.json` ファイルを作成：
-
-```bash
-# 既存のファイルをコピーして編集
-cp lessons/metadata.ja.json lessons/metadata.fr.json
-```
-
-#### 3. レッスンコンテンツの翻訳
-
-各レッスンフォルダに `lesson.{lang}.json` ファイルを作成：
-
-```bash
-cp lessons/01_hello/lesson.ja.json lessons/01_hello/lesson.fr.json
-```
-
-#### 4. 言語セレクターへの追加
-
-`lib/js/i18n.js` の `createLanguageSwitcher` 関数に新しいオプションを追加：
-
-```javascript
-switcher.innerHTML = `
-    <select id="language-select" class="language-select">
-        <option value="ja" ${currentLang === 'ja' ? 'selected' : ''}>${t('lang_ja')}</option>
-        <option value="en" ${currentLang === 'en' ? 'selected' : ''}>${t('lang_en')}</option>
-        <option value="fr" ${currentLang === 'fr' ? 'selected' : ''}>${t('lang_fr')}</option>
-    </select>
-`;
-```
-
-そして `lang_fr` キーを translations オブジェクトに追加：
-
-```javascript
-ja: { lang_fr: "Français" },
-en: { lang_fr: "Français" },
-fr: { lang_fr: "Français" }
-```
-
+#### 3. レッスンページ（`docs/lessons/{id}/theory.{lang}.html`, `exercise.{lang}.html`）
+各言語用のHTMLファイルを作成し、全コンテンツを翻訳して埋め込みます。
 
 ## レッスンの構成
 
-それぞれのレッスンは以下のような構成を持つものとします。
+各レッスンは以下の4つのHTMLファイルで構成されます：
 
-1. **理論説明ページ** (`theory.html`): Pythonの基本的な概念や文法、およびコード例を説明。
-2. **演習課題ページ** (`exercise.html`): 学習者が自分でコードを書いてみるための課題を提供。コードを実行するためのUIを提供。
+1. **theory.ja.html** - 日本語の理論説明（コンテンツ全て埋め込み）
+2. **theory.en.html** - 英語の理論説明（コンテンツ全て埋め込み）
+3. **exercise.ja.html** - 日本語の演習課題（コンテンツ全て埋め込み）
+4. **exercise.en.html** - 英語の演習課題（コンテンツ全て埋め込み）
 
 ### 演習課題の機能
 
@@ -170,31 +128,97 @@ fr: { lang_fr: "Français" }
 - **自動テスト**: 実行結果を評価し、正解か不正解かをフィードバック
 - **ヒント表示**: 学習者をサポートするヒントを表示
 
-### レッスンデータ形式
+## 新しいレッスンの追加方法
 
-各レッスンは言語ごとに `lesson.{lang}.json` ファイルを持ち、以下の形式で記述します：
+### 手順
+
+#### 1. レッスンフォルダの作成
+
+```bash
+mkdir docs/lessons/02_variables
+```
+
+#### 2. HTMLファイルの作成
+
+既存のレッスンをテンプレートとしてコピー：
+
+```bash
+cd docs/lessons/02_variables
+cp ../01_hello/theory.ja.html theory.ja.html
+cp ../01_hello/theory.en.html theory.en.html
+cp ../01_hello/exercise.ja.html exercise.ja.html
+cp ../01_hello/exercise.en.html exercise.en.html
+```
+
+#### 3. コンテンツの編集
+
+各HTMLファイルを開いて、レッスン内容を編集：
+
+**theory.ja.html / theory.en.html:**
+- `<title>` タグ
+- `<h1>` レッスンタイトル
+- `<section>` 内の理論説明
+- コード例
+
+**exercise.ja.html / exercise.en.html:**
+- `<title>` タグ
+- `<h1>` レッスンタイトル
+- 課題説明（`<div class="task-description">`）
+- 指示（`<div class="instructions">`）
+- ヒント（`<div class="hints">`）
+- 初期コード（`INITIAL_CODE` 変数）
+- テストケース（`TESTS` 配列）
+
+#### 4. メタデータの更新
+
+**docs/lessons/metadata.ja.json** と **docs/lessons/metadata.en.json** にレッスン情報を追加：
 
 ```json
 {
-  "id": "lesson01",
-  "title": "レッスン名",
-  "theory": {
-    "title": "理論のタイトル",
-    "sections": [...],
-    "examples": [...]
-  },
-  "exercise": {
-    "task": "課題内容",
-    "initialCode": "初期コード",
-    "tests": [
-      {
-        "name": "テスト名",
-        "description": "テストの説明",
-        "code": "テスト用Pythonコード"
-      }
-    ]
-  }
+  "lessons": [
+    {
+      "id": "01_hello",
+      "number": 1,
+      "title": "はじめてのPython",
+      "description": "print関数を使って「Hello, World!」を表示してみよう。",
+      "available": true
+    },
+    {
+      "id": "02_variables",
+      "number": 2,
+      "title": "変数と計算",
+      "description": "変数を使ってデータを保存し、計算をしてみよう。",
+      "available": true
+    }
+  ]
 }
 ```
 
-**注意**: `lesson.json` という名前のファイルは使用しません。必ず `lesson.ja.json`、`lesson.en.json` のように言語コードを含めてください。
+#### 5. ナビゲーションリンクの追加（オプション）
+
+前後のレッスンがある場合、フッターにナビゲーションリンクを追加：
+
+```html
+<footer class="footer">
+    <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+    <div style="display: flex; gap: 12px;">
+        <a href="exercise.ja.html" class="btn btn-primary">演習を始める →</a>
+        <a href="../02_variables/theory.ja.html" class="btn btn-primary">次のレッスン →</a>
+    </div>
+</footer>
+```
+
+### 完了
+
+以上でレッスンの追加は完了です。ブラウザをリロードすると、目次ページに新しいレッスンが表示されます。
+
+## 設計思想
+
+このプロジェクトは**「HTMLはドキュメントであり、それ自体がデータ」**という原則に基づいています：
+
+- ✅ URLにアクセスすればコンテンツが直接読める
+- ✅ 検索エンジンがコンテンツをインデックス可能
+- ✅ GitHub Pagesなど静的ホスティングで動作
+- ✅ サーバーサイドロジック不要
+
+この設計により、メンテナンス性、可搬性、アクセシビリティが向上しています。
