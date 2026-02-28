@@ -130,6 +130,7 @@
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
     <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
     
     <!-- アプリケーションスクリプト -->
     <script>
@@ -165,125 +166,16 @@ result`
         ];
         
         // 事前ロードするファイル（データ分析などのレッスンで使用）
-        // このレッスンでは不要なので空配列
-        const INITIAL_FILES = [
-            // 例：{ name: 'data.csv', content: 'name,age\nAlice,25\nBob,30\n' }
-        ];
-        
-        // 初期化
-        async function initialize() {
-            // エディタの初期化
-            await window.monacoEditor.init({
-                value: INITIAL_CODE
-            });
-            
-            // テストを設定
-            window.tester.setTests(TESTS);
-            
-            // タスクパネルの折りたたみ機能
-            setupTaskPanel();
-            
-            // ファイルエクスプローラーの初期化（初期ファイルを渡す）
-            window.fileExplorer.init({
-                initialFiles: INITIAL_FILES
-            });
-            
-            // Pyodideの初期化
-            document.getElementById('status').textContent = 'Python環境を初期化中...';
-            await window.pyodideRunner.init();
-            
-            // 初期ファイルをロード
-            await window.fileExplorer.loadInitialFiles();
-            
-            document.getElementById('status').textContent = '準備完了';
-        }
-        
-        // タスクパネルの折りたたみ設定
-        function setupTaskPanel() {
-            const taskPanel = document.querySelector('.task-panel');
-            const taskHeader = document.querySelector('.task-header');
-            const taskToggle = document.querySelector('.task-toggle');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (!taskPanel || !taskHeader || !mainContent) return;
-            
-            taskHeader.addEventListener('click', () => {
-                const isCollapsed = taskPanel.classList.toggle('collapsed');
-                mainContent.classList.toggle('task-collapsed', isCollapsed);
-                
-                if (taskToggle) {
-                    taskToggle.textContent = isCollapsed ? '▶' : '◀';
-                }
-            });
-        }
-        
-        // ボタンイベントの設定
-        function setupButtons() {
-            // 実行ボタン
-            document.getElementById('btn-run').addEventListener('click', async () => {
-                const code = window.monacoEditor.getContent();
-                if (code.trim()) {
-                    clearConsole();
-                    appendToConsole('コードを実行中...', 'info');
-                    try {
-                        const result = await window.pyodideRunner.run(code);
-                        if (result !== undefined && result !== null) {
-                            appendToConsole(`戻り値: ${result}`, 'output');
-                        }
-                        appendToConsole('実行が完了しました', 'info');
-                        
-                        // ファイルエクスプローラーを更新
-                        window.fileExplorer.refresh();
-                    } catch (error) {
-                        // エラーは runner.js で表示される
-                    }
-                } else {
-                    appendToConsole('コードを入力してください', 'info');
-                }
-            });
-            
-            // テストボタン
-            document.getElementById('btn-test').addEventListener('click', async () => {
-                const code = window.monacoEditor.getContent();
-                if (code.trim()) {
-                    clearConsole();
-                    appendToConsole('テストを実行中...', 'info');
-                    
-                    const testResult = await window.tester.runAll(code);
-                    window.tester.displayResults(testResult);
-                    
-                    // テスト結果を表示
-                    document.getElementById('test-results-overlay').style.display = 'block';
-                    
-                    appendToConsole('テストが完了しました', 'info');
-                    
-                    // ファイルエクスプローラーを更新
-                    window.fileExplorer.refresh();
-                } else {
-                    appendToConsole('コードを入力してください', 'info');
-                }
-            });
-            
-            // リセットボタン
-            document.getElementById('btn-reset').addEventListener('click', () => {
-                window.monacoEditor.setContent(INITIAL_CODE);
-                clearConsole();
-                appendToConsole('コードをリセットしました', 'info');
-            });
-            
-            // クリアボタン
-            document.getElementById('btn-clear').addEventListener('click', clearConsole);
-            
-            // テスト結果を閉じる
-            document.getElementById('btn-close-results').addEventListener('click', () => {
-                document.getElementById('test-results-overlay').style.display = 'none';
-            });
-        }
+        const INITIAL_FILES = [];
         
         // ページ読み込み時に実行
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             setupButtons();
-            initialize();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
         });
     </script>
 </body>

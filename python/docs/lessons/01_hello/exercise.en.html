@@ -130,6 +130,8 @@
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
     <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
     
     <!-- Application Script -->
     <script>
@@ -166,124 +168,17 @@ result`
         
         // Pre-loaded files (used in lessons like data analysis)
         // Empty for this lesson
-        const INITIAL_FILES = [
-            // Example: { name: 'data.csv', content: 'name,age\nAlice,25\nBob,30\n' }
-        ];
-        
-        // Initialize
-        async function initialize() {
-            // Initialize editor
-            await window.monacoEditor.init({
-                value: INITIAL_CODE
-            });
-            
-            // Set tests
-            window.tester.setTests(TESTS);
-            
-            // Setup task panel collapse
-            setupTaskPanel();
-            
-            // Initialize file explorer (pass initial files)
-            window.fileExplorer.init({
-                initialFiles: INITIAL_FILES
-            });
-            
-            // Initialize Pyodide
-            document.getElementById('status').textContent = 'Initializing Python environment...';
-            await window.pyodideRunner.init();
-            
-            // Load initial files
-            await window.fileExplorer.loadInitialFiles();
-            
-            document.getElementById('status').textContent = 'Ready';
-        }
-        
-        // Setup task panel collapse
-        function setupTaskPanel() {
-            const taskPanel = document.querySelector('.task-panel');
-            const taskHeader = document.querySelector('.task-header');
-            const taskToggle = document.querySelector('.task-toggle');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (!taskPanel || !taskHeader || !mainContent) return;
-            
-            taskHeader.addEventListener('click', () => {
-                const isCollapsed = taskPanel.classList.toggle('collapsed');
-                mainContent.classList.toggle('task-collapsed', isCollapsed);
-                
-                if (taskToggle) {
-                    taskToggle.textContent = isCollapsed ? '▶' : '◀';
-                }
-            });
-        }
-        
-        // Setup button events
-        function setupButtons() {
-            // Run button
-            document.getElementById('btn-run').addEventListener('click', async () => {
-                const code = window.monacoEditor.getContent();
-                if (code.trim()) {
-                    clearConsole();
-                    appendToConsole('Running code...', 'info');
-                    try {
-                        const result = await window.pyodideRunner.run(code);
-                        if (result !== undefined && result !== null) {
-                            appendToConsole(`Return value: ${result}`, 'output');
-                        }
-                        appendToConsole('Execution completed', 'info');
-                        
-                        // Update file explorer
-                        window.fileExplorer.refresh();
-                    } catch (error) {
-                        // Error is displayed by runner.js
-                    }
-                } else {
-                    appendToConsole('Please enter code', 'info');
-                }
-            });
-            
-            // Test button
-            document.getElementById('btn-test').addEventListener('click', async () => {
-                const code = window.monacoEditor.getContent();
-                if (code.trim()) {
-                    clearConsole();
-                    appendToConsole('Running tests...', 'info');
-                    
-                    const testResult = await window.tester.runAll(code);
-                    window.tester.displayResults(testResult);
-                    
-                    // Display test results
-                    document.getElementById('test-results-overlay').style.display = 'block';
-                    
-                    appendToConsole('Testing completed', 'info');
-                    
-                    // Refresh file viewer
-                    window.fileViewer.refresh();
-                } else {
-                    appendToConsole('Please enter code', 'info');
-                }
-            });
-            
-            // Reset button
-            document.getElementById('btn-reset').addEventListener('click', () => {
-                window.monacoEditor.setContent(INITIAL_CODE);
-                clearConsole();
-                appendToConsole('Code reset', 'info');
-            });
-            
-            // Clear button
-            document.getElementById('btn-clear').addEventListener('click', clearConsole);
-            
-            // Close test results
-            document.getElementById('btn-close-results').addEventListener('click', () => {
-                document.getElementById('test-results-overlay').style.display = 'none';
-            });
-        }
+        // Initial files (used for data analysis lessons)
+        const INITIAL_FILES = [];
         
         // Execute on page load
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             setupButtons();
-            initialize();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
         });
     </script>
 </body>

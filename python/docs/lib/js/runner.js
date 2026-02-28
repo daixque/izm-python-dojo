@@ -13,8 +13,12 @@ async function initPyodide() {
         });
         
         // 標準出力・標準エラーのリダイレクト
-        pyodide.setStdout({ batched: (msg) => appendToConsole(msg, 'output') });
-        pyodide.setStderr({ batched: (msg) => appendToConsole(msg, 'error') });
+        pyodide.setStdout({ batched: (msg) => {
+            if (window.appendToConsole) window.appendToConsole(msg, 'output');
+        }});
+        pyodide.setStderr({ batched: (msg) => {
+            if (window.appendToConsole) window.appendToConsole(msg, 'error');
+        }});
         
         isReady = true;
         updateStatus('準備完了 ✓', true);
@@ -29,7 +33,9 @@ async function initPyodide() {
         console.log('Pyodide initialized successfully');
     } catch (error) {
         updateStatus('エラー: Python読み込み失敗', false);
-        appendToConsole(`初期化エラー: ${error.message}`, 'error');
+        if (window.appendToConsole) {
+            window.appendToConsole(`初期化エラー: ${error.message}`, 'error');
+        }
         console.error('Pyodide initialization failed:', error);
     }
 }
@@ -51,7 +57,9 @@ function updateStatus(message, ready) {
 // Pythonコードの実行
 async function runPythonCode(code) {
     if (!isReady) {
-        appendToConsole('エラー: Pythonがまだ準備できていません', 'error');
+        if (window.appendToConsole) {
+            window.appendToConsole('エラー: Pythonがまだ準備できていません', 'error');
+        }
         return null;
     }
     
@@ -61,30 +69,10 @@ async function runPythonCode(code) {
         return result;
     } catch (error) {
         // Pythonエラーを表示
-        appendToConsole(`エラー: ${error.message}`, 'error');
+        if (window.appendToConsole) {
+            window.appendToConsole(`エラー: ${error.message}`, 'error');
+        }
         throw error;
-    }
-}
-
-// コンソールに出力
-function appendToConsole(message, type = 'output') {
-    const consoleElement = document.getElementById('console');
-    if (!consoleElement) return;
-    
-    const line = document.createElement('div');
-    line.className = `console-${type}`;
-    line.textContent = message;
-    consoleElement.appendChild(line);
-    
-    // 自動スクロール
-    consoleElement.scrollTop = consoleElement.scrollHeight;
-}
-
-// コンソールをクリア
-function clearConsole() {
-    const consoleElement = document.getElementById('console');
-    if (consoleElement) {
-        consoleElement.innerHTML = '';
     }
 }
 
