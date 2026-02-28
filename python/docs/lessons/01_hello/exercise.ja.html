@@ -29,6 +29,7 @@
             <aside class="task-panel">
                 <div class="task-header">
                     <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
                 </div>
                 <div class="task-content">
                     <div class="task-description">
@@ -77,6 +78,21 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
         </div>
 
         <!-- フッター -->
@@ -113,6 +129,7 @@
     <script src="../../lib/js/runner.js"></script>
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
     
     <!-- アプリケーションスクリプト -->
     <script>
@@ -147,6 +164,12 @@ result`
             }
         ];
         
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        // このレッスンでは不要なので空配列
+        const INITIAL_FILES = [
+            // 例：{ name: 'data.csv', content: 'name,age\nAlice,25\nBob,30\n' }
+        ];
+        
         // 初期化
         async function initialize() {
             // エディタの初期化
@@ -157,10 +180,41 @@ result`
             // テストを設定
             window.tester.setTests(TESTS);
             
+            // タスクパネルの折りたたみ機能
+            setupTaskPanel();
+            
+            // ファイルエクスプローラーの初期化（初期ファイルを渡す）
+            window.fileExplorer.init({
+                initialFiles: INITIAL_FILES
+            });
+            
             // Pyodideの初期化
             document.getElementById('status').textContent = 'Python環境を初期化中...';
             await window.pyodideRunner.init();
+            
+            // 初期ファイルをロード
+            await window.fileExplorer.loadInitialFiles();
+            
             document.getElementById('status').textContent = '準備完了';
+        }
+        
+        // タスクパネルの折りたたみ設定
+        function setupTaskPanel() {
+            const taskPanel = document.querySelector('.task-panel');
+            const taskHeader = document.querySelector('.task-header');
+            const taskToggle = document.querySelector('.task-toggle');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (!taskPanel || !taskHeader || !mainContent) return;
+            
+            taskHeader.addEventListener('click', () => {
+                const isCollapsed = taskPanel.classList.toggle('collapsed');
+                mainContent.classList.toggle('task-collapsed', isCollapsed);
+                
+                if (taskToggle) {
+                    taskToggle.textContent = isCollapsed ? '▶' : '◀';
+                }
+            });
         }
         
         // ボタンイベントの設定
@@ -177,6 +231,9 @@ result`
                             appendToConsole(`戻り値: ${result}`, 'output');
                         }
                         appendToConsole('実行が完了しました', 'info');
+                        
+                        // ファイルエクスプローラーを更新
+                        window.fileExplorer.refresh();
                     } catch (error) {
                         // エラーは runner.js で表示される
                     }
@@ -199,6 +256,9 @@ result`
                     document.getElementById('test-results-overlay').style.display = 'block';
                     
                     appendToConsole('テストが完了しました', 'info');
+                    
+                    // ファイルエクスプローラーを更新
+                    window.fileExplorer.refresh();
                 } else {
                     appendToConsole('コードを入力してください', 'info');
                 }

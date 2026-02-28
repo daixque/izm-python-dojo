@@ -222,3 +222,98 @@ cp ../01_hello/exercise.en.html exercise.en.html
 - ✅ サーバーサイドロジック不要
 
 この設計により、メンテナンス性、可搬性、アクセシビリティが向上しています。
+
+## ファイル操作機能
+
+### ファイルエクスプローラー
+
+演習ページ（`exercise.*.html`）には、右側にファイルエクスプローラーが配置されています。
+Pythonコードでファイルを作成・操作すると、ここに表示されます。
+
+**機能：**
+- 📁 **ファイル一覧**: Pyodideの仮想ファイルシステム（`/home/pyodide`）内のファイルを表示
+- 👁️ **プレビュー**: ファイルをクリックすると内容を確認できます
+- ⬇️ **ダウンロード**: ファイルをローカルに保存
+- 🗑️ **削除**: 不要なファイルを削除
+- ◀▶ **折りたたみ**: ヘッダーをクリックすると表示/非表示を切り替え
+
+**レイアウト：**
+- デスクトップ（>1200px）: タスクパネル | コード/コンソール | ファイルエクスプローラー
+- タブレット（768-1200px）: コード/コンソールのみ（タスクとファイルは非表示）
+- モバイル（<768px）: 縦積み表示、ファイルエクスプローラーは非表示
+
+### 事前ロードされたファイル
+
+データ分析などのレッスンで、最初から既存のファイルを用意することができます。
+
+**使い方：**
+
+`exercise.*.html` の `<script>` 内で `INITIAL_FILES` 配列を定義します：
+
+```javascript
+// 事前ロードするファイル
+const INITIAL_FILES = [
+    {
+        name: 'students.csv',
+        content: 'name,age,grade\nAlice,14,8\nBob,13,7\nCharlie,15,9\n'
+    },
+    {
+        name: 'README.txt',
+        content: 'このファイルには学生データが含まれています。\nPythonで読み込んで分析してみましょう。'
+    }
+];
+```
+
+この配列を `fileExplorer.init()` に渡します：
+
+```javascript
+window.fileExplorer.init({
+    initialFiles: INITIAL_FILES
+});
+```
+
+あとは `loadInitialFiles()` を呼び出すだけ：
+
+```javascript
+await window.pyodideRunner.init();
+await window.fileExplorer.loadInitialFiles();
+```
+
+**活用例：**
+- **Lesson 18（データ集計）**: CSVファイルを事前配置し、集計プログラムを書く
+- **Lesson 19（ファイル操作）**: サンプルテキストファイルを用意し、読み書き練習
+- **Lesson 20（最終プロジェクト）**: データベースやタスクリストのテンプレートを提供
+
+### ファイル操作API
+
+`runner.js` は Pyodide のファイルシステムを操作するAPIを提供します：
+
+```javascript
+// ファイル一覧を取得
+const files = window.pyodideRunner.fs.listFiles();
+
+// ファイル内容を読み込み
+const content = window.pyodideRunner.fs.readFile('data.csv');
+
+// ファイルの存在確認
+const exists = window.pyodideRunner.fs.fileExists('data.csv');
+
+// ファイルを削除
+window.pyodideRunner.fs.deleteFile('old.txt');
+
+// ファイルをダウンロード
+window.pyodideRunner.fs.downloadFile('result.csv');
+```
+
+Pythonコード内では通常のファイル操作：
+
+```python
+# ファイル書き込み
+with open('output.txt', 'w') as f:
+    f.write('Hello, File!')
+
+# ファイル読み込み
+with open('data.csv', 'r') as f:
+    content = f.read()
+    print(content)
+```

@@ -88,10 +88,83 @@ function clearConsole() {
     }
 }
 
+// ファイルシステム操作
+const fileSystem = {
+    // ファイル一覧を取得（カレントディレクトリ）
+    listFiles: function() {
+        if (!isReady || !pyodide) return [];
+        
+        try {
+            const files = pyodide.FS.readdir('/home/pyodide');
+            // '.' と '..' を除外
+            return files.filter(f => f !== '.' && f !== '..');
+        } catch (error) {
+            console.error('Failed to list files:', error);
+            return [];
+        }
+    },
+    
+    // ファイル内容を読み取り
+    readFile: function(filename) {
+        if (!isReady || !pyodide) return null;
+        
+        try {
+            const path = `/home/pyodide/${filename}`;
+            const data = pyodide.FS.readFile(path, { encoding: 'utf8' });
+            return data;
+        } catch (error) {
+            console.error(`Failed to read file ${filename}:`, error);
+            return null;
+        }
+    },
+    
+    // ファイルが存在するかチェック
+    fileExists: function(filename) {
+        if (!isReady || !pyodide) return false;
+        
+        try {
+            const path = `/home/pyodide/${filename}`;
+            pyodide.FS.stat(path);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    },
+    
+    // ファイルを削除
+    deleteFile: function(filename) {
+        if (!isReady || !pyodide) return false;
+        
+        try {
+            const path = `/home/pyodide/${filename}`;
+            pyodide.FS.unlink(path);
+            return true;
+        } catch (error) {
+            console.error(`Failed to delete file ${filename}:`, error);
+            return false;
+        }
+    },
+    
+    // ファイルをダウンロード
+    downloadFile: function(filename) {
+        const content = this.readFile(filename);
+        if (!content) return;
+        
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+};
+
 // グローバルに公開
 window.pyodideRunner = {
     init: initPyodide,
     run: runPythonCode,
     isReady: () => isReady,
-    getPyodide: () => pyodide
+    getPyodide: () => pyodide,
+    fs: fileSystem
 };

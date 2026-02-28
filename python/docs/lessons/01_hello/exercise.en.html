@@ -29,6 +29,7 @@
             <aside class="task-panel">
                 <div class="task-header">
                     <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
                 </div>
                 <div class="task-content">
                     <div class="task-description">
@@ -77,6 +78,21 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
+            <!-- File Explorer (right pane) -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file to view</div>
+                    </div>
+                </div>
+            </aside>
         </div>
 
         <!-- Footer -->
@@ -113,6 +129,7 @@
     <script src="../../lib/js/runner.js"></script>
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
     
     <!-- Application Script -->
     <script>
@@ -147,6 +164,12 @@ result`
             }
         ];
         
+        // Pre-loaded files (used in lessons like data analysis)
+        // Empty for this lesson
+        const INITIAL_FILES = [
+            // Example: { name: 'data.csv', content: 'name,age\nAlice,25\nBob,30\n' }
+        ];
+        
         // Initialize
         async function initialize() {
             // Initialize editor
@@ -157,10 +180,41 @@ result`
             // Set tests
             window.tester.setTests(TESTS);
             
+            // Setup task panel collapse
+            setupTaskPanel();
+            
+            // Initialize file explorer (pass initial files)
+            window.fileExplorer.init({
+                initialFiles: INITIAL_FILES
+            });
+            
             // Initialize Pyodide
             document.getElementById('status').textContent = 'Initializing Python environment...';
             await window.pyodideRunner.init();
+            
+            // Load initial files
+            await window.fileExplorer.loadInitialFiles();
+            
             document.getElementById('status').textContent = 'Ready';
+        }
+        
+        // Setup task panel collapse
+        function setupTaskPanel() {
+            const taskPanel = document.querySelector('.task-panel');
+            const taskHeader = document.querySelector('.task-header');
+            const taskToggle = document.querySelector('.task-toggle');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (!taskPanel || !taskHeader || !mainContent) return;
+            
+            taskHeader.addEventListener('click', () => {
+                const isCollapsed = taskPanel.classList.toggle('collapsed');
+                mainContent.classList.toggle('task-collapsed', isCollapsed);
+                
+                if (taskToggle) {
+                    taskToggle.textContent = isCollapsed ? '▶' : '◀';
+                }
+            });
         }
         
         // Setup button events
@@ -177,6 +231,9 @@ result`
                             appendToConsole(`Return value: ${result}`, 'output');
                         }
                         appendToConsole('Execution completed', 'info');
+                        
+                        // Update file explorer
+                        window.fileExplorer.refresh();
                     } catch (error) {
                         // Error is displayed by runner.js
                     }
@@ -199,6 +256,9 @@ result`
                     document.getElementById('test-results-overlay').style.display = 'block';
                     
                     appendToConsole('Testing completed', 'info');
+                    
+                    // Refresh file viewer
+                    window.fileViewer.refresh();
                 } else {
                     appendToConsole('Please enter code', 'info');
                 }
