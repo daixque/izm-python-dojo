@@ -61,17 +61,7 @@ const translations = {
         // 言語
         language: "言語",
         lang_ja: "日本語",
-        lang_en: "English",
-        
-        // レッスンタイトル
-        lesson1_title: "はじめてのPython",
-        lesson1_desc: "print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。",
-        lesson2_title: "変数と計算",
-        lesson2_desc: "変数を使ってデータを保存し、計算をしてみよう。",
-        lesson3_title: "条件分岐（if文）",
-        lesson3_desc: "条件によって処理を変える方法を学ぼう。",
-        lesson4_title: "繰り返し（for文）",
-        lesson4_desc: "同じ処理を繰り返し実行する方法を学ぼう。"
+        lang_en: "English"
     },
     en: {
         // Header
@@ -132,17 +122,7 @@ const translations = {
         // Language
         language: "Language",
         lang_ja: "日本語",
-        lang_en: "English",
-        
-        // Lesson titles
-        lesson1_title: "First Steps with Python",
-        lesson1_desc: "Display 'Hello, World!' using the print function. Experience your first step in programming.",
-        lesson2_title: "Variables and Calculations",
-        lesson2_desc: "Store data in variables and perform calculations.",
-        lesson3_title: "Conditional Branching (if statement)",
-        lesson3_desc: "Learn how to change processing based on conditions.",
-        lesson4_title: "Loops (for statement)",
-        lesson4_desc: "Learn how to repeat the same process multiple times."
+        lang_en: "English"
     }
 };
 
@@ -242,6 +222,11 @@ function getLessonFilePath() {
     return `lesson.${currentLang}.json`;
 }
 
+// レッスンメタデータファイルのパスを取得
+function getMetadataFilePath() {
+    return `lessons/metadata.${currentLang}.json`;
+}
+
 // グローバルに公開
 window.i18n = {
     init: initLanguage,
@@ -249,5 +234,6 @@ window.i18n = {
     getCurrentLanguage: getCurrentLanguage,
     setLanguage: setLanguage,
     createLanguageSwitcher: createLanguageSwitcher,
-    getLessonFilePath: getLessonFilePath
+    getLessonFilePath: getLessonFilePath,
+    getMetadataFilePath: getMetadataFilePath
 };

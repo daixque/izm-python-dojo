@@ -25,11 +25,13 @@ python/
       theory.css         # 理論説明ページ用スタイル
       exercise.css       # 演習課題ページ用スタイル
     js/
-      i18n.js            # 多言語対応ライブラリ
+      i18n.js            # 多言語対応ライブラリ（共通UIのみ）
       runner.js          # Pyodide実行エンジン
       editor.js          # Monaco Editor制御
       tester.js          # 自動テスト機能
   lessons/               # レッスンデータ
+    metadata.ja.json     # レッスンメタデータ（日本語）
+    metadata.en.json     # レッスンメタデータ（英語）
     01_hello/            # レッスン1: はじめてのPython
       theory.html        # 理論説明ページ
       exercise.html      # 演習課題ページ
@@ -72,20 +74,37 @@ python3 -m http.server 8080
 
 ### 翻訳の仕組み
 
-多言語対応は2層構造で実現されています：
+多言語対応は階層的な構造で実現されています：
 
-1. **UI要素の翻訳**（`lib/js/i18n.js`）
-   - ボタンラベル、メッセージ、エラーテキストなど
-   - すべてのページで共通のUI文字列を管理
-   
-2. **レッスンコンテンツの翻訳**（`lesson.{lang}.json`）
-   - 理論説明、課題、ヒント、テストメッセージなど
-   - レッスンごとに言語別のJSONファイルで管理
-   - 例: `lesson.ja.json`（日本語）、`lesson.en.json`（英語）
+#### 1. 共通UIラベル（`lib/js/i18n.js`）
+すべてのページで共通して使用されるUI要素の翻訳を管理します：
+- ボタンラベル（実行、テスト、リセットなど）
+- ステータスメッセージ（準備中、実行完了など）
+- エラーメッセージ
+- セクションラベル（理論、演習など）
+
+**編集が必要な場面**: 新しい共通UIコンポーネントやメッセージを追加する場合のみ
+
+#### 2. レッスンメタデータ（`lessons/metadata.{lang}.json`）
+目次ページで表示されるレッスンの一覧情報を管理します：
+- レッスン番号
+- レッスンタイトル
+- レッスンの説明
+- 公開状態（available: true/false）
+
+**編集が必要な場面**: 新しいレッスンを追加する場合
+
+#### 3. レッスンコンテンツ（`lessons/{id}/lesson.{lang}.json`）
+各レッスン固有のコンテンツを管理します：
+- 理論説明（sections, examples）
+- 演習課題（task, instructions, hints）
+- テストケース（tests）
+
+**編集が必要な場面**: レッスンの内容を作成・編集する場合
 
 ### 新しい言語を追加する方法
 
-#### 1. UIテキストの翻訳
+#### 1. 共通UIテキストの翻訳
 
 `lib/js/i18n.js` の `translations` オブジェクトに新しい言語コードを追加：
 
@@ -97,27 +116,43 @@ const translations = {
 };
 ```
 
-#### 2. レッスンコンテンツの翻訳
+#### 2. レッスンメタデータの翻訳
+
+`lessons/metadata.{lang}.json` ファイルを作成：
+
+```bash
+# 既存のファイルをコピーして編集
+cp lessons/metadata.ja.json lessons/metadata.fr.json
+```
+
+#### 3. レッスンコンテンツの翻訳
 
 各レッスンフォルダに `lesson.{lang}.json` ファイルを作成：
 
 ```bash
-lessons/01_hello/
-  lesson.ja.json  # 日本語
-  lesson.en.json  # 英語
-  lesson.fr.json  # 新しい言語
+cp lessons/01_hello/lesson.ja.json lessons/01_hello/lesson.fr.json
 ```
 
-#### 3. 言語セレクターへの追加
+#### 4. 言語セレクターへの追加
 
-`i18n.js` の `lang_*` キーに新しい言語名を追加：
+`lib/js/i18n.js` の `createLanguageSwitcher` 関数に新しいオプションを追加：
 
 ```javascript
-ja: {
-    lang_ja: "日本語",
-    lang_en: "English",
-    lang_fr: "Français"  // 追加
-}
+switcher.innerHTML = `
+    <select id="language-select" class="language-select">
+        <option value="ja" ${currentLang === 'ja' ? 'selected' : ''}>${t('lang_ja')}</option>
+        <option value="en" ${currentLang === 'en' ? 'selected' : ''}>${t('lang_en')}</option>
+        <option value="fr" ${currentLang === 'fr' ? 'selected' : ''}>${t('lang_fr')}</option>
+    </select>
+`;
+```
+
+そして `lang_fr` キーを translations オブジェクトに追加：
+
+```javascript
+ja: { lang_fr: "Français" },
+en: { lang_fr: "Français" },
+fr: { lang_fr: "Français" }
 ```
 
 

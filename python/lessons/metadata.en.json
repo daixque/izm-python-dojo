@@ -1,0 +1,32 @@
+{
+  "lessons": [
+    {
+      "id": "01_hello",
+      "number": 1,
+      "title": "First Steps with Python",
+      "description": "Display 'Hello, World!' using the print function. Experience your first step in programming.",
+      "available": true
+    },
+    {
+      "id": "02_variables",
+      "number": 2,
+      "title": "Variables and Calculations",
+      "description": "Store data in variables and perform calculations.",
+      "available": false
+    },
+    {
+      "id": "03_if",
+      "number": 3,
+      "title": "Conditional Branching (if statement)",
+      "description": "Learn how to change processing based on conditions.",
+      "available": false
+    },
+    {
+      "id": "04_for",
+      "number": 4,
+      "title": "Loops (for statement)",
+      "description": "Learn how to repeat the same process multiple times.",
+      "available": false
+    }
+  ]
+}

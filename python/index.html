@@ -173,48 +173,8 @@
         </header>
 
         <!-- レッスン一覧 -->
-        <div class="lessons-grid">
-            <!-- レッスン1 -->
-            <div class="lesson-card">
-                <div class="lesson-number">1</div>
-                <h2 id="lesson1-title">はじめてのPython</h2>
-                <p id="lesson1-desc">print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。</p>
-                <div class="lesson-links">
-                    <a href="lessons/01_hello/theory.html" class="btn btn-secondary" id="lesson1-theory-btn">📚 理論</a>
-                    <a href="lessons/01_hello/exercise.html" class="btn btn-primary" id="lesson1-exercise-btn">✏️ 演習</a>
-                </div>
-            </div>
-
-            <!-- 今後のレッスン用プレースホルダー -->
-            <div class="lesson-card" style="opacity: 0.5;">
-                <div class="lesson-number">2</div>
-                <h2 id="lesson2-title">変数と計算</h2>
-                <p id="lesson2-desc">変数を使ってデータを保存し、計算をしてみよう。</p>
-                <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled id="lesson2-theory-btn">📚 理論</button>
-                    <button class="btn btn-primary" disabled id="lesson2-exercise-btn">✏️ 演習</button>
-                </div>
-            </div>
-
-            <div class="lesson-card" style="opacity: 0.5;">
-                <div class="lesson-number">3</div>
-                <h2 id="lesson3-title">条件分岐（if文）</h2>
-                <p id="lesson3-desc">条件によって処理を変える方法を学ぼう。</p>
-                <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled id="lesson3-theory-btn">📚 理論</button>
-                    <button class="btn btn-primary" disabled id="lesson3-exercise-btn">✏️ 演習</button>
-                </div>
-            </div>
-
-            <div class="lesson-card" style="opacity: 0.5;">
-                <div class="lesson-number">4</div>
-                <h2 id="lesson4-title">繰り返し（for文）</h2>
-                <p id="lesson4-desc">同じ処理を繰り返し実行する方法を学ぼう。</p>
-                <div class="lesson-links">
-                    <button class="btn btn-secondary" disabled id="lesson4-theory-btn">📚 理論</button>
-                    <button class="btn btn-primary" disabled id="lesson4-exercise-btn">✏️ 演習</button>
-                </div>
-            </div>
+        <div class="lessons-grid" id="lessons-grid">
+            <!-- レッスンは動的に読み込まれます -->
         </div>
     </div>
     
@@ -223,37 +183,69 @@
         function updateUITexts() {
             document.getElementById('page-title').textContent = `🐍 ${window.i18n.t('appTitle')}`;
             document.getElementById('page-subtitle').textContent = window.i18n.t('subtitle');
-            
-            // Lesson 1
-            document.getElementById('lesson1-title').textContent = window.i18n.t('lesson1_title');
-            document.getElementById('lesson1-desc').textContent = window.i18n.t('lesson1_desc');
-            document.getElementById('lesson1-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
-            document.getElementById('lesson1-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
-            
-            // Lesson 2
-            document.getElementById('lesson2-title').textContent = window.i18n.t('lesson2_title');
-            document.getElementById('lesson2-desc').textContent = window.i18n.t('lesson2_desc');
-            document.getElementById('lesson2-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
-            document.getElementById('lesson2-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
-            
-            // Lesson 3
-            document.getElementById('lesson3-title').textContent = window.i18n.t('lesson3_title');
-            document.getElementById('lesson3-desc').textContent = window.i18n.t('lesson3_desc');
-            document.getElementById('lesson3-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
-            document.getElementById('lesson3-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
-            
-            // Lesson 4
-            document.getElementById('lesson4-title').textContent = window.i18n.t('lesson4_title');
-            document.getElementById('lesson4-desc').textContent = window.i18n.t('lesson4_desc');
-            document.getElementById('lesson4-theory-btn').innerHTML = `📚 ${window.i18n.t('label_theory')}`;
-            document.getElementById('lesson4-exercise-btn').innerHTML = `✏️ ${window.i18n.t('label_exercise')}`;
+        }
+        
+        // レッスン一覧を読み込んで表示
+        async function loadLessons() {
+            try {
+                const metadataFile = window.i18n.getMetadataFilePath();
+                const response = await fetch(metadataFile);
+                const data = await response.json();
+                
+                const grid = document.getElementById('lessons-grid');
+                grid.innerHTML = ''; // クリア
+                
+                data.lessons.forEach(lesson => {
+                    const card = document.createElement('div');
+                    card.className = 'lesson-card';
+                    if (!lesson.available) {
+                        card.style.opacity = '0.5';
+                    }
+                    
+                    const theoryLabel = window.i18n.t('label_theory').replace('📚 ', '');
+                    const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
+                    
+                    if (lesson.available) {
+                        card.innerHTML = `
+                            <div class="lesson-number">${lesson.number}</div>
+                            <h2>${lesson.title}</h2>
+                            <p>${lesson.description}</p>
+                            <div class="lesson-links">
+                                <a href="lessons/${lesson.id}/theory.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
+                                <a href="lessons/${lesson.id}/exercise.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
+                            </div>
+                        `;
+                    } else {
+                        card.innerHTML = `
+                            <div class="lesson-number">${lesson.number}</div>
+                            <h2>${lesson.title}</h2>
+                            <p>${lesson.description}</p>
+                            <div class="lesson-links">
+                                <button class="btn btn-secondary" disabled>📚 ${theoryLabel}</button>
+                                <button class="btn btn-primary" disabled>✏️ ${exerciseLabel}</button>
+                            </div>
+                        `;
+                    }
+                    
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load lessons metadata:', error);
+                document.getElementById('lessons-grid').innerHTML = `
+                    <p style="color: white;">レッスンデータの読み込みに失敗しました。</p>
+                `;
+            }
         }
         
         // 初期化
         window.addEventListener('DOMContentLoaded', () => {
             window.i18n.init();
-            window.i18n.createLanguageSwitcher('language-switcher', updateUITexts);
+            window.i18n.createLanguageSwitcher('language-switcher', () => {
+                updateUITexts();
+                loadLessons();
+            });
             updateUITexts();
+            loadLessons();
         });
     </script>
 </body>

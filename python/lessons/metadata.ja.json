@@ -1,0 +1,32 @@
+{
+  "lessons": [
+    {
+      "id": "01_hello",
+      "number": 1,
+      "title": "はじめてのPython",
+      "description": "print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。",
+      "available": true
+    },
+    {
+      "id": "02_variables",
+      "number": 2,
+      "title": "変数と計算",
+      "description": "変数を使ってデータを保存し、計算をしてみよう。",
+      "available": false
+    },
+    {
+      "id": "03_if",
+      "number": 3,
+      "title": "条件分岐（if文）",
+      "description": "条件によって処理を変える方法を学ぼう。",
+      "available": false
+    },
+    {
+      "id": "04_for",
+      "number": 4,
+      "title": "繰り返し（for文）",
+      "description": "同じ処理を繰り返し実行する方法を学ぼう。",
+      "available": false
+    }
+  ]
+}
