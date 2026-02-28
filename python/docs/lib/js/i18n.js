@@ -129,21 +129,32 @@ const translations = {
 // 現在の言語を管理
 let currentLang = 'ja';
 
-// 初期化：URLパラメータまたはローカルストレージから言語を取得
+// 初期化：ファイル名、URLパラメータ、またはローカルストレージから言語を取得
 function initLanguage() {
-    // URLパラメータをチェック
+    // 1. URLパラメータをチェック
     const urlParams = new URLSearchParams(window.location.search);
     const langParam = urlParams.get('lang');
     
     if (langParam && translations[langParam]) {
         currentLang = langParam;
         localStorage.setItem('preferredLanguage', langParam);
-    } else {
-        // ローカルストレージから取得
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang && translations[savedLang]) {
-            currentLang = savedLang;
-        }
+        return currentLang;
+    }
+    
+    // 2. ファイル名から判定（exercise.ja.html, exercise.en.html など）
+    const path = window.location.pathname;
+    if (path.includes('.en.')) {
+        currentLang = 'en';
+        return currentLang;
+    } else if (path.includes('.ja.')) {
+        currentLang = 'ja';
+        return currentLang;
+    }
+    
+    // 3. ローカルストレージから取得
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && translations[savedLang]) {
+        currentLang = savedLang;
     }
     
     return currentLang;
@@ -160,7 +171,9 @@ function getCurrentLanguage() {
 }
 
 // 言語を切り替え
-function setLanguage(lang) {
+function setLanguage(lang, options = {}) {
+    const { reload = false } = options;
+    
     if (translations[lang]) {
         currentLang = lang;
         localStorage.setItem('preferredLanguage', lang);
@@ -170,8 +183,10 @@ function setLanguage(lang) {
         url.searchParams.set('lang', lang);
         window.history.pushState({}, '', url);
         
-        // ページをリロード
-        window.location.reload();
+        // reloadオプションがtrueの場合のみページをリロード
+        if (reload) {
+            window.location.reload();
+        }
     }
 }
 
@@ -196,19 +211,12 @@ function createLanguageSwitcher(containerId, onLanguageChange) {
     switcher.querySelector('#language-select').addEventListener('change', (e) => {
         const newLang = e.target.value;
         if (translations[newLang]) {
-            currentLang = newLang;
-            localStorage.setItem('preferredLanguage', newLang);
-            
-            // URLを更新（リロードなし）
-            const url = new URL(window.location);
-            url.searchParams.set('lang', newLang);
-            window.history.pushState({}, '', url);
-            
             // コールバックがあれば実行、なければページリロード
             if (onLanguageChange && typeof onLanguageChange === 'function') {
+                setLanguage(newLang, { reload: false });
                 onLanguageChange();
             } else {
-                window.location.reload();
+                setLanguage(newLang, { reload: true });
             }
         }
     });

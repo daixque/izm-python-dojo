@@ -126,6 +126,7 @@
     <!-- Monaco Editor -->
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
     <!-- Common Libraries -->
+    <script src="../../lib/js/i18n.js"></script>
     <script src="../../lib/js/runner.js"></script>
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
@@ -173,6 +174,11 @@ result`
         
         // Execute on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            // Initialize language (auto-detect from filename)
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
             setupButtons();
             await initializeExercise({
                 initialCode: INITIAL_CODE,

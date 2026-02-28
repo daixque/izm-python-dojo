@@ -80,9 +80,10 @@ async function initializeExercise(config = {}) {
     });
     
     // Pyodideの初期化
+    const t = (key, fallback) => window.i18n ? window.i18n.t(key) : fallback;
     const statusElement = document.getElementById('status');
     if (statusElement) {
-        statusElement.textContent = 'Python環境を初期化中...';
+        statusElement.textContent = t('msg_pythonNotReady', 'Python環境を初期化中...');
     }
     
     await window.pyodideRunner.init();
@@ -91,7 +92,7 @@ async function initializeExercise(config = {}) {
     await window.fileExplorer.loadInitialFiles();
     
     if (statusElement) {
-        statusElement.textContent = '準備完了';
+        statusElement.textContent = t('status_ready', '準備完了');
     }
 }
 
@@ -99,6 +100,9 @@ async function initializeExercise(config = {}) {
  * ボタンイベントの設定
  */
 function setupButtons() {
+    // i18nメッセージ取得ヘルパー
+    const t = (key, fallback) => window.i18n ? window.i18n.t(key) : fallback;
+    
     // 実行ボタン
     const btnRun = document.getElementById('btn-run');
     if (btnRun) {
@@ -106,13 +110,13 @@ function setupButtons() {
             const code = window.monacoEditor.getContent();
             if (code.trim()) {
                 clearConsole();
-                appendToConsole('コードを実行中...', 'info');
+                appendToConsole(t('msg_executing', 'コードを実行中...'), 'info');
                 try {
                     const result = await window.pyodideRunner.run(code);
                     if (result !== undefined && result !== null) {
-                        appendToConsole(`戻り値: ${result}`, 'output');
+                        appendToConsole(`${t('msg_returnValue', '戻り値:')} ${result}`, 'output');
                     }
-                    appendToConsole('実行が完了しました', 'info');
+                    appendToConsole(t('msg_executionComplete', '実行が完了しました'), 'info');
                     
                     // ファイルエクスプローラーを更新
                     window.fileExplorer.refresh();
@@ -120,7 +124,7 @@ function setupButtons() {
                     // エラーは runner.js で表示される
                 }
             } else {
-                appendToConsole('コードを入力してください', 'info');
+                appendToConsole(t('msg_enterCode', 'コードを入力してください'), 'info');
             }
         });
     }
@@ -132,7 +136,7 @@ function setupButtons() {
             const code = window.monacoEditor.getContent();
             if (code.trim()) {
                 clearConsole();
-                appendToConsole('テストを実行中...', 'info');
+                appendToConsole(t('msg_testing', 'テストを実行中...'), 'info');
                 
                 const testResult = await window.tester.runAll(code);
                 window.tester.displayResults(testResult);
@@ -143,12 +147,12 @@ function setupButtons() {
                     overlay.style.display = 'block';
                 }
                 
-                appendToConsole('テストが完了しました', 'info');
+                appendToConsole(t('msg_testComplete', 'テストが完了しました'), 'info');
                 
                 // ファイルエクスプローラーを更新
                 window.fileExplorer.refresh();
             } else {
-                appendToConsole('コードを入力してください', 'info');
+                appendToConsole(t('msg_enterCode', 'コードを入力してください'), 'info');
             }
         });
     }
@@ -159,7 +163,7 @@ function setupButtons() {
         btnReset.addEventListener('click', () => {
             window.monacoEditor.setContent(savedInitialCode);
             clearConsole();
-            appendToConsole('コードをリセットしました', 'info');
+            appendToConsole(t('msg_codeReset', 'コードをリセットしました'), 'info');
         });
     }
     

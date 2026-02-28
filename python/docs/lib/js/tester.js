@@ -1,42 +1,6 @@
 // テスト機能（自動評価）
 let currentTests = [];
 
-// 現在の言語を取得（ファイル名から判定）
-function getCurrentLanguage() {
-    const path = window.location.pathname;
-    if (path.includes('.en.')) return 'en';
-    if (path.includes('.ja.')) return 'ja';
-    return 'ja'; // デフォルトは日本語
-}
-
-// 言語別メッセージ
-const messages = {
-    ja: {
-        pythonNotReady: 'Pythonがまだ準備できていません',
-        noTests: 'テストが設定されていません',
-        testLabel: 'テスト',
-        testError: 'テスト実行エラー',
-        errorLabel: 'エラー',
-        allPassed: 'すべてのテストに合格しました！',
-        someFailed: '一部のテストに失敗しました'
-    },
-    en: {
-        pythonNotReady: 'Python is not ready yet',
-        noTests: 'No tests configured',
-        testLabel: 'Test',
-        testError: 'Test execution error',
-        errorLabel: 'Error',
-        allPassed: 'All tests passed!',
-        someFailed: 'Some tests failed'
-    }
-};
-
-// メッセージを取得
-function getMessage(key) {
-    const lang = getCurrentLanguage();
-    return messages[lang][key] || messages['ja'][key];
-}
-
 // テストを設定
 function setTests(tests) {
     currentTests = tests || [];
@@ -47,14 +11,14 @@ async function runAllTests(userCode) {
     if (!window.pyodideRunner.isReady()) {
         return {
             success: false,
-            message: getMessage('pythonNotReady')
+            message: window.i18n ? window.i18n.t('msg_pyodideNotReady') : 'Python is not ready yet'
         };
     }
     
     if (currentTests.length === 0) {
         return {
             success: false,
-            message: getMessage('noTests')
+            message: window.i18n ? window.i18n.t('msg_noTestsConfigured') : 'No tests configured'
         };
     }
     
@@ -95,7 +59,7 @@ async function runSingleTest(userCode, test, testNumber) {
         
         return {
             testNumber: testNumber,
-            name: test.name || `${getMessage('testLabel')} ${testNumber}`,
+            name: test.name || `${window.i18n ? window.i18n.t('test_label') : 'Test'} ${testNumber}`,
             description: test.description || '',
             passed: resultObj.passed,
             message: resultObj.message || ''
@@ -103,10 +67,10 @@ async function runSingleTest(userCode, test, testNumber) {
     } catch (error) {
         return {
             testNumber: testNumber,
-            name: test.name || `${getMessage('testLabel')} ${testNumber}`,
+            name: test.name || `${window.i18n ? window.i18n.t('test_label') : 'Test'} ${testNumber}`,
             description: test.description || '',
             passed: false,
-            message: `${getMessage('testError')}: ${error.message}`
+            message: `${window.i18n ? window.i18n.t('msg_testExecutionError') : 'Test execution error'}: ${error.message}`
         };
     }
 }
@@ -119,9 +83,10 @@ function displayTestResults(testResult) {
     resultContainer.innerHTML = '';
     
     if (!testResult.success) {
+        const errorLabel = window.i18n ? window.i18n.t('test_error') : 'Error';
         resultContainer.innerHTML = `
             <div class="test-error">
-                <strong>${getMessage('errorLabel')}:</strong> ${testResult.message}
+                <strong>${errorLabel}:</strong> ${testResult.message}
             </div>
         `;
         return;
@@ -132,9 +97,11 @@ function displayTestResults(testResult) {
     const summaryIcon = testResult.allPassed ? '✓' : '✗';
     const passedCount = testResult.results.filter(r => r.passed).length;
     const totalCount = testResult.results.length;
+    const allPassedMsg = window.i18n ? window.i18n.t('test_allPassed') : 'All tests passed!';
+    const someFailedMsg = window.i18n ? window.i18n.t('test_someFailed') : 'Some tests failed';
     const summaryText = testResult.allPassed 
-        ? `${getMessage('allPassed')} (${totalCount}/${totalCount})` 
-        : `${getMessage('someFailed')} (${passedCount}/${totalCount})`;
+        ? `${allPassedMsg} (${totalCount}/${totalCount})` 
+        : `${someFailedMsg} (${passedCount}/${totalCount})`;
     
     const summaryHTML = `
         <div class="${summaryClass}">
