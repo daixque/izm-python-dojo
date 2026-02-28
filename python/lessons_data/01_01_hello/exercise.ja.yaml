@@ -1,0 +1,16 @@
+lesson:
+  number: "01_01"  # チャプター_レッスン形式
+  id: "hello"
+  title: "はじめてのPython"
+
+task_description: |
+  <p>「Hello, World!」と表示するプログラムを書いてみましょう。</p>
+
+instructions:
+  - "<code>print()</code>関数を使います"
+  - "カッコの中に、ダブルクォーテーションで囲んだ「Hello, World!」を書きます"
+  - "最後のカッコを閉じるのを忘れずに！"
+
+hints:
+  - "print()のカッコの中に、ダブルクォーテーションで囲んだ文字を書きます"
+  - "正解例: print(\"Hello, World!\")"

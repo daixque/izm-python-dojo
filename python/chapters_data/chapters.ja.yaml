@@ -1,0 +1,30 @@
+chapters:
+  - id: "chapter1"
+    number: "01"
+    title: "プログラミングの基礎"
+    description: "Pythonの基本的な使い方を学びます"
+  
+  - id: "chapter2"
+    number: "02"
+    title: "条件分岐"
+    description: "条件によって処理を変える方法を学びます"
+  
+  - id: "chapter3"
+    number: "03"
+    title: "繰り返し処理"
+    description: "同じ処理を繰り返す方法を学びます"
+  
+  - id: "chapter4"
+    number: "04"
+    title: "データ構造"
+    description: "複数のデータをまとめて扱う方法を学びます"
+  
+  - id: "chapter5"
+    number: "05"
+    title: "関数"
+    description: "再利用可能なコードの書き方を学びます"
+  
+  - id: "chapter6"
+    number: "06"
+    title: "実践プロジェクト"
+    description: "学んだことを活かして実用的なプログラムを作ります"

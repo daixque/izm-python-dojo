@@ -1,0 +1,37 @@
+# 日本語UI文言
+# ページタイトル
+page_title:
+  theory: "理論"
+  exercise: "演習課題"
+
+# ヘッダー
+header:
+  lesson_prefix: "レッスン"
+
+# 言語スイッチャー
+language_switcher:
+  to_english: "English"
+  to_japanese: "日本語"
+
+# 理論ページ
+theory:
+  start_exercise: "演習を始める"
+
+# 演習ページ
+exercise:
+  task_heading: "📋 課題内容"
+  instructions_heading: "✏️ やること"
+  hints_heading: "💡 ヒント"
+  button_run: "▶ 実行"
+  button_test: "✓ テスト"
+  button_reset: "🔄 リセット"
+  button_clear: "クリア"
+  status_ready: "準備完了"
+  status_running: "実行中..."
+  status_testing: "テスト中..."
+  status_preparing: "準備中..."
+  editor_label: "📝 コードエディタ"
+  console_label: "💻 実行結果"
+  task_label: "課題"
+  task_toggle_open: "◀"
+  task_toggle_close: "▶"

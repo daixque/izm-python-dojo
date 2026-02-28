@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン01_01: はじめてのPython</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1 id="lesson-title">📝 レッスン01_01: はじめてのPython</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>「Hello, World!」と表示するプログラムを書いてみましょう。</p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li><code>print()</code>関数を使います</li>
+                            <li>カッコの中に、ダブルクォーテーションで囲んだ「Hello, World!」を書きます</li>
+                            <li>最後のカッコを閉じるのを忘れずに！</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4>💡 ヒント</h4>
+                        <ul>
+                            <li>print()のカッコの中に、ダブルクォーテーションで囲んだ文字を書きます</li>
+                            <li>正解例: print("Hello, World!")</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="theory.ja.html" class="btn btn-link">📚 理論に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const INITIAL_CODE = "# \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u307f\u3088\u3046\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\nimport sys\nfrom io import StringIO\n\n# \u6a19\u6e96\u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\nold_stdout = sys.stdout\nsys.stdout = StringIO()\n\ntry:\n    exec(user_code)\n    output = sys.stdout.getvalue()\nfinally:\n    sys.stdout = old_stdout\n\n# \u51fa\u529b\u3092\u30c1\u30a7\u30c3\u30af\nexpected = \"Hello, World!\\\\n\"\nif output == expected:\n    result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01\" if lang == \"ja\" else \"\u2713 Correct!\"}\nelse:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u51fa\u529b\u304c\u9055\u3044\u307e\u3059\u3002\\\\n\u671f\u5f85: {repr(expected)}\\\\n\u5b9f\u969b: {repr(output)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Output is different.\\\\nExpected: {repr(expected)}\\\\nActual: {repr(output)}\"}\n\nresult\n", "description": "\u6b63\u3057\u304f\u300cHello, World!\u300d\u3068\u8868\u793a\u3067\u304d\u3066\u3044\u308b\u304b", "name": "\u30c6\u30b9\u30c81: Hello, World!\u3092\u8868\u793a"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

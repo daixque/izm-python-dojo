@@ -7,32 +7,11 @@
       "description": "Learn the fundamentals of Python",
       "lessons": [
         {
-          "id": "01_hello",
-          "number": 1,
+          "id": "01_01_hello",
+          "number": "01_01",
           "title": "First Steps with Python",
-          "description": "Display 'Hello, World!' with the print function. Your first step in programming.",
+          "description": "Write a program to display 'Hello, World!'",
           "available": true
-        },
-        {
-          "id": "02_variables",
-          "number": 2,
-          "title": "Variables and Calculations",
-          "description": "Store data in variables and perform calculations.",
-          "available": false
-        },
-        {
-          "id": "03_types",
-          "number": 3,
-          "title": "Data Types and Conversion",
-          "description": "Understand data types like integers, floats, and strings.",
-          "available": false
-        },
-        {
-          "id": "04_input",
-          "number": 4,
-          "title": "User Input",
-          "description": "Create programs that receive input from users.",
-          "available": false
         }
       ]
     },
@@ -41,152 +20,35 @@
       "number": 2,
       "title": "Conditional Statements",
       "description": "Learn to control program flow with conditions",
-      "lessons": [
-        {
-          "id": "05_if_basic",
-          "number": 5,
-          "title": "Basic Conditionals",
-          "description": "Use if statements to change behavior based on conditions.",
-          "available": false
-        },
-        {
-          "id": "06_if_else",
-          "number": 6,
-          "title": "else and elif",
-          "description": "Handle multiple conditions effectively.",
-          "available": false
-        },
-        {
-          "id": "07_logic",
-          "number": 7,
-          "title": "Logical Operators",
-          "description": "Create complex conditions with and and or.",
-          "available": false
-        }
-      ]
+      "lessons": []
     },
     {
       "id": "chapter3",
       "number": 3,
       "title": "Loops",
       "description": "Learn to repeat operations efficiently",
-      "lessons": [
-        {
-          "id": "08_for_basic",
-          "number": 8,
-          "title": "for Loop Basics",
-          "description": "Master repetition with for loops.",
-          "available": false
-        },
-        {
-          "id": "09_for_advanced",
-          "number": 9,
-          "title": "Advanced for Loops",
-          "description": "Use range and loop calculations effectively.",
-          "available": false
-        },
-        {
-          "id": "10_while",
-          "number": 10,
-          "title": "while Loops",
-          "description": "Learn loops that continue while conditions are true.",
-          "available": false
-        }
-      ]
+      "lessons": []
     },
     {
       "id": "chapter4",
       "number": 4,
       "title": "Data Structures",
       "description": "Learn to work with collections of data",
-      "lessons": [
-        {
-          "id": "11_list_basic",
-          "number": 11,
-          "title": "List Basics",
-          "description": "Manage multiple pieces of data with lists.",
-          "available": false
-        },
-        {
-          "id": "12_list_advanced",
-          "number": 12,
-          "title": "List Operations",
-          "description": "Add, remove, and sort list items.",
-          "available": false
-        },
-        {
-          "id": "13_list_loop",
-          "number": 13,
-          "title": "for Loops and Lists",
-          "description": "Process each element in a list with loops.",
-          "available": false
-        },
-        {
-          "id": "14_dict",
-          "number": 14,
-          "title": "Dictionary Basics",
-          "description": "Manage data with key-value pairs.",
-          "available": false
-        }
-      ]
+      "lessons": []
     },
     {
       "id": "chapter5",
       "number": 5,
       "title": "Functions",
       "description": "Learn to write reusable code",
-      "lessons": [
-        {
-          "id": "15_function_basic",
-          "number": 15,
-          "title": "Function Basics",
-          "description": "Create your own functions to organize code.",
-          "available": false
-        },
-        {
-          "id": "16_function_advanced",
-          "number": 16,
-          "title": "Advanced Functions",
-          "description": "Master parameters and return values.",
-          "available": false
-        }
-      ]
+      "lessons": []
     },
     {
       "id": "chapter6",
       "number": 6,
       "title": "Practical Projects",
       "description": "Apply your knowledge to build real programs",
-      "lessons": [
-        {
-          "id": "17_text_game",
-          "number": 17,
-          "title": "Text-Based Game",
-          "description": "Create a fun game while learning programming.",
-          "available": false
-        },
-        {
-          "id": "18_data_analysis",
-          "number": 18,
-          "title": "Data Aggregation Program",
-          "description": "Build a program to collect and analyze data.",
-          "available": false
-        },
-        {
-          "id": "19_file",
-          "number": 19,
-          "title": "File Operations Basics",
-          "description": "Learn to read and write files.",
-          "available": false
-        },
-        {
-          "id": "20_final_project",
-          "number": 20,
-          "title": "Final Project",
-          "description": "Design and build your own program from scratch.",
-          "available": false
-        }
-      ]
+      "lessons": []
     }
   ]
 }

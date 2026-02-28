@@ -1,0 +1,16 @@
+lesson:
+  number: "01_01"  # Chapter_Lesson format
+  id: "hello"
+  title: "First Steps with Python"
+
+task_description: |
+  <p>Write a program to display 'Hello, World!'</p>
+
+instructions:
+  - "Use the <code>print()</code> function"
+  - "Inside the parentheses, write 'Hello, World!' enclosed in double quotes"
+  - "Don't forget to close the parentheses!"
+
+hints:
+  - "Inside the print() parentheses, write text enclosed in double quotes"
+  - "Example answer: print(\"Hello, World!\")"

@@ -1,0 +1,30 @@
+chapters:
+  - id: "chapter1"
+    number: "01"
+    title: "Programming Basics"
+    description: "Learn the fundamentals of Python"
+  
+  - id: "chapter2"
+    number: "02"
+    title: "Conditional Statements"
+    description: "Learn to control program flow with conditions"
+  
+  - id: "chapter3"
+    number: "03"
+    title: "Loops"
+    description: "Learn to repeat operations efficiently"
+  
+  - id: "chapter4"
+    number: "04"
+    title: "Data Structures"
+    description: "Learn to work with collections of data"
+  
+  - id: "chapter5"
+    number: "05"
+    title: "Functions"
+    description: "Learn to write reusable code"
+  
+  - id: "chapter6"
+    number: "06"
+    title: "Practical Projects"
+    description: "Apply your knowledge to build real programs"

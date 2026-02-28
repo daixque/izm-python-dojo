@@ -1,0 +1,37 @@
+# English UI strings
+# Page titles
+page_title:
+  theory: "Theory"
+  exercise: "Exercise"
+
+# Header
+header:
+  lesson_prefix: "Lesson"
+
+# Language switcher
+language_switcher:
+  to_english: "English"
+  to_japanese: "日本語"
+
+# Theory page
+theory:
+  start_exercise: "Start Exercise"
+
+# Exercise page
+exercise:
+  task_heading: "📋 Task"
+  instructions_heading: "✏️ Instructions"
+  hints_heading: "💡 Hints"
+  button_run: "▶ Run"
+  button_test: "✓ Test"
+  button_reset: "🔄 Reset"
+  button_clear: "Clear"
+  status_ready: "Ready"
+  status_running: "Running..."
+  status_testing: "Testing..."
+  status_preparing: "Preparing..."
+  editor_label: "📝 Code Editor"
+  console_label: "💻 Output"
+  task_label: "Task"
+  task_toggle_open: "◀"
+  task_toggle_close: "▶"
