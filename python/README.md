@@ -18,18 +18,81 @@
 ```text
 python/
   README.md              # プロジェクト概要
-  index.html             # エントリポイント
-  css/
-    style.css            # スタイル定義
-  js/
-    runner.js            # Pyodide実行エンジン
-    editor.js            # Monaco Editor初期化
-  lessons/
-    lesson01.json        # レッスン1: Hello World
+  index.html             # 目次ページ（レッスン一覧）
+  lib/                   # 共通ライブラリ
+    css/
+      theory.css         # 理論説明ページ用スタイル
+      exercise.css       # 演習課題ページ用スタイル
+    js/
+      runner.js          # Pyodide実行エンジン
+      editor.js          # Monaco Editor制御
+      tester.js          # 自動テスト機能
+  lessons/               # レッスンデータ
+    01_hello/            # レッスン1: はじめてのPython
+      theory.html        # 理論説明ページ
+      exercise.html      # 演習課題ページ
+      lesson.json        # レッスンデータ
+    02_variables/        # (今後追加予定)
+    03_if/               # (今後追加予定)
 ```
 
 ## 使い方
 
-1. `index.html` をブラウザで開く
-2. コードエディタにコードを記述
-3. 「実行」ボタンで結果を確認
+### ローカルサーバーで起動（推奨）
+
+ブラウザのセキュリティ制約（CORS）対策のため、ローカルサーバーで起動してください：
+
+```bash
+cd python
+python3 -m http.server 8080
+```
+
+その後、ブラウザで `http://localhost:8080` を開きます。
+
+### 学習の流れ
+
+1. **目次ページ**で学びたいレッスンを選択
+2. **理論説明ページ**で概念を学習
+3. **演習課題ページ**でコードを記述し、実行・テスト
+
+
+## レッスンの構成
+
+それぞれのレッスンは以下のような構成を持つものとします。
+
+1. **理論説明ページ** (`theory.html`): Pythonの基本的な概念や文法、およびコード例を説明。
+2. **演習課題ページ** (`exercise.html`): 学習者が自分でコードを書いてみるための課題を提供。コードを実行するためのUIを提供。
+
+### 演習課題の機能
+
+- **コードエディタ**: Monaco Editor（VS Code同等）でコード記述
+- **実行機能**: Pyodideでブラウザ内でPython実行
+- **自動テスト**: 実行結果を評価し、正解か不正解かをフィードバック
+- **ヒント表示**: 学習者をサポートするヒントを表示
+
+### レッスンデータ形式
+
+各レッスンは `lesson.json` に以下の形式で記述します：
+
+```json
+{
+  "id": "lesson01",
+  "title": "レッスン名",
+  "theory": {
+    "title": "理論のタイトル",
+    "sections": [...],
+    "examples": [...]
+  },
+  "exercise": {
+    "task": "課題内容",
+    "initialCode": "初期コード",
+    "tests": [
+      {
+        "name": "テスト名",
+        "description": "テストの説明",
+        "code": "テスト用Pythonコード"
+      }
+    ]
+  }
+}
+```

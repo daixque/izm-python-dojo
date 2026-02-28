@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン1</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1 id="lesson-title">📝 演習課題</h1>
+            <div class="status">
+                <span id="status">準備中...</span>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                </div>
+                <div class="task-content">
+                    <div class="task-description" id="task-description">
+                        <p>課題を読み込んでいます...</p>
+                    </div>
+                    <div class="instructions" id="instructions" style="display: none;">
+                        <h4>✏️ やること</h4>
+                        <ul id="instructions-list"></ul>
+                    </div>
+                    <div class="hints" id="hints" style="display: none;">
+                        <h4>💡 ヒント</h4>
+                        <ul id="hints-list"></ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="theory.html" class="btn btn-link">📚 理論に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+                <!-- <a href="../02_variables/theory.html" class="btn btn-primary">次のレッスン →</a> -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        let currentLesson = null;
+        
+        // レッスンデータを読み込んで表示
+        async function loadLesson() {
+            try {
+                const response = await fetch('lesson.json');
+                const lesson = await response.json();
+                currentLesson = lesson;
+                
+                // タイトル
+                document.getElementById('lesson-title').textContent = lesson.title;
+                document.title = `演習課題 - ${lesson.title}`;
+                
+                // タスク説明
+                document.getElementById('task-description').innerHTML = `
+                    <h3>📋 課題内容</h3>
+                    <p>${lesson.exercise.task}</p>
+                `;
+                
+                // 指示
+                if (lesson.exercise.instructions && lesson.exercise.instructions.length > 0) {
+                    document.getElementById('instructions').style.display = 'block';
+                    document.getElementById('instructions-list').innerHTML = 
+                        lesson.exercise.instructions.map(inst => `<li>${inst}</li>`).join('');
+                }
+                
+                // ヒント
+                if (lesson.exercise.hints && lesson.exercise.hints.length > 0) {
+                    document.getElementById('hints').style.display = 'block';
+                    document.getElementById('hints-list').innerHTML = 
+                        lesson.exercise.hints.map(hint => `<li>${hint}</li>`).join('');
+                }
+                
+                // エディタの初期化
+                await window.monacoEditor.init({
+                    value: lesson.exercise.initialCode || '# ここにコードを書いてみよう\n'
+                });
+                
+                // テストを設定
+                if (lesson.exercise.tests) {
+                    window.tester.setTests(lesson.exercise.tests);
+                }
+                
+                // Pyodideの初期化
+                await window.pyodideRunner.init();
+                
+            } catch (error) {
+                console.error('Failed to load lesson:', error);
+                document.getElementById('task-description').innerHTML = `
+                    <p style="color: red;">エラー: レッスンデータの読み込みに失敗しました。</p>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+        
+        // ボタンイベントの設定
+        function setupButtons() {
+            // 実行ボタン
+            document.getElementById('btn-run').addEventListener('click', async () => {
+                const code = window.monacoEditor.getContent();
+                if (code.trim()) {
+                    clearConsole();
+                    appendToConsole('>>> プログラムを実行中...', 'info');
+                    try {
+                        const result = await window.pyodideRunner.run(code);
+                        if (result !== undefined && result !== null) {
+                            appendToConsole(`戻り値: ${result}`, 'output');
+                        }
+                        appendToConsole('>>> 実行完了', 'info');
+                    } catch (error) {
+                        // エラーは runner.js で表示される
+                    }
+                } else {
+                    appendToConsole('⚠ コードを入力してください', 'info');
+                }
+            });
+            
+            // テストボタン
+            document.getElementById('btn-test').addEventListener('click', async () => {
+                const code = window.monacoEditor.getContent();
+                if (code.trim()) {
+                    clearConsole();
+                    appendToConsole('>>> テストを実行中...', 'info');
+                    
+                    const testResult = await window.tester.runAll(code);
+                    window.tester.displayResults(testResult);
+                    
+                    // テスト結果を表示
+                    document.getElementById('test-results-overlay').style.display = 'block';
+                    
+                    appendToConsole('>>> テスト完了', 'info');
+                } else {
+                    appendToConsole('⚠ コードを入力してください', 'info');
+                }
+            });
+            
+            // リセットボタン
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                if (currentLesson && currentLesson.exercise.initialCode) {
+                    window.monacoEditor.setContent(currentLesson.exercise.initialCode);
+                    clearConsole();
+                    appendToConsole('✓ コードをリセットしました', 'info');
+                }
+            });
+            
+            // クリアボタン
+            document.getElementById('btn-clear').addEventListener('click', clearConsole);
+            
+            // テスト結果を閉じる
+            document.getElementById('btn-close-results').addEventListener('click', () => {
+                document.getElementById('test-results-overlay').style.display = 'none';
+            });
+        }
+        
+        // 初期化
+        window.addEventListener('DOMContentLoaded', () => {
+            setupButtons();
+            loadLesson();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+/* 演習課題ページ用スタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+/* ヘッダー */
+.header {
+    background: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.status {
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+#status.ready {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* メインコンテンツ */
+.main-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 16px;
+    overflow: hidden;
+}
+
+/* タスクパネル */
+.task-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.task-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 24px;
+}
+
+.task-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.task-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.task-description {
+    margin-bottom: 20px;
+}
+
+.task-description h3 {
+    color: #667eea;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.task-description p {
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.task-description code {
+    background: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    color: #e83e8c;
+}
+
+.instructions {
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.instructions h4 {
+    color: #ff8c00;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.instructions ul {
+    margin-left: 20px;
+}
+
+.instructions li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.hints {
+    background: #e7f3ff;
+    border-left: 4px solid #2196F3;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+.hints h4 {
+    color: #1976D2;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.hints ul {
+    margin-left: 20px;
+}
+
+.hints li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* コードパネル */
+.code-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.editor-container {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.editor-header {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editor-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+}
+
+.editor {
+    flex: 1;
+    min-height: 0;
+}
+
+/* コンソール */
+.console-container {
+    height: 180px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.console-header {
+    background: #2d3748;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.console-label {
+    font-weight: 600;
+}
+
+.console {
+    flex: 1;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.console-output {
+    color: #4ec9b0;
+}
+
+.console-error {
+    color: #f48771;
+}
+
+.console-info {
+    color: #9cdcfe;
+}
+
+/* テスト結果 */
+.test-results-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.test-summary-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 4px solid #28a745;
+}
+
+.test-summary-failure {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 4px solid #dc3545;
+}
+
+.test-error {
+    background: #fff3cd;
+    color: #856404;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.test-item {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.test-item:last-child {
+    margin-bottom: 0;
+}
+
+.test-passed {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.test-failed {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.test-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.test-icon {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.test-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.test-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.test-message {
+    font-size: 14px;
+    color: #555;
+    white-space: pre-wrap;
+}
+
+/* ボタン */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #5568d3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    background: #495057;
+    color: white;
+    font-size: 12px;
+}
+
+.btn-small:hover {
+    background: #343a40;
+}
+
+.btn-link {
+    background: transparent;
+    color: #667eea;
+    text-decoration: none;
+    padding: 8px 16px;
+}
+
+.btn-link:hover {
+    background: #f0f0f0;
+}
+
+/* フッター */
+.footer {
+    background: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.footer-next {
+    display: flex;
+    gap: 12px;
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    
+    .task-panel {
+        max-height: 300px;
+    }
+    
+    .footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .btn {
+        width: auto;
+        flex: 1;
+    }
+}
