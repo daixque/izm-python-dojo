@@ -1,32 +1,192 @@
 {
-  "lessons": [
+  "chapters": [
     {
-      "id": "01_hello",
+      "id": "chapter1",
       "number": 1,
-      "title": "はじめてのPython",
-      "description": "print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。",
-      "available": true
+      "title": "プログラミングの基礎",
+      "description": "Pythonの基本的な使い方を学びます",
+      "lessons": [
+        {
+          "id": "01_hello",
+          "number": 1,
+          "title": "はじめてのPython",
+          "description": "print関数を使って「Hello, World!」を表示してみよう。プログラミングの第一歩を体験します。",
+          "available": true
+        },
+        {
+          "id": "02_variables",
+          "number": 2,
+          "title": "変数と計算",
+          "description": "変数を使ってデータを保存し、計算をしてみよう。",
+          "available": false
+        },
+        {
+          "id": "03_types",
+          "number": 3,
+          "title": "データ型と変換",
+          "description": "整数、小数、文字列などのデータ型を理解しよう。",
+          "available": false
+        },
+        {
+          "id": "04_input",
+          "number": 4,
+          "title": "ユーザー入力",
+          "description": "ユーザーからデータを受け取るプログラムを作ろう。",
+          "available": false
+        }
+      ]
     },
     {
-      "id": "02_variables",
+      "id": "chapter2",
       "number": 2,
-      "title": "変数と計算",
-      "description": "変数を使ってデータを保存し、計算をしてみよう。",
-      "available": false
+      "title": "条件分岐",
+      "description": "条件によって処理を変える方法を学びます",
+      "lessons": [
+        {
+          "id": "05_if_basic",
+          "number": 5,
+          "title": "条件分岐の基礎",
+          "description": "if文を使って条件によって処理を変えよう。",
+          "available": false
+        },
+        {
+          "id": "06_if_else",
+          "number": 6,
+          "title": "elseとelif",
+          "description": "複数の条件を扱う方法を学ぼう。",
+          "available": false
+        },
+        {
+          "id": "07_logic",
+          "number": 7,
+          "title": "論理演算子",
+          "description": "andやorを使って複雑な条件を作ろう。",
+          "available": false
+        }
+      ]
     },
     {
-      "id": "03_if",
+      "id": "chapter3",
       "number": 3,
-      "title": "条件分岐（if文）",
-      "description": "条件によって処理を変える方法を学ぼう。",
-      "available": false
+      "title": "繰り返し処理",
+      "description": "同じ処理を繰り返す方法を学びます",
+      "lessons": [
+        {
+          "id": "08_for_basic",
+          "number": 8,
+          "title": "forループの基礎",
+          "description": "forループで繰り返し処理をマスターしよう。",
+          "available": false
+        },
+        {
+          "id": "09_for_advanced",
+          "number": 9,
+          "title": "forループの応用",
+          "description": "rangeやループ内の計算を使いこなそう。",
+          "available": false
+        },
+        {
+          "id": "10_while",
+          "number": 10,
+          "title": "whileループ",
+          "description": "条件が真の間繰り返すwhileループを学ぼう。",
+          "available": false
+        }
+      ]
     },
     {
-      "id": "04_for",
+      "id": "chapter4",
       "number": 4,
-      "title": "繰り返し（for文）",
-      "description": "同じ処理を繰り返し実行する方法を学ぼう。",
-      "available": false
+      "title": "データ構造",
+      "description": "複数のデータをまとめて扱う方法を学びます",
+      "lessons": [
+        {
+          "id": "11_list_basic",
+          "number": 11,
+          "title": "リストの基礎",
+          "description": "複数のデータをリストにまとめて管理しよう。",
+          "available": false
+        },
+        {
+          "id": "12_list_advanced",
+          "number": 12,
+          "title": "リストの操作",
+          "description": "リストの追加、削除、並び替えを学ぼう。",
+          "available": false
+        },
+        {
+          "id": "13_list_loop",
+          "number": 13,
+          "title": "forループとリスト",
+          "description": "リストの各要素に対してループ処理をしよう。",
+          "available": false
+        },
+        {
+          "id": "14_dict",
+          "number": 14,
+          "title": "辞書の基礎",
+          "description": "キーと値のペアでデータを管理しよう。",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "chapter5",
+      "number": 5,
+      "title": "関数",
+      "description": "再利用可能なコードの書き方を学びます",
+      "lessons": [
+        {
+          "id": "15_function_basic",
+          "number": 15,
+          "title": "関数の基礎",
+          "description": "自分で関数を作って処理をまとめよう。",
+          "available": false
+        },
+        {
+          "id": "16_function_advanced",
+          "number": 16,
+          "title": "関数の応用",
+          "description": "引数や戻り値を使いこなそう。",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "chapter6",
+      "number": 6,
+      "title": "実践プロジェクト",
+      "description": "学んだことを活かして実用的なプログラムを作ります",
+      "lessons": [
+        {
+          "id": "17_text_game",
+          "number": 17,
+          "title": "テキストベースゲーム",
+          "description": "ゲームを作って楽しくプログラミングしよう。",
+          "available": false
+        },
+        {
+          "id": "18_data_analysis",
+          "number": 18,
+          "title": "データ集計プログラム",
+          "description": "データを集計・分析するプログラムを作ろう。",
+          "available": false
+        },
+        {
+          "id": "19_file",
+          "number": 19,
+          "title": "ファイル操作の基礎",
+          "description": "ファイルの読み書きを学ぼう。",
+          "available": false
+        },
+        {
+          "id": "20_final_project",
+          "number": 20,
+          "title": "最終プロジェクト",
+          "description": "自分でプログラムを設計して作り上げよう。",
+          "available": false
+        }
+      ]
     }
   ]
 }

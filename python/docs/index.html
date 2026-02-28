@@ -12,10 +12,80 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            margin: 0;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .sidebar-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 8px;
+        }
+        
+        .nav-link {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            line-height: 1.4;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateX(4px);
+        }
+        
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .nav-chapter-number {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-right: 4px;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
             padding: 40px 20px;
         }
         
@@ -70,6 +140,45 @@
         }
         
         .lessons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+        
+        .chapter-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px;
+        }
+        
+        .chapter-header {
+            color: white;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chapter-number {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .chapter-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .chapter-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .chapter-lessons {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 24px;
@@ -152,29 +261,72 @@
             background: #d0d0d0;
         }
         
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            
+            .main-content {
+                margin-left: 240px;
+            }
+        }
+        
         @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: sticky;
+                top: 0;
+                max-height: 60vh;
+                z-index: 10;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
             .header h1 {
                 font-size: 36px;
             }
             
-            .lessons-grid {
+            .chapter-lessons {
                 grid-template-columns: 1fr;
+            }
+            
+            .chapter-header h2 {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ヘッダー -->
-        <header class="header">
-            <div class="language-switcher" id="language-switcher"></div>
-            <h1 id="page-title">🐍 Python学習環境</h1>
-            <p id="page-subtitle">中学生向けプログラミング入門教材</p>
-        </header>
+    <!-- サイドバー -->
+    <aside class="sidebar">
+        <div class="sidebar-title">📖 Chapters</div>
+        <ul class="sidebar-nav" id="chapter-nav">
+            <!-- チャプターナビゲーションは動的に読み込まれます -->
+        </ul>
+    </aside>
+    
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+        <div class="container">
+            <!-- ヘッダー -->
+            <header class="header">
+                <div class="language-switcher" id="language-switcher"></div>
+                <h1 id="page-title">🐍 Python学習環境</h1>
+                <p id="page-subtitle">中学生向けプログラミング入門教材</p>
+            </header>
 
-        <!-- レッスン一覧 -->
-        <div class="lessons-grid" id="lessons-grid">
-            <!-- レッスンは動的に読み込まれます -->
+            <!-- レッスン一覧 -->
+            <div class="lessons-grid" id="lessons-grid">
+                <!-- レッスンは動的に読み込まれます -->
+            </div>
         </div>
     </div>
     
@@ -183,6 +335,25 @@
         function updateUITexts() {
             document.getElementById('page-title').textContent = `🐍 ${window.i18n.t('appTitle')}`;
             document.getElementById('page-subtitle').textContent = window.i18n.t('subtitle');
+        }
+        
+        // チャプターナビゲーションを生成
+        function buildChapterNav(chapters) {
+            const nav = document.getElementById('chapter-nav');
+            nav.innerHTML = '';
+            
+            chapters.forEach(chapter => {
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                
+                const link = document.createElement('a');
+                link.href = `#chapter-${chapter.id}`;
+                link.className = 'nav-link';
+                link.innerHTML = `<span class="nav-chapter-number">Ch.${chapter.number}</span> ${chapter.title}`;
+                
+                li.appendChild(link);
+                nav.appendChild(li);
+            });
         }
         
         // レッスン一覧を読み込んで表示
@@ -195,47 +366,108 @@
                 const grid = document.getElementById('lessons-grid');
                 grid.innerHTML = ''; // クリア
                 
-                data.lessons.forEach(lesson => {
-                    const card = document.createElement('div');
-                    card.className = 'lesson-card';
-                    if (!lesson.available) {
-                        card.style.opacity = '0.5';
-                    }
+                // チャプターナビゲーションを構築
+                buildChapterNav(data.chapters);
+                
+                // 章ごとにレンダリング
+                data.chapters.forEach(chapter => {
+                    // 章セクションを作成
+                    const chapterSection = document.createElement('div');
+                    chapterSection.className = 'chapter-section';
+                    chapterSection.id = `chapter-${chapter.id}`;
                     
-                    const theoryLabel = window.i18n.t('label_theory').replace('📚 ', '');
-                    const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
+                    // 章ヘッダー
+                    const chapterHeader = document.createElement('div');
+                    chapterHeader.className = 'chapter-header';
+                    chapterHeader.innerHTML = `
+                        <div class="chapter-number">Chapter ${chapter.number}</div>
+                        <h2>${chapter.title}</h2>
+                        <p>${chapter.description}</p>
+                    `;
+                    chapterSection.appendChild(chapterHeader);
                     
-                    if (lesson.available) {
-                        const lang = window.i18n.currentLang;
-                        card.innerHTML = `
-                            <div class="lesson-number">${lesson.number}</div>
-                            <h2>${lesson.title}</h2>
-                            <p>${lesson.description}</p>
-                            <div class="lesson-links">
-                                <a href="lessons/${lesson.id}/theory.${lang}.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
-                                <a href="lessons/${lesson.id}/exercise.${lang}.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
-                            </div>
-                        `;
-                    } else {
-                        card.innerHTML = `
-                            <div class="lesson-number">${lesson.number}</div>
-                            <h2>${lesson.title}</h2>
-                            <p>${lesson.description}</p>
-                            <div class="lesson-links">
-                                <button class="btn btn-secondary" disabled>📚 ${theoryLabel}</button>
-                                <button class="btn btn-primary" disabled>✏️ ${exerciseLabel}</button>
-                            </div>
-                        `;
-                    }
+                    // レッスングリッド
+                    const chapterLessons = document.createElement('div');
+                    chapterLessons.className = 'chapter-lessons';
                     
-                    grid.appendChild(card);
+                    // 章内のレッスンをレンダリング
+                    chapter.lessons.forEach(lesson => {
+                        const card = document.createElement('div');
+                        card.className = 'lesson-card';
+                        if (!lesson.available) {
+                            card.style.opacity = '0.5';
+                        }
+                        
+                        const theoryLabel = window.i18n.t('label_theory').replace('📚 ', '');
+                        const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
+                        
+                        if (lesson.available) {
+                            const lang = window.i18n.currentLang;
+                            card.innerHTML = `
+                                <div class="lesson-number">${lesson.number}</div>
+                                <h2>${lesson.title}</h2>
+                                <p>${lesson.description}</p>
+                                <div class="lesson-links">
+                                    <a href="lessons/${lesson.id}/theory.${lang}.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
+                                    <a href="lessons/${lesson.id}/exercise.${lang}.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
+                                </div>
+                            `;
+                        } else {
+                            card.innerHTML = `
+                                <div class="lesson-number">${lesson.number}</div>
+                                <h2>${lesson.title}</h2>
+                                <p>${lesson.description}</p>
+                                <div class="lesson-links">
+                                    <button class="btn btn-secondary" disabled>📚 ${theoryLabel}</button>
+                                    <button class="btn btn-primary" disabled>✏️ ${exerciseLabel}</button>
+                                </div>
+                            `;
+                        }
+                        
+                        chapterLessons.appendChild(card);
+                    });
+                    
+                    chapterSection.appendChild(chapterLessons);
+                    grid.appendChild(chapterSection);
                 });
+                
+                // スクロール時のアクティブチャプターハイライト
+                setupScrollObserver();
             } catch (error) {
                 console.error('Failed to load lessons metadata:', error);
                 document.getElementById('lessons-grid').innerHTML = `
                     <p style="color: white;">レッスンデータの読み込みに失敗しました。</p>
                 `;
             }
+        }
+        
+        // スクロール監視で現在のチャプターをハイライト
+        function setupScrollObserver() {
+            const chapters = document.querySelectorAll('.chapter-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chapterId = entry.target.id;
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${chapterId}`) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            chapters.forEach(chapter => observer.observe(chapter));
         }
         
         // 初期化
