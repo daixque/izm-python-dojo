@@ -618,7 +618,8 @@ body {
 }
 
 .file-list {
-    flex: 1;
+    flex: 0 0 auto;
+    max-height: 200px;
     overflow-y: auto;
     background: #f8f9fa;
     border-bottom: 1px solid #e0e0e0;
@@ -681,7 +682,7 @@ body {
 }
 
 .file-content {
-    flex: 2;
+    flex: 1;
     padding: 12px;
     overflow-y: auto;
     overflow-x: auto;

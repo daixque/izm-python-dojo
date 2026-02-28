@@ -65,8 +65,20 @@ class FileExplorer {
         // ファイルがあれば一覧を表示
         if (files.length > 0) {
             this.renderFileList(files);
+            
+            // 現在選択中のファイルがあれば内容を再読み込み
+            if (this.currentFile && files.includes(this.currentFile)) {
+                this.displayFileContent(this.currentFile);
+            } else if (this.currentFile && !files.includes(this.currentFile)) {
+                // 選択中のファイルが削除された場合
+                this.currentFile = null;
+                if (this.fileContentElement) {
+                    this.fileContentElement.innerHTML = '<div class="file-empty-state">ファイルを選択してください</div>';
+                }
+            }
         } else {
             // ファイルがない場合は空の状態を表示
+            this.currentFile = null;
             if (this.fileListElement) {
                 this.fileListElement.innerHTML = '<div class="file-empty-state">ファイルがありません</div>';
             }
@@ -85,6 +97,7 @@ class FileExplorer {
         files.forEach(filename => {
             const item = document.createElement('div');
             item.className = 'file-list-item';
+            item.dataset.filename = filename;
             if (filename === this.currentFile) {
                 item.classList.add('active');
             }
@@ -137,8 +150,17 @@ class FileExplorer {
     // ファイルを選択
     selectFile(filename) {
         this.currentFile = filename;
-        this.refresh();
         this.displayFileContent(filename);
+        
+        // アクティブ状態を更新
+        const items = this.fileListElement.querySelectorAll('.file-list-item');
+        items.forEach(item => {
+            if (item.dataset.filename === filename) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
     }
     
     // ファイル内容を表示
