@@ -206,13 +206,14 @@
                     const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
                     
                     if (lesson.available) {
+                        const lang = window.i18n.currentLang;
                         card.innerHTML = `
                             <div class="lesson-number">${lesson.number}</div>
                             <h2>${lesson.title}</h2>
                             <p>${lesson.description}</p>
                             <div class="lesson-links">
-                                <a href="lessons/${lesson.id}/theory.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
-                                <a href="lessons/${lesson.id}/exercise.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
+                                <a href="lessons/${lesson.id}/theory.${lang}.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
+                                <a href="lessons/${lesson.id}/exercise.${lang}.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
                             </div>
                         `;
                     } else {

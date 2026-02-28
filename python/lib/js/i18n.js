@@ -235,5 +235,6 @@ window.i18n = {
     setLanguage: setLanguage,
     createLanguageSwitcher: createLanguageSwitcher,
     getLessonFilePath: getLessonFilePath,
-    getMetadataFilePath: getMetadataFilePath
+    getMetadataFilePath: getMetadataFilePath,
+    get currentLang() { return currentLang; }
 };
