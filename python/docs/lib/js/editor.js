@@ -1,5 +1,67 @@
 // Monaco Editor（共通ライブラリ）
 let editor = null;
+let autoSaveTimer = null;
+let currentLessonId = null;
+
+// localStorageキーのプレフィックス
+const CODE_STORAGE_PREFIX = 'pythonLearning_code_';
+
+// コードをlocalStorageに保存
+function saveCode(lessonId, code) {
+    try {
+        const key = CODE_STORAGE_PREFIX + lessonId;
+        localStorage.setItem(key, code);
+        console.log(`Code saved for lesson: ${lessonId}`);
+    } catch (e) {
+        console.warn('Failed to save code to localStorage:', e);
+    }
+}
+
+// コードをlocalStorageから読み込み
+function loadCode(lessonId) {
+    try {
+        const key = CODE_STORAGE_PREFIX + lessonId;
+        const savedCode = localStorage.getItem(key);
+        if (savedCode !== null) {
+            console.log(`Code loaded for lesson: ${lessonId}`);
+            return savedCode;
+        }
+    } catch (e) {
+        console.warn('Failed to load code from localStorage:', e);
+    }
+    return null;
+}
+
+// 保存されたコードを削除
+function clearSavedCode(lessonId) {
+    try {
+        const key = CODE_STORAGE_PREFIX + lessonId;
+        localStorage.removeItem(key);
+        console.log(`Saved code cleared for lesson: ${lessonId}`);
+    } catch (e) {
+        console.warn('Failed to clear saved code:', e);
+    }
+}
+
+// 自動保存を設定（デバウンス付き）
+function setupAutoSave(lessonId) {
+    if (!editor || !lessonId) return;
+    
+    currentLessonId = lessonId;
+    
+    editor.onDidChangeModelContent(() => {
+        // 既存のタイマーをクリア
+        if (autoSaveTimer) {
+            clearTimeout(autoSaveTimer);
+        }
+        
+        // 1秒後に保存（デバウンス）
+        autoSaveTimer = setTimeout(() => {
+            const code = editor.getValue();
+            saveCode(currentLessonId, code);
+        }, 1000);
+    });
+}
 
 // Monaco Editorの初期化
 function initMonacoEditor(options = {}) {
@@ -61,5 +123,9 @@ window.monacoEditor = {
     init: initMonacoEditor,
     getContent: getEditorContent,
     setContent: setEditorContent,
-    getEditor: () => editor
+    getEditor: () => editor,
+    saveCode: saveCode,
+    loadCode: loadCode,
+    clearSavedCode: clearSavedCode,
+    setupAutoSave: setupAutoSave
 };

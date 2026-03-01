@@ -16,7 +16,7 @@ const translations = {
         btn_clear: "クリア",
         btn_close: "閉じる",
         btn_backToMenu: "← 目次に戻る",
-        btn_backToTheory: "📚 理論に戻る",
+        btn_backToTheory: "📚 説明に戻る",
         btn_startExercise: "演習を始める →",
         btn_nextLesson: "次のレッスン →",
         
@@ -24,7 +24,7 @@ const translations = {
         label_codeEditor: "📝 コードエディタ",
         label_console: "💻 実行結果",
         label_task: "課題",
-        label_theory: "📚 理論説明",
+        label_theory: "📚 説明",
         label_exercise: "✏️ 演習課題",
         
         // メッセージ
@@ -94,7 +94,7 @@ const translations = {
         btn_clear: "Clear",
         btn_close: "Close",
         btn_backToMenu: "← Back to Menu",
-        btn_backToTheory: "📚 Back to Theory",
+        btn_backToTheory: "📚 Back to Learn",
         btn_startExercise: "Start Exercise →",
         btn_nextLesson: "Next Lesson →",
         
@@ -102,7 +102,7 @@ const translations = {
         label_codeEditor: "📝 Code Editor",
         label_console: "💻 Output",
         label_task: "Task",
-        label_theory: "📚 Theory",
+        label_theory: "📚 Learn",
         label_exercise: "✏️ Exercise",
         
         // Messages

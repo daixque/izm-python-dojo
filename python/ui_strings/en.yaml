@@ -4,7 +4,7 @@ subtitle: "Learn Python by Writing Code"
 
 # Page titles
 page_title:
-  theory: "Theory"
+  theory: "Learn"
   exercise: "Exercise"
 
 # Header
@@ -16,7 +16,7 @@ language_switcher:
   to_english: "English"
   to_japanese: "日本語"
 
-# Theory page
+# Learn page
 theory:
   start_exercise: "Start Exercise"
 
@@ -29,6 +29,8 @@ exercise:
   button_test: "✓ Test"
   button_reset: "🔄 Reset"
   button_clear: "Clear"
+  back_to_menu: "← Back to Menu"
+  back_to_theory: "📚 Back to Learn"
   status_ready: "Ready"
   status_running: "Running..."
   status_testing: "Testing..."

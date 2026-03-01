@@ -103,8 +103,8 @@
         <!-- フッター -->
         <footer class="footer">
             <div class="footer-nav">
-                <a href="../../index.html" class="btn btn-secondary">{% if lang == 'ja' %}← 目次に戻る{% else %}← Back to Menu{% endif %}</a>
-                <a href="theory.{{ lang }}.html" class="btn btn-link">📚 {% if lang == 'ja' %}理論に戻る{% else %}Back to Theory{% endif %}</a>
+                <a href="../../index.html" class="btn btn-secondary">{{ ui.exercise.back_to_menu }}</a>
+                <a href="theory.{{ lang }}.html" class="btn btn-link">{{ ui.exercise.back_to_theory }}</a>
             </div>
             <div class="footer-next">
                 <!-- 次のレッスンがある場合はここに追加 -->

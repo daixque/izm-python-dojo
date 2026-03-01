@@ -77,7 +77,7 @@ python3 -m http.server 8080
 ### 学習の流れ
 
 1. **目次ページ**で学びたいレッスンを選択
-2. **理論説明ページ**で概念を学習
+2. **説明ページ**で概念を学習
 3. **演習課題ページ**でコードを記述し、実行・テスト
 
 ## ビルドシステム
@@ -119,12 +119,12 @@ python3 build.py 01_01_hello
 このプロジェクトでは、**YAMLでコンテンツを管理し、言語ごとに独立したHTMLを生成**する設計を採用しています。
 
 **YAMLソース:**
-- `theory.ja.yaml` / `theory.en.yaml` - 理論ページのコンテンツ
+- `theory.ja.yaml` / `theory.en.yaml` - 説明ページのコンテンツ
 - `exercise.ja.yaml` / `exercise.en.yaml` - 演習ページのコンテンツ
 - `code.yaml` - コードとテスト（言語共通）
 
 **生成されるHTML:**
-- `theory.ja.html` / `theory.en.html` - 理論ページ
+- `theory.ja.html` / `theory.en.html` - 説明ページ
 - `exercise.ja.html` / `exercise.en.html` - 演習ページ
 
 各HTMLファイルには全てのコンテンツが直接埋め込まれており、JavaScriptなしでも内容が読めます。

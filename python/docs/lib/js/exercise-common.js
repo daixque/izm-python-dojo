@@ -61,10 +61,25 @@ async function initializeExercise(config = {}) {
     // 初期コードを保存
     savedInitialCode = initialCode;
     
+    // 保存されたコードを読み込み（あれば）
+    let codeToLoad = initialCode;
+    if (typeof LESSON_ID !== 'undefined') {
+        const savedCode = window.monacoEditor.loadCode(LESSON_ID);
+        if (savedCode !== null) {
+            codeToLoad = savedCode;
+            console.log('Restored saved code for lesson:', LESSON_ID);
+        }
+    }
+    
     // エディタの初期化
     await window.monacoEditor.init({
-        value: initialCode
+        value: codeToLoad
     });
+    
+    // 自動保存を有効化
+    if (typeof LESSON_ID !== 'undefined') {
+        window.monacoEditor.setupAutoSave(LESSON_ID);
+    }
     
     // テストを設定
     if (tests.length > 0) {
@@ -187,6 +202,12 @@ function setupButtons() {
     if (btnReset) {
         btnReset.addEventListener('click', () => {
             window.monacoEditor.setContent(savedInitialCode);
+            
+            // 保存されたコードも削除
+            if (typeof LESSON_ID !== 'undefined') {
+                window.monacoEditor.clearSavedCode(LESSON_ID);
+            }
+            
             clearConsole();
             appendToConsole(t('msg_codeReset', 'コードをリセットしました'), 'info');
         });
