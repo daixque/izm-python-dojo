@@ -85,9 +85,9 @@ def load_yaml_file(filepath):
         sys.exit(1)
 
 
-def validate_theory_yaml(data, filename, lang):
+def validate_learn_yaml(data, filename, lang):
     """
-    theory.{lang}.yaml のバリデーション
+    learn.{lang}.yaml のバリデーション
     """
     required_fields = ['lesson.number', 'lesson.id', 'lesson.title', 'content']
     errors = []
@@ -174,21 +174,21 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
             print(f"  ⚠️  Skipping {lang}: {e}")
             continue
         
-        # theory.{lang}.yaml を読み込み
-        theory_yaml_path = lesson_dir / f"theory.{lang}.yaml"
-        if not theory_yaml_path.exists():
-            print(f"  ⚠️  Skipping theory.{lang}: file not found")
+        # learn.{lang}.yaml を読み込み
+        learn_yaml_path = lesson_dir / f"learn.{lang}.yaml"
+        if not learn_yaml_path.exists():
+            print(f"  ⚠️  Skipping learn.{lang}: file not found")
         else:
-            theory_data = load_yaml_file(theory_yaml_path)
+            learn_data = load_yaml_file(learn_yaml_path)
             try:
-                validate_theory_yaml(theory_data, str(theory_yaml_path), lang)
-                # theory.html を生成
-                template = env.get_template('theory_template.html')
+                validate_learn_yaml(learn_data, str(learn_yaml_path), lang)
+                # learn.html を生成
+                template = env.get_template('learn_template.html')
                 html = template.render(
                     lang=lang,
                     ui=ui_strings,
-                    lesson=theory_data['lesson'],
-                    content=theory_data['content']
+                    lesson=learn_data['lesson'],
+                    content=learn_data['content']
                 )
                 
                 # 出力先ディレクトリを作成
@@ -196,7 +196,7 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
                 output_dir.mkdir(parents=True, exist_ok=True)
                 
                 # HTMLファイルを書き込み
-                output_file = output_dir / f"theory.{lang}.html"
+                output_file = output_dir / f"learn.{lang}.html"
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(html)
                 print(f"    ✅ {output_file}")
@@ -310,17 +310,17 @@ def generate_metadata(lang):
         
         lesson_id = lesson_dir.name
         
-        # theory.{lang}.yamlを読み込んでレッスン情報を取得
-        theory_file = lesson_dir / f"theory.{lang}.yaml"
-        if not theory_file.exists():
-            print(f"  ⚠️  Skipping {lesson_id}: theory.{lang}.yaml not found")
+        # learn.{lang}.yamlを読み込んでレッスン情報を取得
+        learn_file = lesson_dir / f"learn.{lang}.yaml"
+        if not learn_file.exists():
+            print(f"  ⚠️  Skipping {lesson_id}: learn.{lang}.yaml not found")
             continue
         
         try:
-            with open(theory_file, 'r', encoding='utf-8') as f:
-                theory_data = yaml.safe_load(f)
+            with open(learn_file, 'r', encoding='utf-8') as f:
+                learn_data = yaml.safe_load(f)
             
-            lesson_info = theory_data.get('lesson', {})
+            lesson_info = learn_data.get('lesson', {})
             lesson_number = lesson_info.get('number', '')
             lesson_title = lesson_info.get('title', '')
             
@@ -337,9 +337,9 @@ def generate_metadata(lang):
                     description = re.sub(r'<[^>]+>', '', task_desc).strip()
             
             # HTMLファイルが存在するかチェック（available判定）
-            html_theory = Path(f"docs/lessons/{lesson_id}/theory.{lang}.html")
+            html_learn = Path(f"docs/lessons/{lesson_id}/learn.{lang}.html")
             html_exercise = Path(f"docs/lessons/{lesson_id}/exercise.{lang}.html")
-            available = html_theory.exists() and html_exercise.exists()
+            available = html_learn.exists() and html_exercise.exists()
             
             # チャプター番号を取得（lesson_numberの最初の2桁）
             chapter_number = lesson_number[:2] if lesson_number else ''

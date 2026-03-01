@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ ui.page_title.theory }} - {{ ui.header.lesson_prefix }}{{ lesson.number }}: {{ lesson.title }}</title>
-    <link rel="stylesheet" href="../../lib/css/theory.css">
+    <title>{{ ui.page_title.learn }} - {{ ui.header.lesson_prefix }}{{ lesson.number }}: {{ lesson.title }}</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
 </head>
 <body>
     <div class="container">
@@ -12,12 +12,12 @@
         <header class="header">
             <h1 id="lesson-title">{{ lesson.title }}</h1>
             <div class="lesson-meta">
-                <span id="lesson-type">📚 {{ ui.page_title.theory }}</span>
+                <span id="lesson-type">📚 {{ ui.page_title.learn }}</span>
                 <div id="language-switcher">
                     {% if lang == 'ja' %}
-                        <a href="theory.en.html" class="language-link">{{ ui.language_switcher.to_english }}</a>
+                        <a href="learn.en.html" class="language-link">{{ ui.language_switcher.to_english }}</a>
                     {% else %}
-                        <a href="theory.ja.html" class="language-link">{{ ui.language_switcher.to_japanese }}</a>
+                        <a href="learn.ja.html" class="language-link">{{ ui.language_switcher.to_japanese }}</a>
                     {% endif %}
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <a href="../../index.html" class="btn btn-secondary">{% if lang == 'ja' %}← 目次に戻る{% else %}← Back to Menu{% endif %}</a>
             <div style="display: flex; gap: 12px;">
                 <a href="exercise.{{ lang }}.html" class="btn btn-primary">
-                    {{ ui.theory.start_exercise }} →
+                    {{ ui.learn.start_exercise }} →
                 </a>
             </div>
         </footer>

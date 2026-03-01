@@ -186,7 +186,7 @@
                             card.style.opacity = '0.5';
                         }
                         
-                        const theoryLabel = window.i18n.t('label_theory').replace('📚 ', '');
+                        const learnLabel = window.i18n.t('label_learn').replace('📚 ', '');
                         const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
                         const markCompleteText = window.i18n.t('progress.mark_complete');
                         const markIncompleteText = window.i18n.t('progress.mark_incomplete');
@@ -210,7 +210,7 @@
                                 <h2>${lesson.title}</h2>
                                 <p>${lesson.description}</p>
                                 <div class="lesson-links">
-                                    <a href="lessons/${lesson.id}/theory.${lang}.html" class="btn btn-secondary">📚 ${theoryLabel}</a>
+                                    <a href="lessons/${lesson.id}/learn.${lang}.html" class="btn btn-secondary">📚 ${learnLabel}</a>
                                     <a href="lessons/${lesson.id}/exercise.${lang}.html" class="btn btn-primary">✏️ ${exerciseLabel}</a>
                                 </div>
                             `;
@@ -252,7 +252,7 @@
                                 <h2>${lesson.title}</h2>
                                 <p>${lesson.description}</p>
                                 <div class="lesson-links">
-                                    <button class="btn btn-secondary" disabled>📚 ${theoryLabel}</button>
+                                    <button class="btn btn-secondary" disabled>📚 ${learnLabel}</button>
                                     <button class="btn btn-primary" disabled>✏️ ${exerciseLabel}</button>
                                 </div>
                             `;

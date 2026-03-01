@@ -4,7 +4,7 @@ subtitle: "コードを書いて学ぶPython入門"
 
 # ページタイトル
 page_title:
-  theory: "説明"
+  learn: "説明"
   exercise: "演習課題"
 
 # ヘッダー
@@ -17,7 +17,7 @@ language_switcher:
   to_japanese: "日本語"
 
 # 説明ページ
-theory:
+learn:
   start_exercise: "演習を始める"
 
 # 演習ページ
@@ -30,7 +30,7 @@ exercise:
   button_reset: "🔄 リセット"
   button_clear: "クリア"
   back_to_menu: "← 目次に戻る"
-  back_to_theory: "📚 説明に戻る"
+  back_to_learn: "📚 説明に戻る"
   status_ready: "準備完了"
   status_running: "実行中..."
   status_testing: "テスト中..."

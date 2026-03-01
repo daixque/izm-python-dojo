@@ -6,8 +6,8 @@
 
 - `exercise_template.ja.html` - 日本語版演習ページテンプレート
 - `exercise_template.en.html` - 英語版演習ページテンプレート
-- `theory_template.ja.html` - 日本語版理論ページテンプレート
-- `theory_template.en.html` - 英語版理論ページテンプレート
+- `learn_template.ja.html` - 日本語版理論ページテンプレート
+- `learn_template.en.html` - 英語版理論ページテンプレート
 
 ## プレースホルダー一覧
 
@@ -31,11 +31,11 @@
 | `{{TESTS}}` | テストコード | JavaScript配列 |
 | `{{INITIAL_FILES}}` | 初期ファイル | JavaScript配列（通常は`[]`） |
 
-### 理論ページ (theory_template) のプレースホルダー
+### 理論ページ 説明ページ (learn_template) のプレースホルダー
 
 | プレースホルダー | 説明 | 形式 |
 |---|---|---|
-| `{{THEORY_CONTENT}}` | 理論説明の本文 | HTMLセクション（`<section>`タグ） |
+| `{{LEARN_CONTENT}}` | 説明の本文 | HTMLセクション（`<section>`タグ） |
 
 ## 使用例
 
@@ -110,9 +110,9 @@ result`
 ]
 ```
 
-### 2. theory.ja.html の作成
+### 2. learn.ja.html の作成
 
-**THEORY_CONTENT の例:**
+**LEARN_CONTENT の例:**
 ```html
 <section class="section">
     <h2>プログラミングの第一歩</h2>
@@ -153,8 +153,8 @@ cd python/docs/lessons/02_variables
 # テンプレートディレクトリから
 cp ../../../../templates/exercise_template.ja.html exercise.ja.html
 cp ../../../../templates/exercise_template.en.html exercise.en.html
-cp ../../../../templates/theory_template.ja.html theory.ja.html
-cp ../../../../templates/theory_template.en.html theory.en.html
+cp ../../../../templates/learn_template.ja.html learn.ja.html
+cp ../../../../templates/learn_template.en.html learn.en.html
 ```
 
 ### 3. プレースホルダーの置き換え
@@ -168,7 +168,7 @@ cp ../../../../templates/theory_template.en.html theory.en.html
 
 ### 4. 動作確認
 
-1. ブラウザで `http://localhost:8080/lessons/02_variables/theory.ja.html` を開く
+1. ブラウザで `http://localhost:8080/lessons/02_variables/learn.ja.html` を開く
 2. 理論ページの内容を確認
 3. 「演習を始める」ボタンで演習ページに移動
 4. コードを書いて実行・テストが正しく動作するか確認
@@ -207,7 +207,7 @@ result  # 最後に result を返す
 
 ## 注意事項
 
-1. **ファイル名の規則**: `exercise.ja.html`, `exercise.en.html`, `theory.ja.html`, `theory.en.html` を厳守
+1. **ファイル名の規則**: `exercise.ja.html`, `exercise.en.html`, `learn.ja.html`, `learn.en.html` を厳守
 2. **レッスン番号**: 2桁（`01`, `02`, ...）で統一
 3. **相対パス**: テンプレートは `../../lib/` から参照する前提（`docs/lessons/XX_name/` に配置）
 4. **言語判定**: i18n.js がファイル名から自動判定するため、ファイル名規則を守る

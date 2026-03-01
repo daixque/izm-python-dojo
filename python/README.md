@@ -17,7 +17,7 @@ python/
   README.md                        # プロジェクト概要
   build.py                         # ビルドスクリプト（YAML → HTML変換）
   templates/                       # Jinja2テンプレート
-    theory_template.html           # 理論ページのテンプレート
+    learn_template.html            # 理論ページのテンプレート
     exercise_template.html         # 演習ページのテンプレート
   ui_strings/                      # UI文言の多言語データ
     ja.yaml                        # 日本語UI文言
@@ -27,8 +27,8 @@ python/
     chapters.en.yaml               # 章情報（英語）
   lessons_data/                    # レッスンのソースデータ（YAML）
     01_01_hello/                   # Chapter 1 - Lesson 1: はじめてのPython
-      theory.ja.yaml               # 理論説明（日本語）
-      theory.en.yaml               # 理論説明（英語）
+      learn.ja.yaml                # 理論説明（日本語）
+      learn.en.yaml                # 理論説明（英語）
       exercise.ja.yaml             # 演習課題（日本語）
       exercise.en.yaml             # 演習課題（英語）
       code.yaml                    # コード・テスト（言語共通）
@@ -38,7 +38,7 @@ python/
     index.html                     # 目次ページ（レッスン一覧）
     lib/                           # 共通ライブラリ
       css/
-        theory.css                 # 理論説明ページ用スタイル
+        learn.css                  # 理論説明ページ用スタイル
         exercise.css               # 演習課題ページ用スタイル
       js/
         i18n.js                    # 多言語対応（index.htmlのみ使用）
@@ -49,8 +49,8 @@ python/
       metadata.ja.json             # レッスンメタデータ（日本語）
       metadata.en.json             # レッスンメタデータ（英語）
       01_01_hello/                 # Chapter 1 - Lesson 1
-        theory.ja.html             # 理論説明ページ（日本語）
-        theory.en.html             # 理論説明ページ（英語）
+        learn.ja.html              # 理論説明ページ（日本語）
+        learn.en.html              # 理論説明ページ（英語）
         exercise.ja.html           # 演習課題ページ（日本語）
         exercise.en.html           # 演習課題ページ（英語）
 ```
@@ -97,8 +97,8 @@ python3 build.py 01_01_hello
 ```
 
 ビルドすると以下が生成されます：
-- `docs/lessons/{lesson_id}/theory.ja.html`
-- `docs/lessons/{lesson_id}/theory.en.html`
+- `docs/lessons/{lesson_id}/learn.ja.html`
+- `docs/lessons/{lesson_id}/learn.en.html`
 - `docs/lessons/{lesson_id}/exercise.ja.html`
 - `docs/lessons/{lesson_id}/exercise.en.html`
 - `docs/lessons/metadata.ja.json`
@@ -119,12 +119,12 @@ python3 build.py 01_01_hello
 このプロジェクトでは、**YAMLでコンテンツを管理し、言語ごとに独立したHTMLを生成**する設計を採用しています。
 
 **YAMLソース:**
-- `theory.ja.yaml` / `theory.en.yaml` - 説明ページのコンテンツ
+- `learn.ja.yaml` / `learn.en.yaml` - 説明ページのコンテンツ
 - `exercise.ja.yaml` / `exercise.en.yaml` - 演習ページのコンテンツ
 - `code.yaml` - コードとテスト（言語共通）
 
 **生成されるHTML:**
-- `theory.ja.html` / `theory.en.html` - 説明ページ
+- `learn.ja.html` / `learn.en.html` - 説明ページ
 - `exercise.ja.html` / `exercise.en.html` - 演習ページ
 
 各HTMLファイルには全てのコンテンツが直接埋め込まれており、JavaScriptなしでも内容が読めます。
@@ -148,7 +148,7 @@ python3 build.py 01_01_hello
 
 ```yaml
 page_title:
-  theory: "理論"
+  learn: "説明"
   exercise: "演習"
 exercise:
   button_run: "実行"
@@ -173,7 +173,7 @@ chapters:
 
 #### 4. レッスンコンテンツ（`lessons_data/{lesson_id}/`）
 各レッスンのYAMLファイル：
-- `theory.{lang}.yaml` - 理論説明
+- `learn.{lang}.yaml` - 理論説明
 - `exercise.{lang}.yaml` - 演習課題
 
 ## レッスンの構成
@@ -182,8 +182,8 @@ chapters:
 
 各レッスンは以下の5つのYAMLファイルで構成されます：
 
-1. **theory.ja.yaml** - 日本語の理論説明
-2. **theory.en.yaml** - 英語の理論説明
+1. **learn.ja.yaml** - 日本語の理論説明
+2. **learn.en.yaml** - 英語の理論説明
 3. **exercise.ja.yaml** - 日本語の演習課題
 4. **exercise.en.yaml** - 英語の演習課題
 5. **code.yaml** - 初期コード・テストケース（言語共通）
@@ -192,8 +192,8 @@ chapters:
 
 `build.py` が以下の4つのHTMLファイルを生成します：
 
-1. **theory.ja.html** - 日本語の理論説明（コンテンツ全て埋め込み）
-2. **theory.en.html** - 英語の理論説明（コンテンツ全て埋め込み）
+1. **learn.ja.html** - 日本語の理論説明（コンテンツ全て埋め込み）
+2. **learn.en.html** - 英語の理論説明（コンテンツ全て埋め込み）
 3. **exercise.ja.html** - 日本語の演習課題（コンテンツ全て埋め込み）
 4. **exercise.en.html** - 英語の演習課題（コンテンツ全て埋め込み）
 
@@ -236,8 +236,8 @@ cd lessons_data/01_02_variables
 既存のレッスンをテンプレートとしてコピー：
 
 ```bash
-cp ../01_01_hello/theory.ja.yaml theory.ja.yaml
-cp ../01_01_hello/theory.en.yaml theory.en.yaml
+cp ../01_01_hello/learn.ja.yaml learn.ja.yaml
+cp ../01_01_hello/learn.en.yaml learn.en.yaml
 cp ../01_01_hello/exercise.ja.yaml exercise.ja.yaml
 cp ../01_01_hello/exercise.en.yaml exercise.en.yaml
 cp ../01_01_hello/code.yaml code.yaml
@@ -245,7 +245,7 @@ cp ../01_01_hello/code.yaml code.yaml
 
 #### 3. YAMLファイルの編集
 
-**theory.ja.yaml (理論説明 - 日本語):**
+**learn.ja.yaml (理論説明 - 日本語):**
 
 ```yaml
 lesson:
@@ -317,7 +317,7 @@ tests:
       assert output.strip() == "30", f"30 を表示してください（現在: {output}）"
 ```
 
-**theory.en.yaml / exercise.en.yaml:**
+**learn.en.yaml / exercise.en.yaml:**
 
 日本語版と同じ構造で英語に翻訳します。
 
@@ -329,8 +329,8 @@ python3 build.py 01_02_variables
 ```
 
 成功すると以下が生成されます：
-- `docs/lessons/01_02_variables/theory.ja.html`
-- `docs/lessons/01_02_variables/theory.en.html`
+- `docs/lessons/01_02_variables/learn.ja.html`
+- `docs/lessons/01_02_variables/learn.en.html`
 - `docs/lessons/01_02_variables/exercise.ja.html`
 - `docs/lessons/01_02_variables/exercise.en.html`
 - `docs/lessons/metadata.ja.json` (自動更新)
