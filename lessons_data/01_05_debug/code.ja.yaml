@@ -1,0 +1,118 @@
+initial_code: |
+  # このコードには3つのバグがあります。修正してください。
+  
+  # 太郎くんの情報
+  name = "太郎"
+  age = 15
+  
+  # 来年の年齢を計算（バグ1: 型変換が必要）
+  next_age = age + "1"
+  
+  # 表示する（バグ2: 変数名のタイポ）
+  print(namae + "くんは来年" + str(next_age) + "歳です")
+  
+  # 身長の情報（バグ3: 計算ミス）
+  height = 160
+  print("身長は" + str(height) + "cmで、10cm伸びたら" + str(height + 1) + "cmです")
+  
+
+initial_files: []
+
+tests:
+  - name: "テスト1: 基本的な構文が正しい"
+    description: "print文が正しく使われているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # print()の使用をチェック
+          if 'print(' not in user_code:
+              result = {"passed": False, "message": "✗ print()関数を使ってください"}
+          else:
+              result = {"passed": True, "message": "✓ print()関数が使われています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト2: プログラムがエラーなく実行される"
+    description: "すべてのバグが修正され、エラーなく実行できるか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # 出力を取得
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # エラーなく実行できたらOK
+          result = {"passed": True, "message": "✓ プログラムがエラーなく実行されました"}
+              
+      except Exception as e:
+          sys.stdout = old_stdout
+          error_msg = str(e)
+          
+          # エラーの種類に応じてヒントを出す
+          if "NameError" in error_msg:
+              hint = "変数名のスペルを確認してください（name と namae を間違えていませんか？）"
+          elif "TypeError" in error_msg:
+              hint = "型変換（int()やstr()）が必要かもしれません"
+          else:
+              hint = "エラーメッセージをよく読んでみましょう"
+          
+          result = {"passed": False, "message": f"✗ エラー: {error_msg}\nヒント: {hint}"}
+      
+      result
+
+  - name: "テスト3: 正しい出力をしている"
+    description: "期待される内容が正しく表示されているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # 出力を取得
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 期待される出力内容をチェック
+          has_taro = "太郎" in output
+          has_16 = "16歳" in output  # 15 + 1 = 16
+          has_170 = "170cm" in output  # 160 + 10 = 170
+          
+          if has_taro and has_16 and has_170:
+              result = {"passed": True, "message": "✓ 正しい内容が表示されています"}
+          else:
+              missing = []
+              if not has_taro:
+                  missing.append("「太郎」")
+              if not has_16:
+                  missing.append("「16歳」(15+1)")
+              if not has_170:
+                  missing.append("「170cm」(160+10)")
+              
+              result = {"passed": False, "message": f"✗ 出力に不足または誤りがあります: {', '.join(missing)}"}
+              
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result

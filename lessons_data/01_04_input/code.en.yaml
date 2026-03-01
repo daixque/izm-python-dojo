@@ -1,0 +1,95 @@
+initial_code: |
+  # Use input() to get a name and display a greeting
+  
+
+initial_files: []
+
+tests:
+  - name: "Test 1: Using input() to get name"
+    description: "Check if input() is used to get the name"
+    inputs:
+      - "Taro"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Check if input() is used
+          if 'input(' not in user_code:
+              result = {"passed": False, "message": "✗ Please use the input() function"}
+          else:
+              result = {"passed": True, "message": "✓ input() function is used"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 2: Displaying greeting correctly"
+    description: "Check if greeting is displayed using the entered name"
+    inputs:
+      - "Taro"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Get output
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if name is in output
+          if "Taro" in output:
+              result = {"passed": True, "message": "✓ Entered name is correctly displayed"}
+          else:
+              result = {"passed": False, "message": "✗ Please display the entered name"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 3: Greeting format is correct"
+    description: "Check if greeting words like 'Hello' are included"
+    inputs:
+      - "Hanako"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Get output
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check greeting words and name
+          greeting_words = ["Hello", "Hi", "Hey", "Greetings"]
+          has_greeting = any(word.lower() in output.lower() for word in greeting_words)
+          has_name = "Hanako" in output
+          
+          if has_greeting and has_name:
+              result = {"passed": True, "message": "✓ Greeting format is correct"}
+          elif not has_greeting:
+              result = {"passed": False, "message": "✗ Please include a greeting word (Hello, etc.)"}
+          else:
+              result = {"passed": False, "message": "✗ Please include the entered name"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result

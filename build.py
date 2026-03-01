@@ -127,8 +127,15 @@ def validate_code_yaml(data, filename):
     # testsの各要素が必須フィールドを持つかチェック
     if 'tests' in data:
         for i, test in enumerate(data['tests']):
-            if 'name' not in test or 'ja' not in test.get('name', {}) or 'en' not in test.get('name', {}):
-                errors.append(f"Test {i}: Missing name.ja or name.en")
+            # nameは文字列（言語別ファイル）または辞書（共通ファイル）のどちらでもOK
+            if 'name' not in test:
+                errors.append(f"Test {i}: Missing name")
+            elif isinstance(test['name'], dict):
+                # 辞書の場合は ja と en が必要
+                if 'ja' not in test['name'] or 'en' not in test['name']:
+                    errors.append(f"Test {i}: Missing name.ja or name.en")
+            # 文字列の場合はそのまま使用（言語別ファイル）
+            
             if 'code' not in test:
                 errors.append(f"Test {i}: Missing code")
     
@@ -148,24 +155,25 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
     lesson_id = lesson_dir.name
     print(f"\n📦 Building lesson: {lesson_id}")
     
-    # code.yaml を読み込み（言語共通）
-    code_yaml_path = lesson_dir / "code.yaml"
-    if not code_yaml_path.exists():
-        print(f"⚠️  Skipping {lesson_id}: code.yaml not found")
-        return
-    
-    code_data = load_yaml_file(code_yaml_path)
-    
-    # バリデーション
-    try:
-        validate_code_yaml(code_data, str(code_yaml_path))
-    except ValidationError as e:
-        print(f"❌ Validation error: {e}")
-        return
-    
     # 各言語でビルド
     for lang in languages:
         print(f"  🌐 Building {lang}...")
+        
+        # code.{lang}.yaml を読み込み（言語別）
+        code_lang_yaml_path = lesson_dir / f"code.{lang}.yaml"
+        
+        if not code_lang_yaml_path.exists():
+            print(f"  ⚠️  Skipping {lang}: code.{lang}.yaml not found")
+            continue
+        
+        code_data = load_yaml_file(code_lang_yaml_path)
+        
+        # バリデーション
+        try:
+            validate_code_yaml(code_data, str(code_lang_yaml_path))
+        except ValidationError as e:
+            print(f"  ❌ Validation error in code.{lang}.yaml: {e}")
+            continue
         
         # UI文言を読み込み
         try:
@@ -222,9 +230,18 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
                     # lang 変数を定義するコードを先頭に追加
                     test_code_with_lang = f'lang = "{lang}"\n{test_code}'
                     
+                    # name と description を言語別ファイル対応
+                    test_name = test['name'] if isinstance(test['name'], str) else test['name'][lang]
+                    test_description = ''
+                    if 'description' in test:
+                        if isinstance(test['description'], str):
+                            test_description = test['description']
+                        else:
+                            test_description = test['description'].get(lang, '')
+                    
                     tests_for_template.append({
-                        'name': test['name'][lang],
-                        'description': test.get('description', {}).get(lang, ''),
+                        'name': test_name,
+                        'description': test_description,
                         'code': test_code_with_lang
                     })
                 

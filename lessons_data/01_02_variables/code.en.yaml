@@ -1,0 +1,88 @@
+initial_code: |
+  # Write your code here
+  
+
+initial_files: []
+
+tests:
+  - name: "Test 1: Variable age is defined"
+    description: "Check if variable age is assigned a value"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Check if age is defined
+          if 'age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Variable age is not defined"}
+          elif not isinstance(exec_globals['age'], (int, float)):
+              result = {"passed": False, "message": "✗ Variable age should be a number"}
+          else:
+              result = {"passed": True, "message": "✓ Variable age is correctly defined"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 2: future_age is correctly calculated"
+    description: "Check if age in 10 years is correctly calculated"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Check if future_age is defined
+          if 'future_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Variable future_age is not defined"}
+          elif 'age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Variable age is not defined"}
+          elif exec_globals['future_age'] != exec_globals['age'] + 10:
+              result = {"passed": False, "message": f"✗ future_age calculation is incorrect. Calculate age + 10"}
+          else:
+              result = {"passed": True, "message": "✓ Age in 10 years is correctly calculated"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 3: future_age is displayed"
+    description: "Check if future_age value is displayed"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture standard output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check future_age value
+          if 'future_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Variable future_age is not defined"}
+          else:
+              expected_value = exec_globals['future_age']
+              output_lines = output.strip().split('\n')
+              
+              # Check if expected value is in output
+              if str(expected_value) in output:
+                  result = {"passed": True, "message": "✓ future_age is correctly displayed"}
+              else:
+                  result = {"passed": False, "message": f"✗ future_age value ({expected_value}) is not displayed"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result

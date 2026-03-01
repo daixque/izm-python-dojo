@@ -1,0 +1,118 @@
+initial_code: |
+  # This code has 3 bugs. Please fix them.
+  
+  # Taro's information
+  name = "Taro"
+  age = 15
+  
+  # Calculate next year's age (Bug 1: type conversion needed)
+  next_age = age + "1"
+  
+  # Display (Bug 2: variable name typo)
+  print(namae + " will be " + str(next_age) + " years old next year")
+  
+  # Height information (Bug 3: calculation error)
+  height = 160
+  print("Height is " + str(height) + "cm, if it grows 10cm it will be " + str(height + 1) + "cm")
+  
+
+initial_files: []
+
+tests:
+  - name: "Test 1: Basic syntax is correct"
+    description: "Check if print statement is used correctly"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Check if print() is used
+          if 'print(' not in user_code:
+              result = {"passed": False, "message": "✗ Please use the print() function"}
+          else:
+              result = {"passed": True, "message": "✓ print() function is used"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 2: Program runs without errors"
+    description: "Check if all bugs are fixed and code runs without errors"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Get output
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # If executed without errors, OK
+          result = {"passed": True, "message": "✓ Program ran without errors"}
+              
+      except Exception as e:
+          sys.stdout = old_stdout
+          error_msg = str(e)
+          
+          # Provide hints based on error type
+          if "NameError" in error_msg:
+              hint = "Check the spelling of variable names (name vs namae)"
+          elif "TypeError" in error_msg:
+              hint = "Type conversion (int() or str()) may be needed"
+          else:
+              hint = "Read the error message carefully"
+          
+          result = {"passed": False, "message": f"✗ Error: {error_msg}\nHint: {hint}"}
+      
+      result
+
+  - name: "Test 3: Correct output"
+    description: "Check if expected content is displayed correctly"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Get output
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check expected output content
+          has_taro = "Taro" in output
+          has_16 = "16" in output and "years old" in output  # 15 + 1 = 16
+          has_170 = "170cm" in output  # 160 + 10 = 170
+          
+          if has_taro and has_16 and has_170:
+              result = {"passed": True, "message": "✓ Correct content is displayed"}
+          else:
+              missing = []
+              if not has_taro:
+                  missing.append("'Taro'")
+              if not has_16:
+                  missing.append("'16 years old' (15+1)")
+              if not has_170:
+                  missing.append("'170cm' (160+10)")
+              
+              result = {"passed": False, "message": f"✗ Output is missing or incorrect: {', '.join(missing)}"}
+              
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result

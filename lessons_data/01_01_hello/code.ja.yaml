@@ -1,0 +1,31 @@
+initial_code: |
+  # ここにコードを書いてみよう
+  
+
+initial_files: []
+
+tests:
+  - name: "テスト1: Hello, World!を表示"
+    description: "正しく「Hello, World!」と表示できているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      # 標準出力をキャプチャ
+      old_stdout = sys.stdout
+      sys.stdout = StringIO()
+      
+      try:
+          exec(user_code)
+          output = sys.stdout.getvalue()
+      finally:
+          sys.stdout = old_stdout
+      
+      # 出力をチェック
+      expected = "Hello, World!\n"
+      if output == expected:
+          result = {"passed": True, "message": "✓ 正解です！"}
+      else:
+          result = {"passed": False, "message": f"✗ 出力が違います。\n期待: {repr(expected)}\n実際: {repr(output)}"}
+      
+      result

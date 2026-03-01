@@ -1,0 +1,93 @@
+initial_code: |
+  # Write your code here
+  
+
+initial_files: []
+
+tests:
+  - name: "Test 1: num1 and num2 are defined as strings"
+    description: "Check if variables num1 and num2 are assigned as strings"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Check if num1 and num2 are defined
+          if 'num1' not in exec_globals or 'num2' not in exec_globals:
+              result = {"passed": False, "message": "✗ Please define variables num1 and num2"}
+          elif exec_globals.get('num1') != "50" or exec_globals.get('num2') != "30":
+              result = {"passed": False, "message": "✗ Assign \"50\" to num1 and \"30\" to num2"}
+          else:
+              result = {"passed": True, "message": "✓ Variables are correctly defined"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 2: Correctly converting types and calculating"
+    description: "Check if strings are converted to integers and sum is calculated"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Execute user code
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # Expected sum value
+          expected_sum = 80
+          
+          # Check if calculation was performed
+          # (stored in a variable or included in output)
+          has_correct_calculation = False
+          
+          # Check sum from variables
+          for var_name, var_value in exec_globals.items():
+              if isinstance(var_value, int) and var_value == expected_sum:
+                  has_correct_calculation = True
+                  break
+          
+          if has_correct_calculation:
+              result = {"passed": True, "message": "✓ Correctly converted and calculated"}
+          else:
+              result = {"passed": False, "message": "✗ Use int() to convert strings to integers and calculate the sum"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name: "Test 3: Result is displayed in correct format"
+    description: "Check if output is in the format 'The sum is 80'"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # Capture standard output
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if 80 is in output
+          if "80" in output:
+              # Check if "sum" or "Sum" is included
+              if "sum" in output.lower():
+                  result = {"passed": True, "message": "✓ Result is correctly displayed"}
+              else:
+                  result = {"passed": True, "message": "✓ Result is displayed"}
+          else:
+              result = {"passed": False, "message": "✗ Sum (80) is not displayed"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result

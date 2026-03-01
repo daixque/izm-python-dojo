@@ -1,0 +1,88 @@
+initial_code: |
+  # ここにコードを書いてみよう
+  
+
+initial_files: []
+
+tests:
+  - name: "テスト1: ageという変数が定義されている"
+    description: "変数ageに値が代入されているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # ageが定義されているかチェック
+          if 'age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 変数 age が定義されていません"}
+          elif not isinstance(exec_globals['age'], (int, float)):
+              result = {"passed": False, "message": "✗ 変数 age には数値を代入してください"}
+          else:
+              result = {"passed": True, "message": "✓ 変数 age が正しく定義されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト2: future_ageが正しく計算されている"
+    description: "10年後の年齢が正しく計算されているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # future_ageが定義されているかチェック
+          if 'future_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 変数 future_age が定義されていません"}
+          elif 'age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 変数 age が定義されていません"}
+          elif exec_globals['future_age'] != exec_globals['age'] + 10:
+              result = {"passed": False, "message": f"✗ future_age の計算が正しくありません。age + 10 を計算してください"}
+          else:
+              result = {"passed": True, "message": "✓ 10年後の年齢が正しく計算されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト3: future_ageが表示されている"
+    description: "future_ageの値が出力されているか"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 標準出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # future_ageの値をチェック
+          if 'future_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 変数 future_age が定義されていません"}
+          else:
+              expected_value = exec_globals['future_age']
+              output_lines = output.strip().split('\n')
+              
+              # 出力に期待値が含まれているかチェック
+              if str(expected_value) in output:
+                  result = {"passed": True, "message": "✓ future_age が正しく表示されています"}
+              else:
+                  result = {"passed": False, "message": f"✗ future_age の値（{expected_value}）が出力されていません"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result

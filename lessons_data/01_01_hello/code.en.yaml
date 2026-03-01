@@ -1,0 +1,31 @@
+initial_code: |
+  # Write your code here
+  
+
+initial_files: []
+
+tests:
+  - name: "Test 1: Display Hello, World!"
+    description: "Check if 'Hello, World!' is displayed correctly"
+    code: |
+      import sys
+      from io import StringIO
+      
+      # Capture standard output
+      old_stdout = sys.stdout
+      sys.stdout = StringIO()
+      
+      try:
+          exec(user_code)
+          output = sys.stdout.getvalue()
+      finally:
+          sys.stdout = old_stdout
+      
+      # Check output
+      expected = "Hello, World!\n"
+      if output == expected:
+          result = {"passed": True, "message": "✓ Correct!"}
+      else:
+          result = {"passed": False, "message": f"✗ Output is different.\nExpected: {repr(expected)}\nActual: {repr(output)}"}
+      
+      result
