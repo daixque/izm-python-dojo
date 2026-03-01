@@ -52,8 +52,11 @@
                         </ul>
                     </div>
                     <div class="hints">
-                        <h4>{{ ui.exercise.hints_heading }}</h4>
-                        <ul>
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            {{ ui.exercise.hints_heading }}
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
                             {% for item in hints %}
                             <li>{{ item|safe }}</li>
                             {% endfor %}

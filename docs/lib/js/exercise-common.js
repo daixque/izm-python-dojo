@@ -25,6 +25,22 @@ function setupTaskPanel() {
 }
 
 /**
+ * ヒントセクションの折りたたみ機能を設定
+ */
+function setupHintsPanel() {
+    const hintsToggle = document.querySelector('.hints-toggle');
+    const hintsContent = document.querySelector('.hints-content');
+    const hintsSection = document.querySelector('.hints');
+    
+    if (!hintsToggle || !hintsContent || !hintsSection) return;
+    
+    hintsToggle.addEventListener('click', () => {
+        const isExpanded = hintsSection.classList.toggle('expanded');
+        hintsContent.style.display = isExpanded ? 'block' : 'none';
+    });
+}
+
+/**
  * コンソール出力関数
  */
 function appendToConsole(text, type = 'output') {
@@ -88,6 +104,9 @@ async function initializeExercise(config = {}) {
     
     // タスクパネルの折りたたみ機能
     setupTaskPanel();
+    
+    // ヒントセクションの折りたたみ機能
+    setupHintsPanel();
     
     // ファイルエクスプローラーの初期化
     window.fileExplorer.init({

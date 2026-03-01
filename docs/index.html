@@ -206,7 +206,6 @@
                                 <div class="lesson-status-badge ${isCompleted ? 'completed' : 'incomplete'}">
                                     ${statusIcon} ${statusText}
                                 </div>
-                                <div class="lesson-number">${lesson.number}</div>
                                 <h2>${lesson.title}</h2>
                                 <p>${lesson.description}</p>
                                 <div class="lesson-links">
@@ -248,7 +247,6 @@
                             });
                         } else {
                             card.innerHTML = `
-                                <div class="lesson-number">${lesson.number}</div>
                                 <h2>${lesson.title}</h2>
                                 <p>${lesson.description}</p>
                                 <div class="lesson-links">

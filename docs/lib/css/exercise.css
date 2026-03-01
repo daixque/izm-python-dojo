@@ -247,6 +247,37 @@ body {
     font-size: 16px;
 }
 
+.hints-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0 !important;
+    transition: color 0.2s;
+}
+
+.hints-toggle:hover {
+    color: #0d47a1;
+}
+
+.hints-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+
+.hints.expanded .hints-icon {
+    transform: rotate(90deg);
+}
+
+.hints-content {
+    margin-left: 20px;
+    margin-top: 12px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
 .hints ul {
     margin-left: 20px;
 }
