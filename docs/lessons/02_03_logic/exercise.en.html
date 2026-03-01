@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson02_03: Logical Operators</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson02_03: Logical Operators</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Let's create a program to find who can ride the attraction among 4 people at a theme park.</p>
+<p>The attraction requirements are: <strong>"6 years or older" AND "120cm or taller"</strong>.</p>
+<h3>Data for 4 People</h3>
+<ul>
+  <li><strong>A</strong>: 8 years old, 125cm</li>
+  <li><strong>B</strong>: 5 years old, 130cm</li>
+  <li><strong>C</strong>: 10 years old, 115cm</li>
+  <li><strong>D</strong>: 4 years old, 140cm</li>
+</ul>
+<p>Print the name (A, B, C, or D) of the person who meets the requirements.</p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>The data (age and height) for all 4 people are already defined as variables</li>
+                            <li>Use the <code>and</code> operator to check both age and height requirements</li>
+                            <li>For each person, use an <code>if</code> statement to check the conditions, and <code>print()</code> the name of those who meet them</li>
+                            <li>We won't use functions (haven't learned them yet)</li>
+                            <li>We won't use loops either (haven't learned them yet)</li>
+                            <li>Write condition checks for all 4 people</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>{'hint': 'Example condition check for person A:<br>\n<code>if age_a >= 6 and height_a >= 120:</code><br>\n&nbsp;&nbsp;&nbsp;&nbsp;<code>print("A")</code>\n'}</li>
+                            <li>{'hint': "The <code>and</code> operator returns True only when both conditions are True.<br>\nEven if age meets the requirement, if height doesn't, they can't ride.\n"}</li>
+                            <li>{'hint': 'Check all 4 people using the same pattern:<br>\n- Person A: <code>age_a</code> and <code>height_a</code><br>\n- Person B: <code>age_b</code> and <code>height_b</code><br>\n- Person C: <code>age_c</code> and <code>height_c</code><br>\n- Person D: <code>age_d</code> and <code>height_d</code>\n'}</li>
+                            <li>{'hint': "Only one person meets the requirements.<br>\nCheck each person's age and height to find who meets both conditions.\n"}</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "02_03_logic";
+        const INITIAL_CODE = "def can_ride(age, height):\n    # Write your code here\n    # Return True if age is 6 or older AND height is 120cm or taller, otherwise False\n    return True\n\nprint(\"A: \", can_ride(8, 125))\nprint(\"B: \", can_ride(5, 130))\nprint(\"C: \", can_ride(10, 115))\nprint(\"D: \", can_ride(4, 140))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    # Capture standard output\n    old_stdout = sys.stdout\n    sys.stdout = buffer = io.StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = buffer.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"A: True\" is in the output\n    if \"A:\" in output and \"True\" in output.split(\"\\n\")[0]:\n        result = {\"passed\": True, \"message\": \"\u2713 Person A can ride (True)\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Person A (8 years, 125cm) meets the requirements, so it should be True. Actual output: \u0027{output.strip()}\u0027\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Person A (8 years, 125cm) meets the requirements, so True should be returned", "name": "Person A check"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    old_stdout = sys.stdout\n    sys.stdout = buffer = io.StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = buffer.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"B: False\" is in line 2\n    lines = output.strip().split(\u0027\\n\u0027)\n    if len(lines) \u003e= 2 and \"B:\" in lines[1] and \"False\" in lines[1]:\n        result = {\"passed\": True, \"message\": \"\u2713 Person B cannot ride (False)\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Person B (5 years, 130cm) doesn\u0027t meet the age requirement, so it should be False. Actual output: \u0027{output.strip()}\u0027\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Person B (5 years, 130cm) doesn\u0027t meet the age requirement, so False should be returned", "name": "Person B check"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    old_stdout = sys.stdout\n    sys.stdout = buffer = io.StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = buffer.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"C: False\" is in line 3\n    lines = output.strip().split(\u0027\\n\u0027)\n    if len(lines) \u003e= 3 and \"C:\" in lines[2] and \"False\" in lines[2]:\n        result = {\"passed\": True, \"message\": \"\u2713 Person C cannot ride (False)\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Person C (10 years, 115cm) doesn\u0027t meet the height requirement, so it should be False. Actual output: \u0027{output.strip()}\u0027\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Person C (10 years, 115cm) doesn\u0027t meet the height requirement, so False should be returned", "name": "Person C check"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    old_stdout = sys.stdout\n    sys.stdout = buffer = io.StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = buffer.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"D: False\" is in line 4\n    lines = output.strip().split(\u0027\\n\u0027)\n    if len(lines) \u003e= 4 and \"D:\" in lines[3] and \"False\" in lines[3]:\n        result = {\"passed\": True, \"message\": \"\u2713 Person D cannot ride (False)\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Person D (4 years, 140cm) doesn\u0027t meet the age requirement, so it should be False. Actual output: \u0027{output.strip()}\u0027\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Person D (4 years, 140cm) doesn\u0027t meet the age requirement, so False should be returned", "name": "Person D check"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    old_stdout = sys.stdout\n    sys.stdout = buffer = io.StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = buffer.getvalue().strip()\n    sys.stdout = old_stdout\n    \n    lines = output.split(\u0027\\n\u0027)\n    # Verify that there are 4 lines of output\n    if len(lines) != 4:\n        result = {\"passed\": False, \"message\": f\"\u2717 4 lines of output are required. Actual: {len(lines)} lines\"}\n    # Verify the content of each line\n    elif \"A:\" in lines[0] and \"True\" in lines[0] and \\\n         \"B:\" in lines[1] and \"False\" in lines[1] and \\\n         \"C:\" in lines[2] and \"False\" in lines[2] and \\\n         \"D:\" in lines[3] and \"False\" in lines[3]:\n        result = {\"passed\": True, \"message\": \"\u2713 Perfect! All evaluations are correct\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Output is not correct. Expected output:\\nA: True\\nB: False\\nC: False\\nD: False\\n\\nActual output:\\n{output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that all 4 people are correctly evaluated", "name": "Overall verification"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

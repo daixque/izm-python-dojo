@@ -62,6 +62,13 @@
           "title": "else and elif",
           "description": "Complete a rock-paper-scissors game program.\nCreate a program that plays rock-paper-scissors with the computer and determines the winner.\nGame Rules\n\n  Rock (1) beats Scissors (2)\n  Scissors (2) beats Paper (3)\n  Paper (3) beats Rock (1)\n  Same choice results in a tie",
           "available": true
+        },
+        {
+          "id": "02_03_logic",
+          "number": "02_03",
+          "title": "Logical Operators",
+          "description": "Let's create a program to find who can ride the attraction among 4 people at a theme park.\nThe attraction requirements are: \"6 years or older\" AND \"120cm or taller\".\nData for 4 People\n\n  A: 8 years old, 125cm\n  B: 5 years old, 130cm\n  C: 10 years old, 115cm\n  D: 4 years old, 140cm\n\nPrint the name (A, B, C, or D) of the person who meets the requirements.",
+          "available": true
         }
       ]
     },

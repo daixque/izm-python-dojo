@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson02_03: Logical Operators</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Logical Operators</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔗 What are Logical Operators?</h2>
+  <p>In the previous lesson, we learned about <code>if</code>, <code>elif</code>, and <code>else</code>. Now we'll learn how to combine multiple conditions.</p>
+  <p><strong>Logical operators</strong> allow you to express complex conditions like "A AND B", "A OR B", and "NOT A".</p>
+</section>
+
+<section class="section">
+  <h2>✅ and Operator - "AND"</h2>
+  <p><code>and</code> returns <strong>True only when both conditions are True</strong>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic and</div>
+    <div class="example-code">age = 25<br>height = 170<br><br>if age >= 18 and height >= 160:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Conditions met")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Conditions not met")</div>
+    <div class="example-explanation">In this example, "Conditions met" is printed only when age is 18 or more <strong>AND</strong> height is 160cm or more.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Truth Table for and</div>
+    <div class="example-code"># Pattern 1<br>True and True   # → True<br><br># Pattern 2<br>True and False  # → False<br><br># Pattern 3<br>False and True  # → False<br><br># Pattern 4<br>False and False # → False</div>
+    <div class="example-explanation"><strong>Important:</strong> <code>and</code> returns <strong>True only when both are True</strong>.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔀 or Operator - "OR"</h2>
+  <p><code>or</code> returns <strong>True if either condition is True</strong>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic or</div>
+    <div class="example-code">day = "Saturday"<br><br>if day == "Saturday" or day == "Sunday":<br>&nbsp;&nbsp;&nbsp;&nbsp;print("It's a weekend")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("It's a weekday")</div>
+    <div class="example-explanation">In this example, "It's a weekend" is printed when the day is Saturday <strong>OR</strong> Sunday.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Truth Table for or</div>
+    <div class="example-code"># Pattern 1<br>True or True   # → True<br><br># Pattern 2<br>True or False  # → True<br><br># Pattern 3<br>False or True  # → True<br><br># Pattern 4<br>False or False # → False</div>
+    <div class="example-explanation"><strong>Important:</strong> <code>or</code> returns <strong>True if either one is True</strong>.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🚫 not Operator - "NOT"</h2>
+  <p><code>not</code> <strong>reverses</strong> the condition. It turns True into False and False into True.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic not</div>
+    <div class="example-code">is_raining = False<br><br>if not is_raining:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("No umbrella needed")</div>
+    <div class="example-explanation">Since <code>is_raining</code> is False, <code>not is_raining</code> becomes True, and "No umbrella needed" is printed.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Truth Table for not</div>
+    <div class="example-code">not True   # → False<br>not False  # → True</div>
+    <div class="example-explanation"><strong>Important:</strong> <code>not</code> <strong>flips</strong> True and False.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔧 Complex Conditions</h2>
+  <p>By combining logical operators, you can express more complex conditions.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Combining Multiple Logical Operators</div>
+    <div class="example-code">age = 20<br>has_ticket = True<br>is_holiday = False<br><br>if (age >= 18 and has_ticket) or is_holiday:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You can enter")</div>
+    <div class="example-explanation">
+      This condition reads as:<br>
+      "(18 or older <strong>AND</strong> has a ticket) <strong>OR</strong> it's a holiday" allows entry.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Order of Evaluation</div>
+    <div class="example-code"># With parentheses<br>if (age >= 18 and height >= 160) or has_special_pass:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")<br><br># Without parentheses<br>if age >= 18 and height >= 160 or has_special_pass:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")  # Same meaning</div>
+    <div class="example-explanation">
+      <strong>Priority order:</strong><br>
+      1. Expressions in parentheses have highest priority<br>
+      2. <code>not</code><br>
+      3. <code>and</code><br>
+      4. <code>or</code><br>
+      <br>
+      When in doubt, use parentheses to be explicit!
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 Practical Example - Theme Park Ride Requirements</h2>
+  <p>Let's look at a practical example of logical operators: checking requirements for a theme park ride.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Checking Requirements</div>
+    <div class="example-code">age = 10<br>height = 130<br><br># Ride requirements: 6 years or older AND 120cm or taller<br>if age >= 6 and height >= 120:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You can ride this attraction")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You cannot ride this attraction")</div>
+    <div class="example-explanation">
+      In this example, <strong>both</strong> age and height requirements must be met.<br>
+      Since we're using <code>and</code>, failing either condition means you can't ride.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>and</code>: True only when both are True (strict condition)</li>
+    <li><code>or</code>: True when either is True (lenient condition)</li>
+    <li><code>not</code>: Reverses True and False</li>
+    <li>Use parentheses <code>()</code> to make priority clear</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

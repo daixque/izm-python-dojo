@@ -1,0 +1,42 @@
+lesson:
+  number: "02_03"
+  id: "02_03_logic"
+  title: "論理演算子"
+
+task_description: |
+  <p>遊園地に来た4人の中で、アトラクションに乗れる人を見つけるプログラムを作りましょう。</p>
+  <p>アトラクションの利用条件は<strong>「6歳以上」かつ「身長120cm以上」</strong>です。</p>
+  <h3>4人のデータ</h3>
+  <ul>
+    <li><strong>A</strong>: 8歳, 125cm</li>
+    <li><strong>B</strong>: 5歳, 130cm</li>
+    <li><strong>C</strong>: 10歳, 115cm</li>
+    <li><strong>D</strong>: 4歳, 140cm</li>
+  </ul>
+  <p>条件を満たす人の名前（A、B、C、またはD）を出力してください。</p>
+
+instructions:
+  - "4人のデータ（年齢と身長）は、変数として既に定義されています"
+  - "<code>and</code> 演算子を使って、年齢と身長の両方の条件をチェックします"
+  - "各人について <code>if</code> 文で条件をチェックし、条件を満たす人の名前を <code>print()</code> で出力します"
+  - "関数は使いません（まだ学習していないため）"
+  - "ループも使いません（まだ学習していないため）"
+  - "4人それぞれに対して条件チェックを書きましょう"
+
+hints:
+  - hint: |
+      Aさんの条件チェックの例：<br>
+      <code>if age_a >= 6 and height_a >= 120:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>print("A")</code>
+  - hint: |
+      <code>and</code> 演算子は、両方の条件が True のときだけ True になります。<br>
+      年齢が条件を満たしても、身長が条件を満たさなければ乗れません。
+  - hint: |
+      4人全員について同じパターンでチェックします：<br>
+      - Aさん: <code>age_a</code> と <code>height_a</code><br>
+      - Bさん: <code>age_b</code> と <code>height_b</code><br>
+      - Cさん: <code>age_c</code> と <code>height_c</code><br>
+      - Dさん: <code>age_d</code> と <code>height_d</code>
+  - hint: |
+      正解は1人だけです。<br>
+      4人それぞれの年齢と身長を確認して、両方の条件を満たす人を見つけましょう。

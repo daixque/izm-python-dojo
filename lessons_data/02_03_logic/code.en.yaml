@@ -1,0 +1,149 @@
+initial_code: |
+  def can_ride(age, height):
+      # Write your code here
+      # Return True if age is 6 or older AND height is 120cm or taller, otherwise False
+      return True
+
+  print("A: ", can_ride(8, 125))
+  print("B: ", can_ride(5, 130))
+  print("C: ", can_ride(10, 115))
+  print("D: ", can_ride(4, 140))
+
+initial_files: []
+
+tests:
+  - name: "Person A check"
+    description: "Person A (8 years, 125cm) meets the requirements, so True should be returned"
+    code: |
+      import io
+      import sys
+      try:
+          # Capture standard output
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if "A: True" is in the output
+          if "A:" in output and "True" in output.split("\n")[0]:
+              result = {"passed": True, "message": "✓ Person A can ride (True)"}
+          else:
+              result = {"passed": False, "message": f"✗ Person A (8 years, 125cm) meets the requirements, so it should be True. Actual output: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Person B check"
+    description: "Person B (5 years, 130cm) doesn't meet the age requirement, so False should be returned"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if "B: False" is in line 2
+          lines = output.strip().split('\n')
+          if len(lines) >= 2 and "B:" in lines[1] and "False" in lines[1]:
+              result = {"passed": True, "message": "✓ Person B cannot ride (False)"}
+          else:
+              result = {"passed": False, "message": f"✗ Person B (5 years, 130cm) doesn't meet the age requirement, so it should be False. Actual output: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Person C check"
+    description: "Person C (10 years, 115cm) doesn't meet the height requirement, so False should be returned"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if "C: False" is in line 3
+          lines = output.strip().split('\n')
+          if len(lines) >= 3 and "C:" in lines[2] and "False" in lines[2]:
+              result = {"passed": True, "message": "✓ Person C cannot ride (False)"}
+          else:
+              result = {"passed": False, "message": f"✗ Person C (10 years, 115cm) doesn't meet the height requirement, so it should be False. Actual output: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Person D check"
+    description: "Person D (4 years, 140cm) doesn't meet the age requirement, so False should be returned"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # Check if "D: False" is in line 4
+          lines = output.strip().split('\n')
+          if len(lines) >= 4 and "D:" in lines[3] and "False" in lines[3]:
+              result = {"passed": True, "message": "✓ Person D cannot ride (False)"}
+          else:
+              result = {"passed": False, "message": f"✗ Person D (4 years, 140cm) doesn't meet the age requirement, so it should be False. Actual output: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Overall verification"
+    description: "Verify that all 4 people are correctly evaluated"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue().strip()
+          sys.stdout = old_stdout
+          
+          lines = output.split('\n')
+          # Verify that there are 4 lines of output
+          if len(lines) != 4:
+              result = {"passed": False, "message": f"✗ 4 lines of output are required. Actual: {len(lines)} lines"}
+          # Verify the content of each line
+          elif "A:" in lines[0] and "True" in lines[0] and \
+               "B:" in lines[1] and "False" in lines[1] and \
+               "C:" in lines[2] and "False" in lines[2] and \
+               "D:" in lines[3] and "False" in lines[3]:
+              result = {"passed": True, "message": "✓ Perfect! All evaluations are correct"}
+          else:
+              result = {"passed": False, "message": f"✗ Output is not correct. Expected output:\nA: True\nB: False\nC: False\nD: False\n\nActual output:\n{output}"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

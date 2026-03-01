@@ -1,0 +1,149 @@
+initial_code: |
+  def can_ride(age, height):
+      # ここにコードを書いてください
+      # 年齢が6歳以上 かつ 身長が120cm以上ならTrue、そうでなければFalseを返す
+      return True
+
+  print("A: ", can_ride(8, 125))
+  print("B: ", can_ride(5, 130))
+  print("C: ", can_ride(10, 115))
+  print("D: ", can_ride(4, 140))
+
+initial_files: []
+
+tests:
+  - name: "Aさんの判定"
+    description: "Aさん（8歳、125cm）は条件を満たすのでTrueが返される"
+    code: |
+      import io
+      import sys
+      try:
+          # 標準出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # 出力に"A: True"が含まれているかチェック
+          if "A:" in output and "True" in output.split("\n")[0]:
+              result = {"passed": True, "message": "✓ Aさんは乗れます（True）"}
+          else:
+              result = {"passed": False, "message": f"✗ Aさん（8歳、125cm）は条件を満たすのでTrueになるはずです。実際の出力: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Bさんの判定"
+    description: "Bさん（5歳、130cm）は年齢が条件を満たさないのでFalseが返される"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # 2行目に"B: False"が含まれているかチェック
+          lines = output.strip().split('\n')
+          if len(lines) >= 2 and "B:" in lines[1] and "False" in lines[1]:
+              result = {"passed": True, "message": "✓ Bさんは乗れません（False）"}
+          else:
+              result = {"passed": False, "message": f"✗ Bさん（5歳、130cm）は年齢が足りないのでFalseになるはずです。実際の出力: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Cさんの判定"
+    description: "Cさん（10歳、115cm）は身長が条件を満たさないのでFalseが返される"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # 3行目に"C: False"が含まれているかチェック
+          lines = output.strip().split('\n')
+          if len(lines) >= 3 and "C:" in lines[2] and "False" in lines[2]:
+              result = {"passed": True, "message": "✓ Cさんは乗れません（False）"}
+          else:
+              result = {"passed": False, "message": f"✗ Cさん（10歳、115cm）は身長が足りないのでFalseになるはずです。実際の出力: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Dさんの判定"
+    description: "Dさん（4歳、140cm）は年齢が条件を満たさないのでFalseが返される"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue()
+          sys.stdout = old_stdout
+          
+          # 4行目に"D: False"が含まれているかチェック
+          lines = output.strip().split('\n')
+          if len(lines) >= 4 and "D:" in lines[3] and "False" in lines[3]:
+              result = {"passed": True, "message": "✓ Dさんは乗れません（False）"}
+          else:
+              result = {"passed": False, "message": f"✗ Dさん（4歳、140cm）は年齢が足りないのでFalseになるはずです。実際の出力: '{output.strip()}'"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "全体の確認"
+    description: "4人全員の判定が正しく行われているか確認"
+    code: |
+      import io
+      import sys
+      try:
+          old_stdout = sys.stdout
+          sys.stdout = buffer = io.StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = buffer.getvalue().strip()
+          sys.stdout = old_stdout
+          
+          lines = output.split('\n')
+          # 4行の出力があることを確認
+          if len(lines) != 4:
+              result = {"passed": False, "message": f"✗ 4行の出力が必要です。実際: {len(lines)}行"}
+          # 各行の内容を確認
+          elif "A:" in lines[0] and "True" in lines[0] and \
+               "B:" in lines[1] and "False" in lines[1] and \
+               "C:" in lines[2] and "False" in lines[2] and \
+               "D:" in lines[3] and "False" in lines[3]:
+              result = {"passed": True, "message": "✓ 完璧！全員の判定が正しく行われています"}
+          else:
+              result = {"passed": False, "message": f"✗ 出力が正しくありません。期待される出力:\nA: True\nB: False\nC: False\nD: False\n\n実際の出力:\n{output}"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

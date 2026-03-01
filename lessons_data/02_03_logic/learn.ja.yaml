@@ -1,0 +1,124 @@
+lesson:
+  number: "02_03"
+  id: "02_03_logic"
+  title: "論理演算子"
+
+content: |
+  <section class="section">
+    <h2>🔗 論理演算子とは</h2>
+    <p>前回のレッスンでは <code>if</code>、<code>elif</code>、<code>else</code> を学びました。今回は、複数の条件を組み合わせる方法を学びます。</p>
+    <p><strong>論理演算子</strong>を使うと、「AかつB」「AまたはB」「Aではない」といった複雑な条件を表現できます。</p>
+  </section>
+
+  <section class="section">
+    <h2>✅ and 演算子 - 「かつ」</h2>
+    <p><code>and</code> は、<strong>両方の条件が True のときだけ True</strong> になります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">and の基本</div>
+      <div class="example-code">age = 25<br>height = 170<br><br>if age >= 18 and height >= 160:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("条件を満たしています")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("条件を満たしていません")</div>
+      <div class="example-explanation">この例では、年齢が18歳以上<strong>かつ</strong>身長が160cm以上のときだけ「条件を満たしています」と表示されます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">and の真偽値表</div>
+      <div class="example-code"># パターン1<br>True and True   # → True<br><br># パターン2<br>True and False  # → False<br><br># パターン3<br>False and True  # → False<br><br># パターン4<br>False and False # → False</div>
+      <div class="example-explanation"><strong>重要：</strong> <code>and</code> は、<strong>両方が True のときだけ True</strong> になります。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔀 or 演算子 - 「または」</h2>
+    <p><code>or</code> は、<strong>どちらか片方でも True なら True</strong> になります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">or の基本</div>
+      <div class="example-code">day = "土曜日"<br><br>if day == "土曜日" or day == "日曜日":<br>&nbsp;&nbsp;&nbsp;&nbsp;print("休日です")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("平日です")</div>
+      <div class="example-explanation">この例では、曜日が土曜日<strong>または</strong>日曜日のときに「休日です」と表示されます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">or の真偽値表</div>
+      <div class="example-code"># パターン1<br>True or True   # → True<br><br># パターン2<br>True or False  # → True<br><br># パターン3<br>False or True  # → True<br><br># パターン4<br>False or False # → False</div>
+      <div class="example-explanation"><strong>重要：</strong> <code>or</code> は、<strong>どちらか片方でも True なら True</strong> になります。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🚫 not 演算子 - 「ではない」</h2>
+    <p><code>not</code> は、条件を<strong>反転</strong>させます。True を False に、False を True に変えます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">not の基本</div>
+      <div class="example-code">is_raining = False<br><br>if not is_raining:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("傘は不要です")</div>
+      <div class="example-explanation"><code>is_raining</code> が False なので、<code>not is_raining</code> は True になり、「傘は不要です」と表示されます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">not の真偽値表</div>
+      <div class="example-code">not True   # → False<br>not False  # → True</div>
+      <div class="example-explanation"><strong>重要：</strong> <code>not</code> は、True と False を<strong>入れ替え</strong>ます。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔧 複雑な条件式</h2>
+    <p>論理演算子を組み合わせることで、より複雑な条件を表現できます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">複数の論理演算子の組み合わせ</div>
+      <div class="example-code">age = 20<br>has_ticket = True<br>is_holiday = False<br><br>if (age >= 18 and has_ticket) or is_holiday:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("入場できます")</div>
+      <div class="example-explanation">
+        この条件は次のように読みます：<br>
+        「（18歳以上<strong>かつ</strong>チケットを持っている）<strong>または</strong>休日である」場合に入場できます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">評価の優先順位</div>
+      <div class="example-code"># カッコがある場合<br>if (age >= 18 and height >= 160) or has_special_pass:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")<br><br># カッコがない場合<br>if age >= 18 and height >= 160 or has_special_pass:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")  # 同じ意味</div>
+      <div class="example-explanation">
+        <strong>優先順位：</strong><br>
+        1. カッコ内の式が最優先<br>
+        2. <code>not</code><br>
+        3. <code>and</code><br>
+        4. <code>or</code><br>
+        <br>
+        迷ったらカッコを使って明示的に書きましょう！
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📊 実用例 - 遊園地のアトラクション判定</h2>
+    <p>論理演算子の実用例として、アトラクションの利用条件をチェックするプログラムを見てみましょう。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">利用条件のチェック</div>
+      <div class="example-code">age = 10<br>height = 130<br><br># アトラクションの条件：6歳以上かつ120cm以上<br>if age >= 6 and height >= 120:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("このアトラクションに乗れます")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("このアトラクションには乗れません")</div>
+      <div class="example-explanation">
+        この例では、年齢と身長の<strong>両方</strong>が条件を満たす必要があります。<br>
+        <code>and</code> を使っているので、片方でも条件を満たさないと乗れません。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>and</code>：両方が True のときだけ True（厳しい条件）</li>
+      <li><code>or</code>：どちらか片方でも True なら True（緩い条件）</li>
+      <li><code>not</code>：True と False を反転</li>
+      <li>カッコ <code>()</code> を使って優先順位を明確に</li>
+    </ul>
+  </section>

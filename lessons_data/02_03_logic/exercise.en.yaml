@@ -1,0 +1,42 @@
+lesson:
+  number: "02_03"
+  id: "02_03_logic"
+  title: "Logical Operators"
+
+task_description: |
+  <p>Let's create a program to find who can ride the attraction among 4 people at a theme park.</p>
+  <p>The attraction requirements are: <strong>"6 years or older" AND "120cm or taller"</strong>.</p>
+  <h3>Data for 4 People</h3>
+  <ul>
+    <li><strong>A</strong>: 8 years old, 125cm</li>
+    <li><strong>B</strong>: 5 years old, 130cm</li>
+    <li><strong>C</strong>: 10 years old, 115cm</li>
+    <li><strong>D</strong>: 4 years old, 140cm</li>
+  </ul>
+  <p>Print the name (A, B, C, or D) of the person who meets the requirements.</p>
+
+instructions:
+  - "The data (age and height) for all 4 people are already defined as variables"
+  - "Use the <code>and</code> operator to check both age and height requirements"
+  - "For each person, use an <code>if</code> statement to check the conditions, and <code>print()</code> the name of those who meet them"
+  - "We won't use functions (haven't learned them yet)"
+  - "We won't use loops either (haven't learned them yet)"
+  - "Write condition checks for all 4 people"
+
+hints:
+  - hint: |
+      Example condition check for person A:<br>
+      <code>if age_a >= 6 and height_a >= 120:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>print("A")</code>
+  - hint: |
+      The <code>and</code> operator returns True only when both conditions are True.<br>
+      Even if age meets the requirement, if height doesn't, they can't ride.
+  - hint: |
+      Check all 4 people using the same pattern:<br>
+      - Person A: <code>age_a</code> and <code>height_a</code><br>
+      - Person B: <code>age_b</code> and <code>height_b</code><br>
+      - Person C: <code>age_c</code> and <code>height_c</code><br>
+      - Person D: <code>age_d</code> and <code>height_d</code>
+  - hint: |
+      Only one person meets the requirements.<br>
+      Check each person's age and height to find who meets both conditions.
