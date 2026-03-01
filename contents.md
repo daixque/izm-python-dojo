@@ -79,7 +79,7 @@
 ### 第2章：条件分岐
 
 #### 📝 レッスン6: 条件分岐の基礎 (02_01_if_basic)
-**ステータス:** 未実装
+**ステータス:** 完成
 **学習内容:**
 - `if` 文の基本構文
 - 比較演算子（`==`, `!=`, `>`, `<`, `>=`, `<=`）
@@ -125,7 +125,7 @@
 ---
 
 #### 📝 レッスン8: 論理演算子 (02_03_logic)
-**ステータス:** 未実装
+**ステータス:** 完成
 **学習内容:**
 - `and` 演算子
 - `or` 演算子
@@ -179,6 +179,27 @@
     - 例：`print_multiplication_table(2)` → 2の段を9行表示
     - 例：`print_multiplication_table(7)` → 7の段を9行表示
 
+模範解答コード
+
+```python
+def print_multiplication_table(n):
+    for i in range(1, 10):
+        print(f"{n} × {i} = {n * i}")
+
+# テスト例
+print_multiplication_table(3)
+# 出力：
+# 3 × 1 = 3
+# 3 × 2 = 6
+# 3 × 3 = 9
+# 3 × 4 = 12
+# 3 × 5 = 15
+# 3 × 6 = 18
+# 3 × 7 = 21
+# 3 × 8 = 24
+# 3 × 9 = 27
+```
+
 ---
 
 #### 📝 レッスン10: for ループの応用 (03_02_for_advanced)
@@ -200,6 +221,21 @@
     - 例：`sum_numbers(5)` → `15` （1+2+3+4+5）
     - 例：`sum_numbers(10)` → `55` （1+2+...+10）
     - 例：`sum_numbers(100)` → `5050`
+
+模範解答コード
+
+```python
+def sum_numbers(n):
+    total = 0
+    for i in range(1, n + 1):
+        total += i
+    return total
+
+# テスト例
+print(sum_numbers(5))   # 15
+print(sum_numbers(10))  # 55
+print(sum_numbers(100)) # 5050
+```
 
 ---
 
@@ -227,6 +263,23 @@
     - 例：`check_guess(50, 70)` → `"Too high"`
     - 例：`check_guess(50, 50)` → `"Correct"`
 
+模範解答コード
+
+```python
+def check_guess(secret, guess):
+    if guess < secret:
+        return "Too low"
+    elif guess > secret:
+        return "Too high"
+    else:
+        return "Correct"
+
+# テスト例
+print(check_guess(50, 30))  # "Too low"
+print(check_guess(50, 70))  # "Too high"
+print(check_guess(50, 50))  # "Correct"
+```
+
 ---
 
 ### 第4章：データ構造
@@ -253,6 +306,21 @@
     - 例：`get_element(["apple", "banana", "orange"], 2)` → `"orange"`
     - 例：`get_element(["apple", "banana"], 5)` → `None`（範囲外）
 
+模範解答コード
+
+```python
+def get_element(fruits, index):
+    if 0 <= index < len(fruits):
+        return fruits[index]
+    else:
+        return None
+
+# テスト例
+print(get_element(["apple", "banana", "orange"], 0))  # "apple"
+print(get_element(["apple", "banana", "orange"], 2))  # "orange"
+print(get_element(["apple", "banana"], 5))            # None
+```
+
 ---
 
 #### 📝 レッスン13: リストの操作 (04_02_list_advanced)
@@ -277,6 +345,22 @@
     - 例：`find_max([5])` → `5`（要素が1つ）
     - 例：`find_max([-5, -2, -10, -1])` → `-1`（負の数）
 
+模範解答コード
+
+```python
+def find_max(numbers):
+    max_value = numbers[0]  # 最初の要素を最大値として初期化
+    for num in numbers:
+        if num > max_value:
+            max_value = num
+    return max_value
+
+# テスト例
+print(find_max([3, 7, 2, 9, 1]))      # 9
+print(find_max([5]))                  # 5
+print(find_max([-5, -2, -10, -1]))   # -1
+```
+
 ---
 
 #### 📝 レッスン14: for ループとリスト (04_03_list_loop)
@@ -299,6 +383,22 @@
     - 例：`filter_even([1, 2, 3, 4, 5, 6])` → `[2, 4, 6]`
     - 例：`filter_even([1, 3, 5])` → `[]`（偶数なし）
     - 例：`filter_even([10, 15, 20, 25])` → `[10, 20]`
+
+模範解答コード
+
+```python
+def filter_even(numbers):
+    result = []
+    for num in numbers:
+        if num % 2 == 0:
+            result.append(num)
+    return result
+
+# テスト例
+print(filter_even([1, 2, 3, 4, 5, 6]))  # [2, 4, 6]
+print(filter_even([1, 3, 5]))           # []
+print(filter_even([10, 15, 20, 25]))    # [10, 20]
+```
 
 ---
 
@@ -323,6 +423,21 @@
     - 例：`get_score({"Alice": 85, "Bob": 92, "Charlie": 78}, "Alice")` → `85`
     - 例：`get_score({"Alice": 85, "Bob": 92}, "Charlie")` → `-1`（存在しない）
     - 例：`get_score({"田中": 88, "佐藤": 95}, "佐藤")` → `95`
+
+模範解答コード
+
+```python
+def get_score(students, name):
+    if name in students:
+        return students[name]
+    else:
+        return -1
+
+# テスト例
+print(get_score({"Alice": 85, "Bob": 92, "Charlie": 78}, "Alice"))  # 85
+print(get_score({"Alice": 85, "Bob": 92}, "Charlie"))               # -1
+print(get_score({"田中": 88, "佐藤": 95}, "佐藤"))                   # 95
+```
 
 ---
 
@@ -349,6 +464,19 @@
     - 例：`add(10, 20)` → `30`
     - 例：`add(-5, 3)` → `-2`（負の数）
     - 例：`add(1.5, 2.5)` → `4.0`（小数）
+
+模範解答コード
+
+```python
+def add(a, b):
+    return a + b
+
+# テスト例
+print(add(3, 5))      # 8
+print(add(10, 20))    # 30
+print(add(-5, 3))     # -2
+print(add(1.5, 2.5))  # 4.0
+```
 
 ---
 
@@ -381,6 +509,29 @@
     - 例：`calculate(10, 5, "divide")` → `2.0`
     - 例：`calculate(10, 0, "divide")` → `None`（0除算）
 
+模範解答コード
+
+```python
+def calculate(a, b, operation="add"):
+    if operation == "add":
+        return a + b
+    elif operation == "subtract":
+        return a - b
+    elif operation == "multiply":
+        return a * b
+    elif operation == "divide":
+        if b == 0:
+            return None
+        return a / b
+
+# テスト例
+print(calculate(10, 5))                  # 15
+print(calculate(10, 5, "subtract"))      # 5
+print(calculate(10, 5, "multiply"))      # 50
+print(calculate(10, 5, "divide"))        # 2.0
+print(calculate(10, 0, "divide"))        # None
+```
+
 ---
 
 ### 第6章：実践プロジェクト
@@ -405,6 +556,31 @@
   - ユーザーは判定ロジックとカウンター、結果表示を実装
   - テスト：様々なシナリオで正しく動作するかをチェック
 
+模範解答コード
+
+```python
+import random
+
+def play_game():
+    secret = random.randint(1, 100)
+    attempts = 0
+    
+    while True:
+        guess = int(input("予想を入力してください (1-100): "))
+        attempts += 1
+        
+        if guess < secret:
+            print("もっと大きいです")
+        elif guess > secret:
+            print("もっと小さいです")
+        else:
+            print(f"正解！ {attempts}回で当てました")
+            break
+
+# ゲームを実行
+play_game()
+```
+
 ---
 
 #### 📝 レッスン19: データ集計プログラム (06_02_data_analysis)
@@ -425,6 +601,46 @@
   - 初期コード：データ構造とメイン処理の枠組みは用意済み
   - ユーザーは上記3つの関数を実装
   - テスト：サンプルデータで正しく分析できるかをチェック
+
+模範解答コード
+
+```python
+def calculate_average(scores):
+    """各生徒の平均点を計算"""
+    averages = {}
+    for name, score_list in scores.items():
+        averages[name] = sum(score_list) / len(score_list)
+    return averages
+
+def find_top_student(averages):
+    """最高平均点の生徒を見つける"""
+    top_student = None
+    max_avg = -1
+    for name, avg in averages.items():
+        if avg > max_avg:
+            max_avg = avg
+            top_student = name
+    return top_student
+
+def count_passing(averages, passing_score=60):
+    """合格者数をカウント"""
+    count = 0
+    for avg in averages.values():
+        if avg >= passing_score:
+            count += 1
+    return count
+
+# テスト例
+scores = {
+    "Alice": [85, 90, 88],
+    "Bob": [70, 75, 72],
+    "Charlie": [55, 60, 58]
+}
+averages = calculate_average(scores)
+print("平均点:", averages)
+print("トップ:", find_top_student(averages))
+print("合格者数:", count_passing(averages))
+```
 
 ---
 
@@ -452,6 +668,31 @@
   - ユーザーはファイル操作のロジックを実装
   - テスト：保存と読み込みが正しく動作するかをチェック
 
+模範解答コード
+
+```python
+def save_memo(filename, content):
+    """テキストをファイルに保存"""
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+def load_memo(filename):
+    """ファイルからテキストを読み込む"""
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            return f.read()
+    except FileNotFoundError:
+        return None
+
+# テスト例
+save_memo("test.txt", "これはテストメモです")
+content = load_memo("test.txt")
+print(content)  # "これはテストメモです"
+
+missing = load_memo("notfound.txt")
+print(missing)  # None
+```
+
 ---
 
 #### 📝 レッスン21: 最終プロジェクト (06_04_final_project)
@@ -475,6 +716,53 @@
   - ユーザーは上記5つの機能を実装
   - テスト：各機能が正しく動作するかを個別にチェック
   - オプション機能：タスクの削除、期限の追加など
+
+模範解答コード
+
+```python
+import json
+
+def add_task(tasks, task_name):
+    """タスクを追加"""
+    new_id = max([t["id"] for t in tasks], default=0) + 1
+    tasks.append({"id": new_id, "name": task_name, "completed": False})
+    return tasks
+
+def complete_task(tasks, task_id):
+    """タスクを完了にする"""
+    for task in tasks:
+        if task["id"] == task_id:
+            task["completed"] = True
+    return tasks
+
+def show_tasks(tasks):
+    """タスク一覧を表示"""
+    for task in tasks:
+        status = "✓" if task["completed"] else " "
+        print(f"[{status}] {task['id']}: {task['name']}")
+
+def save_tasks(tasks, filename):
+    """タスクをファイルに保存"""
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(tasks, f, ensure_ascii=False, indent=2)
+
+def load_tasks(filename):
+    """タスクをファイルから読み込む"""
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+# テスト例
+tasks = []
+tasks = add_task(tasks, "Pythonの勉強")
+tasks = add_task(tasks, "買い物")
+show_tasks(tasks)
+complete_task(tasks, 1)
+show_tasks(tasks)
+save_tasks(tasks, "tasks.json")
+```
 
 ---
 
