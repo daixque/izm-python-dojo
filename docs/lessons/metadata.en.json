@@ -33,6 +33,13 @@
           "title": "User Input",
           "description": "Use the input() function to ask the user for their name and return a greeting.\nDisplay the greeting in the format \"Hello, ○○!\"",
           "available": true
+        },
+        {
+          "id": "01_05_debug",
+          "number": "01_05",
+          "title": "Debugging Basics",
+          "description": "The following code has 3 bugs. Read the error messages and fix all the bugs.\nAfter fixing them, verify that it works correctly.\nExpected behavior:\n\n  Display \"Taro-kun will be 16 years old next year\"\n  Display \"Height is 160cm, and if it grows 10cm, it will be 170cm\"",
+          "available": true
         }
       ]
     },

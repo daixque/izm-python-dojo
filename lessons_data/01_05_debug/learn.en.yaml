@@ -1,0 +1,109 @@
+lesson:
+  number: "01_05"
+  id: "01_05_debug"
+  title: "Debugging Basics"
+
+content: |
+  <section class="section">
+    <h2>What is Debugging?</h2>
+    <p>When programming, you will inevitably encounter errors.</p>
+    <p>"Debugging" is the process of finding and fixing mistakes (bugs) in a program.</p>
+    <p>For programmers, debugging is a very important skill.</p>
+  </section>
+
+  <section class="section">
+    <h2>Common Types of Errors</h2>
+    <p>In Python, you'll often encounter these types of errors:</p>
+    <ul>
+      <li><strong>SyntaxError</strong>: The grammar is incorrect</li>
+      <li><strong>NameError</strong>: Using a variable that hasn't been defined</li>
+      <li><strong>TypeError</strong>: Using data types incorrectly</li>
+      <li><strong>IndentationError</strong>: Incorrect indentation</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>How to Read Error Messages</h2>
+    <p>When an error occurs, Python kindly displays an error message.</p>
+    <p>Error messages contain the following information:</p>
+    <ul>
+      <li>The line number where the error occurred</li>
+      <li>The type of error</li>
+      <li>A description of the error</li>
+    </ul>
+    <p>It may seem difficult at first, but with practice, error messages become great hints for solving problems.</p>
+  </section>
+
+  <section class="section">
+    <h2>Common Mistake Patterns</h2>
+    <h3>1. Forgetting to Close Quotes</h3>
+    <div class="code-example bad">print("Hello)  # Wrong: closing quote is different</div>
+    <div class="code-example good">print("Hello")  # Correct</div>
+
+    <h3>2. Variable Name Typos</h3>
+    <div class="code-example bad">namae = "Taro"<br>print(name)  # Wrong: variable name is different</div>
+    <div class="code-example good">namae = "Taro"<br>print(namae)  # Correct</div>
+
+    <h3>3. Type Mismatch</h3>
+    <div class="code-example bad">age = "15"<br>print(age + 1)  # Wrong: can't add string and number</div>
+    <div class="code-example good">age = 15<br>print(age + 1)  # Correct</div>
+
+    <h3>4. Missing Parentheses</h3>
+    <div class="code-example bad">print "Hello"  # Wrong: no parentheses</div>
+    <div class="code-example good">print("Hello")  # Correct</div>
+  </section>
+
+  <section class="section">
+    <h2>Debugging Techniques</h2>
+    <h3>1. Read Error Messages Carefully</h3>
+    <p>Error messages tell you what the problem is. Read them calmly.</p>
+
+    <h3>2. Debug with print()</h3>
+    <p>When you want to check a variable's value, display it with <code>print()</code>.</p>
+    <div class="code-example">x = 10<br>print("Value of x:", x)  # Check variable value</div>
+
+    <h3>3. Check Line by Line</h3>
+    <p>When you don't know where the error is, try executing the code line by line.</p>
+
+    <h3>4. Comment Out and Test</h3>
+    <p>To identify the problematic part, temporarily disable (comment out) code.</p>
+    <div class="code-example"># print(age + 1)  # Temporarily disable this line</div>
+  </section>
+
+  <section class="examples">
+    <h2>Debugging Examples</h2>
+    
+    <div class="example-item">
+      <div class="example-title">Problem: NameError</div>
+      <div class="example-code bad">name = "Taro"<br>print(namae)  # NameError: name 'namae' is not defined</div>
+      <div class="example-code good">name = "Taro"<br>print(name)  # Fixed: corrected variable name</div>
+      <div class="example-explanation">Fixed the variable name typo.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Problem: TypeError</div>
+      <div class="example-code bad">age = "15"<br>next_year = age + 1  # TypeError: can only concatenate str to str</div>
+      <div class="example-code good">age = 15<br>next_year = age + 1  # Fixed: changed to numeric type</div>
+      <div class="example-explanation">Changed string to number to enable calculation.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Problem: SyntaxError</div>
+      <div class="example-code bad">if age > 10<br>    print("Over 10")  # SyntaxError: invalid syntax</div>
+      <div class="example-code good">if age > 10:<br>    print("Over 10")  # Fixed: added colon</div>
+      <div class="example-explanation">Added colon (:) at the end of if statement.</div>
+    </div>
+  </section>
+
+  <section class="section tips">
+    <h2>💡 Debugging Tips</h2>
+    <ul>
+      <li>Stay calm and read error messages carefully</li>
+      <li>Check the line number where the error occurred</li>
+      <li>Check for variable name typos</li>
+      <li>Verify that quotes and parentheses are properly closed</li>
+      <li>Use print() to check variable values</li>
+      <li>When stuck, start with simple code and add gradually</li>
+      <li>Searching error messages on the internet often leads to solutions</li>
+    </ul>
+  </section>

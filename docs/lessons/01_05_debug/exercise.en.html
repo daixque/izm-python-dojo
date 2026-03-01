@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson01_05: Debugging Basics</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson01_05: Debugging Basics</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>The following code has 3 bugs. Read the error messages and fix all the bugs.</p>
+<p>After fixing them, verify that it works correctly.</p>
+<p><strong>Expected behavior:</strong></p>
+<ul>
+  <li>Display "Taro-kun will be 16 years old next year"</li>
+  <li>Display "Height is 160cm, and if it grows 10cm, it will be 170cm"</li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Read error messages carefully to identify problematic lines</li>
+                            <li>Fix bugs one by one</li>
+                            <li>Test your code with the run button</li>
+                            <li>Once all bugs are fixed, verify with tests</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Bug 1: Cannot add a string and a number. Convert one of them</li>
+                            <li>Bug 2: Variable name spelling is incorrect (name vs namae)</li>
+                            <li>Bug 3: Calculation is wrong. If it grows 10cm...?</li>
+                            <li>Take your time and fix them one by one</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "01_05_debug";
+        const INITIAL_CODE = "# \u3053\u306e\u30b3\u30fc\u30c9\u306b\u306f3\u3064\u306e\u30d0\u30b0\u304c\u3042\u308a\u307e\u3059\u3002\u4fee\u6b63\u3057\u3066\u304f\u3060\u3055\u3044\u3002\n\n# \u592a\u90ce\u304f\u3093\u306e\u60c5\u5831\nname = \"\u592a\u90ce\"\nage = 15\n\n# \u6765\u5e74\u306e\u5e74\u9f62\u3092\u8a08\u7b97\uff08\u30d0\u30b01: \u578b\u5909\u63db\u304c\u5fc5\u8981\uff09\nnext_age = age + \"1\"\n\n# \u8868\u793a\u3059\u308b\uff08\u30d0\u30b02: \u5909\u6570\u540d\u306e\u30bf\u30a4\u30dd\uff09\nprint(namae + \"\u304f\u3093\u306f\u6765\u5e74\" + str(next_age) + \"\u6b73\u3067\u3059\")\n\n# \u8eab\u9577\u306e\u60c5\u5831\uff08\u30d0\u30b03: \u8a08\u7b97\u30df\u30b9\uff09\nheight = 160\nprint(\"\u8eab\u9577\u306f\" + str(height) + \"cm\u3067\u300110cm\u4f38\u3073\u305f\u3089\" + str(height + 1) + \"cm\u3067\u3059\")\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # print()\u306e\u4f7f\u7528\u3092\u30c1\u30a7\u30c3\u30af\n    if \u0027print(\u0027 not in user_code:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 print()\u95a2\u6570\u3092\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Please use the print() function\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 print()\u95a2\u6570\u304c\u4f7f\u308f\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 print() function is used\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if print statement is used correctly", "name": "Test 1: Basic syntax is correct"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # \u51fa\u529b\u3092\u53d6\u5f97\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u30a8\u30e9\u30fc\u306a\u304f\u5b9f\u884c\u3067\u304d\u305f\u3089OK\n    if lang == \"ja\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30d7\u30ed\u30b0\u30e9\u30e0\u304c\u30a8\u30e9\u30fc\u306a\u304f\u5b9f\u884c\u3055\u308c\u307e\u3057\u305f\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 Program ran without errors\"}\n        \nexcept Exception as e:\n    sys.stdout = old_stdout\n    error_msg = str(e)\n    \n    # \u30a8\u30e9\u30fc\u306e\u7a2e\u985e\u306b\u5fdc\u3058\u3066\u30d2\u30f3\u30c8\u3092\u51fa\u3059\n    if \"NameError\" in error_msg:\n        if lang == \"ja\":\n            hint = \"\u5909\u6570\u540d\u306e\u30b9\u30da\u30eb\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\uff08name \u3068 namae \u3092\u9593\u9055\u3048\u3066\u3044\u307e\u305b\u3093\u304b\uff1f\uff09\"\n        else:\n            hint = \"Check the spelling of variable names\"\n    elif \"TypeError\" in error_msg:\n        if lang == \"ja\":\n            hint = \"\u578b\u5909\u63db\uff08int()\u3084str()\uff09\u304c\u5fc5\u8981\u304b\u3082\u3057\u308c\u307e\u305b\u3093\"\n        else:\n            hint = \"Type conversion (int() or str()) may be needed\"\n    else:\n        if lang == \"ja\":\n            hint = \"\u30a8\u30e9\u30fc\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u3088\u304f\u8aad\u3093\u3067\u307f\u307e\u3057\u3087\u3046\"\n        else:\n            hint = \"Read the error message carefully\"\n    \n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {error_msg}\\n\u30d2\u30f3\u30c8: {hint}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error: {error_msg}\\nHint: {hint}\"}\n\nresult\n", "description": "Check if all bugs are fixed and code runs without errors", "name": "Test 2: Program runs without errors"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # \u51fa\u529b\u3092\u53d6\u5f97\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u671f\u5f85\u3055\u308c\u308b\u51fa\u529b\u5185\u5bb9\u3092\u30c1\u30a7\u30c3\u30af\n    has_taro = \"\u592a\u90ce\" in output\n    has_16 = \"16\u6b73\" in output  # 15 + 1 = 16\n    has_170 = \"170cm\" in output  # 160 + 10 = 170\n    \n    if has_taro and has_16 and has_170:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u3057\u3044\u5185\u5bb9\u304c\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct content is displayed\"}\n    else:\n        missing = []\n        if not has_taro:\n            missing.append(\"\u300c\u592a\u90ce\u300d\" if lang == \"ja\" else \"\u0027Taro\u0027\")\n        if not has_16:\n            missing.append(\"\u300c16\u6b73\u300d(15+1)\" if lang == \"ja\" else \"\u002716 years old\u0027 (15+1)\")\n        if not has_170:\n            missing.append(\"\u300c170cm\u300d(160+10)\" if lang == \"ja\" else \"\u0027170cm\u0027 (160+10)\")\n        \n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": f\"\u2717 \u51fa\u529b\u306b\u4e0d\u8db3\u307e\u305f\u306f\u8aa4\u308a\u304c\u3042\u308a\u307e\u3059: {\u0027, \u0027.join(missing)}\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Output is missing or incorrect: {\u0027, \u0027.join(missing)}\"}\n        \nexcept Exception as e:\n    sys.stdout = old_stdout\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if expected content is displayed correctly", "name": "Test 3: Correct output"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

@@ -23,34 +23,23 @@ async function initPyodide() {
             if (window.appendToConsole) window.appendToConsole(msg, 'error');
         }});
         
-        // 標準入力のリダイレクト（input()関数のサポート）
-        pyodide.setStdin({
-            stdin: () => {
-                if (inputMode === 'test') {
-                    // テストモード: 事前設定された入力を使用
-                    if (inputIndex < inputQueue.length) {
-                        const value = inputQueue[inputIndex];
-                        inputIndex++;
-                        if (window.appendToConsole) {
-                            window.appendToConsole(`> ${value}`, 'input');
-                        }
-                        return value + '\n';
-                    } else {
-                        throw new Error('テスト用の入力データが不足しています');
-                    }
-                } else {
-                    // インタラクティブモード: promptダイアログを使用
-                    const value = prompt('入力してください:');
-                    if (value === null) {
-                        throw new Error('入力がキャンセルされました');
-                    }
-                    if (window.appendToConsole) {
-                        window.appendToConsole(`> ${value}`, 'input');
-                    }
-                    return value + '\n';
-                }
-            }
-        });
+        // Pythonのinput()関数を上書き
+        await pyodide.runPythonAsync(`
+import builtins
+import js
+
+def custom_input(prompt=''):
+    # JavaScriptの関数を呼び出し
+    result = js.window.pyodideRunner.getInput(prompt)
+    
+    if result is None:
+        raise KeyboardInterrupt('入力がキャンセルされました')
+    
+    return result
+
+# 元のinput関数を上書き
+builtins.input = custom_input
+        `);
         
         isReady = true;
         updateStatus('準備完了 ✓', true);
@@ -187,6 +176,33 @@ function setInputMode(mode, inputs = []) {
     inputIndex = 0;
 }
 
+// input()関数の実装（Pythonから呼ばれる）
+function getInput(promptMessage) {
+    if (inputMode === 'test') {
+        // テストモード: 事前設定された入力を使用
+        if (inputIndex < inputQueue.length) {
+            const value = inputQueue[inputIndex];
+            inputIndex++;
+            if (window.appendToConsole) {
+                window.appendToConsole(promptMessage + value, 'input');
+            }
+            return value;
+        } else {
+            throw new Error('テスト用の入力データが不足しています');
+        }
+    } else {
+        // インタラクティブモード: promptダイアログを使用
+        const value = prompt(promptMessage || '入力してください:');
+        if (value === null) {
+            return null;
+        }
+        if (window.appendToConsole) {
+            window.appendToConsole(promptMessage + value, 'input');
+        }
+        return value;
+    }
+}
+
 // グローバルに公開
 window.pyodideRunner = {
     init: initPyodide,
@@ -194,5 +210,6 @@ window.pyodideRunner = {
     isReady: () => isReady,
     getPyodide: () => pyodide,
     fs: fileSystem,
-    setInputMode: setInputMode
+    setInputMode: setInputMode,
+    getInput: getInput
 };

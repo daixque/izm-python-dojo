@@ -1,0 +1,109 @@
+lesson:
+  number: "01_05"
+  id: "01_05_debug"
+  title: "デバッグの基礎"
+
+content: |
+  <section class="section">
+    <h2>デバッグとは</h2>
+    <p>プログラミングをしていると、必ずエラーに遭遇します。</p>
+    <p>「デバッグ」とは、プログラムの中の間違い（バグ）を見つけて修正する作業のことです。</p>
+    <p>プログラマーにとって、デバッグは非常に重要なスキルです。</p>
+  </section>
+
+  <section class="section">
+    <h2>よくあるエラーの種類</h2>
+    <p>Pythonでよく出会うエラーには、以下のようなものがあります：</p>
+    <ul>
+      <li><strong>SyntaxError（構文エラー）</strong>: 文法が間違っている</li>
+      <li><strong>NameError（名前エラー）</strong>: 定義されていない変数を使っている</li>
+      <li><strong>TypeError（型エラー）</strong>: データ型の使い方が間違っている</li>
+      <li><strong>IndentationError（インデントエラー）</strong>: 字下げが正しくない</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>エラーメッセージの読み方</h2>
+    <p>エラーが起きると、Pythonは親切にエラーメッセージを表示してくれます。</p>
+    <p>エラーメッセージには以下の情報が含まれています：</p>
+    <ul>
+      <li>エラーが起きた行番号</li>
+      <li>エラーの種類</li>
+      <li>エラーの説明</li>
+    </ul>
+    <p>最初は難しく感じるかもしれませんが、慣れればエラーメッセージが問題解決の大きなヒントになります。</p>
+  </section>
+
+  <section class="section">
+    <h2>よくある間違いパターン</h2>
+    <h3>1. 引用符の閉じ忘れ</h3>
+    <div class="code-example bad">print("こんにちは)  # 間違い：閉じる引用符が違う</div>
+    <div class="code-example good">print("こんにちは")  # 正しい</div>
+
+    <h3>2. 変数名のスペルミス</h3>
+    <div class="code-example bad">namae = "太郎"<br>print(name)  # 間違い：変数名が違う</div>
+    <div class="code-example good">namae = "太郎"<br>print(namae)  # 正しい</div>
+
+    <h3>3. 型の不一致</h3>
+    <div class="code-example bad">age = "15"<br>print(age + 1)  # 間違い：文字列と数値を足せない</div>
+    <div class="code-example good">age = 15<br>print(age + 1)  # 正しい</div>
+
+    <h3>4. カッコの不足</h3>
+    <div class="code-example bad">print "こんにちは"  # 間違い：カッコがない</div>
+    <div class="code-example good">print("こんにちは")  # 正しい</div>
+  </section>
+
+  <section class="section">
+    <h2>デバッグのテクニック</h2>
+    <h3>1. エラーメッセージをよく読む</h3>
+    <p>エラーメッセージは問題を教えてくれています。落ち着いて読んでみましょう。</p>
+
+    <h3>2. print()でデバッグ</h3>
+    <p>変数の値を確認したいときは、<code>print()</code>で表示してみましょう。</p>
+    <div class="code-example">x = 10<br>print("xの値:", x)  # 変数の値を確認</div>
+
+    <h3>3. 1行ずつ確認する</h3>
+    <p>どこでエラーが起きているか分からないときは、コードを1行ずつ実行してみましょう。</p>
+
+    <h3>4. コメントアウトして試す</h3>
+    <p>問題のある部分を特定するため、一時的にコードを無効化（コメントアウト）してみます。</p>
+    <div class="code-example"># print(age + 1)  # この行を一時的に無効化</div>
+  </section>
+
+  <section class="examples">
+    <h2>デバッグの実例</h2>
+    
+    <div class="example-item">
+      <div class="example-title">問題: NameError</div>
+      <div class="example-code bad">name = "太郎"<br>print(namae)  # NameError: name 'namae' is not defined</div>
+      <div class="example-code good">name = "太郎"<br>print(name)  # 修正: 変数名を正しくする</div>
+      <div class="example-explanation">変数名のスペルミスを修正しました。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">問題: TypeError</div>
+      <div class="example-code bad">age = "15"<br>next_year = age + 1  # TypeError: can only concatenate str to str</div>
+      <div class="example-code good">age = 15<br>next_year = age + 1  # 修正: 数値型に変更</div>
+      <div class="example-explanation">文字列を数値に変更して計算できるようにしました。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">問題: SyntaxError</div>
+      <div class="example-code bad">if age > 10<br>    print("10歳以上")  # SyntaxError: invalid syntax</div>
+      <div class="example-code good">if age > 10:<br>    print("10歳以上")  # 修正: コロンを追加</div>
+      <div class="example-explanation">if文の最後にコロン(:)を追加しました。</div>
+    </div>
+  </section>
+
+  <section class="section tips">
+    <h2>💡 デバッグのコツ</h2>
+    <ul>
+      <li>焦らず、落ち着いてエラーメッセージを読む</li>
+      <li>エラーが起きた行番号を確認する</li>
+      <li>変数名のスペルミスがないか確認する</li>
+      <li>引用符やカッコが正しく閉じられているか確認する</li>
+      <li>print()を使って変数の値を確認する</li>
+      <li>分からないときは、一度シンプルなコードから始めて、少しずつ追加していく</li>
+      <li>エラーメッセージをインターネットで検索すると、解決方法が見つかることがある</li>
+    </ul>
+  </section>

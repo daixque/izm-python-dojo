@@ -1,0 +1,25 @@
+lesson:
+  number: "01_05"
+  id: "01_05_debug"
+  title: "Debugging Basics"
+
+task_description: |
+  <p>The following code has 3 bugs. Read the error messages and fix all the bugs.</p>
+  <p>After fixing them, verify that it works correctly.</p>
+  <p><strong>Expected behavior:</strong></p>
+  <ul>
+    <li>Display "Taro-kun will be 16 years old next year"</li>
+    <li>Display "Height is 160cm, and if it grows 10cm, it will be 170cm"</li>
+  </ul>
+
+instructions:
+  - "Read error messages carefully to identify problematic lines"
+  - "Fix bugs one by one"
+  - "Test your code with the run button"
+  - "Once all bugs are fixed, verify with tests"
+
+hints:
+  - "Bug 1: Cannot add a string and a number. Convert one of them"
+  - "Bug 2: Variable name spelling is incorrect (name vs namae)"
+  - "Bug 3: Calculation is wrong. If it grows 10cm...?"
+  - "Take your time and fix them one by one"
