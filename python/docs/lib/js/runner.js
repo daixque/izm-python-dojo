@@ -9,7 +9,7 @@ async function initPyodide() {
         
         // Pyodideのロード
         pyodide = await loadPyodide({
-            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/'
+            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.0/full/'
         });
         
         // 標準出力・標準エラーのリダイレクト
