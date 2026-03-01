@@ -35,3 +35,19 @@ exercise:
   task_label: "課題"
   task_toggle_open: "◀"
   task_toggle_close: "▶"
+
+# 進捗管理
+progress:
+  overall_title: "全体の進捗"
+  lessons_completed: "レッスン完了"
+  chapter_progress: "レッスン完了"
+  filter_all: "全て表示"
+  filter_incomplete: "未完了のみ"
+  filter_completed: "完了済みのみ"
+  showing_count: "件表示中"
+  reset_progress: "進捗をリセット"
+  reset_confirm: "本当に全ての進捗をリセットしますか？この操作は取り消せません。"
+  mark_complete: "完了にする"
+  mark_incomplete: "未完了にする"
+  completed_on: "完了日時"
+  congratulations: "🎉 おめでとうございます！レッスンを完了しました！"

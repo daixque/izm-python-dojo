@@ -61,7 +61,22 @@ const translations = {
         // 言語
         language: "言語",
         lang_ja: "日本語",
-        lang_en: "English"
+        lang_en: "English",
+        
+        // 進捗管理
+        'progress.overall_title': "全体の進捗",
+        'progress.lessons_completed': "レッスン完了",
+        'progress.chapter_progress': "レッスン完了",
+        'progress.filter_all': "全て表示",
+        'progress.filter_incomplete': "未完了のみ",
+        'progress.filter_completed': "完了済みのみ",
+        'progress.showing_count': "件表示中",
+        'progress.reset_progress': "進捗をリセット",
+        'progress.reset_confirm': "本当に全ての進捗をリセットしますか？この操作は取り消せません。",
+        'progress.mark_complete': "完了にする",
+        'progress.mark_incomplete': "未完了にする",
+        'progress.completed_on': "完了日時",
+        'progress.congratulations': "🎉 おめでとうございます！レッスンを完了しました！"
     },
     en: {
         // Header
@@ -122,7 +137,22 @@ const translations = {
         // Language
         language: "Language",
         lang_ja: "日本語",
-        lang_en: "English"
+        lang_en: "English",
+        
+        // Progress management
+        'progress.overall_title': "Overall Progress",
+        'progress.lessons_completed': "Lessons Completed",
+        'progress.chapter_progress': "Lessons Completed",
+        'progress.filter_all': "Show All",
+        'progress.filter_incomplete': "Incomplete Only",
+        'progress.filter_completed': "Completed Only",
+        'progress.showing_count': "showing",
+        'progress.reset_progress': "Reset Progress",
+        'progress.reset_confirm': "Are you sure you want to reset all progress? This action cannot be undone.",
+        'progress.mark_complete': "Mark as Complete",
+        'progress.mark_incomplete': "Mark as Incomplete",
+        'progress.completed_on': "Completed on",
+        'progress.congratulations': "🎉 Congratulations! You completed this lesson!"
     }
 };
 
@@ -162,7 +192,15 @@ function initLanguage() {
 
 // 翻訳テキストを取得
 function t(key) {
-    return translations[currentLang][key] || key;
+    // ドット記法をサポート（例: 'progress.overall_title'）
+    const translation = translations[currentLang][key];
+    if (translation !== undefined) {
+        return translation;
+    }
+    
+    // フォールバック: キーそのものを返す
+    console.warn(`Translation not found for key: ${key}`);
+    return key;
 }
 
 // 現在の言語を取得

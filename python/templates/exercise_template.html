@@ -132,6 +132,7 @@
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
     <!-- 共通ライブラリ -->
     <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
     <script src="../../lib/js/runner.js"></script>
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
@@ -140,6 +141,7 @@
     
     <!-- アプリケーションスクリプト -->
     <script>
+        const LESSON_ID = "{{ lesson.id }}";
         const INITIAL_CODE = {{ initial_code|tojson }};
 
         const TESTS = {{ tests|tojson }};

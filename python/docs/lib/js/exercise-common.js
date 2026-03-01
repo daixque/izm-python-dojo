@@ -149,6 +149,31 @@ function setupButtons() {
                 
                 appendToConsole(t('msg_testComplete', 'テストが完了しました'), 'info');
                 
+                // 全テスト合格時の処理
+                if (testResult.success && testResult.allPassed) {
+                    // 進捗管理が利用可能な場合、レッスンを完了としてマーク
+                    if (window.progress && typeof LESSON_ID !== 'undefined') {
+                        window.progress.markLessonCompleted(LESSON_ID);
+                        
+                        // 完了メッセージを表示
+                        const congratsMsg = window.i18n ? window.i18n.t('progress.congratulations') : '🎉 おめでとうございます！レッスンを完了しました！';
+                        appendToConsole(congratsMsg, 'success');
+                        
+                        // テスト結果モーダルにも完了バッジを追加
+                        const testResultsContainer = document.getElementById('test-results');
+                        if (testResultsContainer) {
+                            const completionBadge = document.createElement('div');
+                            completionBadge.className = 'completion-badge';
+                            completionBadge.innerHTML = `
+                                <div style="background: #4caf50; color: white; padding: 12px; border-radius: 8px; margin-top: 16px; text-align: center; font-weight: bold;">
+                                    ${congratsMsg}
+                                </div>
+                            `;
+                            testResultsContainer.appendChild(completionBadge);
+                        }
+                    }
+                }
+                
                 // ファイルエクスプローラーを更新
                 window.fileExplorer.refresh();
             } else {

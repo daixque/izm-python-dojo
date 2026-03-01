@@ -128,6 +128,7 @@
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
     <!-- 共通ライブラリ -->
     <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
     <script src="../../lib/js/runner.js"></script>
     <script src="../../lib/js/editor.js"></script>
     <script src="../../lib/js/tester.js"></script>
@@ -136,6 +137,7 @@
     
     <!-- アプリケーションスクリプト -->
     <script>
+        const LESSON_ID = "hello";
         const INITIAL_CODE = "# \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u307f\u3088\u3046\n";
 
         const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\n# \u6a19\u6e96\u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\nold_stdout = sys.stdout\nsys.stdout = StringIO()\n\ntry:\n    exec(user_code)\n    output = sys.stdout.getvalue()\nfinally:\n    sys.stdout = old_stdout\n\n# \u51fa\u529b\u3092\u30c1\u30a7\u30c3\u30af\nexpected = \"Hello, World!\\n\"\nif output == expected:\n    result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01\" if lang == \"ja\" else \"\u2713 Correct!\"}\nelse:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u51fa\u529b\u304c\u9055\u3044\u307e\u3059\u3002\\n\u671f\u5f85: {repr(expected)}\\n\u5b9f\u969b: {repr(output)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Output is different.\\nExpected: {repr(expected)}\\nActual: {repr(output)}\"}\n\nresult\n", "description": "Check if \u0027Hello, World!\u0027 is displayed correctly", "name": "Test 1: Display Hello, World!"}];

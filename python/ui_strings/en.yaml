@@ -35,3 +35,19 @@ exercise:
   task_label: "Task"
   task_toggle_open: "◀"
   task_toggle_close: "▶"
+
+# Progress management
+progress:
+  overall_title: "Overall Progress"
+  lessons_completed: "Lessons Completed"
+  chapter_progress: "Lessons Completed"
+  filter_all: "Show All"
+  filter_incomplete: "Incomplete Only"
+  filter_completed: "Completed Only"
+  showing_count: "showing"
+  reset_progress: "Reset Progress"
+  reset_confirm: "Are you sure you want to reset all progress? This action cannot be undone."
+  mark_complete: "Mark as Complete"
+  mark_incomplete: "Mark as Incomplete"
+  completed_on: "Completed on"
+  congratulations: "🎉 Congratulations! You completed this lesson!"

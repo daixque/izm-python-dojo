@@ -708,3 +708,25 @@ body {
 .file-explorer.collapsed .file-explorer-body {
     display: none;
 }
+
+/* 進捗管理 - 完了バッジ */
+.completion-badge {
+    animation: fadeInScale 0.5s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* コンソール - 成功メッセージ */
+.console-success {
+    color: #4caf50;
+    font-weight: bold;
+}
