@@ -13,46 +13,46 @@
 ## フォルダ構成
 
 ```text
-python/
-  README.md                        # プロジェクト概要
-  build.py                         # ビルドスクリプト（YAML → HTML変換）
-  templates/                       # Jinja2テンプレート
-    learn_template.html            # 理論ページのテンプレート
-    exercise_template.html         # 演習ページのテンプレート
-  ui_strings/                      # UI文言の多言語データ
-    ja.yaml                        # 日本語UI文言
-    en.yaml                        # 英語UI文言
-  chapters_data/                   # 章の定義
-    chapters.ja.yaml               # 章情報（日本語）
-    chapters.en.yaml               # 章情報（英語）
-  lessons_data/                    # レッスンのソースデータ（YAML）
-    01_01_hello/                   # Chapter 1 - Lesson 1: はじめてのPython
-      learn.ja.yaml                # 理論説明（日本語）
-      learn.en.yaml                # 理論説明（英語）
-      exercise.ja.yaml             # 演習課題（日本語）
-      exercise.en.yaml             # 演習課題（英語）
-      code.yaml                    # コード・テスト（言語共通）
-    01_02_variables/               # Chapter 1 - Lesson 2: 変数と計算（予定）
-    02_01_if/                      # Chapter 2 - Lesson 1: 条件分岐（予定）
-  docs/                            # 生成されたWebコンテンツ（GitHub Pages公開用）
-    index.html                     # 目次ページ（レッスン一覧）
-    lib/                           # 共通ライブラリ
-      css/
-        learn.css                  # 理論説明ページ用スタイル
-        exercise.css               # 演習課題ページ用スタイル
-      js/
-        i18n.js                    # 多言語対応（index.htmlのみ使用）
-        runner.js                  # Pyodide実行エンジン
-        editor.js                  # Monaco Editor制御
-        tester.js                  # 自動テスト機能
-    lessons/                       # 生成されたレッスンHTML
-      metadata.ja.json             # レッスンメタデータ（日本語）
-      metadata.en.json             # レッスンメタデータ（英語）
-      01_01_hello/                 # Chapter 1 - Lesson 1
-        learn.ja.html              # 理論説明ページ（日本語）
-        learn.en.html              # 理論説明ページ（英語）
-        exercise.ja.html           # 演習課題ページ（日本語）
-        exercise.en.html           # 演習課題ページ（英語）
+.
+├── README.md                      # プロジェクト概要
+├── build.py                       # ビルドスクリプト（YAML → HTML変換）
+├── templates/                     # Jinja2テンプレート
+│   ├── learn_template.html        # 理論ページのテンプレート
+│   └── exercise_template.html     # 演習ページのテンプレート
+├── ui_strings/                    # UI文言の多言語データ
+│   ├── ja.yaml                    # 日本語UI文言
+│   └── en.yaml                    # 英語UI文言
+├── chapters_data/                 # 章の定義
+│   ├── chapters.ja.yaml           # 章情報（日本語）
+│   └── chapters.en.yaml           # 章情報（英語）
+├── lessons_data/                  # レッスンのソースデータ（YAML）
+│   ├── 01_01_hello/               # Chapter 1 - Lesson 1: はじめてのPython
+│   │   ├── learn.ja.yaml          # 理論説明（日本語）
+│   │   ├── learn.en.yaml          # 理論説明（英語）
+│   │   ├── exercise.ja.yaml       # 演習課題（日本語）
+│   │   ├── exercise.en.yaml       # 演習課題（英語）
+│   │   └── code.yaml              # コード・テスト（言語共通）
+│   ├── 01_02_variables/           # Chapter 1 - Lesson 2: 変数と計算（予定）
+│   └── 02_01_if/                  # Chapter 2 - Lesson 1: 条件分岐（予定）
+└── docs/                          # 生成されたWebコンテンツ（GitHub Pages公開用）
+    ├── index.html                 # 目次ページ（レッスン一覧）
+    ├── lib/                       # 共通ライブラリ
+    │   ├── css/
+    │   │   ├── learn.css          # 理論説明ページ用スタイル
+    │   │   └── exercise.css       # 演習課題ページ用スタイル
+    │   └── js/
+    │       ├── i18n.js            # 多言語対応（index.htmlのみ使用）
+    │       ├── runner.js          # Pyodide実行エンジン
+    │       ├── editor.js          # Monaco Editor制御
+    │       └── tester.js          # 自動テスト機能
+    └── lessons/                   # 生成されたレッスンHTML
+        ├── metadata.ja.json       # レッスンメタデータ（日本語）
+        ├── metadata.en.json       # レッスンメタデータ（英語）
+        └── 01_01_hello/           # Chapter 1 - Lesson 1
+            ├── learn.ja.html      # 理論説明ページ（日本語）
+            ├── learn.en.html      # 理論説明ページ（英語）
+            ├── exercise.ja.html   # 演習課題ページ（日本語）
+            └── exercise.en.html   # 演習課題ページ（英語）
 ```
 
 ## 使い方
@@ -60,7 +60,7 @@ python/
 ### ローカルサーバーで起動
 
 ```bash
-cd python/docs
+cd docs
 python3 -m http.server 8080
 ```
 
