@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson01_02: Variables and Calculations</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson01_02: Variables and Calculations</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Write a program that assigns your age to a variable, calculates your age in 10 years, and displays it.</p>
+<p>For example, if you're 14 now, you'll be 24 in 10 years.</p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Assign your age to variable <code>age</code></li>
+                            <li>Assign <code>age + 10</code> to variable <code>future_age</code></li>
+                            <li>Display <code>future_age</code> using <code>print()</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4>💡 Hints</h4>
+                        <ul>
+                            <li>First, assign your current age like <code>age = 14</code></li>
+                            <li>Next, calculate 10 years later with <code>future_age = age + 10</code></li>
+                            <li>Finally, display the result with <code>print(future_age)</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "01_02_variables";
+        const INITIAL_CODE = "# \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u307f\u3088\u3046\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # age\u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \u0027age\u0027 not in exec_globals:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 age \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Variable age is not defined\"}\n    elif not isinstance(exec_globals[\u0027age\u0027], (int, float)):\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 age \u306b\u306f\u6570\u5024\u3092\u4ee3\u5165\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Variable age should be a number\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u5909\u6570 age \u304c\u6b63\u3057\u304f\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Variable age is correctly defined\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if variable age is assigned a value", "name": "Test 1: Variable age is defined"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # future_age\u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \u0027future_age\u0027 not in exec_globals:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 future_age \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Variable future_age is not defined\"}\n    elif \u0027age\u0027 not in exec_globals:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 age \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Variable age is not defined\"}\n    elif exec_globals[\u0027future_age\u0027] != exec_globals[\u0027age\u0027] + 10:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": f\"\u2717 future_age \u306e\u8a08\u7b97\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002age + 10 \u3092\u8a08\u7b97\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 future_age calculation is incorrect. Calculate age + 10\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 10\u5e74\u5f8c\u306e\u5e74\u9f62\u304c\u6b63\u3057\u304f\u8a08\u7b97\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Age in 10 years is correctly calculated\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if age in 10 years is correctly calculated", "name": "Test 2: future_age is correctly calculated"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u6a19\u6e96\u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # future_age\u306e\u5024\u3092\u30c1\u30a7\u30c3\u30af\n    if \u0027future_age\u0027 not in exec_globals:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 future_age \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Variable future_age is not defined\"}\n    else:\n        expected_value = exec_globals[\u0027future_age\u0027]\n        output_lines = output.strip().split(\u0027\\n\u0027)\n        \n        # \u51fa\u529b\u306b\u671f\u5f85\u5024\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n        if str(expected_value) in output:\n            if lang == \"ja\":\n                result = {\"passed\": True, \"message\": \"\u2713 future_age \u304c\u6b63\u3057\u304f\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059\"}\n            else:\n                result = {\"passed\": True, \"message\": \"\u2713 future_age is correctly displayed\"}\n        else:\n            if lang == \"ja\":\n                result = {\"passed\": False, \"message\": f\"\u2717 future_age \u306e\u5024\uff08{expected_value}\uff09\u304c\u51fa\u529b\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n            else:\n                result = {\"passed\": False, \"message\": f\"\u2717 future_age value ({expected_value}) is not displayed\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if future_age value is displayed", "name": "Test 3: future_age is displayed"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

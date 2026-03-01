@@ -1,0 +1,83 @@
+lesson:
+  number: "01_02"  # チャプター_レッスン形式
+  id: "01_02_variables"
+  title: "変数と計算"
+
+content: |
+  <section class="section">
+    <h2>変数とは</h2>
+    <p>変数は、データを保存しておくための「箱」のようなものです。</p>
+    <p>この箱には名前をつけることができ、後でその名前を使ってデータを取り出したり、計算に使ったりできます。</p>
+    <p>例えば、「年齢」という箱に「14」という数字を入れておくと、後で「年齢」という名前を使ってその数字を使うことができます。</p>
+  </section>
+
+  <section class="section">
+    <h2>変数への代入</h2>
+    <p>変数にデータを入れることを「代入」と言います。Pythonでは<code>=</code>（イコール）を使って代入します。</p>
+    <p><code>=</code>は「等しい」という意味ではなく、「右側の値を左側の変数に入れる」という意味です。</p>
+    <p>変数名は自分で自由に決められますが、わかりやすい名前をつけることが大切です。</p>
+  </section>
+
+  <section class="section">
+    <h2>四則演算</h2>
+    <p>Pythonでは、算数と同じように計算ができます。</p>
+    <ul>
+      <li><code>+</code> : 足し算（例: <code>5 + 3</code> → 8）</li>
+      <li><code>-</code> : 引き算（例: <code>10 - 4</code> → 6）</li>
+      <li><code>*</code> : 掛け算（例: <code>3 * 4</code> → 12）</li>
+      <li><code>/</code> : 割り算（例: <code>15 / 3</code> → 5.0）</li>
+    </ul>
+    <p>変数に入れた数値も、同じように計算できます。</p>
+  </section>
+
+  <section class="section">
+    <h2>データ型の基本</h2>
+    <p>Pythonには、いろいろな種類のデータがあります。</p>
+    <ul>
+      <li><strong>整数（int）</strong>: 小数点のない数字（例: 10, -5, 0）</li>
+      <li><strong>小数（float）</strong>: 小数点のある数字（例: 3.14, -0.5, 2.0）</li>
+      <li><strong>文字列（str）</strong>: 文字や文章（例: "こんにちは", "Python"）</li>
+    </ul>
+    <p>割り算（<code>/</code>）の結果は、必ず小数（float）になります。</p>
+  </section>
+
+  <section class="examples">
+    <h2>コード例</h2>
+    
+    <div class="example-item">
+      <div class="example-title">変数に数値を代入</div>
+      <div class="example-code">age = 14<br>print(age)</div>
+      <div class="example-explanation">変数ageに14を代入して表示します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">変数を使った計算</div>
+      <div class="example-code">x = 10<br>y = 3<br>print(x + y)</div>
+      <div class="example-explanation">2つの変数の合計を計算して表示します。結果は13になります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">四則演算の例</div>
+      <div class="example-code">a = 20<br>b = 4<br>print(a + b)  # 足し算 → 24<br>print(a - b)  # 引き算 → 16<br>print(a * b)  # 掛け算 → 80<br>print(a / b)  # 割り算 → 5.0</div>
+      <div class="example-explanation">いろいろな計算をまとめて実行できます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">計算結果を変数に保存</div>
+      <div class="example-code">price = 150<br>count = 3<br>total = price * count<br>print(total)</div>
+      <div class="example-explanation">計算結果を新しい変数に保存できます。結果は450になります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">変数の値を更新</div>
+      <div class="example-code">score = 80<br>score = score + 10<br>print(score)</div>
+      <div class="example-explanation">変数の値は後から変更できます。結果は90になります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">小数の計算</div>
+      <div class="example-code">height = 1.65<br>weight = 55.5<br>print(weight / height)</div>
+      <div class="example-explanation">小数も計算できます。</div>
+    </div>
+  </section>
+

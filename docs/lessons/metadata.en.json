@@ -12,6 +12,13 @@
           "title": "First Steps with Python",
           "description": "Write a program to display 'Hello, World!'",
           "available": true
+        },
+        {
+          "id": "01_02_variables",
+          "number": "01_02",
+          "title": "Variables and Calculations",
+          "description": "Write a program that assigns your age to a variable, calculates your age in 10 years, and displays it.\nFor example, if you're 14 now, you'll be 24 in 10 years.",
+          "available": true
         }
       ]
     },

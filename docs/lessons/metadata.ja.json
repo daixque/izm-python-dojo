@@ -12,6 +12,13 @@
           "title": "はじめてのPython",
           "description": "「Hello, World!」と表示するプログラムを書いてみましょう。",
           "available": true
+        },
+        {
+          "id": "01_02_variables",
+          "number": "01_02",
+          "title": "変数と計算",
+          "description": "自分の年齢を変数に代入し、10年後の年齢を計算して表示するプログラムを書いてみましょう。\n例えば、今14歳なら、10年後は24歳になりますね。",
+          "available": true
         }
       ]
     },

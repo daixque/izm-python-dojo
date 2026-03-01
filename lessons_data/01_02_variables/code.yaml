@@ -1,0 +1,140 @@
+initial_code: |
+  # ここにコードを書いてみよう
+  
+
+initial_files: []  # データファイルが必要な場合のみ使用
+
+tests:
+  - name:
+      ja: "テスト1: ageという変数が定義されている"
+      en: "Test 1: Variable age is defined"
+    description:
+      ja: "変数ageに値が代入されているか"
+      en: "Check if variable age is assigned a value"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # ageが定義されているかチェック
+          if 'age' not in exec_globals:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 age が定義されていません"}
+              else:
+                  result = {"passed": False, "message": "✗ Variable age is not defined"}
+          elif not isinstance(exec_globals['age'], (int, float)):
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 age には数値を代入してください"}
+              else:
+                  result = {"passed": False, "message": "✗ Variable age should be a number"}
+          else:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ 変数 age が正しく定義されています"}
+              else:
+                  result = {"passed": True, "message": "✓ Variable age is correctly defined"}
+      except Exception as e:
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト2: future_ageが正しく計算されている"
+      en: "Test 2: future_age is correctly calculated"
+    description:
+      ja: "10年後の年齢が正しく計算されているか"
+      en: "Check if age in 10 years is correctly calculated"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # future_ageが定義されているかチェック
+          if 'future_age' not in exec_globals:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 future_age が定義されていません"}
+              else:
+                  result = {"passed": False, "message": "✗ Variable future_age is not defined"}
+          elif 'age' not in exec_globals:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 age が定義されていません"}
+              else:
+                  result = {"passed": False, "message": "✗ Variable age is not defined"}
+          elif exec_globals['future_age'] != exec_globals['age'] + 10:
+              if lang == "ja":
+                  result = {"passed": False, "message": f"✗ future_age の計算が正しくありません。age + 10 を計算してください"}
+              else:
+                  result = {"passed": False, "message": f"✗ future_age calculation is incorrect. Calculate age + 10"}
+          else:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ 10年後の年齢が正しく計算されています"}
+              else:
+                  result = {"passed": True, "message": "✓ Age in 10 years is correctly calculated"}
+      except Exception as e:
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト3: future_ageが表示されている"
+      en: "Test 3: future_age is displayed"
+    description:
+      ja: "future_ageの値が出力されているか"
+      en: "Check if future_age value is displayed"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 標準出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # future_ageの値をチェック
+          if 'future_age' not in exec_globals:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 future_age が定義されていません"}
+              else:
+                  result = {"passed": False, "message": "✗ Variable future_age is not defined"}
+          else:
+              expected_value = exec_globals['future_age']
+              output_lines = output.strip().split('\n')
+              
+              # 出力に期待値が含まれているかチェック
+              if str(expected_value) in output:
+                  if lang == "ja":
+                      result = {"passed": True, "message": "✓ future_age が正しく表示されています"}
+                  else:
+                      result = {"passed": True, "message": "✓ future_age is correctly displayed"}
+              else:
+                  if lang == "ja":
+                      result = {"passed": False, "message": f"✗ future_age の値（{expected_value}）が出力されていません"}
+                  else:
+                      result = {"passed": False, "message": f"✗ future_age value ({expected_value}) is not displayed"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+

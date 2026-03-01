@@ -1,0 +1,19 @@
+lesson:
+  number: "01_02"  # チャプター_レッスン形式
+  id: "01_02_variables"
+  title: "変数と計算"
+
+task_description: |
+  <p>自分の年齢を変数に代入し、10年後の年齢を計算して表示するプログラムを書いてみましょう。</p>
+  <p>例えば、今14歳なら、10年後は24歳になりますね。</p>
+
+instructions:
+  - "変数 <code>age</code> に自分の年齢を代入します"
+  - "変数 <code>future_age</code> に <code>age + 10</code> を代入します"
+  - "<code>print()</code> で <code>future_age</code> を表示します"
+
+hints:
+  - "まず <code>age = 14</code> のように現在の年齢を代入します"
+  - "次に <code>future_age = age + 10</code> で10年後を計算します"
+  - "最後に <code>print(future_age)</code> で結果を表示します"
+

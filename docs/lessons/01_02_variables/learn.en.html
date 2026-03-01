@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson01_02: Variables and Calculations</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Variables and Calculations</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>What are Variables?</h2>
+  <p>Variables are like 'boxes' for storing data.</p>
+  <p>You can give these boxes names, and later use those names to retrieve the data or use it in calculations.</p>
+  <p>For example, if you put the number '14' in a box called 'age', you can later use that number by referring to 'age'.</p>
+</section>
+
+<section class="section">
+  <h2>Variable Assignment</h2>
+  <p>Putting data into a variable is called 'assignment'. In Python, we use <code>=</code> (equals sign) for assignment.</p>
+  <p><code>=</code> doesn't mean 'equal to'; it means 'put the value on the right into the variable on the left'.</p>
+  <p>You can choose variable names freely, but it's important to use clear and meaningful names.</p>
+</section>
+
+<section class="section">
+  <h2>Arithmetic Operations</h2>
+  <p>In Python, you can do calculations just like in math.</p>
+  <ul>
+    <li><code>+</code> : Addition (e.g., <code>5 + 3</code> → 8)</li>
+    <li><code>-</code> : Subtraction (e.g., <code>10 - 4</code> → 6)</li>
+    <li><code>*</code> : Multiplication (e.g., <code>3 * 4</code> → 12)</li>
+    <li><code>/</code> : Division (e.g., <code>15 / 3</code> → 5.0)</li>
+  </ul>
+  <p>You can use numbers stored in variables for calculations too.</p>
+</section>
+
+<section class="section">
+  <h2>Basic Data Types</h2>
+  <p>Python has different types of data.</p>
+  <ul>
+    <li><strong>Integer (int)</strong>: Numbers without decimal points (e.g., 10, -5, 0)</li>
+    <li><strong>Float (float)</strong>: Numbers with decimal points (e.g., 3.14, -0.5, 2.0)</li>
+    <li><strong>String (str)</strong>: Text or characters (e.g., "Hello", "Python")</li>
+  </ul>
+  <p>The result of division (<code>/</code>) is always a float.</p>
+</section>
+
+<section class="examples">
+  <h2>Examples</h2>
+  
+  <div class="example-item">
+    <div class="example-title">Assign a Number to a Variable</div>
+    <div class="example-code">age = 14<br>print(age)</div>
+    <div class="example-explanation">Assign 14 to variable age and display it.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Calculate Using Variables</div>
+    <div class="example-code">x = 10<br>y = 3<br>print(x + y)</div>
+    <div class="example-explanation">Calculate and display the sum of two variables. The result is 13.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Arithmetic Operations Examples</div>
+    <div class="example-code">a = 20<br>b = 4<br>print(a + b)  # Addition → 24<br>print(a - b)  # Subtraction → 16<br>print(a * b)  # Multiplication → 80<br>print(a / b)  # Division → 5.0</div>
+    <div class="example-explanation">You can perform various calculations.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Store Calculation Results in a Variable</div>
+    <div class="example-code">price = 150<br>count = 3<br>total = price * count<br>print(total)</div>
+    <div class="example-explanation">You can store calculation results in a new variable. The result is 450.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Update a Variable's Value</div>
+    <div class="example-code">score = 80<br>score = score + 10<br>print(score)</div>
+    <div class="example-explanation">You can change a variable's value later. The result is 90.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Calculate with Decimals</div>
+    <div class="example-code">height = 1.65<br>weight = 55.5<br>print(weight / height)</div>
+    <div class="example-explanation">You can calculate with decimal numbers too.</div>
+  </div>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

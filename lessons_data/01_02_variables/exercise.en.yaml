@@ -1,0 +1,19 @@
+lesson:
+  number: "01_02"  # Chapter_Lesson format
+  id: "01_02_variables"
+  title: "Variables and Calculations"
+
+task_description: |
+  <p>Write a program that assigns your age to a variable, calculates your age in 10 years, and displays it.</p>
+  <p>For example, if you're 14 now, you'll be 24 in 10 years.</p>
+
+instructions:
+  - "Assign your age to variable <code>age</code>"
+  - "Assign <code>age + 10</code> to variable <code>future_age</code>"
+  - "Display <code>future_age</code> using <code>print()</code>"
+
+hints:
+  - "First, assign your current age like <code>age = 14</code>"
+  - "Next, calculate 10 years later with <code>future_age = age + 10</code>"
+  - "Finally, display the result with <code>print(future_age)</code>"
+
