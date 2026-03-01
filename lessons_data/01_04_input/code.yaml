@@ -1,0 +1,140 @@
+initial_code: |
+  # input() を使って名前を入力してもらい、挨拶を表示しよう
+  
+
+initial_files: []
+
+tests:
+  - name:
+      ja: "テスト1: input()で名前を入力している"
+      en: "Test 1: Using input() to get name"
+    description:
+      ja: "input()関数を使って名前を入力しているか"
+      en: "Check if input() is used to get the name"
+    inputs:
+      - "太郎"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # input()の使用をチェック
+          if 'input(' not in user_code:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ input()関数を使ってください"}
+              else:
+                  result = {"passed": False, "message": "✗ Please use the input() function"}
+          else:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ input()関数が使われています"}
+              else:
+                  result = {"passed": True, "message": "✓ input() function is used"}
+      except Exception as e:
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト2: 挨拶を正しく表示している"
+      en: "Test 2: Displaying greeting correctly"
+    description:
+      ja: "入力された名前を使って挨拶を表示しているか"
+      en: "Check if greeting is displayed using the entered name"
+    inputs:
+      - "太郎"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # 出力を取得
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 名前が出力に含まれているかチェック
+          if "太郎" in output:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ 入力された名前が正しく表示されています"}
+              else:
+                  result = {"passed": True, "message": "✓ Entered name is correctly displayed"}
+          else:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 入力された名前を表示してください"}
+              else:
+                  result = {"passed": False, "message": "✗ Please display the entered name"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト3: 挨拶のフォーマットが正しい"
+      en: "Test 3: Greeting format is correct"
+    description:
+      ja: "「こんにちは」などの挨拶言葉が含まれているか"
+      en: "Check if greeting words like 'Hello' are included"
+    inputs:
+      - "花子"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # 出力を取得
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 日本語の場合は「こんにちは」、英語の場合は「Hello」「Hi」などをチェック
+          if lang == "ja":
+              greeting_words = ["こんにちは", "おはよう", "こんばんは"]
+              has_greeting = any(word in output for word in greeting_words)
+              has_name = "花子" in output
+              
+              if has_greeting and has_name:
+                  result = {"passed": True, "message": "✓ 挨拶のフォーマットが正しいです"}
+              elif not has_greeting:
+                  result = {"passed": False, "message": "✗ 挨拶言葉（こんにちは など）を含めてください"}
+              else:
+                  result = {"passed": False, "message": "✗ 入力された名前を含めてください"}
+          else:
+              greeting_words = ["Hello", "Hi", "Hey", "Greetings"]
+              has_greeting = any(word.lower() in output.lower() for word in greeting_words)
+              has_name = "花子" in output or "Hanako" in output
+              
+              if has_greeting and has_name:
+                  result = {"passed": True, "message": "✓ Greeting format is correct"}
+              elif not has_greeting:
+                  result = {"passed": False, "message": "✗ Please include a greeting word (Hello, etc.)"}
+              else:
+                  result = {"passed": False, "message": "✗ Please include the entered name"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result

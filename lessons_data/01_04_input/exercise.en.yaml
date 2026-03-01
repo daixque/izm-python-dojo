@@ -1,0 +1,18 @@
+lesson:
+  number: "01_04"
+  id: "01_04_input"
+  title: "User Input"
+
+task_description: |
+  <p>Use the <code>input()</code> function to ask the user for their name and return a greeting.</p>
+  <p>Display the greeting in the format "Hello, ○○!"</p>
+
+instructions:
+  - "Use <code>input()</code> to ask for a name"
+  - "Store the entered name in variable <code>name</code>"
+  - "Display a greeting in the format \"Hello, ○○!\""
+
+hints:
+  - "<code>input(\"Enter your name: \")</code> receives input with a message"
+  - "Use <code>+</code> to concatenate strings"
+  - "Example: <code>print(\"Hello, \" + name + \"!\")</code>"

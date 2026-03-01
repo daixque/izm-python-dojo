@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン01_04: ユーザー入力</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">ユーザー入力</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>input()関数とは</h2>
+  <p>これまでは、プログラムの中であらかじめ決められた値を使っていました。</p>
+  <p><code>input()</code>関数を使うと、プログラムを実行したときに、ユーザーから値を入力してもらうことができます。</p>
+  <p>これによって、毎回違う入力で動くプログラムを作れるようになります。</p>
+</section>
+
+<section class="section">
+  <h2>input()の基本的な使い方</h2>
+  <p><code>input()</code>関数は、ユーザーが入力した文字列を返します。</p>
+  <p>入力を受け取るには、変数に代入します：</p>
+  <div class="code-example">name = input("あなたの名前は？ ")</div>
+  <p>プログラムを実行すると、メッセージが表示され、入力を待ちます。</p>
+  <p>ユーザーが何か入力してEnterキーを押すと、その値が変数に保存されます。</p>
+</section>
+
+<section class="section">
+  <h2>入力されたデータは文字列</h2>
+  <p><strong>重要：</strong> <code>input()</code>で受け取ったデータは、常に文字列（str）型です。</p>
+  <p>数字を入力しても、それは文字列として扱われます。</p>
+  <p>計算に使いたい場合は、<code>int()</code>や<code>float()</code>で数値に変換する必要があります。</p>
+</section>
+
+<section class="section">
+  <h2>数値を入力してもらう</h2>
+  <p>数値の入力を受け取って計算に使うには、型変換を組み合わせます：</p>
+  <div class="code-example">age = int(input("年齢を入力してください: "))</div>
+  <p>これで、入力された値が整数として変数に保存されます。</p>
+</section>
+
+<section class="section">
+  <h2>インタラクティブなプログラム</h2>
+  <p><code>input()</code>を使うことで、ユーザーと対話するプログラムを作れます。</p>
+  <p>質問をして、答えに応じた処理をする、といったことができるようになります。</p>
+  <p>例えば、名前を入力してもらって、その人に向けた挨拶を返すプログラムなどです。</p>
+</section>
+
+<section class="examples">
+  <h2>コード例</h2>
+  
+  <div class="example-item">
+    <div class="example-title">基本的な入力</div>
+    <div class="example-code">name = input("名前を入力してください: ")<br>print("こんにちは、" + name + "さん！")</div>
+    <div class="example-explanation">入力された名前を使って挨拶を表示します。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">数値の入力と計算</div>
+    <div class="example-code">age = int(input("年齢を入力してください: "))<br>future_age = age + 10<br>print("10年後、あなたは" + str(future_age) + "歳です")</div>
+    <div class="example-explanation">入力された年齢を使って10年後を計算します。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">複数の入力</div>
+    <div class="example-code">num1 = int(input("1つ目の数値: "))<br>num2 = int(input("2つ目の数値: "))<br>total = num1 + num2<br>print("合計: " + str(total))</div>
+    <div class="example-explanation">2つの数値を入力してもらい、合計を計算します。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">小数の入力</div>
+    <div class="example-code">price = float(input("商品の価格: "))<br>tax = price * 0.1<br>print("消費税: " + str(tax) + "円")</div>
+    <div class="example-explanation">価格を入力してもらい、消費税を計算します。</div>
+  </div>
+</section>
+
+<section class="section tips">
+  <h2>💡 ポイント</h2>
+  <ul>
+    <li><code>input()</code>の括弧の中にメッセージを書くと、ユーザーに何を入力すればいいか伝えられます</li>
+    <li>入力は必ず文字列なので、計算に使う場合は型変換を忘れずに</li>
+    <li>メッセージの最後にスペースや「: 」を付けると、入力しやすくなります</li>
+    <li>ユーザーが入力をキャンセルすると、プログラムが停止する場合があります</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

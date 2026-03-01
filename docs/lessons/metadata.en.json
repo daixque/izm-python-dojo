@@ -26,6 +26,13 @@
           "title": "Data Types and Conversion",
           "description": "Write a program that converts two numbers given as strings to integers, calculates their sum, and displays it.\nFinally, display the result in the format \"The sum is ○○\".",
           "available": true
+        },
+        {
+          "id": "01_04_input",
+          "number": "01_04",
+          "title": "User Input",
+          "description": "Use the input() function to ask the user for their name and return a greeting.\nDisplay the greeting in the format \"Hello, ○○!\"",
+          "available": true
         }
       ]
     },

@@ -1,6 +1,9 @@
 // Pyodide実行エンジン（共通ライブラリ）
 let pyodide = null;
 let isReady = false;
+let inputMode = 'interactive'; // 'interactive' or 'test'
+let inputQueue = []; // テスト時の入力キュー
+let inputIndex = 0; // 現在の入力インデックス
 
 // Pyodideの初期化
 async function initPyodide() {
@@ -19,6 +22,35 @@ async function initPyodide() {
         pyodide.setStderr({ batched: (msg) => {
             if (window.appendToConsole) window.appendToConsole(msg, 'error');
         }});
+        
+        // 標準入力のリダイレクト（input()関数のサポート）
+        pyodide.setStdin({
+            stdin: () => {
+                if (inputMode === 'test') {
+                    // テストモード: 事前設定された入力を使用
+                    if (inputIndex < inputQueue.length) {
+                        const value = inputQueue[inputIndex];
+                        inputIndex++;
+                        if (window.appendToConsole) {
+                            window.appendToConsole(`> ${value}`, 'input');
+                        }
+                        return value + '\n';
+                    } else {
+                        throw new Error('テスト用の入力データが不足しています');
+                    }
+                } else {
+                    // インタラクティブモード: promptダイアログを使用
+                    const value = prompt('入力してください:');
+                    if (value === null) {
+                        throw new Error('入力がキャンセルされました');
+                    }
+                    if (window.appendToConsole) {
+                        window.appendToConsole(`> ${value}`, 'input');
+                    }
+                    return value + '\n';
+                }
+            }
+        });
         
         isReady = true;
         updateStatus('準備完了 ✓', true);
@@ -148,11 +180,19 @@ const fileSystem = {
     }
 };
 
+// 入力モードの設定
+function setInputMode(mode, inputs = []) {
+    inputMode = mode;
+    inputQueue = inputs;
+    inputIndex = 0;
+}
+
 // グローバルに公開
 window.pyodideRunner = {
     init: initPyodide,
     run: runPythonCode,
     isReady: () => isReady,
     getPyodide: () => pyodide,
-    fs: fileSystem
+    fs: fileSystem,
+    setInputMode: setInputMode
 };

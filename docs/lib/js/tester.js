@@ -47,6 +47,13 @@ async function runSingleTest(userCode, test, testNumber) {
     try {
         const pyodide = window.pyodideRunner.getPyodide();
         
+        // テスト用入力が定義されている場合は設定
+        if (test.inputs && Array.isArray(test.inputs)) {
+            window.pyodideRunner.setInputMode('test', test.inputs);
+        } else {
+            window.pyodideRunner.setInputMode('interactive');
+        }
+        
         // ユーザーコードをPython環境に注入
         pyodide.globals.set('user_code', userCode);
         

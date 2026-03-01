@@ -145,6 +145,10 @@ function setupButtons() {
             if (code.trim()) {
                 clearConsole();
                 appendToConsole(t('msg_executing', 'コードを実行中...'), 'info');
+                
+                // インタラクティブモードに設定（prompt()を使用）
+                window.pyodideRunner.setInputMode('interactive');
+                
                 try {
                     const result = await window.pyodideRunner.run(code);
                     if (result !== undefined && result !== null) {

@@ -378,6 +378,11 @@ body {
     color: #9cdcfe;
 }
 
+.console-input {
+    color: #dcdcaa;
+    font-style: italic;
+}
+
 /* テスト結果 */
 .test-results-container {
     background: white;

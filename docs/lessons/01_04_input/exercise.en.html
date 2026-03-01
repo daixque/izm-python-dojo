@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson01_04: User Input</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson01_04: User Input</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Use the <code>input()</code> function to ask the user for their name and return a greeting.</p>
+<p>Display the greeting in the format "Hello, ○○!"</p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Use <code>input()</code> to ask for a name</li>
+                            <li>Store the entered name in variable <code>name</code></li>
+                            <li>Display a greeting in the format "Hello, ○○!"</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li><code>input("Enter your name: ")</code> receives input with a message</li>
+                            <li>Use <code>+</code> to concatenate strings</li>
+                            <li>Example: <code>print("Hello, " + name + "!")</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "01_04_input";
+        const INITIAL_CODE = "# input() \u3092\u4f7f\u3063\u3066\u540d\u524d\u3092\u5165\u529b\u3057\u3066\u3082\u3089\u3044\u3001\u6328\u62f6\u3092\u8868\u793a\u3057\u3088\u3046\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # input()\u306e\u4f7f\u7528\u3092\u30c1\u30a7\u30c3\u30af\n    if \u0027input(\u0027 not in user_code:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 input()\u95a2\u6570\u3092\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Please use the input() function\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 input()\u95a2\u6570\u304c\u4f7f\u308f\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 input() function is used\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if input() is used to get the name", "name": "Test 1: Using input() to get name"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # \u51fa\u529b\u3092\u53d6\u5f97\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u540d\u524d\u304c\u51fa\u529b\u306b\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \"\u592a\u90ce\" in output:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u5165\u529b\u3055\u308c\u305f\u540d\u524d\u304c\u6b63\u3057\u304f\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Entered name is correctly displayed\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5165\u529b\u3055\u308c\u305f\u540d\u524d\u3092\u8868\u793a\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Please display the entered name\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if greeting is displayed using the entered name", "name": "Test 2: Displaying greeting correctly"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # \u51fa\u529b\u3092\u53d6\u5f97\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u65e5\u672c\u8a9e\u306e\u5834\u5408\u306f\u300c\u3053\u3093\u306b\u3061\u306f\u300d\u3001\u82f1\u8a9e\u306e\u5834\u5408\u306f\u300cHello\u300d\u300cHi\u300d\u306a\u3069\u3092\u30c1\u30a7\u30c3\u30af\n    if lang == \"ja\":\n        greeting_words = [\"\u3053\u3093\u306b\u3061\u306f\", \"\u304a\u306f\u3088\u3046\", \"\u3053\u3093\u3070\u3093\u306f\"]\n        has_greeting = any(word in output for word in greeting_words)\n        has_name = \"\u82b1\u5b50\" in output\n        \n        if has_greeting and has_name:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6328\u62f6\u306e\u30d5\u30a9\u30fc\u30de\u30c3\u30c8\u304c\u6b63\u3057\u3044\u3067\u3059\"}\n        elif not has_greeting:\n            result = {\"passed\": False, \"message\": \"\u2717 \u6328\u62f6\u8a00\u8449\uff08\u3053\u3093\u306b\u3061\u306f \u306a\u3069\uff09\u3092\u542b\u3081\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 \u5165\u529b\u3055\u308c\u305f\u540d\u524d\u3092\u542b\u3081\u3066\u304f\u3060\u3055\u3044\"}\n    else:\n        greeting_words = [\"Hello\", \"Hi\", \"Hey\", \"Greetings\"]\n        has_greeting = any(word.lower() in output.lower() for word in greeting_words)\n        has_name = \"\u82b1\u5b50\" in output or \"Hanako\" in output\n        \n        if has_greeting and has_name:\n            result = {\"passed\": True, \"message\": \"\u2713 Greeting format is correct\"}\n        elif not has_greeting:\n            result = {\"passed\": False, \"message\": \"\u2717 Please include a greeting word (Hello, etc.)\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Please include the entered name\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if greeting words like \u0027Hello\u0027 are included", "name": "Test 3: Greeting format is correct"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>
