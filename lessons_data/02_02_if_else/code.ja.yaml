@@ -1,0 +1,162 @@
+initial_code: |
+  import random
+
+  def judge_winner(user, computer):
+      # user: ユーザーの手 (1: グー, 2: チョキ, 3: パー)
+      # computer: コンピュータの手 (1: グー, 2: チョキ, 3: パー)
+      
+      # ここに条件分岐を書いてください
+      # 例: return "判定結果"
+      
+      return "判定結果"
+
+  # ━━━ テスト後に以下のコメントを外すと、実際に遊べます ━━━
+  # user = int(input("あなたの手を選んでください（1: グー、2: チョキ、3: パー）: "))
+  # computer = random.randint(1, 3)
+  # 
+  # # 手を表示
+  # hands = {1: "グー", 2: "チョキ", 3: "パー"}
+  # print(f"あなた: {hands[user]}")
+  # print(f"コンピュータ: {hands[computer]}")
+  # 
+  # # 勝敗を判定
+  # result = judge_winner(user, computer)
+  # print(result)
+
+initial_files: []
+
+tests:
+  - name: "引き分け（グー）"
+    description: "両方がグーの場合は引き分けになる"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 1)
+          if test_result == "引き分け！":
+              result = {"passed": True, "message": "✓ 引き分け（グー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: '引き分け！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "引き分け（チョキ）"
+    description: "両方がチョキの場合は引き分けになる"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 2)
+          if test_result == "引き分け！":
+              result = {"passed": True, "message": "✓ 引き分け（チョキ）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: '引き分け！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "引き分け（パー）"
+    description: "両方がパーの場合は引き分けになる"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 3)
+          if test_result == "引き分け！":
+              result = {"passed": True, "message": "✓ 引き分け（パー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: '引き分け！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "ユーザーの勝ち（グー vs チョキ）"
+    description: "ユーザーがグー、コンピュータがチョキの場合はユーザーの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 2)
+          if test_result == "あなたの勝ち！":
+              result = {"passed": True, "message": "✓ ユーザーの勝ち（グー vs チョキ）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'あなたの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "ユーザーの勝ち（チョキ vs パー）"
+    description: "ユーザーがチョキ、コンピュータがパーの場合はユーザーの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 3)
+          if test_result == "あなたの勝ち！":
+              result = {"passed": True, "message": "✓ ユーザーの勝ち（チョキ vs パー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'あなたの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "ユーザーの勝ち（パー vs グー）"
+    description: "ユーザーがパー、コンピュータがグーの場合はユーザーの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 1)
+          if test_result == "あなたの勝ち！":
+              result = {"passed": True, "message": "✓ ユーザーの勝ち（パー vs グー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'あなたの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "コンピュータの勝ち（グー vs パー）"
+    description: "ユーザーがグー、コンピュータがパーの場合はコンピュータの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 3)
+          if test_result == "コンピュータの勝ち！":
+              result = {"passed": True, "message": "✓ コンピュータの勝ち（グー vs パー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'コンピュータの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "コンピュータの勝ち（チョキ vs グー）"
+    description: "ユーザーがチョキ、コンピュータがグーの場合はコンピュータの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 1)
+          if test_result == "コンピュータの勝ち！":
+              result = {"passed": True, "message": "✓ コンピュータの勝ち（チョキ vs グー）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'コンピュータの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "コンピュータの勝ち（パー vs チョキ）"
+    description: "ユーザーがパー、コンピュータがチョキの場合はコンピュータの勝ち"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 2)
+          if test_result == "コンピュータの勝ち！":
+              result = {"passed": True, "message": "✓ コンピュータの勝ち（パー vs チョキ）のテスト成功"}
+          else:
+              result = {"passed": False, "message": f"✗ 期待: 'コンピュータの勝ち！', 実際: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

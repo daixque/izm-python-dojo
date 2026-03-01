@@ -55,6 +55,13 @@
           "title": "Basics of Conditional Statements",
           "description": "Create a program that asks the user to enter a number, then determines if it's positive, negative, or zero.\nExamples:\n\n  Input: 5 → Output: Positive number\n  Input: -3 → Output: Negative number\n  Input: 0 → Output: Zero",
           "available": true
+        },
+        {
+          "id": "02_02_if_else",
+          "number": "02_02",
+          "title": "else and elif",
+          "description": "Complete a rock-paper-scissors game program.\nCreate a program that plays rock-paper-scissors with the computer and determines the winner.\nGame Rules\n\n  Rock (1) beats Scissors (2)\n  Scissors (2) beats Paper (3)\n  Paper (3) beats Rock (1)\n  Same choice results in a tie",
+          "available": true
         }
       ]
     },

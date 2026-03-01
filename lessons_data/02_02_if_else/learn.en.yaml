@@ -1,0 +1,109 @@
+lesson:
+  number: "02_02"
+  id: "02_02_if_else"
+  title: "else and elif"
+
+content: |
+  <section class="section">
+    <h2>🔀 The else Statement</h2>
+    <p>In the previous lesson, we learned about the <code>if</code> statement. Now we'll learn how to handle cases when the condition is not met.</p>
+    <p>The <code>else</code> statement lets you specify what to do when the <code>if</code> condition is <code>False</code>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic else Statement</div>
+      <div class="example-code">age = 15<br><br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Adult")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Child")</div>
+      <div class="example-explanation">In this example, if <code>age</code> is not 18 or greater (i.e., less than 18), "Child" will be printed.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔀 The elif Statement - Multiple Conditions</h2>
+    <p><code>elif</code> (short for "else if") allows you to check multiple conditions in sequence.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Using elif for Multiple Conditions</div>
+      <div class="example-code">score = 75<br><br>if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Excellent!")<br>elif score >= 70:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Good")<br>elif score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Pass")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Fail")</div>
+      <div class="example-explanation">
+        This code checks conditions from top to bottom:
+        <ul>
+          <li>First checks <code>score >= 90</code> (False)</li>
+          <li>Next checks <code>score >= 70</code> (True!) → Prints "Good" and stops</li>
+          <li>Remaining conditions are not checked</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚠️ Condition Priority</h2>
+    <p><strong>Important:</strong> <code>elif</code> statements are evaluated from top to bottom, and only the first block with a <code>True</code> condition is executed.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">❌ Incorrect Example</div>
+      <div class="example-code">if score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Pass")<br>elif score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Excellent!")  # This will never be reached!</div>
+      <div class="example-explanation">A student with 90 points will only see "Pass", not "Excellent!". This is because the first condition <code>score >= 60</code> is True, so execution stops there.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">✓ Correct Example</div>
+      <div class="example-code">if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Excellent!")<br>elif score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Pass")</div>
+      <div class="example-explanation"><strong>Tip:</strong> Write more restrictive conditions (higher values) first!</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📊 Flowcharts</h2>
+    <p>A diagram showing the flow of conditional logic is called a "flowchart".</p>
+    <div class="mermaid">
+      flowchart TD
+        Start([Start]) --> Cond1{Condition 1}
+        Cond1 -->|Yes| ProcessA[Process A]
+        Cond1 -->|No| Cond2{Condition 2}
+        Cond2 -->|Yes| ProcessB[Process B]
+        Cond2 -->|No| ElseBlock[else block]
+        ProcessA --> End([End])
+        ProcessB --> End
+        ElseBlock --> End
+    </div>
+    <p>Drawing such diagrams before writing code helps organize complex conditional logic.</p>
+  </section>
+
+  <section class="section">
+    <h2>🎲 Random Numbers - The random Module</h2>
+    <p>Games and simulations often need random numbers. Python provides the <code>random</code> module for this.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Generating Random Integers</div>
+      <div class="example-code">import random<br><br># Generate a random integer from 1 to 6<br>dice = random.randint(1, 6)<br>print(f"Dice roll: {dice}")</div>
+      <div class="example-explanation">
+        <code>random.randint(a, b)</code> returns a random integer between <code>a</code> and <code>b</code> (inclusive).<br>
+        <strong>Note:</strong> <code>import random</code> should be written once at the beginning of your program.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Rock-Paper-Scissors Example</div>
+      <div class="example-code">import random<br><br># 1:Rock, 2:Scissors, 3:Paper<br>computer = random.randint(1, 3)<br><br>if computer == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Computer: Rock")<br>elif computer == 2:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Computer: Scissors")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Computer: Paper")</div>
+      <div class="example-explanation">Different outputs are produced based on the randomly generated number.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🎯 Summary</h2>
+    <ul>
+      <li><code>else</code>: Executes when the if condition is False</li>
+      <li><code>elif</code>: Allows checking multiple conditions in sequence</li>
+      <li>Conditions are evaluated top to bottom; only the first True block executes</li>
+      <li>Write more restrictive conditions first</li>
+      <li><code>random.randint(a, b)</code> generates a random integer</li>
+    </ul>
+    <p>Now let's move on to the exercises to master else and elif!</p>
+  </section>

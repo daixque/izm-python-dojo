@@ -1,0 +1,41 @@
+lesson:
+  number: "02_02"
+  id: "02_02_if_else"
+  title: "else and elif"
+
+task_description: |
+  <p>Complete a rock-paper-scissors game program.</p>
+  <p>Create a program that plays rock-paper-scissors with the computer and determines the winner.</p>
+  <h3>Game Rules</h3>
+  <ul>
+    <li>Rock (1) beats Scissors (2)</li>
+    <li>Scissors (2) beats Paper (3)</li>
+    <li>Paper (3) beats Rock (1)</li>
+    <li>Same choice results in a tie</li>
+  </ul>
+
+instructions:
+  - "Get the user's choice (1: Rock, 2: Scissors, 3: Paper)"
+  - "The computer's choice is already randomly generated"
+  - "Write the logic inside the <code>judge_winner(user, computer)</code> function"
+  - "The function must return <code>\"You win!\"</code>, <code>\"Computer wins!\"</code>, or <code>\"It's a tie!\"</code>"
+  - "Use <code>elif</code> to check all winning patterns"
+  - "After testing, uncomment the lines at the bottom if you want to play the game"
+
+hints:
+  - hint: |
+      First, check for a tie:<br>
+      <code>if user == computer:</code><br>
+      Then <code>return "It's a tie!"</code>
+  - hint: |
+      There are 3 patterns where the user wins:<br>
+      1. User has Rock (1) and computer has Scissors (2)<br>
+      2. User has Scissors (2) and computer has Paper (3)<br>
+      3. User has Paper (3) and computer has Rock (1)
+  - hint: |
+      You can connect multiple conditions with or:<br>
+      <code>if (user == 1 and computer == 2) or (user == 2 and computer == 3) or (user == 3 and computer == 1):</code><br>
+      Then <code>return "You win!"</code>
+  - hint: |
+      Anything other than a tie or user win is a computer win.<br>
+      Use <code>else:</code> and <code>return "Computer wins!"</code> at the end

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン02_02: else と elif</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン02_02: else と elif</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>じゃんけんゲームのプログラムを完成させましょう。</p>
+<p>コンピュータとじゃんけんをして、勝敗を判定するプログラムを作ります。</p>
+<h3>勝敗のルール</h3>
+<ul>
+  <li>グー（1）はチョキ（2）に勝つ</li>
+  <li>チョキ（2）はパー（3）に勝つ</li>
+  <li>パー（3）はグー（1）に勝つ</li>
+  <li>同じ手の場合は引き分け</li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>ユーザーに手を入力してもらう（1: グー、2: チョキ、3: パー）</li>
+                            <li>コンピュータの手は既にランダムで生成されています</li>
+                            <li><code>judge_winner(user, computer)</code> 関数の中に勝敗判定のロジックを書く</li>
+                            <li>関数は <code>"あなたの勝ち！"</code>、<code>"コンピュータの勝ち！"</code>、<code>"引き分け！"</code> のいずれかを返します</li>
+                            <li><code>elif</code> を使って、すべての勝ちパターンをチェックしましょう</li>
+                            <li>テスト後、実際に遊びたい場合は下部のコメントを外してください</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>{'hint': 'まず引き分けの条件をチェックします：<br>\n<code>if user == computer:</code><br>\nこのとき <code>return "引き分け！"</code> を返します\n'}</li>
+                            <li>{'hint': 'ユーザーが勝つパターンは3つあります：<br>\n1. ユーザーがグー（1）でコンピュータがチョキ（2）<br>\n2. ユーザーがチョキ（2）でコンピュータがパー（3）<br>\n3. ユーザーがパー（3）でコンピュータがグー（1）\n'}</li>
+                            <li>{'hint': '複数の条件を or でつなぐことができます：<br>\n<code>if (user == 1 and computer == 2) or (user == 2 and computer == 3) or (user == 3 and computer == 1):</code><br>\nこのとき <code>return "あなたの勝ち！"</code> を返します\n'}</li>
+                            <li>{'hint': '引き分けとユーザーの勝ち以外は、すべてコンピュータの勝ちです。<br>\n最後に <code>else:</code> を使って <code>return "コンピュータの勝ち！"</code> を返しましょう\n'}</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "02_02_if_else";
+        const INITIAL_CODE = "import random\n\ndef judge_winner(user, computer):\n    # user: \u30e6\u30fc\u30b6\u30fc\u306e\u624b (1: \u30b0\u30fc, 2: \u30c1\u30e7\u30ad, 3: \u30d1\u30fc)\n    # computer: \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u624b (1: \u30b0\u30fc, 2: \u30c1\u30e7\u30ad, 3: \u30d1\u30fc)\n    \n    # \u3053\u3053\u306b\u6761\u4ef6\u5206\u5c90\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # \u4f8b: return \"\u5224\u5b9a\u7d50\u679c\"\n    \n    return \"\u5224\u5b9a\u7d50\u679c\"\n\n# \u2501\u2501\u2501 \u30c6\u30b9\u30c8\u5f8c\u306b\u4ee5\u4e0b\u306e\u30b3\u30e1\u30f3\u30c8\u3092\u5916\u3059\u3068\u3001\u5b9f\u969b\u306b\u904a\u3079\u307e\u3059 \u2501\u2501\u2501\n# user = int(input(\"\u3042\u306a\u305f\u306e\u624b\u3092\u9078\u3093\u3067\u304f\u3060\u3055\u3044\uff081: \u30b0\u30fc\u30012: \u30c1\u30e7\u30ad\u30013: \u30d1\u30fc\uff09: \"))\n# computer = random.randint(1, 3)\n# \n# # \u624b\u3092\u8868\u793a\n# hands = {1: \"\u30b0\u30fc\", 2: \"\u30c1\u30e7\u30ad\", 3: \"\u30d1\u30fc\"}\n# print(f\"\u3042\u306a\u305f: {hands[user]}\")\n# print(f\"\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf: {hands[computer]}\")\n# \n# # \u52dd\u6557\u3092\u5224\u5b9a\n# result = judge_winner(user, computer)\n# print(result)\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](1, 1)\n    if test_result == \"\u5f15\u304d\u5206\u3051\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u5f15\u304d\u5206\u3051\uff08\u30b0\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u5f15\u304d\u5206\u3051\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u4e21\u65b9\u304c\u30b0\u30fc\u306e\u5834\u5408\u306f\u5f15\u304d\u5206\u3051\u306b\u306a\u308b", "name": "\u5f15\u304d\u5206\u3051\uff08\u30b0\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](2, 2)\n    if test_result == \"\u5f15\u304d\u5206\u3051\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u5f15\u304d\u5206\u3051\uff08\u30c1\u30e7\u30ad\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u5f15\u304d\u5206\u3051\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u4e21\u65b9\u304c\u30c1\u30e7\u30ad\u306e\u5834\u5408\u306f\u5f15\u304d\u5206\u3051\u306b\u306a\u308b", "name": "\u5f15\u304d\u5206\u3051\uff08\u30c1\u30e7\u30ad\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](3, 3)\n    if test_result == \"\u5f15\u304d\u5206\u3051\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u5f15\u304d\u5206\u3051\uff08\u30d1\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u5f15\u304d\u5206\u3051\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u4e21\u65b9\u304c\u30d1\u30fc\u306e\u5834\u5408\u306f\u5f15\u304d\u5206\u3051\u306b\u306a\u308b", "name": "\u5f15\u304d\u5206\u3051\uff08\u30d1\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](1, 2)\n    if test_result == \"\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30b0\u30fc vs \u30c1\u30e7\u30ad\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30b0\u30fc\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30c1\u30e7\u30ad\u306e\u5834\u5408\u306f\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061", "name": "\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30b0\u30fc vs \u30c1\u30e7\u30ad\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](2, 3)\n    if test_result == \"\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30c1\u30e7\u30ad vs \u30d1\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30c1\u30e7\u30ad\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30d1\u30fc\u306e\u5834\u5408\u306f\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061", "name": "\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30c1\u30e7\u30ad vs \u30d1\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](3, 1)\n    if test_result == \"\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30d1\u30fc vs \u30b0\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u3042\u306a\u305f\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30d1\u30fc\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30b0\u30fc\u306e\u5834\u5408\u306f\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061", "name": "\u30e6\u30fc\u30b6\u30fc\u306e\u52dd\u3061\uff08\u30d1\u30fc vs \u30b0\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](1, 3)\n    if test_result == \"\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30b0\u30fc vs \u30d1\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30b0\u30fc\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30d1\u30fc\u306e\u5834\u5408\u306f\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061", "name": "\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30b0\u30fc vs \u30d1\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](2, 1)\n    if test_result == \"\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30c1\u30e7\u30ad vs \u30b0\u30fc\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30c1\u30e7\u30ad\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30b0\u30fc\u306e\u5834\u5408\u306f\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061", "name": "\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30c1\u30e7\u30ad vs \u30b0\u30fc\uff09"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    test_result = exec_globals[\u0027judge_winner\u0027](3, 2)\n    if test_result == \"\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30d1\u30fc vs \u30c1\u30e7\u30ad\uff09\u306e\u30c6\u30b9\u30c8\u6210\u529f\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: \u0027\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff01\u0027, \u5b9f\u969b: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30e6\u30fc\u30b6\u30fc\u304c\u30d1\u30fc\u3001\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u304c\u30c1\u30e7\u30ad\u306e\u5834\u5408\u306f\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061", "name": "\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u306e\u52dd\u3061\uff08\u30d1\u30fc vs \u30c1\u30e7\u30ad\uff09"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

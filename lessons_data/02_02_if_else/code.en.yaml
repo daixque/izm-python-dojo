@@ -1,0 +1,162 @@
+initial_code: |
+  import random
+
+  def judge_winner(user, computer):
+      # user: User's choice (1: Rock, 2: Scissors, 3: Paper)
+      # computer: Computer's choice (1: Rock, 2: Scissors, 3: Paper)
+      
+      # Write your conditional logic here
+      # Example: return "result"
+      
+      return "result"
+
+  # ━━━ Uncomment the lines below after testing to play the game ━━━
+  # user = int(input("Choose your hand (1: Rock, 2: Scissors, 3: Paper): "))
+  # computer = random.randint(1, 3)
+  # 
+  # # Display choices
+  # hands = {1: "Rock", 2: "Scissors", 3: "Paper"}
+  # print(f"You: {hands[user]}")
+  # print(f"Computer: {hands[computer]}")
+  # 
+  # # Determine winner
+  # result = judge_winner(user, computer)
+  # print(result)
+
+initial_files: []
+
+tests:
+  - name: "Tie (Rock)"
+    description: "Both choose Rock results in a tie"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 1)
+          if test_result == "It's a tie!":
+              result = {"passed": True, "message": "✓ Tie (Rock) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'It's a tie!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Tie (Scissors)"
+    description: "Both choose Scissors results in a tie"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 2)
+          if test_result == "It's a tie!":
+              result = {"passed": True, "message": "✓ Tie (Scissors) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'It's a tie!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Tie (Paper)"
+    description: "Both choose Paper results in a tie"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 3)
+          if test_result == "It's a tie!":
+              result = {"passed": True, "message": "✓ Tie (Paper) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'It's a tie!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "User wins (Rock vs Scissors)"
+    description: "User has Rock, Computer has Scissors - User wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 2)
+          if test_result == "You win!":
+              result = {"passed": True, "message": "✓ User wins (Rock vs Scissors) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'You win!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "User wins (Scissors vs Paper)"
+    description: "User has Scissors, Computer has Paper - User wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 3)
+          if test_result == "You win!":
+              result = {"passed": True, "message": "✓ User wins (Scissors vs Paper) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'You win!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "User wins (Paper vs Rock)"
+    description: "User has Paper, Computer has Rock - User wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 1)
+          if test_result == "You win!":
+              result = {"passed": True, "message": "✓ User wins (Paper vs Rock) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'You win!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Computer wins (Rock vs Paper)"
+    description: "User has Rock, Computer has Paper - Computer wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](1, 3)
+          if test_result == "Computer wins!":
+              result = {"passed": True, "message": "✓ Computer wins (Rock vs Paper) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'Computer wins!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Computer wins (Scissors vs Rock)"
+    description: "User has Scissors, Computer has Rock - Computer wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](2, 1)
+          if test_result == "Computer wins!":
+              result = {"passed": True, "message": "✓ Computer wins (Scissors vs Rock) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'Computer wins!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Computer wins (Paper vs Scissors)"
+    description: "User has Paper, Computer has Scissors - Computer wins"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          test_result = exec_globals['judge_winner'](3, 2)
+          if test_result == "Computer wins!":
+              result = {"passed": True, "message": "✓ Computer wins (Paper vs Scissors) test passed"}
+          else:
+              result = {"passed": False, "message": f"✗ Expected: 'Computer wins!', Got: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
