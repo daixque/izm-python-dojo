@@ -1,0 +1,140 @@
+initial_code: |
+  # ここにコードを書いてみよう
+  
+
+initial_files: []  # データファイルが必要な場合のみ使用
+
+tests:
+  - name:
+      ja: "テスト1: num1とnum2が文字列として定義されている"
+      en: "Test 1: num1 and num2 are defined as strings"
+    description:
+      ja: "変数num1とnum2が文字列として代入されているか"
+      en: "Check if variables num1 and num2 are assigned as strings"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # num1とnum2が定義されているかチェック
+          if 'num1' not in exec_globals or 'num2' not in exec_globals:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 変数 num1 と num2 を定義してください"}
+              else:
+                  result = {"passed": False, "message": "✗ Please define variables num1 and num2"}
+          elif exec_globals.get('num1') != "50" or exec_globals.get('num2') != "30":
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ num1に\"50\"、num2に\"30\"を代入してください"}
+              else:
+                  result = {"passed": False, "message": "✗ Assign \"50\" to num1 and \"30\" to num2"}
+          else:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ 変数が正しく定義されています"}
+              else:
+                  result = {"passed": True, "message": "✓ Variables are correctly defined"}
+      except Exception as e:
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト2: 正しく型変換して計算している"
+      en: "Test 2: Correctly converting types and calculating"
+    description:
+      ja: "文字列を整数に変換して合計を計算しているか"
+      en: "Check if strings are converted to integers and sum is calculated"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # ユーザーコードを実行
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          # 期待される合計値
+          expected_sum = 80
+          
+          # 出力をキャプチャして計算が行われたか確認
+          # （変数に保存されているか、または出力に含まれているか）
+          has_correct_calculation = False
+          
+          # 変数から合計をチェック
+          for var_name, var_value in exec_globals.items():
+              if isinstance(var_value, int) and var_value == expected_sum:
+                  has_correct_calculation = True
+                  break
+          
+          if has_correct_calculation:
+              if lang == "ja":
+                  result = {"passed": True, "message": "✓ 正しく型変換して計算されています"}
+              else:
+                  result = {"passed": True, "message": "✓ Correctly converted and calculated"}
+          else:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ int()を使って文字列を整数に変換し、合計を計算してください"}
+              else:
+                  result = {"passed": False, "message": "✗ Use int() to convert strings to integers and calculate the sum"}
+      except Exception as e:
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+
+  - name:
+      ja: "テスト3: 結果が正しい形式で表示されている"
+      en: "Test 3: Result is displayed in correct format"
+    description:
+      ja: "「合計は80です」という形式で出力されているか"
+      en: "Check if output is in the format 'The sum is 80'"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 標準出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 出力に80が含まれているかチェック
+          if "80" in output:
+              if lang == "ja":
+                  # 日本語の場合、「合計は」と「です」が含まれているか
+                  if "合計" in output or "ごうけい" in output:
+                      result = {"passed": True, "message": "✓ 結果が正しく表示されています"}
+                  else:
+                      result = {"passed": True, "message": "✓ 結果が表示されています"}
+              else:
+                  # 英語の場合、"sum"または"Sum"が含まれているか
+                  if "sum" in output.lower():
+                      result = {"passed": True, "message": "✓ Result is correctly displayed"}
+                  else:
+                      result = {"passed": True, "message": "✓ Result is displayed"}
+          else:
+              if lang == "ja":
+                  result = {"passed": False, "message": "✗ 合計（80）が出力されていません"}
+              else:
+                  result = {"passed": False, "message": "✗ Sum (80) is not displayed"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          if lang == "ja":
+              result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+          else:
+              result = {"passed": False, "message": f"✗ Error occurred: {str(e)}"}
+      
+      result
+

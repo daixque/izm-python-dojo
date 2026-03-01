@@ -19,6 +19,13 @@
           "title": "Variables and Calculations",
           "description": "Write a program that assigns your age to a variable, calculates your age in 10 years, and displays it.\nFor example, if you're 14 now, you'll be 24 in 10 years.",
           "available": true
+        },
+        {
+          "id": "01_03_types",
+          "number": "01_03",
+          "title": "Data Types and Conversion",
+          "description": "Write a program that converts two numbers given as strings to integers, calculates their sum, and displays it.\nFinally, display the result in the format \"The sum is ○○\".",
+          "available": true
         }
       ]
     },

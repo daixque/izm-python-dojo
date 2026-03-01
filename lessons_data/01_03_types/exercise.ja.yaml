@@ -1,0 +1,21 @@
+lesson:
+  number: "01_03"  # チャプター_レッスン形式
+  id: "01_03_types"
+  title: "データ型と変換"
+
+task_description: |
+  <p>文字列として与えられた2つの数値を整数に変換し、その合計を計算して表示するプログラムを書きましょう。</p>
+  <p>最後に、「合計は○○です」という形式で結果を表示してください。</p>
+
+instructions:
+  - "変数 <code>num1</code> に文字列 <code>\"50\"</code> を代入します"
+  - "変数 <code>num2</code> に文字列 <code>\"30\"</code> を代入します"
+  - "<code>int()</code> を使って両方を整数に変換し、合計を計算します"
+  - "結果を「合計は○○です」という形式で表示します"
+
+hints:
+  - "<code>int(num1)</code> で文字列を整数に変換できます"
+  - "合計は <code>int(num1) + int(num2)</code> で計算します"
+  - "数値を文字列に変換するには <code>str()</code> を使います"
+  - "例: <code>print(\"合計は\" + str(sum) + \"です\")</code>"
+

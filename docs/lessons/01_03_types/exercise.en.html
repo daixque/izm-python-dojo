@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson01_03: Data Types and Conversion</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson01_03: Data Types and Conversion</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Write a program that converts two numbers given as strings to integers, calculates their sum, and displays it.</p>
+<p>Finally, display the result in the format "The sum is ○○".</p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Assign the string <code>"50"</code> to variable <code>num1</code></li>
+                            <li>Assign the string <code>"30"</code> to variable <code>num2</code></li>
+                            <li>Use <code>int()</code> to convert both to integers and calculate the sum</li>
+                            <li>Display the result in the format 'The sum is ○○'</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>You can convert a string to integer with <code>int(num1)</code></li>
+                            <li>Calculate the sum with <code>int(num1) + int(num2)</code></li>
+                            <li>Use <code>str()</code> to convert numbers to strings</li>
+                            <li>Example: <code>print("The sum is " + str(sum))</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "01_03_types";
+        const INITIAL_CODE = "# \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u307f\u3088\u3046\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # num1\u3068num2\u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \u0027num1\u0027 not in exec_globals or \u0027num2\u0027 not in exec_globals:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5909\u6570 num1 \u3068 num2 \u3092\u5b9a\u7fa9\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Please define variables num1 and num2\"}\n    elif exec_globals.get(\u0027num1\u0027) != \"50\" or exec_globals.get(\u0027num2\u0027) != \"30\":\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 num1\u306b\\\"50\\\"\u3001num2\u306b\\\"30\\\"\u3092\u4ee3\u5165\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Assign \\\"50\\\" to num1 and \\\"30\\\" to num2\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u5909\u6570\u304c\u6b63\u3057\u304f\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Variables are correctly defined\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if variables num1 and num2 are assigned as strings", "name": "Test 1: num1 and num2 are defined as strings"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u30e6\u30fc\u30b6\u30fc\u30b3\u30fc\u30c9\u3092\u5b9f\u884c\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # \u671f\u5f85\u3055\u308c\u308b\u5408\u8a08\u5024\n    expected_sum = 80\n    \n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\u3057\u3066\u8a08\u7b97\u304c\u884c\u308f\u308c\u305f\u304b\u78ba\u8a8d\n    # \uff08\u5909\u6570\u306b\u4fdd\u5b58\u3055\u308c\u3066\u3044\u308b\u304b\u3001\u307e\u305f\u306f\u51fa\u529b\u306b\u542b\u307e\u308c\u3066\u3044\u308b\u304b\uff09\n    has_correct_calculation = False\n    \n    # \u5909\u6570\u304b\u3089\u5408\u8a08\u3092\u30c1\u30a7\u30c3\u30af\n    for var_name, var_value in exec_globals.items():\n        if isinstance(var_value, int) and var_value == expected_sum:\n            has_correct_calculation = True\n            break\n    \n    if has_correct_calculation:\n        if lang == \"ja\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u3057\u304f\u578b\u5909\u63db\u3057\u3066\u8a08\u7b97\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Correctly converted and calculated\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 int()\u3092\u4f7f\u3063\u3066\u6587\u5b57\u5217\u3092\u6574\u6570\u306b\u5909\u63db\u3057\u3001\u5408\u8a08\u3092\u8a08\u7b97\u3057\u3066\u304f\u3060\u3055\u3044\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Use int() to convert strings to integers and calculate the sum\"}\nexcept Exception as e:\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if strings are converted to integers and sum is calculated", "name": "Test 2: Correctly converting types and calculating"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u6a19\u6e96\u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u51fa\u529b\u306b80\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \"80\" in output:\n        if lang == \"ja\":\n            # \u65e5\u672c\u8a9e\u306e\u5834\u5408\u3001\u300c\u5408\u8a08\u306f\u300d\u3068\u300c\u3067\u3059\u300d\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\n            if \"\u5408\u8a08\" in output or \"\u3054\u3046\u3051\u3044\" in output:\n                result = {\"passed\": True, \"message\": \"\u2713 \u7d50\u679c\u304c\u6b63\u3057\u304f\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059\"}\n            else:\n                result = {\"passed\": True, \"message\": \"\u2713 \u7d50\u679c\u304c\u8868\u793a\u3055\u308c\u3066\u3044\u307e\u3059\"}\n        else:\n            # \u82f1\u8a9e\u306e\u5834\u5408\u3001\"sum\"\u307e\u305f\u306f\"Sum\"\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\n            if \"sum\" in output.lower():\n                result = {\"passed\": True, \"message\": \"\u2713 Result is correctly displayed\"}\n            else:\n                result = {\"passed\": True, \"message\": \"\u2713 Result is displayed\"}\n    else:\n        if lang == \"ja\":\n            result = {\"passed\": False, \"message\": \"\u2717 \u5408\u8a08\uff0880\uff09\u304c\u51fa\u529b\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Sum (80) is not displayed\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    if lang == \"ja\":\n        result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if output is in the format \u0027The sum is 80\u0027", "name": "Test 3: Result is displayed in correct format"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

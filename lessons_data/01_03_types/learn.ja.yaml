@@ -1,0 +1,100 @@
+lesson:
+  number: "01_03"  # チャプター_レッスン形式
+  id: "01_03_types"
+  title: "データ型と変換"
+
+content: |
+  <section class="section">
+    <h2>データ型とは</h2>
+    <p>プログラミングでは、扱うデータにいくつかの「型（type）」があります。</p>
+    <p>データ型によって、そのデータで何ができるかが変わってきます。</p>
+    <p>Pythonの主なデータ型を理解することで、より正確なプログラムを書けるようになります。</p>
+  </section>
+
+  <section class="section">
+    <h2>主なデータ型</h2>
+    <p>Pythonには以下のような基本的なデータ型があります：</p>
+    <ul>
+      <li><strong>整数（int）</strong>: 小数点のない数字（例: 10, -5, 0）</li>
+      <li><strong>小数（float）</strong>: 小数点のある数字（例: 3.14, -0.5, 2.0）</li>
+      <li><strong>文字列（str）</strong>: 文字や文章（例: "こんにちは", "Python"）</li>
+      <li><strong>真偽値（bool）</strong>: 真（True）か偽（False）のどちらか</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>type()関数でデータ型を調べる</h2>
+    <p><code>type()</code>関数を使うと、データの型を確認できます。</p>
+    <p>プログラムを書いていて「この変数は何型だっけ？」と思ったときに便利です。</p>
+  </section>
+
+  <section class="section">
+    <h2>文字列と数値の違い</h2>
+    <p>見た目は同じ「123」でも、文字列の<code>"123"</code>と整数の<code>123</code>は別物です。</p>
+    <p>文字列の数字は計算に使えません。計算したいときは、数値型に変換する必要があります。</p>
+    <p>逆に、数値を文字列として扱いたいときは、文字列型に変換します。</p>
+  </section>
+
+  <section class="section">
+    <h2>型変換（キャスト）</h2>
+    <p>データ型を変換することを「型変換」または「キャスト」と言います。</p>
+    <ul>
+      <li><code>int()</code>: 整数に変換（例: <code>int("123")</code> → 123）</li>
+      <li><code>float()</code>: 小数に変換（例: <code>float("3.14")</code> → 3.14）</li>
+      <li><code>str()</code>: 文字列に変換（例: <code>str(42)</code> → "42"）</li>
+    </ul>
+    <p>変換できない形式の場合はエラーになります（例: <code>int("こんにちは")</code>）。</p>
+  </section>
+
+  <section class="section">
+    <h2>文字列の連結</h2>
+    <p>文字列同士は<code>+</code>演算子で連結（つなげる）できます。</p>
+    <p>ただし、文字列と数値を直接連結することはできません。数値を<code>str()</code>で文字列に変換してから連結します。</p>
+  </section>
+
+  <section class="examples">
+    <h2>コード例</h2>
+    
+    <div class="example-item">
+      <div class="example-title">type()関数で型を確認</div>
+      <div class="example-code">print(type(42))        # &lt;class 'int'&gt;<br>print(type(3.14))      # &lt;class 'float'&gt;<br>print(type("Hello"))   # &lt;class 'str'&gt;<br>print(type(True))      # &lt;class 'bool'&gt;</div>
+      <div class="example-explanation">それぞれのデータ型を確認できます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">文字列を数値に変換</div>
+      <div class="example-code">text = "100"<br>number = int(text)<br>print(number + 50)  # 150</div>
+      <div class="example-explanation">文字列"100"を整数100に変換して計算します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">数値を文字列に変換</div>
+      <div class="example-code">age = 14<br>message = "私は" + str(age) + "歳です"<br>print(message)</div>
+      <div class="example-explanation">数値を文字列に変換してメッセージを作ります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">小数への変換</div>
+      <div class="example-code">text = "3.14"<br>pi = float(text)<br>print(pi * 2)  # 6.28</div>
+      <div class="example-explanation">文字列を小数に変換して計算します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">整数と小数の違い</div>
+      <div class="example-code">a = 10<br>b = 10.0<br>print(type(a))  # &lt;class 'int'&gt;<br>print(type(b))  # &lt;class 'float'&gt;</div>
+      <div class="example-explanation">10と10.0は見た目は似ていますが型が違います。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">文字列の連結</div>
+      <div class="example-code">first = "Python"<br>second = "プログラミング"<br>print(first + second)  # Pythonプログラミング</div>
+      <div class="example-explanation">文字列同士は+で連結できます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">計算結果を文字列にして表示</div>
+      <div class="example-code">x = 5<br>y = 3<br>result = x + y<br>print("答えは" + str(result) + "です")</div>
+      <div class="example-explanation">計算結果を文字列に変換してメッセージに組み込みます。</div>
+    </div>
+  </section>
+
