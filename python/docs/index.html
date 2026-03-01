@@ -78,6 +78,17 @@
             if (filterAll) filterAll.textContent = window.i18n.t('progress.filter_all');
             if (filterIncomplete) filterIncomplete.textContent = window.i18n.t('progress.filter_incomplete');
             if (filterCompleted) filterCompleted.textContent = window.i18n.t('progress.filter_completed');
+            
+            // ステータスバッジの文言を更新
+            const statusCompletedText = window.i18n.t('progress.status_completed');
+            const statusIncompleteText = window.i18n.t('progress.status_incomplete');
+            document.querySelectorAll('.lesson-status-badge').forEach(badge => {
+                if (badge.classList.contains('completed')) {
+                    badge.textContent = `✓ ${statusCompletedText}`;
+                } else {
+                    badge.textContent = `○ ${statusIncompleteText}`;
+                }
+            });
         }
         
         // チャプターナビゲーションを生成
@@ -179,14 +190,22 @@
                         const exerciseLabel = window.i18n.t('label_exercise').replace('✏️ ', '');
                         const markCompleteText = window.i18n.t('progress.mark_complete');
                         const markIncompleteText = window.i18n.t('progress.mark_incomplete');
+                        const statusCompletedText = window.i18n.t('progress.status_completed');
+                        const statusIncompleteText = window.i18n.t('progress.status_incomplete');
                         
                         if (lesson.available) {
                             const lang = window.i18n.currentLang;
                             const toggleBtnText = isCompleted ? markIncompleteText : markCompleteText;
+                            const statusText = isCompleted ? statusCompletedText : statusIncompleteText;
+                            const statusIcon = isCompleted ? '✓' : '○';
+                            
                             card.innerHTML = `
                                 <button class="lesson-completion-toggle" data-lesson-id="${lesson.id}" title="${toggleBtnText}">
                                     ${isCompleted ? '✓' : '○'}
                                 </button>
+                                <div class="lesson-status-badge ${isCompleted ? 'completed' : 'incomplete'}">
+                                    ${statusIcon} ${statusText}
+                                </div>
                                 <div class="lesson-number">${lesson.number}</div>
                                 <h2>${lesson.title}</h2>
                                 <p>${lesson.description}</p>
@@ -198,6 +217,8 @@
                             
                             // 完了切り替えボタンのイベントリスナー
                             const toggleBtn = card.querySelector('.lesson-completion-toggle');
+                            const statusBadge = card.querySelector('.lesson-status-badge');
+                            
                             toggleBtn.addEventListener('click', (e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -208,10 +229,14 @@
                                     card.classList.add('completed');
                                     toggleBtn.textContent = '✓';
                                     toggleBtn.title = markIncompleteText;
+                                    statusBadge.className = 'lesson-status-badge completed';
+                                    statusBadge.textContent = `✓ ${statusCompletedText}`;
                                 } else {
                                     card.classList.remove('completed');
                                     toggleBtn.textContent = '○';
                                     toggleBtn.title = markCompleteText;
+                                    statusBadge.className = 'lesson-status-badge incomplete';
+                                    statusBadge.textContent = `○ ${statusIncompleteText}`;
                                 }
                                 
                                 // 進捗表示を更新

@@ -1,6 +1,6 @@
 lesson:
   number: "01_01"  # Chapter_Lesson format
-  id: "hello"
+  id: "01_01_hello"
   title: "First Steps with Python"
 
 content: |

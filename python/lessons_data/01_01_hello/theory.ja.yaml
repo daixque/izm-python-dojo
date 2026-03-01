@@ -1,6 +1,6 @@
 lesson:
   number: "01_01"  # チャプター_レッスン形式
-  id: "hello"
+  id: "01_01_hello"
   title: "はじめてのPython"
 
 content: |

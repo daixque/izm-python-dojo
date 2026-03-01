@@ -51,3 +51,5 @@ progress:
   mark_incomplete: "未完了にする"
   completed_on: "完了日時"
   congratulations: "🎉 おめでとうございます！レッスンを完了しました！"
+  status_completed: "完了"
+  status_incomplete: "未完了"

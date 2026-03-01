@@ -76,7 +76,9 @@ const translations = {
         'progress.mark_complete': "完了にする",
         'progress.mark_incomplete': "未完了にする",
         'progress.completed_on': "完了日時",
-        'progress.congratulations': "🎉 おめでとうございます！レッスンを完了しました！"
+        'progress.congratulations': '🎉 おめでとうございます！レッスンを完了しました！',
+        'progress.status_completed': '完了',
+        'progress.status_incomplete': '未完了'
     },
     en: {
         // Header
@@ -152,7 +154,9 @@ const translations = {
         'progress.mark_complete': "Mark as Complete",
         'progress.mark_incomplete': "Mark as Incomplete",
         'progress.completed_on': "Completed on",
-        'progress.congratulations': "🎉 Congratulations! You completed this lesson!"
+        'progress.congratulations': '🎉 Congratulations! You\'ve completed this lesson!',
+        'progress.status_completed': 'Completed',
+        'progress.status_incomplete': 'Incomplete'
     }
 };
 
