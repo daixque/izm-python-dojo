@@ -1,0 +1,353 @@
+lesson:
+  number: "02_01"
+  id: "02_01_if_basic"
+  title: "Basics of Conditional Statements"
+
+content: |
+  <section class="section">
+    <h2>🎯 What are Conditional Statements?</h2>
+    <p>Programs need to perform different actions based on different situations. For example:</p>
+    <ul>
+      <li>If the test score is 60 or above, display "Pass"</li>
+      <li>If it's raining, display "Bring an umbrella"</li>
+      <li>If age is 18 or above, display "You're an adult"</li>
+    </ul>
+    <p>This kind of "if... then..." logic is called <strong>conditional branching</strong>.</p>
+  </section>
+
+  <section class="section">
+    <h2>📝 Basic if Statement Syntax</h2>
+    <p>In Python, we use the <code>if</code> statement for conditional branching.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic if statement</div>
+      <div class="example-code">age = 15<br><br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You are an adult")<br><br>print("Program finished")</div>
+      <div class="example-explanation">
+        <strong>Syntax explanation:</strong>
+        <ul>
+          <li><code>if condition:</code> - Executes only when the condition is True</li>
+          <li>A colon <code>:</code> is required at the end of the line</li>
+          <li>Code to be executed must be <strong>indented</strong></li>
+          <li>If the condition is False, the indented lines are skipped</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔍 Comparison Operators</h2>
+    <p>We use <strong>comparison operators</strong> to create conditions.</p>
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+      <thead>
+        <tr style="background: #f0f0f0;">
+          <th style="border: 1px solid #ddd; padding: 8px;">Operator</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Meaning</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Example</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>==</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Equal to</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>5 == 5</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>!=</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Not equal to</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>5 != 3</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Greater than</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>10 &gt; 5</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Less than</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt; 5</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;=</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Greater than or equal</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>5 &gt;= 5</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;=</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Less than or equal</td>
+          <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt;= 5</code></td>
+          <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Comparison operator examples</div>
+      <div class="example-code">score = 85<br><br>if score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You passed!")<br><br>if score == 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Perfect score!")<br><br>temperature = 30<br><br>if temperature > 25:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("It's hot today")</div>
+      <div class="example-explanation">You can use multiple conditions to make different judgments.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚠️ The Importance of Indentation</h2>
+    <p><strong>Indentation</strong> is extremely important in Python.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Correct indentation</div>
+      <div class="example-code">age = 15<br><br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You are an adult")<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You can vote")<br><br>print("This always runs")</div>
+      <div class="example-explanation">Code inside an if statement must be indented with 4 spaces.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Wrong indentation (Error)</div>
+      <div class="example-code">age = 15<br><br>if age >= 18:<br>print("You are an adult")  # ← Error! No indentation</div>
+      <div class="example-explanation">Without indentation, you'll get an error.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p><strong>Key points:</strong></p>
+    <ul>
+      <li>Use 4 spaces or 1 tab for indentation</li>
+      <li>Code inside an if statement must be indented</li>
+      <li>Code in the same block must have the same indentation level</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>✨ True and False</h2>
+    <p>Comparison operators return <strong>boolean values</strong>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Checking boolean values</div>
+      <div class="example-code"># Store comparison results in variables<br>result = 10 > 5<br>print(result)  # True<br><br>result2 = 3 > 10<br>print(result2)  # False<br><br># if statements check boolean values<br>is_adult = True<br><br>if is_adult:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("You are an adult")</div>
+      <div class="example-explanation">Comparison results are either True or False.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🎯 Summary</h2>
+    <ul>
+      <li>Use <code>if condition:</code> for conditional branching</li>
+      <li>Create conditions with comparison operators (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>)</li>
+      <li>Indented code runs only when the condition is True</li>
+      <li>Always use 4 spaces or 1 tab for indentation consistently</li>
+    </ul>
+    <p>Now try the exercise to master conditional statements!</p>
+  </section>
+
+  - type: "text"
+    content: |
+      <h2>🎯 What are Conditional Statements?</h2>
+      <p>Programs need to perform different actions based on different situations. For example:</p>
+      <ul>
+        <li>If the test score is 60 or above, display "Pass"</li>
+        <li>If it's raining, display "Bring an umbrella"</li>
+        <li>If age is 18 or above, display "You're an adult"</li>
+      </ul>
+      <p>This kind of "if... then..." logic is called <strong>conditional branching</strong>.</p>
+
+  - type: "text"
+    content: |
+      <h2>📝 Basic if Statement Syntax</h2>
+      <p>In Python, we use the <code>if</code> statement for conditional branching.</p>
+
+  - type: "code"
+    title: "Basic if statement"
+    language: "python"
+    code: |
+      age = 15
+      
+      if age >= 18:
+          print("You are an adult")
+      
+      print("Program finished")
+
+  - type: "text"
+    content: |
+      <p><strong>Syntax explanation:</strong></p>
+      <ul>
+        <li><code>if condition:</code> - Executes only when the condition is True</li>
+        <li>A colon <code>:</code> is required at the end of the line</li>
+        <li>Code to be executed must be <strong>indented</strong></li>
+        <li>If the condition is False, the indented lines are skipped</li>
+      </ul>
+
+  - type: "text"
+    content: |
+      <h2>🔍 Comparison Operators</h2>
+      <p>We use <strong>comparison operators</strong> to create conditions.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+        <thead>
+          <tr style="background: #f0f0f0;">
+            <th style="border: 1px solid #ddd; padding: 8px;">Operator</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Meaning</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Example</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>==</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Equal to</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>5 == 5</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>!=</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Not equal to</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>5 != 3</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Greater than</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>10 &gt; 5</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Less than</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt; 5</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;=</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Greater than or equal</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>5 &gt;= 5</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;=</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Less than or equal</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt;= 5</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+          </tr>
+        </tbody>
+      </table>
+
+  - type: "code"
+    title: "Comparison operator examples"
+    language: "python"
+    code: |
+      score = 85
+      
+      if score >= 60:
+          print("You passed!")
+      
+      if score == 100:
+          print("Perfect score!")
+      
+      temperature = 30
+      
+      if temperature > 25:
+          print("It's hot today")
+
+  - type: "text"
+    content: |
+      <h2>⚠️ The Importance of Indentation</h2>
+      <p><strong>Indentation</strong> is extremely important in Python.</p>
+
+  - type: "code"
+    title: "Correct indentation"
+    language: "python"
+    code: |
+      age = 15
+      
+      if age >= 18:
+          print("You are an adult")
+          print("You can vote")
+      
+      print("This always runs")
+
+  - type: "code"
+    title: "Wrong indentation (Error)"
+    language: "python"
+    code: |
+      age = 15
+      
+      if age >= 18:
+      print("You are an adult")  # ← Error! No indentation
+
+  - type: "text"
+    content: |
+      <p><strong>Key points:</strong></p>
+      <ul>
+        <li>Use 4 spaces or 1 tab for indentation</li>
+        <li>Code inside an if statement must be indented</li>
+        <li>Code in the same block must have the same indentation level</li>
+      </ul>
+
+  - type: "text"
+    content: |
+      <h2>✨ True and False</h2>
+      <p>Comparison operators return <strong>boolean values</strong>.</p>
+
+  - type: "code"
+    title: "Checking boolean values"
+    language: "python"
+    code: |
+      # Store comparison results in variables
+      result = 10 > 5
+      print(result)  # True
+      
+      result2 = 3 > 10
+      print(result2)  # False
+      
+      # if statements check boolean values
+      is_adult = True
+      
+      if is_adult:
+          print("You are an adult")
+
+  - type: "practice"
+    title: "Practice: Check test score"
+    description: "Run the following code and see how it works."
+    initial_code: |
+      # Set test score
+      score = 75
+      
+      # Display "Excellent!" if score is 80 or above
+      if score >= 80:
+          print("Excellent!")
+      
+      # Display "Passed" if score is 60 or above
+      if score >= 60:
+          print("Passed")
+      
+      # Try changing the score!
+
+  - type: "practice"
+    title: "Practice: Positive and negative numbers"
+    description: "Check if a number is positive or negative."
+    initial_code: |
+      # Set a number
+      number = -5
+      
+      # Write if statements here
+      # Display "Positive number" if positive
+      # Display "Negative number" if negative
+
+  - type: "text"
+    content: |
+      <h2>🎯 Summary</h2>
+      <ul>
+        <li>Use <code>if condition:</code> for conditional branching</li>
+        <li>Create conditions with comparison operators (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>)</li>
+        <li>Indented code runs only when the condition is True</li>
+        <li>Always use 4 spaces or 1 tab for indentation consistently</li>
+      </ul>
+      <p>Now try the exercise to master conditional statements!</p>

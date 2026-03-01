@@ -1,0 +1,25 @@
+lesson:
+  number: "02_01"
+  id: "02_01_if_basic"
+  title: "Basics of Conditional Statements"
+
+task_description: |
+  <p>Create a program that asks the user to enter a number, then determines if it's positive, negative, or zero.</p>
+  <p><strong>Examples:</strong></p>
+  <ul>
+    <li>Input: <code>5</code> → Output: <code>Positive number</code></li>
+    <li>Input: <code>-3</code> → Output: <code>Negative number</code></li>
+    <li>Input: <code>0</code> → Output: <code>Zero</code></li>
+  </ul>
+
+instructions:
+  - "Use <code>input()</code> to get a number and convert it to integer with <code>int()</code>"
+  - "Use <code>if number > 0:</code> to check if it's positive"
+  - "Use <code>if number < 0:</code> to check if it's negative"
+  - "Use <code>if number == 0:</code> to check if it's zero"
+
+hints:
+  - "First, use <code>number = int(input(\"Enter a number: \"))</code> to get input"
+  - "Then write <code>if number > 0:</code> with the positive number logic"
+  - "Similarly, add <code>if number < 0:</code> and <code>if number == 0:</code>"
+  - "Use <code>print()</code> after each condition to display the result"

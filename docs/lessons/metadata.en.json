@@ -48,7 +48,15 @@
       "number": 2,
       "title": "Conditional Statements",
       "description": "Learn to control program flow with conditions",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "02_01_if_basic",
+          "number": "02_01",
+          "title": "Basics of Conditional Statements",
+          "description": "Create a program that asks the user to enter a number, then determines if it's positive, negative, or zero.\nExamples:\n\n  Input: 5 → Output: Positive number\n  Input: -3 → Output: Negative number\n  Input: 0 → Output: Zero",
+          "available": true
+        }
+      ]
     },
     {
       "id": "chapter3",

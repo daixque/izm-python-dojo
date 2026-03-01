@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson02_01: Basics of Conditional Statements</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson02_01: Basics of Conditional Statements</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Create a program that asks the user to enter a number, then determines if it's positive, negative, or zero.</p>
+<p><strong>Examples:</strong></p>
+<ul>
+  <li>Input: <code>5</code> → Output: <code>Positive number</code></li>
+  <li>Input: <code>-3</code> → Output: <code>Negative number</code></li>
+  <li>Input: <code>0</code> → Output: <code>Zero</code></li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Use <code>input()</code> to get a number and convert it to integer with <code>int()</code></li>
+                            <li>Use <code>if number > 0:</code> to check if it's positive</li>
+                            <li>Use <code>if number < 0:</code> to check if it's negative</li>
+                            <li>Use <code>if number == 0:</code> to check if it's zero</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>First, use <code>number = int(input("Enter a number: "))</code> to get input</li>
+                            <li>Then write <code>if number > 0:</code> with the positive number logic</li>
+                            <li>Similarly, add <code>if number < 0:</code> and <code>if number == 0:</code></li>
+                            <li>Use <code>print()</code> after each condition to display the result</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "02_01_if_basic";
+        const INITIAL_CODE = "# Program to determine if a number is positive, negative, or zero\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Check if input() is used\n    if \u0027input(\u0027 not in user_code:\n        result = {\"passed\": False, \"message\": \"\u2717 Please use the input() function\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 input() function is used\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if input() is used to get a number", "name": "Test 1: Using input()"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"positive\" or \"Positive\" is in output\n    if \"positive\" in output.lower():\n        result = {\"passed\": True, \"message\": \"\u2713 Correctly identifies positive numbers\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 For positive number (5), display \u0027Positive number\u0027\\nActual output: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "When 5 is entered, it should display \u0027positive\u0027", "name": "Test 2: Correctly identifies positive numbers"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"negative\" or \"Negative\" is in output\n    if \"negative\" in output.lower():\n        result = {\"passed\": True, \"message\": \"\u2713 Correctly identifies negative numbers\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 For negative number (-3), display \u0027Negative number\u0027\\nActual output: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "When -3 is entered, it should display \u0027negative\u0027", "name": "Test 3: Correctly identifies negative numbers"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if \"0\" or \"zero\" is in output\n    if \"0\" in output or \"zero\" in output.lower():\n        result = {\"passed\": True, \"message\": \"\u2713 Correctly identifies zero\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 For 0, display \u0027Zero\u0027 or \u00270\u0027\\nActual output: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "When 0 is entered, it should display \u0027zero\u0027", "name": "Test 4: Correctly identifies zero"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

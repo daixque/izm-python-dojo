@@ -1,0 +1,25 @@
+lesson:
+  number: "02_01"
+  id: "02_01_if_basic"
+  title: "条件分岐の基礎"
+
+task_description: |
+  <p>ユーザーから数値を入力してもらい、その数値が正の数か、負の数か、0かを判定するプログラムを作りましょう。</p>
+  <p><strong>例：</strong></p>
+  <ul>
+    <li>入力: <code>5</code> → 出力: <code>正の数です</code></li>
+    <li>入力: <code>-3</code> → 出力: <code>負の数です</code></li>
+    <li>入力: <code>0</code> → 出力: <code>0です</code></li>
+  </ul>
+
+instructions:
+  - "<code>input()</code> で数値を入力してもらい、<code>int()</code> で整数に変換します"
+  - "<code>if number > 0:</code> で正の数かチェックします"
+  - "<code>if number < 0:</code> で負の数かチェックします"
+  - "<code>if number == 0:</code> で0かチェックします"
+
+hints:
+  - "まず <code>number = int(input(\"数値を入力してください: \"))</code> で入力を受け取ります"
+  - "次に <code>if number > 0:</code> で正の数の時の処理を書きます"
+  - "同様に <code>if number < 0:</code> と <code>if number == 0:</code> も書きます"
+  - "それぞれの条件の後に <code>print()</code> で結果を表示します"

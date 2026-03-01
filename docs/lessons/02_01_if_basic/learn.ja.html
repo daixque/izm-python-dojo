@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン02_01: 条件分岐の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">条件分岐の基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🎯 条件分岐とは？</h2>
+  <p>プログラムは、状況に応じて違う処理を行う必要があります。例えば：</p>
+  <ul>
+    <li>テストの点数が60点以上なら「合格」と表示する</li>
+    <li>天気が雨なら「傘を持っていこう」と表示する</li>
+    <li>年齢が18歳以上なら「成人です」と表示する</li>
+  </ul>
+  <p>このような「もし〜なら〜する」という処理を<strong>条件分岐</strong>と呼びます。</p>
+</section>
+
+<section class="section">
+  <h2>📝 if文の基本構文</h2>
+  <p>Pythonでは<code>if</code>文を使って条件分岐を行います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">基本的なif文</div>
+    <div class="example-code">age = 15<br><br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("成人です")<br><br>print("プログラム終了")</div>
+    <div class="example-explanation">
+      <strong>構文の説明：</strong>
+      <ul>
+        <li><code>if 条件:</code> - 条件が真（True）の時だけ実行される</li>
+        <li>行末には<code>:</code>（コロン）が必要</li>
+        <li>実行する処理は<strong>インデント（字下げ）</strong>する</li>
+        <li>条件が偽（False）の時は、インデントされた行はスキップされる</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 比較演算子</h2>
+  <p>条件を作るには<strong>比較演算子</strong>を使います。</p>
+  <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+    <thead>
+      <tr style="background: #f0f0f0;">
+        <th style="border: 1px solid #ddd; padding: 8px;">演算子</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">意味</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">例</th>
+        <th style="border: 1px solid #ddd; padding: 8px;">結果</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>==</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">等しい</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>5 == 5</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>!=</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">等しくない</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>5 != 3</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">より大きい</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>10 &gt; 5</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">より小さい</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt; 5</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>&gt;=</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">以上</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>5 &gt;= 5</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;=</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">以下</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><code>3 &lt;= 5</code></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">True</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">比較演算子の例</div>
+    <div class="example-code">score = 85<br><br>if score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("合格です！")<br><br>if score == 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("満点です！")<br><br>temperature = 30<br><br>if temperature > 25:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("暑いですね")</div>
+    <div class="example-explanation">複数の条件を使って、それぞれ異なる判定を行うことができます。</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⚠️ インデントの重要性</h2>
+  <p>Pythonでは<strong>インデント（字下げ）</strong>が非常に重要です。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">正しいインデント</div>
+    <div class="example-code">age = 15<br><br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("成人です")<br>&nbsp;&nbsp;&nbsp;&nbsp;print("選挙権があります")<br><br>print("これは常に実行されます")</div>
+    <div class="example-explanation">if文の中の処理は、スペース4つ分インデントします。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">間違ったインデント（エラー）</div>
+    <div class="example-code">age = 15<br><br>if age >= 18:<br>print("成人です")  # ← エラー！インデントがない</div>
+    <div class="example-explanation">インデントがないとエラーになります。</div>
+  </div>
+</section>
+
+<section class="section">
+  <p><strong>ポイント：</strong></p>
+  <ul>
+    <li>インデントはスペース4つ、またはタブ1つ</li>
+    <li>if文の中の処理は必ずインデントする</li>
+    <li>同じブロックは同じ深さでインデントする</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>✨ True と False</h2>
+  <p>比較演算子の結果は<strong>真偽値</strong>（ブール値）になります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">真偽値の確認</div>
+    <div class="example-code"># 比較の結果を変数に保存できる<br>result = 10 > 5<br>print(result)  # True<br><br>result2 = 3 > 10<br>print(result2)  # False<br><br># if文は真偽値をチェックする<br>is_adult = True<br><br>if is_adult:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("成人です")</div>
+    <div class="example-explanation">比較の結果はTrue（真）またはFalse（偽）になります。</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎯 まとめ</h2>
+  <ul>
+    <li><code>if 条件:</code> で条件分岐を行う</li>
+    <li>比較演算子（<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>）で条件を作る</li>
+    <li>条件が真（True）の時だけ、インデントされた処理が実行される</li>
+    <li>インデントは必ずスペース4つ、またはタブ1つで統一する</li>
+  </ul>
+  <p>次は演習課題に挑戦して、条件分岐を使いこなせるようになりましょう！</p>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

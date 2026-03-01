@@ -1,0 +1,115 @@
+initial_code: |
+  # ユーザーから数値を入力してもらい、正の数・負の数・0を判定するプログラム
+  
+
+initial_files: []
+
+tests:
+  - name: "テスト1: input()を使用している"
+    description: "input()関数で数値を入力しているか"
+    inputs:
+      - "5"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # input()の使用をチェック
+          if 'input(' not in user_code:
+              result = {"passed": False, "message": "✗ input()関数を使ってください"}
+          else:
+              result = {"passed": True, "message": "✓ input()関数が使われています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト2: 正の数を正しく判定"
+    description: "正の数（5）を入力した時、「正の数」と表示されるか"
+    inputs:
+      - "5"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 「正」が含まれているかチェック
+          if "正" in output or "プラス" in output:
+              result = {"passed": True, "message": "✓ 正の数を正しく判定しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 正の数（5）に対して「正の数」と表示してください\n実際の出力: {output}"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト3: 負の数を正しく判定"
+    description: "負の数（-3）を入力した時、「負の数」と表示されるか"
+    inputs:
+      - "-3"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 「負」が含まれているかチェック
+          if "負" in output or "マイナス" in output:
+              result = {"passed": True, "message": "✓ 負の数を正しく判定しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 負の数（-3）に対して「負の数」と表示してください\n実際の出力: {output}"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result
+
+  - name: "テスト4: 0を正しく判定"
+    description: "0を入力した時、「0」または「ゼロ」と表示されるか"
+    inputs:
+      - "0"
+    code: |
+      import sys
+      from io import StringIO
+      
+      try:
+          # 出力をキャプチャ
+          old_stdout = sys.stdout
+          sys.stdout = StringIO()
+          
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          
+          output = sys.stdout.getvalue()
+          sys.stdout = old_stdout
+          
+          # 「0」または「ゼロ」が含まれているかチェック
+          if "0" in output or "ゼロ" in output:
+              result = {"passed": True, "message": "✓ 0を正しく判定しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 0に対して「0です」または「ゼロです」と表示してください\n実際の出力: {output}"}
+      except Exception as e:
+          sys.stdout = old_stdout
+          result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
+      
+      result

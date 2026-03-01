@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン02_01: 条件分岐の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン02_01: 条件分岐の基礎</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>ユーザーから数値を入力してもらい、その数値が正の数か、負の数か、0かを判定するプログラムを作りましょう。</p>
+<p><strong>例：</strong></p>
+<ul>
+  <li>入力: <code>5</code> → 出力: <code>正の数です</code></li>
+  <li>入力: <code>-3</code> → 出力: <code>負の数です</code></li>
+  <li>入力: <code>0</code> → 出力: <code>0です</code></li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li><code>input()</code> で数値を入力してもらい、<code>int()</code> で整数に変換します</li>
+                            <li><code>if number > 0:</code> で正の数かチェックします</li>
+                            <li><code>if number < 0:</code> で負の数かチェックします</li>
+                            <li><code>if number == 0:</code> で0かチェックします</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>まず <code>number = int(input("数値を入力してください: "))</code> で入力を受け取ります</li>
+                            <li>次に <code>if number > 0:</code> で正の数の時の処理を書きます</li>
+                            <li>同様に <code>if number < 0:</code> と <code>if number == 0:</code> も書きます</li>
+                            <li>それぞれの条件の後に <code>print()</code> で結果を表示します</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "02_01_if_basic";
+        const INITIAL_CODE = "# \u30e6\u30fc\u30b6\u30fc\u304b\u3089\u6570\u5024\u3092\u5165\u529b\u3057\u3066\u3082\u3089\u3044\u3001\u6b63\u306e\u6570\u30fb\u8ca0\u306e\u6570\u30fb0\u3092\u5224\u5b9a\u3059\u308b\u30d7\u30ed\u30b0\u30e9\u30e0\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # input()\u306e\u4f7f\u7528\u3092\u30c1\u30a7\u30c3\u30af\n    if \u0027input(\u0027 not in user_code:\n        result = {\"passed\": False, \"message\": \"\u2717 input()\u95a2\u6570\u3092\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 input()\u95a2\u6570\u304c\u4f7f\u308f\u308c\u3066\u3044\u307e\u3059\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n\nresult\n", "description": "input()\u95a2\u6570\u3067\u6570\u5024\u3092\u5165\u529b\u3057\u3066\u3044\u308b\u304b", "name": "\u30c6\u30b9\u30c81: input()\u3092\u4f7f\u7528\u3057\u3066\u3044\u308b"}, {"code": "lang = \"ja\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u300c\u6b63\u300d\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \"\u6b63\" in output or \"\u30d7\u30e9\u30b9\" in output:\n        result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u306e\u6570\u3092\u6b63\u3057\u304f\u5224\u5b9a\u3057\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u6b63\u306e\u6570\uff085\uff09\u306b\u5bfe\u3057\u3066\u300c\u6b63\u306e\u6570\u300d\u3068\u8868\u793a\u3057\u3066\u304f\u3060\u3055\u3044\\n\u5b9f\u969b\u306e\u51fa\u529b: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n\nresult\n", "description": "\u6b63\u306e\u6570\uff085\uff09\u3092\u5165\u529b\u3057\u305f\u6642\u3001\u300c\u6b63\u306e\u6570\u300d\u3068\u8868\u793a\u3055\u308c\u308b\u304b", "name": "\u30c6\u30b9\u30c82: \u6b63\u306e\u6570\u3092\u6b63\u3057\u304f\u5224\u5b9a"}, {"code": "lang = \"ja\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u300c\u8ca0\u300d\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \"\u8ca0\" in output or \"\u30de\u30a4\u30ca\u30b9\" in output:\n        result = {\"passed\": True, \"message\": \"\u2713 \u8ca0\u306e\u6570\u3092\u6b63\u3057\u304f\u5224\u5b9a\u3057\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u8ca0\u306e\u6570\uff08-3\uff09\u306b\u5bfe\u3057\u3066\u300c\u8ca0\u306e\u6570\u300d\u3068\u8868\u793a\u3057\u3066\u304f\u3060\u3055\u3044\\n\u5b9f\u969b\u306e\u51fa\u529b: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n\nresult\n", "description": "\u8ca0\u306e\u6570\uff08-3\uff09\u3092\u5165\u529b\u3057\u305f\u6642\u3001\u300c\u8ca0\u306e\u6570\u300d\u3068\u8868\u793a\u3055\u308c\u308b\u304b", "name": "\u30c6\u30b9\u30c83: \u8ca0\u306e\u6570\u3092\u6b63\u3057\u304f\u5224\u5b9a"}, {"code": "lang = \"ja\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # \u51fa\u529b\u3092\u30ad\u30e3\u30d7\u30c1\u30e3\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # \u300c0\u300d\u307e\u305f\u306f\u300c\u30bc\u30ed\u300d\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b\u30c1\u30a7\u30c3\u30af\n    if \"0\" in output or \"\u30bc\u30ed\" in output:\n        result = {\"passed\": True, \"message\": \"\u2713 0\u3092\u6b63\u3057\u304f\u5224\u5b9a\u3057\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 0\u306b\u5bfe\u3057\u3066\u300c0\u3067\u3059\u300d\u307e\u305f\u306f\u300c\u30bc\u30ed\u3067\u3059\u300d\u3068\u8868\u793a\u3057\u3066\u304f\u3060\u3055\u3044\\n\u5b9f\u969b\u306e\u51fa\u529b: {output}\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f: {str(e)}\"}\n\nresult\n", "description": "0\u3092\u5165\u529b\u3057\u305f\u6642\u3001\u300c0\u300d\u307e\u305f\u306f\u300c\u30bc\u30ed\u300d\u3068\u8868\u793a\u3055\u308c\u308b\u304b", "name": "\u30c6\u30b9\u30c84: 0\u3092\u6b63\u3057\u304f\u5224\u5b9a"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>
