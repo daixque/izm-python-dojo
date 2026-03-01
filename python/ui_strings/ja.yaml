@@ -1,4 +1,7 @@
 # 日本語UI文言
+appTitle: "IZM Python 道場"
+subtitle: "コードを書いて学ぶPython入門"
+
 # ページタイトル
 page_title:
   theory: "理論"

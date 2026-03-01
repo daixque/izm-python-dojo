@@ -1,4 +1,7 @@
 # English UI strings
+appTitle: "IZM Python Dojo"
+subtitle: "Learn Python by Writing Code"
+
 # Page titles
 page_title:
   theory: "Theory"

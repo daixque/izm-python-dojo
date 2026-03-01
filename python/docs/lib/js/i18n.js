@@ -4,8 +4,8 @@
 const translations = {
     ja: {
         // ヘッダー
-        appTitle: "Python学習環境",
-        subtitle: "中学生向けプログラミング入門教材",
+        appTitle: "IZM Python 道場",
+        subtitle: "コードを書いて学ぶPython入門",
         status_loading: "準備中...",
         status_ready: "準備完了 ✓",
         
@@ -82,8 +82,8 @@ const translations = {
     },
     en: {
         // Header
-        appTitle: "Python Learning Environment",
-        subtitle: "Programming Introduction for Middle School Students",
+        appTitle: "IZM Python Dojo",
+        subtitle: "Learn Python by Writing Code",
         status_loading: "Loading...",
         status_ready: "Ready ✓",
         
