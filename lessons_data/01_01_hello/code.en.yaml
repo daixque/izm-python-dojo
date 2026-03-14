@@ -1,6 +1,9 @@
 initial_code: |
   # Write your code here
-  
+
+
+solution_code: |
+  print("Hello, World!")
 
 initial_files: []
 

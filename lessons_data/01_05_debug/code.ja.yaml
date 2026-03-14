@@ -16,6 +16,21 @@ initial_code: |
   print("身長は" + str(height) + "cmで、10cm伸びたら" + str(height + 1) + "cmです")
   
 
+solution_code: |
+  # 太郎くんの情報
+  name = "太郎"
+  age = 15
+
+  # 来年の年齢を計算（バグ1修正: int + 1）
+  next_age = age + 1
+
+  # 表示する（バグ2修正: namae → name）
+  print(name + "くんは来年" + str(next_age) + "歳です")
+
+  # 身長の情報（バグ3修正: +1 → +10）
+  height = 160
+  print("身長は" + str(height) + "cmで、10cm伸びたら" + str(height + 10) + "cmです")
+
 initial_files: []
 
 tests:

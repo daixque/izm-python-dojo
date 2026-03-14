@@ -1,6 +1,9 @@
 initial_code: |
   # ここにコードを書いてみよう
-  
+
+
+solution_code: |
+  print("Hello, World!")
 
 initial_files: []
 

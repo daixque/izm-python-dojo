@@ -349,6 +349,80 @@ python3 -m http.server 8080
 
 以上でレッスンの追加は完了です。メタデータは自動生成されるため、手動での JSON 編集は不要です。
 
+## テストコードの書き方
+
+テストコードは `code.ja.yaml` / `code.en.yaml` の `tests` セクションに Python で記述します。
+
+### 基本構造
+
+```python
+import sys
+from io import StringIO
+
+old_stdout = sys.stdout
+try:
+    sys.stdout = StringIO()
+    exec_globals = {}
+    exec(user_code, exec_globals)
+    output = sys.stdout.getvalue()
+    sys.stdout = old_stdout
+
+    if "期待される出力" in output:
+        result = {"passed": True, "message": "✓ 正解です！"}
+    else:
+        result = {"passed": False, "message": "✗ エラーメッセージ"}
+except Exception as e:
+    sys.stdout = old_stdout
+    result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+
+result  # 最後に result を返す
+```
+
+**重要なポイント:**
+- `user_code` 変数にユーザーのコードが格納されている
+- テスト結果は `{"passed": bool, "message": str}` の辞書で返す
+- 必ず `finally` または `except` 内で `sys.stdout` を復元する
+
+### input() を使うレッスンのテスト
+
+`input()` を使うレッスンでは、テスト実行時にブラウザのダイアログが表示されてしまいます。
+**テストコード内では必ず `builtins.input` をモックして、ダイアログが出ないようにしてください。**
+
+```python
+import sys
+import builtins
+from io import StringIO
+
+old_stdout = sys.stdout
+old_input = builtins.input
+try:
+    sys.stdout = StringIO()
+    builtins.input = lambda *args: "テスト用の入力値"  # ← 入力値を固定
+
+    exec_globals = {}
+    exec(user_code, exec_globals)
+
+    output = sys.stdout.getvalue()
+    sys.stdout = old_stdout
+    builtins.input = old_input
+
+    if "テスト用の入力値" in output:
+        result = {"passed": True, "message": "✓ 正解です！"}
+    else:
+        result = {"passed": False, "message": "✗ 入力された値を表示してください"}
+except Exception as e:
+    sys.stdout = old_stdout
+    builtins.input = old_input
+    result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+
+result
+```
+
+**注意事項:**
+- `builtins.input` の復元は `except` 内でも必ず行う
+- テストごとに異なる入力値をモックできる（例：テスト2は `"5"`、テスト3は `"-3"`）
+- `inputs:` フィールド（旧仕様）は現在のシステムでは機能しないため、使用しないこと
+
 ## 設計思想
 
 このプロジェクトは以下の原則に基づいています：

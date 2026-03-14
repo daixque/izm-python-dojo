@@ -1,6 +1,12 @@
 initial_code: |
   # ここにコードを書いてみよう
-  
+
+
+solution_code: |
+  num1 = "50"
+  num2 = "30"
+  total = int(num1) + int(num2)
+  print(f"合計は{total}です")
 
 initial_files: []
 

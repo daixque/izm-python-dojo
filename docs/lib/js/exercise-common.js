@@ -2,6 +2,8 @@
 
 // 初期コードを保存（リセット用）
 let savedInitialCode = '';
+// 模範解答コードを保存
+let savedSolutionCode = '';
 
 /**
  * タスクパネルの折りたたみ機能を設定
@@ -71,11 +73,14 @@ async function initializeExercise(config = {}) {
     const {
         initialCode = '',
         tests = [],
-        initialFiles = []
+        initialFiles = [],
+        solutionCode = ''
     } = config;
-    
+
     // 初期コードを保存
     savedInitialCode = initialCode;
+    // 模範解答を保存
+    savedSolutionCode = solutionCode;
     
     // 保存されたコードを読み込み（あれば）
     let codeToLoad = initialCode;
@@ -236,6 +241,15 @@ function setupButtons() {
         });
     }
     
+    // 回答を見るボタン
+    const btnSolution = document.getElementById('btn-solution');
+    if (btnSolution) {
+        btnSolution.addEventListener('click', () => {
+            window.monacoEditor.setContent(savedSolutionCode);
+            clearConsole();
+        });
+    }
+
     // クリアボタン
     const btnClear = document.getElementById('btn-clear');
     if (btnClear) {

@@ -16,6 +16,21 @@ initial_code: |
   print("Height is " + str(height) + "cm, if it grows 10cm it will be " + str(height + 1) + "cm")
   
 
+solution_code: |
+  # Taro's information
+  name = "Taro"
+  age = 15
+
+  # Calculate next year's age (Bug 1 fixed: int + 1)
+  next_age = age + 1
+
+  # Display (Bug 2 fixed: namae → name)
+  print(name + " will be " + str(next_age) + " years old next year")
+
+  # Height information (Bug 3 fixed: +1 → +10)
+  height = 160
+  print("Height is " + str(height) + "cm, if it grows 10cm it will be " + str(height + 10) + "cm")
+
 initial_files: []
 
 tests:

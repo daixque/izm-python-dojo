@@ -84,6 +84,9 @@
                             <button id="btn-run" class="btn btn-primary" disabled>{{ ui.exercise.button_run }}</button>
                             <button id="btn-test" class="btn btn-success" disabled>{{ ui.exercise.button_test }}</button>
                             <button id="btn-reset" class="btn btn-secondary">{{ ui.exercise.button_reset }}</button>
+                            {% if solution_code %}
+                            <button id="btn-solution" class="btn btn-warning">{{ ui.exercise.button_solution }}</button>
+                            {% endif %}
                         </div>
                     </div>
                     <div id="editor" class="editor"></div>
@@ -159,6 +162,7 @@
     <script>
         const LESSON_ID = "{{ lesson.id }}";
         const INITIAL_CODE = {{ initial_code|tojson }};
+        const SOLUTION_CODE = {{ solution_code|tojson }};
 
         const TESTS = {{ tests|tojson }};
         
@@ -176,7 +180,8 @@
             await initializeExercise({
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
-                initialFiles: INITIAL_FILES
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
             });
         });
     </script>

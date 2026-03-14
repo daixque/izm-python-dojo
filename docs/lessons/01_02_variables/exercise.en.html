@@ -82,6 +82,7 @@
                             <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
                             <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
                             <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
                         </div>
                     </div>
                     <div id="editor" class="editor"></div>
@@ -157,6 +158,7 @@
     <script>
         const LESSON_ID = "01_02_variables";
         const INITIAL_CODE = "# Write your code here\n";
+        const SOLUTION_CODE = "age = 14\nfuture_age = age + 10\nprint(future_age)\n";
 
         const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Check if age is defined\n    if \u0027age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Variable age is not defined\"}\n    elif not isinstance(exec_globals[\u0027age\u0027], (int, float)):\n        result = {\"passed\": False, \"message\": \"\u2717 Variable age should be a number\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 Variable age is correctly defined\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if variable age is assigned a value", "name": "Test 1: Variable age is defined"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Check if future_age is defined\n    if \u0027future_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Variable future_age is not defined\"}\n    elif \u0027age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Variable age is not defined\"}\n    elif exec_globals[\u0027future_age\u0027] != exec_globals[\u0027age\u0027] + 10:\n        result = {\"passed\": False, \"message\": f\"\u2717 future_age calculation is incorrect. Calculate age + 10\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 Age in 10 years is correctly calculated\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if age in 10 years is correctly calculated", "name": "Test 2: future_age is correctly calculated"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture standard output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check future_age value\n    if \u0027future_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Variable future_age is not defined\"}\n    else:\n        expected_value = exec_globals[\u0027future_age\u0027]\n        output_lines = output.strip().split(\u0027\\n\u0027)\n        \n        # Check if expected value is in output\n        if str(expected_value) in output:\n            result = {\"passed\": True, \"message\": \"\u2713 future_age is correctly displayed\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 future_age value ({expected_value}) is not displayed\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if future_age value is displayed", "name": "Test 3: future_age is displayed"}];
         
@@ -174,7 +176,8 @@
             await initializeExercise({
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
-                initialFiles: INITIAL_FILES
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
             });
         });
     </script>

@@ -23,6 +23,28 @@ initial_code: |
   # result = judge_winner(user, computer)
   # print(result)
 
+solution_code: |
+  import random
+
+  def judge_winner(user, computer):
+      if user == computer:
+          return "引き分け！"
+      elif (user == 1 and computer == 2) or (user == 2 and computer == 3) or (user == 3 and computer == 1):
+          return "あなたの勝ち！"
+      else:
+          return "コンピュータの勝ち！"
+
+  # ━━━ テスト後に以下のコメントを外すと、実際に遊べます ━━━
+  # user = int(input("あなたの手を選んでください（1: グー、2: チョキ、3: パー）: "))
+  # computer = random.randint(1, 3)
+  #
+  # hands = {1: "グー", 2: "チョキ", 3: "パー"}
+  # print(f"あなた: {hands[user]}")
+  # print(f"コンピュータ: {hands[computer]}")
+  #
+  # result = judge_winner(user, computer)
+  # print(result)
+
 initial_files: []
 
 tests:

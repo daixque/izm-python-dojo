@@ -2,6 +2,11 @@ initial_code: |
   # Write your code here
   
 
+solution_code: |
+  age = 14
+  future_age = age + 10
+  print(future_age)
+
 initial_files: []
 
 tests:

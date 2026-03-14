@@ -2,6 +2,12 @@ initial_code: |
   # Write your code here
   
 
+solution_code: |
+  num1 = "50"
+  num2 = "30"
+  total = int(num1) + int(num2)
+  print(f"The sum is {total}")
+
 initial_files: []
 
 tests:

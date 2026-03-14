@@ -1,6 +1,10 @@
 initial_code: |
   # input() を使って名前を入力してもらい、挨拶を表示しよう
-  
+
+
+solution_code: |
+  name = input("名前を入力してください: ")
+  print(f"こんにちは、{name}さん！")
 
 initial_files: []
 
@@ -26,62 +30,59 @@ tests:
 
   - name: "テスト2: 挨拶を正しく表示している"
     description: "入力された名前を使って挨拶を表示しているか"
-    inputs:
-      - "太郎"
     code: |
       import sys
+      import builtins
       from io import StringIO
-      
+
+      old_stdout = sys.stdout
+      old_input = builtins.input
       try:
-          # 出力をキャプチャ
-          old_stdout = sys.stdout
           sys.stdout = StringIO()
-          
-          # ユーザーコードを実行
+          builtins.input = lambda *args: "太郎"
+
           exec_globals = {}
           exec(user_code, exec_globals)
-          
-          # 出力を取得
+
           output = sys.stdout.getvalue()
           sys.stdout = old_stdout
-          
-          # 名前が出力に含まれているかチェック
+          builtins.input = old_input
+
           if "太郎" in output:
               result = {"passed": True, "message": "✓ 入力された名前が正しく表示されています"}
           else:
-              result = {"passed": False, "message": "✗ 入力された名前を表示してください"}
+              result = {"passed": False, "message": "✗ input()で受け取った名前を表示してください"}
       except Exception as e:
           sys.stdout = old_stdout
+          builtins.input = old_input
           result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
-      
+
       result
 
   - name: "テスト3: 挨拶のフォーマットが正しい"
     description: "「こんにちは」などの挨拶言葉が含まれているか"
-    inputs:
-      - "花子"
     code: |
       import sys
+      import builtins
       from io import StringIO
-      
+
+      old_stdout = sys.stdout
+      old_input = builtins.input
       try:
-          # 出力をキャプチャ
-          old_stdout = sys.stdout
           sys.stdout = StringIO()
-          
-          # ユーザーコードを実行
+          builtins.input = lambda *args: "花子"
+
           exec_globals = {}
           exec(user_code, exec_globals)
-          
-          # 出力を取得
+
           output = sys.stdout.getvalue()
           sys.stdout = old_stdout
-          
-          # 挨拶言葉と名前をチェック
+          builtins.input = old_input
+
           greeting_words = ["こんにちは", "おはよう", "こんばんは"]
           has_greeting = any(word in output for word in greeting_words)
           has_name = "花子" in output
-          
+
           if has_greeting and has_name:
               result = {"passed": True, "message": "✓ 挨拶のフォーマットが正しいです"}
           elif not has_greeting:
@@ -90,6 +91,7 @@ tests:
               result = {"passed": False, "message": "✗ 入力された名前を含めてください"}
       except Exception as e:
           sys.stdout = old_stdout
+          builtins.input = old_input
           result = {"passed": False, "message": f"✗ エラーが発生しました: {str(e)}"}
-      
+
       result

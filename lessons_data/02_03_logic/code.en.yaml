@@ -9,6 +9,15 @@ initial_code: |
   print("C: ", can_ride(10, 115))
   print("D: ", can_ride(4, 140))
 
+solution_code: |
+  def can_ride(age, height):
+      return age >= 6 and height >= 120
+
+  print("A: ", can_ride(8, 125))
+  print("B: ", can_ride(5, 130))
+  print("C: ", can_ride(10, 115))
+  print("D: ", can_ride(4, 140))
+
 initial_files: []
 
 tests:
