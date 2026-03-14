@@ -2,6 +2,7 @@ lesson:
   number: "06_02"
   id: "06_02_data_analysis"
   title: "データ集計プログラム"
+description: "リストと辞書を使って、生徒の成績データを集計・分析するプログラムを作ります。"
 
 task_description: |
   <p>生徒の成績データを集計する3つの関数を実装しましょう。</p>

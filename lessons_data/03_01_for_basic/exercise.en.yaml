@@ -2,6 +2,7 @@ lesson:
   number: "03_01"
   id: "03_01_for_basic"
   title: "for Loop Basics"
+description: "Learn how to repeat operations a fixed number of times using for loops and range()."
 
 task_description: |
   <p>Implement the function <code>print_multiplication_table(n)</code> that prints a multiplication table.</p>

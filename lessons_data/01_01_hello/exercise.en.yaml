@@ -2,6 +2,7 @@ lesson:
   number: "01_01"  # Chapter_Lesson format
   id: "01_01_hello"
   title: "First Steps with Python"
+description: "Learn how to display text on screen using the print() function."
 
 task_description: |
   <p>Write a program to display 'Hello, World!'</p>

@@ -2,6 +2,7 @@ lesson:
   number: "01_03"  # Chapter_Lesson format
   id: "01_03_types"
   title: "Data Types and Conversion"
+description: "Learn the difference between string and number types and how to convert between them."
 
 task_description: |
   <p>Write a program that converts two numbers given as strings to integers, calculates their sum, and displays it.</p>

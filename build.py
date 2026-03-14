@@ -348,11 +348,17 @@ def generate_metadata(lang):
             if exercise_file.exists():
                 with open(exercise_file, 'r', encoding='utf-8') as f:
                     exercise_data = yaml.safe_load(f)
-                    # task_descriptionからHTMLタグを除去して説明文を作成
-                    task_desc = exercise_data.get('task_description', '')
-                    # 簡易的なHTMLタグ除去
                     import re
-                    description = re.sub(r'<[^>]+>', '', task_desc).strip()
+                    # descriptionフィールドがあればそれを使用、なければtask_descriptionの最初の<p>を使用
+                    if 'description' in exercise_data:
+                        description = exercise_data['description'].strip()
+                    else:
+                        task_desc = exercise_data.get('task_description', '')
+                        first_p = re.search(r'<p>(.*?)</p>', task_desc, re.DOTALL)
+                        if first_p:
+                            description = re.sub(r'<[^>]+>', '', first_p.group(1)).strip()
+                        else:
+                            description = re.sub(r'<[^>]+>', '', task_desc).strip()
             
             # HTMLファイルが存在するかチェック（available判定）
             html_learn = Path(f"docs/lessons/{lesson_id}/learn.{lang}.html")

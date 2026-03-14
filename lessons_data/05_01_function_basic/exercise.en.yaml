@@ -2,6 +2,7 @@ lesson:
   number: "05_01"
   id: "05_01_function_basic"
   title: "Function Basics"
+description: "Learn how to define reusable functions with parameters and return values."
 
 task_description: |
   <p>Implement the function <code>add(a, b)</code>.</p>

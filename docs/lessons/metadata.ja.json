@@ -10,35 +10,35 @@
           "id": "01_01_hello",
           "number": "01_01",
           "title": "はじめてのPython",
-          "description": "「Hello, World!」と表示するプログラムを書いてみましょう。",
+          "description": "print()関数を使って画面に文字を表示する方法を学びます。",
           "available": true
         },
         {
           "id": "01_02_variables",
           "number": "01_02",
           "title": "変数と計算",
-          "description": "自分の年齢を変数に代入し、10年後の年齢を計算して表示するプログラムを書いてみましょう。\n例えば、今14歳なら、10年後は24歳になりますね。",
+          "description": "変数への代入と数値計算の基本を学びます。",
           "available": true
         },
         {
           "id": "01_03_types",
           "number": "01_03",
           "title": "データ型と変換",
-          "description": "文字列として与えられた2つの数値を整数に変換し、その合計を計算して表示するプログラムを書きましょう。\n最後に、「合計は○○です」という形式で結果を表示してください。",
+          "description": "文字列と数値のデータ型の違いと型変換の方法を学びます。",
           "available": true
         },
         {
           "id": "01_04_input",
           "number": "01_04",
           "title": "ユーザー入力",
-          "description": "input()関数を使って、ユーザーに名前を入力してもらい、挨拶を返すプログラムを書きましょう。\n「こんにちは、○○さん！」という形式で挨拶を表示してください。",
+          "description": "input()関数でユーザーから入力を受け取る方法を学びます。",
           "available": true
         },
         {
           "id": "01_05_debug",
           "number": "01_05",
           "title": "デバッグの基礎",
-          "description": "以下のコードには3つのバグがあります。エラーメッセージを読んで、すべてのバグを修正してください。\n修正後、正しく動作することを確認しましょう。\n期待される動作：\n\n  「太郎くんは来年16歳です」と表示される\n  「身長は160cmで、10cm伸びたら170cmです」と表示される",
+          "description": "エラーメッセージを読み解き、バグを修正するデバッグの基本を学びます。",
           "available": true
         }
       ]
@@ -53,21 +53,21 @@
           "id": "02_01_if_basic",
           "number": "02_01",
           "title": "条件分岐の基礎",
-          "description": "ユーザーから数値を入力してもらい、その数値が正の数か、負の数か、0かを判定するプログラムを作りましょう。\n例：\n\n  入力: 5 → 出力: 正の数です\n  入力: -3 → 出力: 負の数です\n  入力: 0 → 出力: 0です",
+          "description": "if文を使って条件によって処理を分岐させる方法を学びます。",
           "available": true
         },
         {
           "id": "02_02_if_else",
           "number": "02_02",
           "title": "else と elif",
-          "description": "じゃんけんゲームのプログラムを完成させましょう。\nコンピュータとじゃんけんをして、勝敗を判定するプログラムを作ります。\n勝敗のルール\n\n  グー（1）はチョキ（2）に勝つ\n  チョキ（2）はパー（3）に勝つ\n  パー（3）はグー（1）に勝つ\n  同じ手の場合は引き分け",
+          "description": "else・elif を使って複数の条件に応じた処理を実装する方法を学びます。",
           "available": true
         },
         {
           "id": "02_03_logic",
           "number": "02_03",
           "title": "論理演算子",
-          "description": "遊園地に来た4人の中で、アトラクションに乗れる人を見つけるプログラムを作りましょう。\nアトラクションの利用条件は「6歳以上」かつ「身長120cm以上」です。\n4人のデータ\n\n  A: 8歳, 125cm\n  B: 5歳, 130cm\n  C: 10歳, 115cm\n  D: 4歳, 140cm\n\n条件を満たす人の名前（A、B、C、またはD）を出力してください。",
+          "description": "and・or などの論理演算子を使って複合条件を作る方法を学びます。",
           "available": true
         }
       ]
@@ -82,21 +82,21 @@
           "id": "03_01_for_basic",
           "number": "03_01",
           "title": "for ループの基礎",
-          "description": "九九の表を表示する関数 print_multiplication_table(n) を実装しましょう。\nn の段の九九を1から9まで表示します。\n出力形式\n例えば print_multiplication_table(3) を呼び出すと：\n3 × 1 = 3\n3 × 2 = 6\n3 × 3 = 9\n3 × 4 = 12\n3 × 5 = 15\n3 × 6 = 18\n3 × 7 = 21\n3 × 8 = 24\n3 × 9 = 27\nのように表示されます。",
+          "description": "forループとrange()を使って決まった回数だけ処理を繰り返す方法を学びます。",
           "available": true
         },
         {
           "id": "03_02_for_advanced",
           "number": "03_02",
           "title": "for ループの応用",
-          "description": "関数 sum_numbers(n) を実装しましょう。\nこの関数は 1 から n までの整数の合計を返します。\n出力例\n例えば sum_numbers(5) を呼び出すと：\n  1 + 2 + 3 + 4 + 5 = 15\nなので 15 を返します。\nsum_numbers(10) は 55 を、sum_numbers(100) は 5050 を返します。",
+          "description": "forループを使って合計や平均などの集計処理を行う方法を学びます。",
           "available": true
         },
         {
           "id": "03_03_while",
           "number": "03_03",
           "title": "while ループ",
-          "description": "関数 check_guess(secret, guess) を実装しましょう。\nこの関数は数当てゲームのヒントを返します。\n\n  guess が secret より小さければ → \"Too low\" を返す\n  guess が secret より大きければ → \"Too high\" を返す\n  guess が secret と同じなら → \"Correct\" を返す\n\n実行例\n  check_guess(50, 30)  → \"Too low\"\ncheck_guess(50, 70)  → \"Too high\"\ncheck_guess(50, 50)  → \"Correct\"",
+          "description": "whileループを使って条件が満たされる間処理を繰り返す方法を学びます。",
           "available": true
         }
       ]
@@ -111,28 +111,28 @@
           "id": "04_01_list_basic",
           "number": "04_01",
           "title": "リストの基礎",
-          "description": "関数 get_element(fruits, index) を実装しましょう。\nfruits: 果物名の文字列リスト\nindex: 取得したい要素の 0 始まりのインデックス\n指定されたインデックスの要素を返します。インデックスが範囲外の場合は None を返します。\n例\n  get_element([\"apple\", \"banana\", \"orange\"], 0)  → \"apple\"\nget_element([\"apple\", \"banana\", \"orange\"], 2)  → \"orange\"\nget_element([\"apple\", \"banana\"], 5)            → None（範囲外）",
+          "description": "リストの作成・要素へのアクセス・長さの取得など、リストの基本操作を学びます。",
           "available": true
         },
         {
           "id": "04_02_list_advanced",
           "number": "04_02",
           "title": "リストの操作",
-          "description": "関数 find_max(numbers) を実装しましょう。\nnumbers: 数値のリスト（空ではありません）\nリストの中の最大値を返します。ただし、max() 関数は使わず、for ループで全要素を比較して求めてください。\n例\n  find_max([3, 7, 2, 9, 1])    → 9\nfind_max([5])                → 5\nfind_max([-5, -2, -10, -1]) → -1",
+          "description": "要素の追加・削除・ソートなど、リストの応用操作を学びます。",
           "available": true
         },
         {
           "id": "04_03_list_loop",
           "number": "04_03",
           "title": "for ループとリスト",
-          "description": "関数 filter_even(numbers) を実装しましょう。\n整数のリスト numbers を受け取り、偶数のみを含む新しいリストを返します。\n実行例\n  filter_even([1, 2, 3, 4, 5, 6])  # [2, 4, 6]\nfilter_even([1, 3, 5])            # []\nfilter_even([10, 15, 20, 25])     # [10, 20]",
+          "description": "forループとリストを組み合わせて、要素を処理・フィルタリングする方法を学びます。",
           "available": true
         },
         {
           "id": "04_04_dict",
           "number": "04_04",
           "title": "辞書の基礎",
-          "description": "関数 get_score(students, name) を実装しましょう。\nstudents は生徒名をキー、点数を値とする辞書です。name で指定された生徒の点数を返します。\n生徒が辞書に存在しない場合は -1 を返してください。\n実行例\n  students = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nget_score(students, \"Alice\")    # 85\nget_score(students, \"Bob\")      # 92\nget_score(students, \"Dave\")     # -1（存在しない）",
+          "description": "キーと値のペアでデータを管理する辞書の基本的な使い方を学びます。",
           "available": true
         }
       ]
@@ -147,14 +147,14 @@
           "id": "05_01_function_basic",
           "number": "05_01",
           "title": "関数の基礎",
-          "description": "関数 add(a, b) を実装しましょう。\n2つの数値 a と b を受け取り、その合計を return 文で返す関数を作ります。\n実行例\n  print(add(3, 5))    # 8\nprint(add(10, 20))  # 30\nprint(add(-5, 3))   # -2",
+          "description": "def文で関数を定義し、引数と戻り値を使って処理を再利用する方法を学びます。",
           "available": true
         },
         {
           "id": "05_02_function_advanced",
           "number": "05_02",
           "title": "関数の応用",
-          "description": "関数 calculate(a, b, operation=\"add\") を実装しましょう。\n2つの数値 a、b と演算の種類 operation を受け取り、指定された演算の結果を返します。\noperationの種類\n\n  \"add\": a + b を返す（デフォルト）\n  \"subtract\": a - b を返す\n  \"multiply\": a * b を返す\n  \"divide\": a / b を返す（b が 0 のときは None を返す）\n\n実行例\n  print(calculate(10, 5))                  # 15 (デフォルトは加算)\nprint(calculate(10, 5, \"subtract\"))      # 5\nprint(calculate(10, 5, \"multiply\"))      # 50\nprint(calculate(10, 5, \"divide\"))        # 2.0\nprint(calculate(10, 0, \"divide\"))        # None",
+          "description": "デフォルト引数・キーワード引数・複数の戻り値など、関数の応用的な使い方を学びます。",
           "available": true
         }
       ]
@@ -169,28 +169,28 @@
           "id": "06_01_text_game",
           "number": "06_01",
           "title": "テキストベースゲーム",
-          "description": "数当てゲームの中核となる2つの関数を実装しましょう。\n実装する関数\n\n  check_guess(secret, guess)：予想を判定する関数\n  play_round(secret, guesses)：一連の予想リストを処理する関数\n\ncheck_guess の仕様\n\n  guess が secret より小さければ \"Too low\" を返す\n  guess が secret より大きければ \"Too high\" を返す\n  guess が secret と同じなら \"Correct\" を返す\n\nplay_round の仕様\n\n  guesses：予想のリスト（例: [30, 70, 50]）\n  各予想を順に check_guess でチェックする\n  \"Correct\" になったら (試行回数, \"Correct\") のタプルを返す\n  全て外れた場合は (guesses の長さ, 最後の判定結果) を返す",
+          "description": "これまでの知識を活かして、数当てゲームのロジックを実装します。",
           "available": true
         },
         {
           "id": "06_02_data_analysis",
           "number": "06_02",
           "title": "データ集計プログラム",
-          "description": "生徒の成績データを集計する3つの関数を実装しましょう。\n実装する関数\n\n  calculate_average(scores)：各生徒の平均点を計算する\n  find_top_student(averages)：最高平均点の生徒名を返す\n  count_passing(averages, passing_score=60)：合格者数を返す\n\ncalculate_average の仕様\n\n  引数 scores：{\"Alice\": [85, 90, 88], ...} の形式\n  戻り値：{\"Alice\": 87.666..., ...} の形式（各生徒の平均値）\n  sum() と len() を使って平均を計算する\n\nfind_top_student の仕様\n\n  引数 averages：{\"Alice\": 87.67, ...} の形式\n  戻り値：最高平均点の生徒の名前（文字列）\n\ncount_passing の仕様\n\n  引数 averages：{\"Alice\": 87.67, ...} の形式\n  引数 passing_score：合格点（デフォルト 60）\n  戻り値：合格点以上の生徒の数（整数）",
+          "description": "リストと辞書を使って、生徒の成績データを集計・分析するプログラムを作ります。",
           "available": true
         },
         {
           "id": "06_03_file",
           "number": "06_03",
           "title": "ファイル操作の基礎",
-          "description": "メモ帳アプリの基本機能として、テキストファイルを保存・読み込みする2つの関数を実装しましょう。\n\n  save_memo(filename, content)：テキストをファイルに保存する関数\n  load_memo(filename)：ファイルからテキストを読み込む関数",
+          "description": "open()とwith文を使ってテキストファイルの読み書きを行う方法を学びます。",
           "available": true
         },
         {
           "id": "06_04_final_project",
           "number": "06_04",
           "title": "最終プロジェクト：タスク管理アプリ",
-          "description": "タスク管理アプリを完成させましょう！5つの関数を実装してください。\n\n  add_task(tasks, task_name)：タスクをリストに追加して返す\n  complete_task(tasks, task_id)：指定 id のタスクを完了にして返す\n  show_tasks(tasks)：タスク一覧を表示する\n  save_tasks(tasks, filename)：タスクを JSON ファイルに保存する\n  load_tasks(filename)：JSON ファイルからタスクを読み込む\n\nタスクのデータ構造\n各タスクは次の形式の辞書です：{\"id\": 1, \"name\": \"タスク名\", \"completed\": False}",
+          "description": "これまで学んだ全ての知識を組み合わせて、タスク管理アプリを完成させます。",
           "available": true
         }
       ]

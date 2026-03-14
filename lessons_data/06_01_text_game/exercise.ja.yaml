@@ -2,6 +2,7 @@ lesson:
   number: "06_01"
   id: "06_01_text_game"
   title: "テキストベースゲーム"
+description: "これまでの知識を活かして、数当てゲームのロジックを実装します。"
 
 task_description: |
   <p>数当てゲームの中核となる2つの関数を実装しましょう。</p>

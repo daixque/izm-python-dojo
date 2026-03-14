@@ -2,6 +2,7 @@ lesson:
   number: "04_04"
   id: "04_04_dict"
   title: "辞書の基礎"
+description: "キーと値のペアでデータを管理する辞書の基本的な使い方を学びます。"
 
 task_description: |
   <p>関数 <code>get_score(students, name)</code> を実装しましょう。</p>

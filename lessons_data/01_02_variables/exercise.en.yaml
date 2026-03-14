@@ -2,6 +2,7 @@ lesson:
   number: "01_02"  # Chapter_Lesson format
   id: "01_02_variables"
   title: "Variables and Calculations"
+description: "Learn how to assign values to variables and perform basic arithmetic."
 
 task_description: |
   <p>Write a program that assigns your age to a variable, calculates your age in 10 years, and displays it.</p>

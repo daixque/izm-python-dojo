@@ -2,6 +2,7 @@ lesson:
   number: "06_02"
   id: "06_02_data_analysis"
   title: "Data Analysis Program"
+description: "Use lists and dictionaries to build a student grade analysis program."
 
 task_description: |
   <p>Let's implement three functions that analyze student grade data.</p>

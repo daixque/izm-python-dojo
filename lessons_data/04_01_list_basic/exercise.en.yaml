@@ -2,6 +2,7 @@ lesson:
   number: "04_01"
   id: "04_01_list_basic"
   title: "List Basics"
+description: "Learn the basics of lists: creating them, accessing elements, and checking length."
 
 task_description: |
   <p>Implement the function <code>get_element(fruits, index)</code>.</p>

@@ -2,6 +2,7 @@ lesson:
   number: "05_02"
   id: "05_02_function_advanced"
   title: "関数の応用"
+description: "デフォルト引数・キーワード引数・複数の戻り値など、関数の応用的な使い方を学びます。"
 
 task_description: |
   <p>関数 <code>calculate(a, b, operation="add")</code> を実装しましょう。</p>

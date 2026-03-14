@@ -2,6 +2,7 @@ lesson:
   number: "05_02"
   id: "05_02_function_advanced"
   title: "Advanced Functions"
+description: "Learn advanced function features: default arguments, keyword arguments, and multiple return values."
 
 task_description: |
   <p>Implement the function <code>calculate(a, b, operation="add")</code>.</p>

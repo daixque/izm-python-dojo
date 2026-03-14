@@ -2,6 +2,7 @@ lesson:
   number: "01_02"  # チャプター_レッスン形式
   id: "01_02_variables"
   title: "変数と計算"
+description: "変数への代入と数値計算の基本を学びます。"
 
 task_description: |
   <p>自分の年齢を変数に代入し、10年後の年齢を計算して表示するプログラムを書いてみましょう。</p>

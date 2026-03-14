@@ -2,6 +2,7 @@ lesson:
   number: "02_03"
   id: "02_03_logic"
   title: "Logical Operators"
+description: "Learn how to build compound conditions using and, or, and not operators."
 
 task_description: |
   <p>Let's create a program to find who can ride the attraction among 4 people at a theme park.</p>

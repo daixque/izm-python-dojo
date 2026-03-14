@@ -2,6 +2,7 @@ lesson:
   number: "06_01"
   id: "06_01_text_game"
   title: "Text-Based Game"
+description: "Apply your knowledge to build the core logic of a number guessing game."
 
 task_description: |
   <p>Let's implement the two core functions of a number guessing game.</p>

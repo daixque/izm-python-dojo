@@ -2,6 +2,7 @@ lesson:
   number: "02_02"
   id: "02_02_if_else"
   title: "else and elif"
+description: "Learn how to handle multiple conditions using else and elif."
 
 task_description: |
   <p>Complete a rock-paper-scissors game program.</p>

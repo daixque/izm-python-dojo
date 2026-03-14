@@ -2,6 +2,7 @@ lesson:
   number: "04_02"
   id: "04_02_list_advanced"
   title: "List Operations"
+description: "Learn how to add, remove, sort, and search elements in a list."
 
 task_description: |
   <p>Implement the function <code>find_max(numbers)</code>.</p>

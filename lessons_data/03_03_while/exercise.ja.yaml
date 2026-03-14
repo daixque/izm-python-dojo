@@ -2,6 +2,7 @@ lesson:
   number: "03_03"
   id: "03_03_while"
   title: "while ループ"
+description: "whileループを使って条件が満たされる間処理を繰り返す方法を学びます。"
 
 task_description: |
   <p>関数 <code>check_guess(secret, guess)</code> を実装しましょう。</p>

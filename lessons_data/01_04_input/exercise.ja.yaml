@@ -2,6 +2,7 @@ lesson:
   number: "01_04"
   id: "01_04_input"
   title: "ユーザー入力"
+description: "input()関数でユーザーから入力を受け取る方法を学びます。"
 
 task_description: |
   <p><code>input()</code>関数を使って、ユーザーに名前を入力してもらい、挨拶を返すプログラムを書きましょう。</p>

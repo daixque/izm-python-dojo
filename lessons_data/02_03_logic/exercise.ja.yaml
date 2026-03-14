@@ -2,6 +2,7 @@ lesson:
   number: "02_03"
   id: "02_03_logic"
   title: "論理演算子"
+description: "and・or などの論理演算子を使って複合条件を作る方法を学びます。"
 
 task_description: |
   <p>遊園地に来た4人の中で、アトラクションに乗れる人を見つけるプログラムを作りましょう。</p>

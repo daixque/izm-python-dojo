@@ -2,6 +2,7 @@ lesson:
   number: "04_02"
   id: "04_02_list_advanced"
   title: "リストの操作"
+description: "要素の追加・削除・ソートなど、リストの応用操作を学びます。"
 
 task_description: |
   <p>関数 <code>find_max(numbers)</code> を実装しましょう。</p>

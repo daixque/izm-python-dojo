@@ -2,6 +2,7 @@ lesson:
   number: "02_01"
   id: "02_01_if_basic"
   title: "Basics of Conditional Statements"
+description: "Learn how to use if statements to branch program flow based on conditions."
 
 task_description: |
   <p>Create a program that asks the user to enter a number, then determines if it's positive, negative, or zero.</p>

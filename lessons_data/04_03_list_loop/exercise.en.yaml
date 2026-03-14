@@ -2,6 +2,7 @@ lesson:
   number: "04_03"
   id: "04_03_list_loop"
   title: "for Loops and Lists"
+description: "Learn how to combine for loops with lists to process and filter elements."
 
 task_description: |
   <p>Implement the function <code>filter_even(numbers)</code>.</p>

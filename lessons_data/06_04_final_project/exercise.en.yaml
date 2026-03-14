@@ -2,6 +2,7 @@ lesson:
   number: "06_04"
   id: "06_04_final_project"
   title: "Final Project: Task Manager App"
+description: "Combine everything you've learned to build a complete task management app."
 
 task_description: |
   <p>Let's complete the task manager app! Implement the following 5 functions.</p>

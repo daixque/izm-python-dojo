@@ -2,6 +2,7 @@ lesson:
   number: "01_04"
   id: "01_04_input"
   title: "User Input"
+description: "Learn how to receive input from the user using the input() function."
 
 task_description: |
   <p>Use the <code>input()</code> function to ask the user for their name and return a greeting.</p>

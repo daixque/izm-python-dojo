@@ -2,6 +2,7 @@ lesson:
   number: "04_04"
   id: "04_04_dict"
   title: "Dictionary Basics"
+description: "Learn how to use dictionaries to store and retrieve data as key-value pairs."
 
 task_description: |
   <p>Implement the function <code>get_score(students, name)</code>.</p>

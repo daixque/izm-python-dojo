@@ -2,6 +2,7 @@ lesson:
   number: "04_01"
   id: "04_01_list_basic"
   title: "リストの基礎"
+description: "リストの作成・要素へのアクセス・長さの取得など、リストの基本操作を学びます。"
 
 task_description: |
   <p>関数 <code>get_element(fruits, index)</code> を実装しましょう。</p>

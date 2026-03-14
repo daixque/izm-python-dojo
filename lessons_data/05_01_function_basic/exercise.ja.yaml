@@ -2,6 +2,7 @@ lesson:
   number: "05_01"
   id: "05_01_function_basic"
   title: "関数の基礎"
+description: "def文で関数を定義し、引数と戻り値を使って処理を再利用する方法を学びます。"
 
 task_description: |
   <p>関数 <code>add(a, b)</code> を実装しましょう。</p>

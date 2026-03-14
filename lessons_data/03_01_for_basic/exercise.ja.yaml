@@ -2,6 +2,7 @@ lesson:
   number: "03_01"
   id: "03_01_for_basic"
   title: "for ループの基礎"
+description: "forループとrange()を使って決まった回数だけ処理を繰り返す方法を学びます。"
 
 task_description: |
   <p>九九の表を表示する関数 <code>print_multiplication_table(n)</code> を実装しましょう。</p>

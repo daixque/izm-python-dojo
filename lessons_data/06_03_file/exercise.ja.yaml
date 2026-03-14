@@ -2,6 +2,7 @@ lesson:
   number: "06_03"
   id: "06_03_file"
   title: "ファイル操作の基礎"
+description: "open()とwith文を使ってテキストファイルの読み書きを行う方法を学びます。"
 
 task_description: |
   <p>メモ帳アプリの基本機能として、テキストファイルを保存・読み込みする2つの関数を実装しましょう。</p>

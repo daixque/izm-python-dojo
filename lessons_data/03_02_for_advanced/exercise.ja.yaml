@@ -2,6 +2,7 @@ lesson:
   number: "03_02"
   id: "03_02_for_advanced"
   title: "for ループの応用"
+description: "forループを使って合計や平均などの集計処理を行う方法を学びます。"
 
 task_description: |
   <p>関数 <code>sum_numbers(n)</code> を実装しましょう。</p>

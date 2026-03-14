@@ -2,6 +2,7 @@ lesson:
   number: "01_01"  # チャプター_レッスン形式
   id: "01_01_hello"
   title: "はじめてのPython"
+description: "print()関数を使って画面に文字を表示する方法を学びます。"
 
 task_description: |
   <p>「Hello, World!」と表示するプログラムを書いてみましょう。</p>

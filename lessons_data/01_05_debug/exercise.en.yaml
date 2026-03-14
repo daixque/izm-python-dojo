@@ -2,6 +2,7 @@ lesson:
   number: "01_05"
   id: "01_05_debug"
   title: "Debugging Basics"
+description: "Learn how to read error messages and fix bugs using basic debugging techniques."
 
 task_description: |
   <p>The following code has 3 bugs. Read the error messages and fix all the bugs.</p>

@@ -2,6 +2,7 @@ lesson:
   number: "04_03"
   id: "04_03_list_loop"
   title: "for ループとリスト"
+description: "forループとリストを組み合わせて、要素を処理・フィルタリングする方法を学びます。"
 
 task_description: |
   <p>関数 <code>filter_even(numbers)</code> を実装しましょう。</p>

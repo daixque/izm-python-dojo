@@ -2,6 +2,7 @@ lesson:
   number: "06_03"
   id: "06_03_file"
   title: "File Operations Basics"
+description: "Learn how to read and write text files using open() and the with statement."
 
 task_description: |
   <p>As a basic feature of a memo app, implement two functions to save and load text files.</p>

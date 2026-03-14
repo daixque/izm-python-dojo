@@ -2,6 +2,7 @@ lesson:
   number: "02_02"
   id: "02_02_if_else"
   title: "else と elif"
+description: "else・elif を使って複数の条件に応じた処理を実装する方法を学びます。"
 
 task_description: |
   <p>じゃんけんゲームのプログラムを完成させましょう。</p>

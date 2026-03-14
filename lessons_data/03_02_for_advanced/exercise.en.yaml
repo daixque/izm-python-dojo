@@ -2,6 +2,7 @@ lesson:
   number: "03_02"
   id: "03_02_for_advanced"
   title: "Advanced for Loops"
+description: "Learn how to use for loops to calculate sums and averages."
 
 task_description: |
   <p>Implement the function <code>sum_numbers(n)</code>.</p>
