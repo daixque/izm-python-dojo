@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン03_02: for ループの応用</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">for ループの応用</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔢 range() の応用</h2>
+  <p>前のレッスンでは <code>range()</code> の基本を学びました。</p>
+  <p>このレッスンでは <code>range(開始, 終了, ステップ)</code> の3つの引数を使いこなします。</p>
+  <p><strong>ステップ</strong>とは、数を何ずつ増やすかを指定する値です。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">偶数だけを表示する（ステップ 2）</div>
+    <div class="example-code">for i in range(0, 10, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：0, 2, 4, 6, 8</div>
+    <div class="example-explanation">
+      <code>range(0, 10, 2)</code> は 0 から始まり、2 ずつ増えて 9 未満の数を生成します。<br>
+      ステップに 2 を指定することで偶数だけを取り出せます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">カウントダウン（ステップ -1）</div>
+    <div class="example-code">for i in range(10, 0, -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：10, 9, 8, 7, 6, 5, 4, 3, 2, 1</div>
+    <div class="example-explanation">
+      ステップに負の値を指定すると、数が減っていきます。<br>
+      <code>range(10, 0, -1)</code> は 10 から 1 まで 1 ずつ減ります（0 は含まれません）。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">5 の倍数を表示する（ステップ 5）</div>
+    <div class="example-code">for i in range(5, 26, 5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：5, 10, 15, 20, 25</div>
+    <div class="example-explanation">
+      <code>range(5, 26, 5)</code> は 5 から始まり、5 ずつ増えて 25 まで生成します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🧮 ループ内での計算 - 合計の求め方</h2>
+  <p>ループを使うと、たくさんの数の合計を簡単に計算できます。</p>
+  <p>ポイントは <strong>合計用変数（アキュムレータ）</strong> を使うことです。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">1 から 5 の合計を計算する</div>
+    <div class="example-code">total = 0<br>for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>print(total)<br># 出力：15</div>
+    <div class="example-explanation">
+      <strong>手順：</strong><br>
+      1. <code>total = 0</code> で合計用変数を初期化する<br>
+      2. ループのたびに <code>total += i</code> で <code>i</code> を加算する<br>
+      3. ループが終わったら <code>total</code> に合計が入っている<br>
+      <br>
+      <code>+=</code> は「今の値に加える」という意味です（<code>total = total + i</code> と同じ）。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">カウンター変数パターン</div>
+    <div class="example-code">count = 0<br>for i in range(1, 11):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(f"偶数の個数: {count}")<br># 出力：偶数の個数: 5</div>
+    <div class="example-explanation">
+      合計だけでなく、条件に合う要素の<strong>個数を数える</strong>こともできます。<br>
+      <code>%</code> は余りを求める演算子です。<code>i % 2 == 0</code> で偶数を判定します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 平均の計算</h2>
+  <p>合計が求まれば、個数で割ることで<strong>平均</strong>も計算できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">1 から 10 の平均を計算する</div>
+    <div class="example-code">total = 0<br>n = 10<br>for i in range(1, n + 1):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>average = total / n<br>print(f"合計: {total}")<br>print(f"平均: {average}")<br># 出力：合計: 55<br># &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平均: 5.5</div>
+    <div class="example-explanation">
+      <strong>合計 ÷ 個数 = 平均</strong> の公式をコードで表現しています。<br>
+      <code>range(1, n + 1)</code> で 1 から n まで繰り返します（n + 1 は含まれないため）。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>range(開始, 終了, ステップ)</code> で増減の間隔を指定できる</li>
+    <li>ステップを負にするとカウントダウンできる</li>
+    <li>合計を求めるには <code>total = 0</code> で初期化してから <code>total += i</code> で加算する</li>
+    <li><code>+=</code> は「今の値に加える」演算子（<code>x += 1</code> は <code>x = x + 1</code> と同じ）</li>
+    <li>合計 ÷ 個数 で平均が求まる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

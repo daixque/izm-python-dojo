@@ -1,0 +1,31 @@
+lesson:
+  number: "05_01"
+  id: "05_01_function_basic"
+  title: "関数の基礎"
+
+task_description: |
+  <p>関数 <code>add(a, b)</code> を実装しましょう。</p>
+  <p>2つの数値 <code>a</code> と <code>b</code> を受け取り、その<strong>合計を return 文で返す</strong>関数を作ります。</p>
+  <h3>実行例</h3>
+  <pre>  print(add(3, 5))    # 8
+  print(add(10, 20))  # 30
+  print(add(-5, 3))   # -2</pre>
+
+instructions:
+  - "関数定義 <code>def add(a, b):</code> は用意済みです。関数の中身を実装してください"
+  - "<code>a</code> と <code>b</code> を足した結果を計算します"
+  - "<code>return</code> 文を使って計算結果を返します"
+
+hints:
+  - hint: |
+      <code>return</code> 文の使い方：<br>
+      <code>def add(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      <code>???</code> の部分に <code>a</code> と <code>b</code> を足す式を書きます。
+  - hint: |
+      足し算は <code>+</code> 演算子を使います：<br>
+      <code>a + b</code> で <code>a</code> と <code>b</code> の合計が計算できます。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def add(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return a + b</code>

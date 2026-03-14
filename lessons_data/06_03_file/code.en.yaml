@@ -1,0 +1,119 @@
+initial_code: |
+  def save_memo(filename, content):
+      # Write your code here
+      # Use: with open(filename, 'w', encoding='utf-8') as f:
+      # Then: f.write(content) to write to the file
+      pass
+
+  def load_memo(filename):
+      # Write your code here
+      # Use try: to open the file and return f.read()
+      # Use except FileNotFoundError: to return None
+      pass
+
+  # Test run
+  save_memo("memo.txt", "This is a memo")
+  content = load_memo("memo.txt")
+  print(content)  # "This is a memo"
+
+  missing = load_memo("notfound.txt")
+  print(missing)  # None
+
+solution_code: |
+  def save_memo(filename, content):
+      with open(filename, 'w', encoding='utf-8') as f:
+          f.write(content)
+
+  def load_memo(filename):
+      try:
+          with open(filename, 'r', encoding='utf-8') as f:
+              return f.read()
+      except FileNotFoundError:
+          return None
+
+  # Test run
+  save_memo("memo.txt", "This is a memo")
+  content = load_memo("memo.txt")
+  print(content)
+
+  missing = load_memo("notfound.txt")
+  print(missing)
+
+initial_files: []
+
+tests:
+  - name: "Does save_memo work?"
+    description: "Call save_memo and verify the file is saved correctly"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("test_save.txt", "test content")
+
+          with open("test_save.txt", 'r', encoding='utf-8') as f:
+              saved = f.read()
+
+          if saved == "test content":
+              result = {"passed": True, "message": "✓ File saving is working correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Saved content is incorrect. Expected: 'test content', Actual: '{saved}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Can load_memo read saved content?"
+    description: "Verify that load_memo correctly reads content saved by save_memo"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("test_load.txt", "load test")
+          loaded = exec_globals['load_memo']("test_load.txt")
+
+          if loaded == "load test":
+              result = {"passed": True, "message": "✓ File reading is working correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Loaded content is incorrect. Expected: 'load test', Actual: '{loaded}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Does load_memo return None for missing files?"
+    description: "Verify that None is returned when trying to read a non-existent file"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          result_val = exec_globals['load_memo']("nonexistent_12345.txt")
+
+          if result_val is None:
+              result = {"passed": True, "message": "✓ Non-existent files return None"}
+          else:
+              result = {"passed": False, "message": f"✗ Non-existent files should return None. Actual: {result_val}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Can multiple memos be saved and loaded?"
+    description: "Verify that multiple files can each be correctly saved and loaded"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("memo1.txt", "Memo 1")
+          exec_globals['save_memo']("memo2.txt", "Memo 2")
+
+          content1 = exec_globals['load_memo']("memo1.txt")
+          content2 = exec_globals['load_memo']("memo2.txt")
+
+          if content1 == "Memo 1" and content2 == "Memo 2":
+              result = {"passed": True, "message": "✓ Multiple files are saved and loaded correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Multiple file handling is incorrect. memo1='{content1}', memo2='{content2}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

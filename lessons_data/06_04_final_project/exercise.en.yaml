@@ -1,0 +1,41 @@
+lesson:
+  number: "06_04"
+  id: "06_04_final_project"
+  title: "Final Project: Task Manager App"
+
+task_description: |
+  <p>Let's complete the task manager app! Implement the following 5 functions.</p>
+  <ol>
+    <li><strong>add_task(tasks, task_name)</strong>: Add a task to the list and return it</li>
+    <li><strong>complete_task(tasks, task_id)</strong>: Mark the task with the given id as complete and return the list</li>
+    <li><strong>show_tasks(tasks)</strong>: Display all tasks</li>
+    <li><strong>save_tasks(tasks, filename)</strong>: Save tasks to a JSON file</li>
+    <li><strong>load_tasks(filename)</strong>: Load tasks from a JSON file</li>
+  </ol>
+  <h3>Task Data Structure</h3>
+  <p>Each task is a dictionary in this format: <code>{"id": 1, "name": "Task name", "completed": False}</code></p>
+
+instructions:
+  - "<code>add_task</code>: Calculate the new id with <code>max([t['id'] for t in tasks], default=0) + 1</code>"
+  - "<code>complete_task</code>: Loop through tasks to find the matching id and set <code>completed</code> to <code>True</code>"
+  - "<code>show_tasks</code>: Display completed tasks as <code>[✓] id: name</code> and incomplete as <code>[ ] id: name</code>"
+  - "<code>save_tasks</code>: Use <code>json.dump(tasks, f, ensure_ascii=False, indent=2)</code>"
+  - "<code>load_tasks</code>: Use <code>json.load(f)</code> to load, return an empty list if the file doesn't exist"
+  - "There is an <code>import json</code> at the top of the file. Do not remove it"
+
+hints:
+  - hint: |
+      Calculating the new id in <code>add_task</code>:<br>
+      <code>new_id = max([t["id"] for t in tasks], default=0) + 1</code><br>
+      <code>tasks.append({"id": new_id, "name": task_name, "completed": False})</code>
+  - hint: |
+      Loop in <code>complete_task</code>:<br>
+      <code>for task in tasks:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if task["id"] == task_id:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>task["completed"] = True</code>
+  - hint: |
+      Display in <code>show_tasks</code>:<br>
+      <code>status = "✓" if task["completed"] else " "</code><br>
+      <code>print(f"[{status}] {task['id']}: {task['name']}")</code>
+  - hint: |
+      <code>save_tasks</code> and <code>load_tasks</code> follow the same pattern as the previous file operations lesson. Use <code>json.dump()</code> instead of <code>f.write()</code>, and <code>json.load()</code> instead of <code>f.read()</code>.

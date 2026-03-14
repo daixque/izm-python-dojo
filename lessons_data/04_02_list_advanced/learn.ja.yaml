@@ -1,0 +1,132 @@
+lesson:
+  number: "04_02"
+  id: "04_02_list_advanced"
+  title: "リストの操作"
+
+content: |
+  <section class="section">
+    <h2>📋 リストをもっと使いこなす</h2>
+    <p>前のレッスンでリストの基本を学びました。このレッスンでは、リストに要素を追加・削除したり、並び替えたりする方法を学びます。</p>
+  </section>
+
+  <section class="section">
+    <h2>➕ 要素の追加: append() と insert()</h2>
+    <p>リストに新しい要素を追加する方法は2つあります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">append(): 末尾に追加</div>
+      <div class="example-code">fruits = ["apple", "banana"]<br>fruits.append("orange")<br>print(fruits)  # ['apple', 'banana', 'orange']<br><br>fruits.append("grape")<br>print(fruits)  # ['apple', 'banana', 'orange', 'grape']</div>
+      <div class="example-explanation">
+        <code>append(値)</code> はリストの<strong>末尾</strong>に要素を追加します。<br>
+        最もよく使うリストへの追加方法です。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">insert(): 指定した位置に追加</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>fruits.insert(1, "grape")  # インデックス1の位置に挿入<br>print(fruits)  # ['apple', 'grape', 'banana', 'orange']</div>
+      <div class="example-explanation">
+        <code>insert(インデックス, 値)</code> は指定した位置に要素を挿入します。<br>
+        既存の要素は後ろにずれます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>➖ 要素の削除: remove() と pop()</h2>
+    <p>リストから要素を削除する方法も2つあります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">remove(): 値を指定して削除</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>fruits.remove("banana")<br>print(fruits)  # ['apple', 'orange']</div>
+      <div class="example-explanation">
+        <code>remove(値)</code> は指定した値を持つ要素を削除します。<br>
+        同じ値が複数ある場合は、最初に見つかったものだけ削除されます。<br>
+        存在しない値を指定すると <code>ValueError</code> エラーになります。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">pop(): インデックスを指定して削除（値を返す）</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>removed = fruits.pop(1)  # インデックス1を削除して返す<br>print(removed)  # banana<br>print(fruits)   # ['apple', 'orange']<br><br>last = fruits.pop()  # 引数なしで末尾を削除<br>print(last)   # orange<br>print(fruits) # ['apple']</div>
+      <div class="example-explanation">
+        <code>pop(インデックス)</code> は指定したインデックスの要素を削除し、その値を返します。<br>
+        引数なしの <code>pop()</code> は末尾の要素を削除します。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✂️ スライス: リストの一部を取り出す</h2>
+    <p><strong>スライス</strong>を使うと、リストの一部を切り出して新しいリストを作れます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">スライスの基本</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange", "grape", "melon"]<br>print(fruits[1:3])   # ['banana', 'orange']（1番目から2番目まで）<br>print(fruits[0:2])   # ['apple', 'banana']（0番目から1番目まで）<br>print(fruits[2:])    # ['orange', 'grape', 'melon']（2番目以降）<br>print(fruits[:3])    # ['apple', 'banana', 'orange']（3番目未満）</div>
+      <div class="example-explanation">
+        <code>リスト[開始:終了]</code> で開始インデックスから終了インデックス<strong>の手前まで</strong>を取り出します。<br>
+        開始を省略すると先頭から、終了を省略すると末尾まで取り出せます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔤 ソート: sort() と sorted()</h2>
+    <p>リストの要素を並び替える方法が2つあります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">sort(): リスト自体を並び替える</div>
+      <div class="example-code">numbers = [3, 1, 4, 1, 5, 9, 2, 6]<br>numbers.sort()<br>print(numbers)  # [1, 1, 2, 3, 4, 5, 6, 9]<br><br>numbers.sort(reverse=True)  # 降順<br>print(numbers)  # [9, 6, 5, 4, 3, 2, 1, 1]</div>
+      <div class="example-explanation">
+        <code>sort()</code> はリスト自体を並び替えます（<strong>元のリストが変わります</strong>）。<br>
+        <code>reverse=True</code> を指定すると降順（大きい順）になります。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">sorted(): 新しいリストを返す</div>
+      <div class="example-code">numbers = [3, 1, 4, 1, 5, 9, 2, 6]<br>sorted_numbers = sorted(numbers)<br>print(sorted_numbers)  # [1, 1, 2, 3, 4, 5, 6, 9]<br>print(numbers)         # [3, 1, 4, 1, 5, 9, 2, 6]（元は変わらない）</div>
+      <div class="example-explanation">
+        <code>sorted(リスト)</code> は並び替えた<strong>新しいリスト</strong>を返します。<br>
+        元のリストは変わらないので、元のデータを保持したい場合に使います。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔍 in 演算子: 要素の検索</h2>
+    <p><code>in</code> 演算子を使うと、リストに特定の値が含まれているか調べられます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">in 演算子の使い方</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br><br>print("apple" in fruits)   # True（含まれる）<br>print("grape" in fruits)   # False（含まれない）<br>print("grape" not in fruits)  # True（含まれない）<br><br>if "banana" in fruits:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("バナナがあります！")</div>
+      <div class="example-explanation">
+        <code>値 in リスト</code> は値がリストに含まれるとき <code>True</code>、含まれないとき <code>False</code> を返します。<br>
+        <code>not in</code> を使うと「含まれない」かどうかを確認できます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>append(値)</code>: 末尾に要素を追加</li>
+      <li><code>insert(インデックス, 値)</code>: 指定位置に要素を挿入</li>
+      <li><code>remove(値)</code>: 値を指定して削除</li>
+      <li><code>pop(インデックス)</code>: インデックスを指定して削除（値を返す）</li>
+      <li><code>リスト[開始:終了]</code>: スライスで一部を取り出す</li>
+      <li><code>sort()</code>: リスト自体を並び替える</li>
+      <li><code>sorted(リスト)</code>: 並び替えた新しいリストを返す</li>
+      <li><code>値 in リスト</code>: 要素が含まれるか検索する</li>
+    </ul>
+  </section>

@@ -1,0 +1,100 @@
+initial_code: |
+  def sum_numbers(n):
+      total = 0
+      # ここにコードを書いてください
+      # for ループで 1 から n まで繰り返し、total に加算する
+      return total
+
+  print(sum_numbers(5))   # 15 になるはず
+  print(sum_numbers(10))  # 55 になるはず
+
+solution_code: |
+  def sum_numbers(n):
+      total = 0
+      for i in range(1, n + 1):
+          total += i
+      return total
+
+  print(sum_numbers(5))
+  print(sum_numbers(10))
+
+initial_files: []
+
+tests:
+  - name: "sum_numbers(5) のテスト"
+    description: "1 から 5 の合計が 15 になるか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 sum_numbers が定義されていません"}
+          else:
+              test_result = exec_globals['sum_numbers'](5)
+              if test_result == 15:
+                  result = {"passed": True, "message": "✓ sum_numbers(5) = 15 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(5) は 15 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "sum_numbers(10) のテスト"
+    description: "1 から 10 の合計が 55 になるか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 sum_numbers が定義されていません"}
+          else:
+              test_result = exec_globals['sum_numbers'](10)
+              if test_result == 55:
+                  result = {"passed": True, "message": "✓ sum_numbers(10) = 55 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(10) は 55 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "sum_numbers(100) のテスト"
+    description: "1 から 100 の合計が 5050 になるか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 sum_numbers が定義されていません"}
+          else:
+              test_result = exec_globals['sum_numbers'](100)
+              if test_result == 5050:
+                  result = {"passed": True, "message": "✓ sum_numbers(100) = 5050 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(100) は 5050 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "戻り値の型チェック"
+    description: "関数が None ではなく数値を返しているか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 sum_numbers が定義されていません"}
+          else:
+              test_result = exec_globals['sum_numbers'](5)
+              if isinstance(test_result, (int, float)):
+                  result = {"passed": True, "message": "✓ 関数が正しく数値を返しています"}
+              elif test_result is None:
+                  result = {"passed": False, "message": "✗ 関数が None を返しています。return total を忘れていませんか？"}
+              else:
+                  result = {"passed": False, "message": f"✗ 関数が数値ではなく {type(test_result).__name__} を返しています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

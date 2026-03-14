@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン04_01: リストの基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">リストの基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>📋 リストとは</h2>
+  <p>プログラムでは、複数のデータをまとめて扱いたいことがよくあります。</p>
+  <p>例えば、果物の名前を5つ管理したいとき、変数を5つ用意するのは大変です。</p>
+  <p><strong>リスト（list）</strong>を使えば、複数のデータを1つの変数にまとめることができます。</p>
+</section>
+
+<section class="section">
+  <h2>📝 リストの作成</h2>
+  <p>リストは <code>[ ]</code>（角かっこ）の中に、カンマ区切りでデータを並べて作ります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">リストの作成と表示</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits)<br># 出力: ['apple', 'banana', 'orange']</div>
+    <div class="example-explanation">
+      3つの果物名をリストにまとめました。<br>
+      <strong>ポイント：</strong><br>
+      - <code>[ ]</code> の中にデータを並べる<br>
+      - データはカンマ <code>,</code> で区切る<br>
+      - 文字列は <code>" "</code> で囲む
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">数値のリスト</div>
+    <div class="example-code">scores = [85, 92, 78, 95, 60]<br>print(scores)<br># 出力: [85, 92, 78, 95, 60]</div>
+    <div class="example-explanation">
+      数値もリストにまとめられます。文字列と違い、<code>" "</code> は不要です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔢 インデックスによる要素へのアクセス</h2>
+  <p>リストの各要素には、<strong>インデックス（番号）</strong>でアクセスできます。</p>
+  <p>インデックスは <strong>0 から始まります</strong>（0始まり）。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">インデックスアクセス（正のインデックス）</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[0])  # apple（1番目）<br>print(fruits[1])  # banana（2番目）<br>print(fruits[2])  # orange（3番目）</div>
+    <div class="example-explanation">
+      <strong>重要：</strong> 最初の要素のインデックスは <code>1</code> ではなく <code>0</code> です。<br>
+      <code>fruits[0]</code> → "apple"（先頭）<br>
+      <code>fruits[1]</code> → "banana"（2番目）<br>
+      <code>fruits[2]</code> → "orange"（3番目）
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">負のインデックス（末尾からアクセス）</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[-1])  # orange（最後）<br>print(fruits[-2])  # banana（最後から2番目）<br>print(fruits[-3])  # apple（最後から3番目）</div>
+    <div class="example-explanation">
+      <code>-1</code> は最後の要素、<code>-2</code> は最後から2番目の要素です。<br>
+      リストの長さを知らなくても最後の要素にアクセスできます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📏 リストの長さ: len()</h2>
+  <p><code>len()</code> 関数でリストに含まれる要素の数（長さ）を取得できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">len() の使い方</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(len(fruits))  # 3<br><br>scores = [85, 92, 78, 95, 60]<br>print(len(scores))  # 5</div>
+    <div class="example-explanation">
+      <code>len(リスト)</code> でリストの要素数が返ります。<br>
+      最後の要素のインデックスは <code>len(リスト) - 1</code> です。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">インデックスの範囲確認</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>n = len(fruits)  # 3<br>print(n - 1)     # 2（最後のインデックス）<br><br># 有効なインデックス: 0, 1, 2<br># fruits[3] → エラー！（範囲外）</div>
+    <div class="example-explanation">
+      <strong>注意：</strong> 範囲外のインデックスを指定すると <code>IndexError</code> エラーが発生します。<br>
+      有効なインデックスは <code>0</code> から <code>len(リスト) - 1</code> までです。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✏️ リストの要素を変更する</h2>
+  <p>インデックスを使って、リストの特定の要素を書き換えることができます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">要素の変更</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[0])  # apple<br><br>fruits[0] = "grape"  # 1番目を変更<br>print(fruits[0])  # grape<br>print(fruits)     # ['grape', 'banana', 'orange']</div>
+    <div class="example-explanation">
+      <code>リスト[インデックス] = 新しい値</code> で要素を変更できます。<br>
+      変数への代入と同じ要領で書き換えられます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li>リストは <code>[ ]</code> でデータをまとめる仕組み</li>
+    <li>インデックスは <strong>0 から始まる</strong>（0始まり）</li>
+    <li><code>リスト[0]</code> で最初の要素、<code>リスト[-1]</code> で最後の要素</li>
+    <li><code>len(リスト)</code> で要素の数を取得できる</li>
+    <li><code>リスト[インデックス] = 値</code> で要素を変更できる</li>
+    <li>範囲外のインデックスは <code>IndexError</code> エラーになる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

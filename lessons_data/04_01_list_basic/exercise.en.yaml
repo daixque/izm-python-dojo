@@ -1,0 +1,43 @@
+lesson:
+  number: "04_01"
+  id: "04_01_list_basic"
+  title: "List Basics"
+
+task_description: |
+  <p>Implement the function <code>get_element(fruits, index)</code>.</p>
+  <p><strong>fruits</strong>: a list of fruit name strings<br>
+  <strong>index</strong>: the zero-based index of the element to retrieve</p>
+  <p>Return the element at the given index. If the index is out of range, return <code>None</code>.</p>
+  <h3>Examples</h3>
+  <pre>  get_element(["apple", "banana", "orange"], 0)  → "apple"
+  get_element(["apple", "banana", "orange"], 2)  → "orange"
+  get_element(["apple", "banana"], 5)            → None (out of range)</pre>
+
+instructions:
+  - "The function definition is already provided. Implement its body."
+  - "Use <code>if 0 <= index < len(fruits):</code> to check whether the index is within the valid range"
+  - "If valid, return <code>fruits[index]</code>"
+  - "If out of range, return <code>None</code> (use <code>return None</code> or <code>else: return None</code>)"
+
+hints:
+  - hint: |
+      To check whether the index is valid:<br>
+      <code>if 0 <= index < len(fruits):</code><br>
+      This checks that index is at least 0 and less than the length of the list in one step.
+  - hint: |
+      Structure of the conditional:<br>
+      <code>if 0 <= index < len(fruits):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return fruits[index]</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>
+  - hint: |
+      <code>len(fruits)</code> returns the number of elements in the list.<br>
+      For example, <code>["apple", "banana", "orange"]</code> has <code>len() = 3</code>.<br>
+      Valid indexes are 0, 1, 2 (index 3 is out of range).
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def get_element(fruits, index):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if 0 <= index < len(fruits):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return fruits[index]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>

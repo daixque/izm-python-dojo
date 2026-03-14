@@ -1,0 +1,98 @@
+initial_code: |
+  def find_max(numbers):
+      max_value = numbers[0]  # 最初の要素を最大値として初期化
+      # ここにコードを書いてください
+      # for ループで numbers の各要素を確認し、
+      # max_value より大きければ max_value を更新する
+      return max_value
+
+  print(find_max([3, 7, 2, 9, 1]))      # 9
+  print(find_max([5]))                   # 5
+  print(find_max([-5, -2, -10, -1]))    # -1
+
+solution_code: |
+  def find_max(numbers):
+      max_value = numbers[0]
+      for num in numbers:
+          if num > max_value:
+              max_value = num
+      return max_value
+
+  print(find_max([3, 7, 2, 9, 1]))
+  print(find_max([5]))
+  print(find_max([-5, -2, -10, -1]))
+
+initial_files: []
+
+tests:
+  - name: "複数要素リストの最大値"
+    description: "find_max([3, 7, 2, 9, 1]) が 9 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 find_max が定義されていません"}
+          else:
+              test_result = exec_globals['find_max']([3, 7, 2, 9, 1])
+              if test_result == 9:
+                  result = {"passed": True, "message": "✓ [3, 7, 2, 9, 1] の最大値 9 が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 9, 実際の値: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "1要素リストの最大値"
+    description: "find_max([5]) が 5 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 find_max が定義されていません"}
+          else:
+              test_result = exec_globals['find_max']([5])
+              if test_result == 5:
+                  result = {"passed": True, "message": "✓ [5] の最大値 5 が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 5, 実際の値: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "負の数リストの最大値"
+    description: "find_max([-5, -2, -10, -1]) が -1 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 find_max が定義されていません"}
+          else:
+              test_result = exec_globals['find_max']([-5, -2, -10, -1])
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ [-5, -2, -10, -1] の最大値 -1 が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: -1, 実際の値: {test_result}（すべて負の数のリストでも正しく最大値を求めてください）"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "同じ値のリストの最大値"
+    description: "find_max([1, 1, 1]) が 1 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 find_max が定義されていません"}
+          else:
+              test_result = exec_globals['find_max']([1, 1, 1])
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ [1, 1, 1] の最大値 1 が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 1, 実際の値: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

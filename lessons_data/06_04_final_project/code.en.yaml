@@ -1,0 +1,162 @@
+initial_code: |
+  import json
+
+  def add_task(tasks, task_name):
+      # Write your code here
+      # Calculate new id (1 if tasks is empty, otherwise max id + 1)
+      # Append {"id": new_id, "name": task_name, "completed": False} to tasks
+      # Return tasks
+      pass
+
+  def complete_task(tasks, task_id):
+      # Write your code here
+      # Find the task with the matching task_id and set completed to True
+      # Return tasks
+      pass
+
+  def show_tasks(tasks):
+      # Write your code here
+      # Display each task as "[✓] id: name" or "[ ] id: name"
+      pass
+
+  def save_tasks(tasks, filename):
+      # Write your code here
+      # Use json.dump() to save tasks to a file
+      pass
+
+  def load_tasks(filename):
+      # Write your code here
+      # Use json.load() to read from a file and return it
+      # Return an empty list if FileNotFoundError occurs
+      pass
+
+  # Test run
+  tasks = []
+  tasks = add_task(tasks, "Study Python")
+  tasks = add_task(tasks, "Go shopping")
+  show_tasks(tasks)
+  tasks = complete_task(tasks, 1)
+  show_tasks(tasks)
+
+solution_code: |
+  import json
+
+  def add_task(tasks, task_name):
+      new_id = max([t["id"] for t in tasks], default=0) + 1
+      tasks.append({"id": new_id, "name": task_name, "completed": False})
+      return tasks
+
+  def complete_task(tasks, task_id):
+      for task in tasks:
+          if task["id"] == task_id:
+              task["completed"] = True
+      return tasks
+
+  def show_tasks(tasks):
+      for task in tasks:
+          status = "✓" if task["completed"] else " "
+          print(f"[{status}] {task['id']}: {task['name']}")
+
+  def save_tasks(tasks, filename):
+      with open(filename, 'w', encoding='utf-8') as f:
+          json.dump(tasks, f, ensure_ascii=False, indent=2)
+
+  def load_tasks(filename):
+      try:
+          with open(filename, 'r', encoding='utf-8') as f:
+              return json.load(f)
+      except FileNotFoundError:
+          return []
+
+  # Test run
+  tasks = []
+  tasks = add_task(tasks, "Study Python")
+  tasks = add_task(tasks, "Go shopping")
+  show_tasks(tasks)
+  tasks = complete_task(tasks, 1)
+  show_tasks(tasks)
+
+initial_files: []
+
+tests:
+  - name: "Does add_task work correctly?"
+    description: "Verify that after adding one task, id, name, and completed are set correctly"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = []
+          tasks = exec_globals['add_task'](tasks, "Test task")
+          if len(tasks) == 1 and tasks[0]["name"] == "Test task" and tasks[0]["id"] == 1 and tasks[0]["completed"] == False:
+              result = {"passed": True, "message": "✓ Task was added correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Task addition is incorrect. Actual: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Do ids increment when adding multiple tasks?"
+    description: "Verify that when adding 2 tasks, their ids are 1 and 2 respectively"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = []
+          tasks = exec_globals['add_task'](tasks, "Task 1")
+          tasks = exec_globals['add_task'](tasks, "Task 2")
+          if len(tasks) == 2 and tasks[0]["id"] == 1 and tasks[1]["id"] == 2:
+              result = {"passed": True, "message": "✓ Multiple task ids are assigned correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Ids are incorrect. Actual: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Does complete_task work correctly?"
+    description: "Verify that the completed field of the specified task becomes True"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = [{"id": 1, "name": "Task 1", "completed": False}]
+          tasks = exec_globals['complete_task'](tasks, 1)
+          if tasks[0]["completed"] == True:
+              result = {"passed": True, "message": "✓ Task was marked as complete correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Task was not marked as complete. Actual: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Do save_tasks and load_tasks work?"
+    description: "Verify that saving tasks to a JSON file and loading them back yields the same data"
+    code: |
+      try:
+          import json as _json
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = [{"id": 1, "name": "Save test", "completed": False}]
+          exec_globals['save_tasks'](tasks, "test_tasks.json")
+          loaded = exec_globals['load_tasks']("test_tasks.json")
+          if loaded == tasks:
+              result = {"passed": True, "message": "✓ Task saving and loading works correctly"}
+          else:
+              result = {"passed": False, "message": f"✗ Saving and loading is incorrect. Expected: {tasks}, Actual: {loaded}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Does load_tasks return an empty list when file is missing?"
+    description: "Verify that an empty list is returned when trying to load a non-existent JSON file"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          loaded = exec_globals['load_tasks']("nonexistent_tasks_99999.json")
+          if loaded == []:
+              result = {"passed": True, "message": "✓ Returns an empty list when file does not exist"}
+          else:
+              result = {"passed": False, "message": f"✗ Should return an empty list. Actual: {loaded}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

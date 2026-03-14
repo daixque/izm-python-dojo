@@ -1,0 +1,58 @@
+lesson:
+  number: "06_01"
+  id: "06_01_text_game"
+  title: "Text-Based Game"
+
+task_description: |
+  <p>Let's implement the two core functions of a number guessing game.</p>
+  <h3>Functions to Implement</h3>
+  <ul>
+    <li><strong>check_guess(secret, guess)</strong>: A function that judges a guess</li>
+    <li><strong>play_round(secret, guesses)</strong>: A function that processes a list of guesses</li>
+  </ul>
+  <h3>Specification for check_guess</h3>
+  <ul>
+    <li>If <code>guess</code> is less than <code>secret</code>, return <code>"Too low"</code></li>
+    <li>If <code>guess</code> is greater than <code>secret</code>, return <code>"Too high"</code></li>
+    <li>If <code>guess</code> equals <code>secret</code>, return <code>"Correct"</code></li>
+  </ul>
+  <h3>Specification for play_round</h3>
+  <ul>
+    <li><code>guesses</code>: a list of guesses (e.g., <code>[30, 70, 50]</code>)</li>
+    <li>Check each guess in order using <code>check_guess</code></li>
+    <li>When <code>"Correct"</code> is found, return a tuple <strong>(number of attempts, "Correct")</strong></li>
+    <li>If all guesses are wrong, return <strong>(length of guesses, last judgment result)</strong></li>
+  </ul>
+
+instructions:
+  - "Implement <code>check_guess(secret, guess)</code>: use <code>if</code>/<code>elif</code>/<code>else</code> to handle the three cases"
+  - "Implement <code>play_round(secret, guesses)</code>: process each guess using a <code>for</code> loop"
+  - "Using <code>enumerate(guesses, 1)</code> makes it easy to track attempt counts starting from 1"
+  - "Return the tuple as soon as <code>\"Correct\"</code> is found"
+  - "After the loop, return a tuple with the last judgment result if no guess was correct"
+
+hints:
+  - hint: |
+      Basic structure of <code>check_guess</code>:<br>
+      <code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      <code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+  - hint: |
+      For <code>play_round</code>, using <code>enumerate</code> is helpful:<br>
+      <code>for i, guess in enumerate(guesses, 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = check_guess(secret, guess)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if result == "Correct":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return (i, "Correct")</code>
+  - hint: |
+      After the loop (all guesses were wrong):<br>
+      <code>return (len(guesses), check_guess(secret, guesses[-1]))</code><br>
+      <code>guesses[-1]</code> accesses the last element of the list.
+  - hint: |
+      Expected results for the test runs:<br>
+      <code>check_guess(50, 30)</code> → <code>"Too low"</code><br>
+      <code>check_guess(50, 70)</code> → <code>"Too high"</code><br>
+      <code>check_guess(50, 50)</code> → <code>"Correct"</code><br>
+      <code>play_round(50, [30, 70, 50])</code> → <code>(3, 'Correct')</code>

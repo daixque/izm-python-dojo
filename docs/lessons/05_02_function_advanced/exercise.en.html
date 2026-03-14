@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson05_02: Advanced Functions</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson05_02: Advanced Functions</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>calculate(a, b, operation="add")</code>.</p>
+<p>It receives two numbers <code>a</code> and <code>b</code>, and an operation type <code>operation</code>, then returns the result of the specified operation.</p>
+<h3>Operation Types</h3>
+<ul>
+  <li><code>"add"</code>: return <code>a + b</code> (default)</li>
+  <li><code>"subtract"</code>: return <code>a - b</code></li>
+  <li><code>"multiply"</code>: return <code>a * b</code></li>
+  <li><code>"divide"</code>: return <code>a / b</code> (return <code>None</code> if <code>b</code> is 0)</li>
+</ul>
+<h3>Example Output</h3>
+<pre>  print(calculate(10, 5))                  # 15 (default is addition)
+print(calculate(10, 5, "subtract"))      # 5
+print(calculate(10, 5, "multiply"))      # 50
+print(calculate(10, 5, "divide"))        # 2.0
+print(calculate(10, 0, "divide"))        # None</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>The function signature <code>def calculate(a, b, operation="add"):</code> is already provided</li>
+                            <li>Use <code>if</code> / <code>elif</code> to branch based on the value of <code>operation</code></li>
+                            <li>Return the result of each operation using a <code>return</code> statement</li>
+                            <li>For division (<code>"divide"</code>), return <code>None</code> when <code>b == 0</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Branch based on the value of <code>operation</code>:<br>
+<code>if operation == "add":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+<code>elif operation == "subtract":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+</li>
+                            <li>Check for division by zero:<br>
+<code>elif operation == "divide":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if b == 0:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code>
+</li>
+                            <li>The four arithmetic operators:<br>
+Addition: <code>a + b</code><br>
+Subtraction: <code>a - b</code><br>
+Multiplication: <code>a * b</code><br>
+Division: <code>a / b</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "05_02_function_advanced";
+        const INITIAL_CODE = "def calculate(a, b, operation=\"add\"):\n    # Write your code here\n    # Perform calculation based on operation and return the result\n    # \"add\": a + b\n    # \"subtract\": a - b\n    # \"multiply\": a * b\n    # \"divide\": a / b (return None if b is 0)\n    pass\n\nprint(calculate(10, 5))                  # 15 (default is addition)\nprint(calculate(10, 5, \"subtract\"))      # 5\nprint(calculate(10, 5, \"multiply\"))      # 50\nprint(calculate(10, 5, \"divide\"))        # 2.0\nprint(calculate(10, 0, \"divide\"))        # None\n";
+        const SOLUTION_CODE = "def calculate(a, b, operation=\"add\"):\n    if operation == \"add\":\n        return a + b\n    elif operation == \"subtract\":\n        return a - b\n    elif operation == \"multiply\":\n        return a * b\n    elif operation == \"divide\":\n        if b == 0:\n            return None\n        return a / b\n\nprint(calculate(10, 5))\nprint(calculate(10, 5, \"subtract\"))\nprint(calculate(10, 5, \"multiply\"))\nprint(calculate(10, 5, \"divide\"))\nprint(calculate(10, 0, \"divide\"))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5)\n        if test_result == 15:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5) = 15 Correct! (default addition)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5) should return 15. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5) should return 15 with default addition", "name": "Default addition test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"subtract\")\n        if test_result == 5:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"subtract\\\") = 5 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"subtract\\\") should return 5. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"subtract\") should return 5", "name": "Subtraction test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"multiply\")\n        if test_result == 50:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"multiply\\\") = 50 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"multiply\\\") should return 50. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"multiply\") should return 50", "name": "Multiplication test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"divide\")\n        if test_result == 2.0:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"divide\\\") = 2.0 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"divide\\\") should return 2.0. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"divide\") should return 2.0", "name": "Division test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 0, \"divide\")\n        if test_result is None:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 0, \\\"divide\\\") = None Correct! (division by zero)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 0, \\\"divide\\\") should return None. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 0, \"divide\") should return None", "name": "Division by zero test"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

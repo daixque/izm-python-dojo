@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson06_04: Final Project: Task Manager App</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson06_04: Final Project: Task Manager App</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Let's complete the task manager app! Implement the following 5 functions.</p>
+<ol>
+  <li><strong>add_task(tasks, task_name)</strong>: Add a task to the list and return it</li>
+  <li><strong>complete_task(tasks, task_id)</strong>: Mark the task with the given id as complete and return the list</li>
+  <li><strong>show_tasks(tasks)</strong>: Display all tasks</li>
+  <li><strong>save_tasks(tasks, filename)</strong>: Save tasks to a JSON file</li>
+  <li><strong>load_tasks(filename)</strong>: Load tasks from a JSON file</li>
+</ol>
+<h3>Task Data Structure</h3>
+<p>Each task is a dictionary in this format: <code>{"id": 1, "name": "Task name", "completed": False}</code></p>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li><code>add_task</code>: Calculate the new id with <code>max([t['id'] for t in tasks], default=0) + 1</code></li>
+                            <li><code>complete_task</code>: Loop through tasks to find the matching id and set <code>completed</code> to <code>True</code></li>
+                            <li><code>show_tasks</code>: Display completed tasks as <code>[✓] id: name</code> and incomplete as <code>[ ] id: name</code></li>
+                            <li><code>save_tasks</code>: Use <code>json.dump(tasks, f, ensure_ascii=False, indent=2)</code></li>
+                            <li><code>load_tasks</code>: Use <code>json.load(f)</code> to load, return an empty list if the file doesn't exist</li>
+                            <li>There is an <code>import json</code> at the top of the file. Do not remove it</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Calculating the new id in <code>add_task</code>:<br>
+<code>new_id = max([t["id"] for t in tasks], default=0) + 1</code><br>
+<code>tasks.append({"id": new_id, "name": task_name, "completed": False})</code>
+</li>
+                            <li>Loop in <code>complete_task</code>:<br>
+<code>for task in tasks:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if task["id"] == task_id:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>task["completed"] = True</code>
+</li>
+                            <li>Display in <code>show_tasks</code>:<br>
+<code>status = "✓" if task["completed"] else " "</code><br>
+<code>print(f"[{status}] {task['id']}: {task['name']}")</code>
+</li>
+                            <li><code>save_tasks</code> and <code>load_tasks</code> follow the same pattern as the previous file operations lesson. Use <code>json.dump()</code> instead of <code>f.write()</code>, and <code>json.load()</code> instead of <code>f.read()</code>.
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "06_04_final_project";
+        const INITIAL_CODE = "import json\n\ndef add_task(tasks, task_name):\n    # Write your code here\n    # Calculate new id (1 if tasks is empty, otherwise max id + 1)\n    # Append {\"id\": new_id, \"name\": task_name, \"completed\": False} to tasks\n    # Return tasks\n    pass\n\ndef complete_task(tasks, task_id):\n    # Write your code here\n    # Find the task with the matching task_id and set completed to True\n    # Return tasks\n    pass\n\ndef show_tasks(tasks):\n    # Write your code here\n    # Display each task as \"[\u2713] id: name\" or \"[ ] id: name\"\n    pass\n\ndef save_tasks(tasks, filename):\n    # Write your code here\n    # Use json.dump() to save tasks to a file\n    pass\n\ndef load_tasks(filename):\n    # Write your code here\n    # Use json.load() to read from a file and return it\n    # Return an empty list if FileNotFoundError occurs\n    pass\n\n# Test run\ntasks = []\ntasks = add_task(tasks, \"Study Python\")\ntasks = add_task(tasks, \"Go shopping\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
+        const SOLUTION_CODE = "import json\n\ndef add_task(tasks, task_name):\n    new_id = max([t[\"id\"] for t in tasks], default=0) + 1\n    tasks.append({\"id\": new_id, \"name\": task_name, \"completed\": False})\n    return tasks\n\ndef complete_task(tasks, task_id):\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task[\"completed\"] = True\n    return tasks\n\ndef show_tasks(tasks):\n    for task in tasks:\n        status = \"\u2713\" if task[\"completed\"] else \" \"\n        print(f\"[{status}] {task[\u0027id\u0027]}: {task[\u0027name\u0027]}\")\n\ndef save_tasks(tasks, filename):\n    with open(filename, \u0027w\u0027, encoding=\u0027utf-8\u0027) as f:\n        json.dump(tasks, f, ensure_ascii=False, indent=2)\n\ndef load_tasks(filename):\n    try:\n        with open(filename, \u0027r\u0027, encoding=\u0027utf-8\u0027) as f:\n            return json.load(f)\n    except FileNotFoundError:\n        return []\n\n# Test run\ntasks = []\ntasks = add_task(tasks, \"Study Python\")\ntasks = add_task(tasks, \"Go shopping\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = []\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Test task\")\n    if len(tasks) == 1 and tasks[0][\"name\"] == \"Test task\" and tasks[0][\"id\"] == 1 and tasks[0][\"completed\"] == False:\n        result = {\"passed\": True, \"message\": \"\u2713 Task was added correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Task addition is incorrect. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that after adding one task, id, name, and completed are set correctly", "name": "Does add_task work correctly?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = []\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Task 1\")\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Task 2\")\n    if len(tasks) == 2 and tasks[0][\"id\"] == 1 and tasks[1][\"id\"] == 2:\n        result = {\"passed\": True, \"message\": \"\u2713 Multiple task ids are assigned correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Ids are incorrect. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that when adding 2 tasks, their ids are 1 and 2 respectively", "name": "Do ids increment when adding multiple tasks?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = [{\"id\": 1, \"name\": \"Task 1\", \"completed\": False}]\n    tasks = exec_globals[\u0027complete_task\u0027](tasks, 1)\n    if tasks[0][\"completed\"] == True:\n        result = {\"passed\": True, \"message\": \"\u2713 Task was marked as complete correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Task was not marked as complete. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that the completed field of the specified task becomes True", "name": "Does complete_task work correctly?"}, {"code": "lang = \"en\"\ntry:\n    import json as _json\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = [{\"id\": 1, \"name\": \"Save test\", \"completed\": False}]\n    exec_globals[\u0027save_tasks\u0027](tasks, \"test_tasks.json\")\n    loaded = exec_globals[\u0027load_tasks\u0027](\"test_tasks.json\")\n    if loaded == tasks:\n        result = {\"passed\": True, \"message\": \"\u2713 Task saving and loading works correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Saving and loading is incorrect. Expected: {tasks}, Actual: {loaded}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that saving tasks to a JSON file and loading them back yields the same data", "name": "Do save_tasks and load_tasks work?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    loaded = exec_globals[\u0027load_tasks\u0027](\"nonexistent_tasks_99999.json\")\n    if loaded == []:\n        result = {\"passed\": True, \"message\": \"\u2713 Returns an empty list when file does not exist\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Should return an empty list. Actual: {loaded}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that an empty list is returned when trying to load a non-existent JSON file", "name": "Does load_tasks return an empty list when file is missing?"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

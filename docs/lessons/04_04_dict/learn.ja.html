@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン04_04: 辞書の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">辞書の基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>📖 辞書とは</h2>
+  <p>辞書（dict）は、<strong>キー</strong>と<strong>値</strong>のペアでデータを管理するデータ型です。</p>
+  <p>現実の辞書で「単語 → 意味」を引くように、キーを使って素早く値を取り出せます。</p>
+  <p>例えば、生徒の名前と点数を対応させたり、単語と翻訳を対応させたりするときに便利です。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">辞書の作成</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92, "Charlie": 78}<br>print(scores)</div>
+    <div class="example-explanation">
+      <code>{キー: 値, キー: 値, ...}</code> の形で作ります。<br>
+      キーと値は <code>:</code> で区切り、各ペアは <code>,</code> で区切ります。<br>
+      キーには文字列や数値、値には任意の型が使えます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">値へのアクセス</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92, "Charlie": 78}<br>print(scores["Alice"])    # 85<br>print(scores["Bob"])      # 92</div>
+    <div class="example-explanation">
+      <code>辞書名[キー]</code> の形でキーに対応する値を取得できます。<br>
+      存在しないキーを指定すると <code>KeyError</code> が発生します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 in 演算子による存在確認</h2>
+  <p>キーが辞書に存在するかどうかは <code>in</code> 演算子で確認できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">in 演算子の使い方</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92}<br>print("Alice" in scores)   # True<br>print("Dave" in scores)    # False<br><br>if "Alice" in scores:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Alice の点数: {scores['Alice']}")</div>
+    <div class="example-explanation">
+      <code>キー in 辞書</code> は、キーが辞書に存在すれば <code>True</code>、なければ <code>False</code> を返します。<br>
+      <code>if</code> と組み合わせて、安全に値を取得できます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✏️ 要素の追加・変更・削除</h2>
+  <p>辞書は作成後に要素を追加・変更・削除できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">要素の追加と変更</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92}<br><br># 新しいキーに代入すると追加<br>scores["Dave"] = 75<br>print(scores)  # {"Alice": 85, "Bob": 92, "Dave": 75}<br><br># 既存のキーに代入すると変更<br>scores["Alice"] = 90<br>print(scores["Alice"])  # 90</div>
+    <div class="example-explanation">
+      <code>辞書[キー] = 値</code> で追加・変更ができます。<br>
+      キーが存在しなければ追加、存在すれば値が上書きされます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">要素の削除</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92, "Charlie": 78}<br>del scores["Charlie"]<br>print(scores)  # {"Alice": 85, "Bob": 92}</div>
+    <div class="example-explanation">
+      <code>del 辞書[キー]</code> でキーと値のペアを削除できます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔑 keys(), values(), items() メソッド</h2>
+  <p>辞書の全キー・全値・全ペアを取得するメソッドがあります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">keys(), values(), items()</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92, "Charlie": 78}<br><br>print(list(scores.keys()))    # ["Alice", "Bob", "Charlie"]<br>print(list(scores.values()))  # [85, 92, 78]<br>print(list(scores.items()))   # [("Alice", 85), ("Bob", 92), ...]</div>
+    <div class="example-explanation">
+      <code>keys()</code>: 全キーを返す<br>
+      <code>values()</code>: 全値を返す<br>
+      <code>items()</code>: (キー, 値) のタプルを返す
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">for ループで辞書を走査する</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92, "Charlie": 78}<br>for name, score in scores.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}: {score}点")<br># 出力：<br># Alice: 85点<br># Bob: 92点<br># Charlie: 78点</div>
+    <div class="example-explanation">
+      <code>for キー, 値 in 辞書.items():</code> で全ペアをループ処理できます。<br>
+      全生徒の点数を表示したり、集計したりするときに使います。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🛡️ .get() メソッドで安全に値を取得する</h2>
+  <p>存在しないキーにアクセスしても <code>KeyError</code> が出ないようにするには <code>.get()</code> を使います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">.get() メソッドの使い方</div>
+    <div class="example-code">scores = {"Alice": 85, "Bob": 92}<br><br># キーが存在する場合<br>print(scores.get("Alice"))       # 85<br><br># キーが存在しない場合（デフォルト値なし）<br>print(scores.get("Dave"))        # None<br><br># キーが存在しない場合（デフォルト値あり）<br>print(scores.get("Dave", 0))     # 0</div>
+    <div class="example-explanation">
+      <code>辞書.get(キー)</code>: キーがなければ <code>None</code> を返す<br>
+      <code>辞書.get(キー, デフォルト値)</code>: キーがなければデフォルト値を返す<br>
+      <code>KeyError</code> が発生しないので安全です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li>辞書は <code>{キー: 値}</code> の形でデータを管理する</li>
+    <li><code>辞書[キー]</code> で値を取得できる（存在しないと KeyError）</li>
+    <li><code>キー in 辞書</code> でキーの存在を確認できる</li>
+    <li><code>辞書[キー] = 値</code> で追加・変更ができる</li>
+    <li><code>items()</code> で全ペアを for ループで処理できる</li>
+    <li><code>辞書.get(キー, デフォルト)</code> で安全に値を取得できる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

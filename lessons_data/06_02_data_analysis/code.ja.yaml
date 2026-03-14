@@ -1,0 +1,170 @@
+initial_code: |
+  def calculate_average(scores):
+      averages = {}
+      # ここにコードを書いてください
+      # scores.items() で各生徒の名前とスコアリストを取得
+      # 各生徒の平均を計算して averages に格納
+      return averages
+
+  def find_top_student(averages):
+      top_student = None
+      max_avg = -1
+      # ここにコードを書いてください
+      # averages.items() で各生徒の名前と平均を取得
+      # 最高平均の生徒名を top_student に格納
+      return top_student
+
+  def count_passing(averages, passing_score=60):
+      count = 0
+      # ここにコードを書いてください
+      # averages.values() で各平均を取得
+      # passing_score 以上なら count を増やす
+      return count
+
+  # テスト実行
+  scores = {
+      "Alice": [85, 90, 88],
+      "Bob": [70, 75, 72],
+      "Charlie": [55, 60, 58]
+  }
+  averages = calculate_average(scores)
+  print("平均点:", averages)
+  print("トップ:", find_top_student(averages))
+  print("合格者数:", count_passing(averages))
+
+solution_code: |
+  def calculate_average(scores):
+      averages = {}
+      for name, score_list in scores.items():
+          averages[name] = sum(score_list) / len(score_list)
+      return averages
+
+  def find_top_student(averages):
+      top_student = None
+      max_avg = -1
+      for name, avg in averages.items():
+          if avg > max_avg:
+              max_avg = avg
+              top_student = name
+      return top_student
+
+  def count_passing(averages, passing_score=60):
+      count = 0
+      for avg in averages.values():
+          if avg >= passing_score:
+              count += 1
+      return count
+
+  # テスト実行
+  scores = {
+      "Alice": [85, 90, 88],
+      "Bob": [70, 75, 72],
+      "Charlie": [55, 60, 58]
+  }
+  averages = calculate_average(scores)
+  print("平均点:", averages)
+  print("トップ:", find_top_student(averages))
+  print("合格者数:", count_passing(averages))
+
+initial_files: []
+
+tests:
+  - name: "calculate_average: 平均点の計算"
+    description: "calculate_average({'Alice': [80, 90, 100]}) は {'Alice': 90.0} を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          calculate_average = exec_globals.get("calculate_average")
+          if calculate_average is None:
+              result = {"passed": False, "message": "✗ calculate_average 関数が定義されていません"}
+          else:
+              res = calculate_average({"Alice": [80, 90, 100]})
+              if isinstance(res, dict) and "Alice" in res and abs(res["Alice"] - 90.0) < 0.01:
+                  result = {"passed": True, "message": "✓ calculate_average({'Alice': [80, 90, 100]}) が正しく {'Alice': 90.0} を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate_average の結果が正しくありません。期待値: {{'Alice': 90.0}}、実際: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "find_top_student: 最高得点者の検索"
+    description: "find_top_student({'Alice': 87.67, 'Bob': 72.33, 'Charlie': 57.67}) は 'Alice' を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          find_top_student = exec_globals.get("find_top_student")
+          if find_top_student is None:
+              result = {"passed": False, "message": "✗ find_top_student 関数が定義されていません"}
+          else:
+              res = find_top_student({"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67})
+              if res == "Alice":
+                  result = {"passed": True, "message": "✓ find_top_student が正しく 'Alice' を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ find_top_student の結果が正しくありません。期待値: 'Alice'、実際: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "count_passing: 合格者数のカウント（デフォルト合格点）"
+    description: "合格点60のとき、Alice(87.67)とBob(72.33)が合格し、Charlie(57.67)は不合格 → 2人"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          count_passing = exec_globals.get("count_passing")
+          if count_passing is None:
+              result = {"passed": False, "message": "✗ count_passing 関数が定義されていません"}
+          else:
+              res = count_passing({"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67})
+              if res == 2:
+                  result = {"passed": True, "message": "✓ count_passing が正しく 2 を返しました（Alice と Bob が合格）"}
+              else:
+                  result = {"passed": False, "message": f"✗ count_passing の結果が正しくありません。期待値: 2、実際: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "count_passing: カスタム合格点"
+    description: "合格点90のとき、Alice(87.67)は不合格 → 0人"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          count_passing = exec_globals.get("count_passing")
+          if count_passing is None:
+              result = {"passed": False, "message": "✗ count_passing 関数が定義されていません"}
+          else:
+              res = count_passing({"Alice": 87.67}, passing_score=90)
+              if res == 0:
+                  result = {"passed": True, "message": "✓ count_passing(averages, passing_score=90) が正しく 0 を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ count_passing(averages, passing_score=90) の結果が正しくありません。期待値: 0、実際: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "統合テスト: 3つの関数を組み合わせた処理"
+    description: "サンプルデータで3つの関数を順番に使って正しい結果が得られるか確認"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          calculate_average = exec_globals.get("calculate_average")
+          find_top_student = exec_globals.get("find_top_student")
+          count_passing = exec_globals.get("count_passing")
+          if None in (calculate_average, find_top_student, count_passing):
+              result = {"passed": False, "message": "✗ 3つの関数がすべて定義されていません"}
+          else:
+              scores = {"Alice": [85, 90, 88], "Bob": [70, 75, 72], "Charlie": [55, 60, 58]}
+              averages = calculate_average(scores)
+              top = find_top_student(averages)
+              passing = count_passing(averages)
+              if top == "Alice" and passing == 2 and abs(averages.get("Alice", 0) - (85+90+88)/3) < 0.01:
+                  result = {"passed": True, "message": "✓ 完璧！3つの関数が正しく連携しています。トップ: Alice、合格者数: 2"}
+              else:
+                  result = {"passed": False, "message": f"✗ 結果が正しくありません。期待値: トップ='Alice'、合格者数=2。実際: トップ='{top}'、合格者数={passing}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

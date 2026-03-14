@@ -1,0 +1,132 @@
+initial_code: |
+  def calculate(a, b, operation="add"):
+      # Write your code here
+      # Perform calculation based on operation and return the result
+      # "add": a + b
+      # "subtract": a - b
+      # "multiply": a * b
+      # "divide": a / b (return None if b is 0)
+      pass
+
+  print(calculate(10, 5))                  # 15 (default is addition)
+  print(calculate(10, 5, "subtract"))      # 5
+  print(calculate(10, 5, "multiply"))      # 50
+  print(calculate(10, 5, "divide"))        # 2.0
+  print(calculate(10, 0, "divide"))        # None
+
+solution_code: |
+  def calculate(a, b, operation="add"):
+      if operation == "add":
+          return a + b
+      elif operation == "subtract":
+          return a - b
+      elif operation == "multiply":
+          return a * b
+      elif operation == "divide":
+          if b == 0:
+              return None
+          return a / b
+
+  print(calculate(10, 5))
+  print(calculate(10, 5, "subtract"))
+  print(calculate(10, 5, "multiply"))
+  print(calculate(10, 5, "divide"))
+  print(calculate(10, 0, "divide"))
+
+initial_files: []
+
+tests:
+  - name: "Default addition test"
+    description: "calculate(10, 5) should return 15 with default addition"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function calculate is not defined"}
+          else:
+              test_result = exec_globals['calculate'](10, 5)
+              if test_result == 15:
+                  result = {"passed": True, "message": "✓ calculate(10, 5) = 15 Correct! (default addition)"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5) should return 15. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Subtraction test"
+    description: "calculate(10, 5, \"subtract\") should return 5"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function calculate is not defined"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "subtract")
+              if test_result == 5:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"subtract\") = 5 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"subtract\") should return 5. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Multiplication test"
+    description: "calculate(10, 5, \"multiply\") should return 50"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function calculate is not defined"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "multiply")
+              if test_result == 50:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"multiply\") = 50 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"multiply\") should return 50. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Division test"
+    description: "calculate(10, 5, \"divide\") should return 2.0"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function calculate is not defined"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "divide")
+              if test_result == 2.0:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"divide\") = 2.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"divide\") should return 2.0. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Division by zero test"
+    description: "calculate(10, 0, \"divide\") should return None"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function calculate is not defined"}
+          else:
+              test_result = exec_globals['calculate'](10, 0, "divide")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ calculate(10, 0, \"divide\") = None Correct! (division by zero)"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 0, \"divide\") should return None. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

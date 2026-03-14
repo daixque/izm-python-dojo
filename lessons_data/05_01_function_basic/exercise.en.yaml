@@ -1,0 +1,31 @@
+lesson:
+  number: "05_01"
+  id: "05_01_function_basic"
+  title: "Function Basics"
+
+task_description: |
+  <p>Implement the function <code>add(a, b)</code>.</p>
+  <p>The function receives two numbers <code>a</code> and <code>b</code>, and <strong>returns their sum using a return statement</strong>.</p>
+  <h3>Example Output</h3>
+  <pre>  print(add(3, 5))    # 8
+  print(add(10, 20))  # 30
+  print(add(-5, 3))   # -2</pre>
+
+instructions:
+  - "The function definition <code>def add(a, b):</code> is already provided. Implement the function body."
+  - "Calculate the sum of <code>a</code> and <code>b</code>"
+  - "Use a <code>return</code> statement to return the result"
+
+hints:
+  - hint: |
+      How to use the <code>return</code> statement:<br>
+      <code>def add(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      Replace <code>???</code> with an expression that adds <code>a</code> and <code>b</code>.
+  - hint: |
+      Use the <code>+</code> operator for addition:<br>
+      <code>a + b</code> calculates the sum of <code>a</code> and <code>b</code>.
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def add(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return a + b</code>

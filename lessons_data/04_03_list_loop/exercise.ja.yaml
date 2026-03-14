@@ -1,0 +1,37 @@
+lesson:
+  number: "04_03"
+  id: "04_03_list_loop"
+  title: "for ループとリスト"
+
+task_description: |
+  <p>関数 <code>filter_even(numbers)</code> を実装しましょう。</p>
+  <p>整数のリスト <code>numbers</code> を受け取り、<strong>偶数のみを含む新しいリスト</strong>を返します。</p>
+  <h3>実行例</h3>
+  <pre>  filter_even([1, 2, 3, 4, 5, 6])  # [2, 4, 6]
+  filter_even([1, 3, 5])            # []
+  filter_even([10, 15, 20, 25])     # [10, 20]</pre>
+
+instructions:
+  - "空のリスト <code>result = []</code> はすでに用意されています"
+  - "<code>for</code> ループで <code>numbers</code> の各要素を順番に確認します"
+  - "偶数かどうかは <code>num % 2 == 0</code> で判定できます"
+  - "条件に合う要素は <code>result.append(num)</code> でリストに追加します"
+  - "最後に <code>return result</code> で結果を返します"
+
+hints:
+  - hint: |
+      for ループでリストの全要素を確認します：<br>
+      <code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># num が偶数かチェック</code>
+  - hint: |
+      偶数の判定には <code>%</code>（余り）演算子を使います：<br>
+      <code>if num % 2 == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># ここで num は偶数</code>
+  - hint: |
+      条件に合う要素を result に追加します：<br>
+      <code>result.append(num)</code>
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if num % 2 == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>result.append(num)</code>

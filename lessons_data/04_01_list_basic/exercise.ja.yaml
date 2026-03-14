@@ -1,0 +1,43 @@
+lesson:
+  number: "04_01"
+  id: "04_01_list_basic"
+  title: "リストの基礎"
+
+task_description: |
+  <p>関数 <code>get_element(fruits, index)</code> を実装しましょう。</p>
+  <p><strong>fruits</strong>: 果物名の文字列リスト<br>
+  <strong>index</strong>: 取得したい要素の 0 始まりのインデックス</p>
+  <p>指定されたインデックスの要素を返します。インデックスが範囲外の場合は <code>None</code> を返します。</p>
+  <h3>例</h3>
+  <pre>  get_element(["apple", "banana", "orange"], 0)  → "apple"
+  get_element(["apple", "banana", "orange"], 2)  → "orange"
+  get_element(["apple", "banana"], 5)            → None（範囲外）</pre>
+
+instructions:
+  - "関数の定義部分は用意済みです。中身を実装してください"
+  - "<code>if 0 <= index < len(fruits):</code> でインデックスが有効な範囲かチェックする"
+  - "有効なら <code>fruits[index]</code> を返す"
+  - "範囲外なら <code>None</code> を返す（<code>return None</code> または <code>else: return None</code>）"
+
+hints:
+  - hint: |
+      インデックスが有効かどうか確認するには：<br>
+      <code>if 0 <= index < len(fruits):</code><br>
+      これで index が 0 以上かつリストの長さ未満かを一度にチェックできます。
+  - hint: |
+      条件分岐の構造：<br>
+      <code>if 0 <= index < len(fruits):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return fruits[index]</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>
+  - hint: |
+      <code>len(fruits)</code> はリストの要素数を返します。<br>
+      例えば <code>["apple", "banana", "orange"]</code> なら <code>len() = 3</code><br>
+      有効なインデックスは 0, 1, 2 です（3 は範囲外）。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def get_element(fruits, index):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if 0 <= index < len(fruits):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return fruits[index]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>

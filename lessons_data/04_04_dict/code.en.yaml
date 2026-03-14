@@ -1,0 +1,100 @@
+initial_code: |
+  def get_score(students, name):
+      # Write your code here
+      # If name exists in students, return students[name]
+      # Otherwise, return -1
+      pass
+
+  # Test run
+  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  print(get_score(students, "Alice"))    # 85
+  print(get_score(students, "Bob"))      # 92
+  print(get_score(students, "Dave"))     # -1
+
+solution_code: |
+  def get_score(students, name):
+      if name in students:
+          return students[name]
+      else:
+          return -1
+
+  # Test run
+  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  print(get_score(students, "Alice"))
+  print(get_score(students, "Bob"))
+  print(get_score(students, "Dave"))
+
+initial_files: []
+
+tests:
+  - name: "Existing key retrieval test"
+    description: "Does get_score({...}, 'Alice') return 85?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_score is not defined"}
+          else:
+              test_result = exec_globals['get_score']({"Alice": 85, "Bob": 92, "Charlie": 78}, "Alice")
+              if test_result == 85:
+                  result = {"passed": True, "message": "✓ Correct! Alice's score of 85 was returned"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 85, Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Missing key test"
+    description: "Does get_score({...}, 'Charlie') return -1 (name not found)?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_score is not defined"}
+          else:
+              test_result = exec_globals['get_score']({"Alice": 85, "Bob": 92}, "Charlie")
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ Correct! -1 is returned for a name that does not exist"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: -1, Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Japanese names test"
+    description: "Does get_score({'田中': 88, '佐藤': 95}, '佐藤') return 95?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_score is not defined"}
+          else:
+              test_result = exec_globals['get_score']({"田中": 88, "佐藤": 95}, "佐藤")
+              if test_result == 95:
+                  result = {"passed": True, "message": "✓ Correct! Score 95 was returned for 佐藤"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 95, Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Empty dictionary test"
+    description: "Does get_score({}, 'Alice') return -1?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_score is not defined"}
+          else:
+              test_result = exec_globals['get_score']({}, "Alice")
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ Correct! -1 is returned for an empty dictionary"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: -1, Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

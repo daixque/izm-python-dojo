@@ -1,0 +1,122 @@
+initial_code: |
+  def check_guess(secret, guess):
+      # ここにコードを書いてください
+      # guess が secret より小さければ "Too low" を返す
+      # guess が secret より大きければ "Too high" を返す
+      # guess が secret と同じなら "Correct" を返す
+      pass
+
+  # ゲームを試してみよう（テスト後にコメントを外して遊べます）
+  # import random
+  # secret = random.randint(1, 100)
+  # while True:
+  #     guess = int(input("予想を入力してください (1-100): "))
+  #     result = check_guess(secret, guess)
+  #     print(result)
+  #     if result == "Correct":
+  #         break
+
+solution_code: |
+  def check_guess(secret, guess):
+      if guess < secret:
+          return "Too low"
+      elif guess > secret:
+          return "Too high"
+      else:
+          return "Correct"
+
+  # ゲームを試してみよう（テスト後にコメントを外して遊べます）
+  # import random
+  # secret = random.randint(1, 100)
+  # while True:
+  #     guess = int(input("予想を入力してください (1-100): "))
+  #     result = check_guess(secret, guess)
+  #     print(result)
+  #     if result == "Correct":
+  #         break
+
+initial_files: []
+
+tests:
+  - name: "Too low のテスト"
+    description: "guess が secret より小さいとき \"Too low\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 check_guess が定義されていません"}
+          else:
+              test_result = exec_globals['check_guess'](50, 30)
+              if test_result == "Too low":
+                  result = {"passed": True, "message": "✓ check_guess(50, 30) = \"Too low\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 30) は \"Too low\" になるはずです。実際: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Too high のテスト"
+    description: "guess が secret より大きいとき \"Too high\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 check_guess が定義されていません"}
+          else:
+              test_result = exec_globals['check_guess'](50, 70)
+              if test_result == "Too high":
+                  result = {"passed": True, "message": "✓ check_guess(50, 70) = \"Too high\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 70) は \"Too high\" になるはずです。実際: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Correct のテスト"
+    description: "guess が secret と等しいとき \"Correct\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 check_guess が定義されていません"}
+          else:
+              test_result = exec_globals['check_guess'](50, 50)
+              if test_result == "Correct":
+                  result = {"passed": True, "message": "✓ check_guess(50, 50) = \"Correct\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 50) は \"Correct\" になるはずです。実際: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "境界値テスト"
+    description: "極端な値でも正しく動作するか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 check_guess が定義されていません"}
+          else:
+              r1 = exec_globals['check_guess'](1, 1)
+              r2 = exec_globals['check_guess'](100, 99)
+
+              if r1 == "Correct" and r2 == "Too low":
+                  result = {"passed": True, "message": "✓ 境界値テスト通過: check_guess(1, 1)=\"Correct\", check_guess(100, 99)=\"Too low\""}
+              else:
+                  msgs = []
+                  if r1 != "Correct":
+                      msgs.append(f"check_guess(1, 1) は \"Correct\" になるはずです。実際: {repr(r1)}")
+                  if r2 != "Too low":
+                      msgs.append(f"check_guess(100, 99) は \"Too low\" になるはずです。実際: {repr(r2)}")
+                  result = {"passed": False, "message": "✗ " + " / ".join(msgs)}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

@@ -1,0 +1,118 @@
+lesson:
+  number: "04_03"
+  id: "04_03_list_loop"
+  title: "for ループとリスト"
+
+content: |
+  <section class="section">
+    <h2>📋 リストと for ループの組み合わせ</h2>
+    <p>前の章で学んだリストと for ループを組み合わせると、リストの全要素に対して処理を行えます。</p>
+    <p><code>range()</code> を使う代わりに、リストを直接 <code>for</code> ループに渡すことができます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">リストの各要素を順番に処理する</div>
+      <div class="example-code">fruits = ["apple", "banana", "cherry"]<br>for fruit in fruits:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(fruit)<br># 出力：<br># apple<br># banana<br># cherry</div>
+      <div class="example-explanation">
+        <code>for fruit in fruits:</code> と書くと、<code>fruits</code> リストの各要素が順番に <code>fruit</code> に代入されます。<br>
+        ループ変数の名前（ここでは <code>fruit</code>）は自由に決められます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">数値リストで計算する</div>
+      <div class="example-code">numbers = [10, 20, 30, 40, 50]<br>for num in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(num * 2)<br># 出力：<br># 20<br># 40<br># 60<br># 80<br># 100</div>
+      <div class="example-explanation">
+        数値のリストでも同じように使えます。各要素 <code>num</code> に対して <code>num * 2</code> を計算して表示します。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔢 enumerate() によるインデックス付きループ</h2>
+    <p>要素の値だけでなく、その位置（インデックス）も同時に取得したいときは <code>enumerate()</code> を使います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">enumerate() の基本</div>
+      <div class="example-code">fruits = ["apple", "banana", "cherry"]<br>for i, fruit in enumerate(fruits):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i}: {fruit}")<br># 出力：<br># 0: apple<br># 1: banana<br># 2: cherry</div>
+      <div class="example-explanation">
+        <code>enumerate(fruits)</code> は <code>(インデックス, 要素)</code> のペアを順番に返します。<br>
+        <code>i</code> がインデックス（0始まり）、<code>fruit</code> が要素の値です。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">enumerate() で1始まりのインデックス</div>
+      <div class="example-code">fruits = ["apple", "banana", "cherry"]<br>for i, fruit in enumerate(fruits, start=1):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i}番目: {fruit}")<br># 出力：<br># 1番目: apple<br># 2番目: banana<br># 3番目: cherry</div>
+      <div class="example-explanation">
+        <code>enumerate(fruits, start=1)</code> とすることで、インデックスを1から始められます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔍 ループで条件に合う要素を集める</h2>
+    <p>空のリストを用意して、条件に合う要素だけを <code>append()</code> で追加するパターンはよく使われます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">偶数だけを集める</div>
+      <div class="example-code">numbers = [1, 2, 3, 4, 5, 6]<br>evens = []<br>for num in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;if num % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evens.append(num)<br>print(evens)  # [2, 4, 6]</div>
+      <div class="example-explanation">
+        <ol>
+          <li>空のリスト <code>evens = []</code> を用意する</li>
+          <li>各要素 <code>num</code> を <code>if</code> でチェックする</li>
+          <li>条件に合う要素を <code>evens.append(num)</code> で追加する</li>
+        </ol>
+        <code>num % 2 == 0</code> は「num を 2 で割った余りが 0（偶数）」という条件です。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">ある値より大きい要素を集める</div>
+      <div class="example-code">scores = [55, 72, 88, 43, 91, 67]<br>high_scores = []<br>for score in scores:<br>&nbsp;&nbsp;&nbsp;&nbsp;if score >= 70:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;high_scores.append(score)<br>print(high_scores)  # [72, 88, 91]</div>
+      <div class="example-explanation">
+        70以上の点数だけを <code>high_scores</code> リストに集めています。<br>
+        このパターンを「フィルタリング」と呼びます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✨ リスト内包表記の基礎</h2>
+    <p>リストを作るループは、<strong>リスト内包表記</strong>という短い書き方でも書けます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">各要素を2倍にしたリストを作る</div>
+      <div class="example-code"># 通常のループ<br>numbers = [1, 2, 3, 4, 5]<br>doubled = []<br>for x in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;doubled.append(x * 2)<br><br># リスト内包表記<br>doubled = [x * 2 for x in numbers]<br>print(doubled)  # [2, 4, 6, 8, 10]</div>
+      <div class="example-explanation">
+        <code>[式 for 変数 in リスト]</code> の形で書きます。<br>
+        1行でリストを作れるので、コードが短くなります。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">条件付きリスト内包表記</div>
+      <div class="example-code">numbers = [1, 2, 3, 4, 5, 6]<br>evens = [x for x in numbers if x % 2 == 0]<br>print(evens)  # [2, 4, 6]</div>
+      <div class="example-explanation">
+        <code>[式 for 変数 in リスト if 条件]</code> の形で、フィルタリングも1行で書けます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>for item in list:</code> でリストの各要素を順番に処理できる</li>
+      <li><code>enumerate(list)</code> でインデックスと要素を同時に取得できる</li>
+      <li>空リスト + <code>append()</code> のパターンで条件に合う要素を集められる</li>
+      <li><code>num % 2 == 0</code> で偶数かどうかを判定できる</li>
+      <li><code>[式 for 変数 in リスト]</code> のリスト内包表記で短く書ける</li>
+    </ul>
+  </section>

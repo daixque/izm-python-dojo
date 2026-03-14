@@ -1,0 +1,129 @@
+lesson:
+  number: "05_02"
+  id: "05_02_function_advanced"
+  title: "関数の応用"
+
+content: |
+  <section class="section">
+    <h2>⚙️ デフォルト引数</h2>
+    <p>関数のパラメータに<strong>デフォルト値</strong>を設定できます。</p>
+    <p>デフォルト値があるパラメータは、呼び出す時に省略できます。省略した場合はデフォルト値が使われます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">デフォルト引数の定義と使い方</div>
+      <div class="example-code">def greet(name, greeting="こんにちは"):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{greeting}、{name}さん！")<br><br>greet("太郎")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# こんにちは、太郎さん！<br>greet("花子", "おはよう")&nbsp;&nbsp;# おはよう、花子さん！</div>
+      <div class="example-explanation">
+        <code>greeting="こんにちは"</code> のように <code>=</code> でデフォルト値を設定します。<br>
+        <code>greet("太郎")</code> のように省略すると <code>"こんにちは"</code> が使われます。<br>
+        <code>greet("花子", "おはよう")</code> のように値を渡すと上書きされます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">複数のデフォルト引数</div>
+      <div class="example-code">def power(base, exponent=2):<br>&nbsp;&nbsp;&nbsp;&nbsp;return base ** exponent<br><br>print(power(3))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 9 (3の2乗)<br>print(power(3, 3))&nbsp;&nbsp;# 27 (3の3乗)<br>print(power(2, 10))&nbsp;# 1024 (2の10乗)</div>
+      <div class="example-explanation">
+        <code>exponent=2</code> がデフォルト値です。<br>
+        省略すると2乗、指定すると任意の乗数で計算できます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏷️ キーワード引数</h2>
+    <p>関数を呼び出す時に、<strong>パラメータ名を指定</strong>して値を渡すことができます。</p>
+    <p>これを<strong>キーワード引数</strong>と言います。順番を気にせず渡せるのが便利です。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">キーワード引数の呼び出し</div>
+      <div class="example-code">def introduce(name, age, city):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}、{age}歳、{city}出身")<br><br># 通常の呼び出し（順番通り）<br>introduce("太郎", 13, "東京")<br><br># キーワード引数（順番不問）<br>introduce(age=13, city="東京", name="太郎")</div>
+      <div class="example-explanation">
+        キーワード引数を使うと、引数の順番を変えることができます。<br>
+        どのパラメータに何の値を渡しているか、コードが読みやすくなります。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">デフォルト引数とキーワード引数の組み合わせ</div>
+      <div class="example-code">def create_profile(name, age, role="生徒"):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f"{name}({age}歳) - {role}"<br><br>print(create_profile("太郎", 13))<br># 太郎(13歳) - 生徒<br><br>print(create_profile("山田先生", 35, role="先生"))<br># 山田先生(35歳) - 先生</div>
+      <div class="example-explanation">
+        デフォルト引数とキーワード引数を組み合わせると、柔軟な関数が作れます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📦 複数の戻り値</h2>
+    <p>Pythonの関数は、<code>return</code> で複数の値をまとめて返すことができます。</p>
+    <p>複数の値は<strong>タプル</strong>としてまとめて返されます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">複数の値を返す</div>
+      <div class="example-code">def min_max(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;return min(numbers), max(numbers)<br><br>minimum, maximum = min_max([3, 1, 4, 1, 5, 9])<br>print(f"最小: {minimum}")&nbsp;&nbsp;# 最小: 1<br>print(f"最大: {maximum}")&nbsp;&nbsp;# 最大: 9</div>
+      <div class="example-explanation">
+        <code>return min(numbers), max(numbers)</code> で2つの値を返します。<br>
+        <code>minimum, maximum = ...</code> のように分割して受け取れます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">タプルとして受け取る</div>
+      <div class="example-code">def divide_with_remainder(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;quotient = a // b<br>&nbsp;&nbsp;&nbsp;&nbsp;remainder = a % b<br>&nbsp;&nbsp;&nbsp;&nbsp;return quotient, remainder<br><br>result = divide_with_remainder(17, 5)<br>print(result)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# (3, 2)<br>print(result[0])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3 (商)<br>print(result[1])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 2 (余り)</div>
+      <div class="example-explanation">
+        戻り値はタプル（複数の値の組）として返ります。<br>
+        <code>result[0]</code> や <code>result[1]</code> でそれぞれの値にアクセスできます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔭 変数のスコープ</h2>
+    <p><strong>スコープ</strong>とは、変数が使える範囲のことです。</p>
+    <p>関数の中で作った変数（ローカル変数）は、その関数の中でしか使えません。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">ローカル変数とグローバル変数</div>
+      <div class="example-code">message = "グローバル変数"&nbsp;&nbsp;# 関数の外<br><br>def show_scope():<br>&nbsp;&nbsp;&nbsp;&nbsp;local_var = "ローカル変数"&nbsp;&nbsp;# 関数の中<br>&nbsp;&nbsp;&nbsp;&nbsp;print(local_var)&nbsp;&nbsp;# OK<br>&nbsp;&nbsp;&nbsp;&nbsp;print(message)&nbsp;&nbsp;&nbsp;&nbsp;# OK（外の変数も読める）<br><br>show_scope()<br># print(local_var)&nbsp;&nbsp;# エラー！外からは使えない</div>
+      <div class="example-explanation">
+        <strong>ローカル変数</strong>：関数の中で作った変数。その関数の中でしか使えない。<br>
+        <strong>グローバル変数</strong>：関数の外で作った変数。どこからでも読める。<br>
+        ローカル変数は関数が終わると消える。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📖 ドキュメント文字列（docstring）</h2>
+    <p>関数の直後に <code>"""</code> で囲んだ説明文を書くことができます。これを<strong>docstring</strong>と言います。</p>
+    <p>関数の使い方や目的を記録しておくと、コードが読みやすくなります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">docstring の書き方</div>
+      <div class="example-code">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;"""2つの数値の合計を返す。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Args:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a: 1つ目の数値<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b: 2つ目の数値<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a と b の合計<br>&nbsp;&nbsp;&nbsp;&nbsp;"""<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br><br>print(add.__doc__)&nbsp;&nbsp;# docstring を表示</div>
+      <div class="example-explanation">
+        <code>"""..."""</code> の中に関数の説明を書きます。<br>
+        <code>関数名.__doc__</code> で docstring を確認できます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li>デフォルト引数 <code>def func(x, y=10):</code> で省略可能なパラメータを作れる</li>
+      <li>キーワード引数 <code>func(y=5, x=3)</code> で順番を変えて引数を渡せる</li>
+      <li><code>return a, b</code> で複数の値をタプルとして返せる</li>
+      <li>ローカル変数は関数の中でのみ有効、グローバル変数はどこからでも読める</li>
+      <li>docstring で関数の説明を書いておくとコードが読みやすくなる</li>
+    </ul>
+  </section>

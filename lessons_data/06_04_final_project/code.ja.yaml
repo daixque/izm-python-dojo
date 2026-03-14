@@ -1,0 +1,162 @@
+initial_code: |
+  import json
+
+  def add_task(tasks, task_name):
+      # ここにコードを書いてください
+      # 新しい id を計算（tasks が空なら 1、そうでなければ最大 id + 1）
+      # {"id": new_id, "name": task_name, "completed": False} を tasks に追加
+      # tasks を返す
+      pass
+
+  def complete_task(tasks, task_id):
+      # ここにコードを書いてください
+      # tasks の中から id が task_id のタスクを探して completed を True にする
+      # tasks を返す
+      pass
+
+  def show_tasks(tasks):
+      # ここにコードを書いてください
+      # 各タスクを "[✓] id: name" または "[ ] id: name" の形式で表示する
+      pass
+
+  def save_tasks(tasks, filename):
+      # ここにコードを書いてください
+      # json.dump() を使って tasks をファイルに保存する
+      pass
+
+  def load_tasks(filename):
+      # ここにコードを書いてください
+      # json.load() でファイルから読み込んで返す
+      # FileNotFoundError なら空リストを返す
+      pass
+
+  # テスト実行
+  tasks = []
+  tasks = add_task(tasks, "Pythonの勉強")
+  tasks = add_task(tasks, "買い物")
+  show_tasks(tasks)
+  tasks = complete_task(tasks, 1)
+  show_tasks(tasks)
+
+solution_code: |
+  import json
+
+  def add_task(tasks, task_name):
+      new_id = max([t["id"] for t in tasks], default=0) + 1
+      tasks.append({"id": new_id, "name": task_name, "completed": False})
+      return tasks
+
+  def complete_task(tasks, task_id):
+      for task in tasks:
+          if task["id"] == task_id:
+              task["completed"] = True
+      return tasks
+
+  def show_tasks(tasks):
+      for task in tasks:
+          status = "✓" if task["completed"] else " "
+          print(f"[{status}] {task['id']}: {task['name']}")
+
+  def save_tasks(tasks, filename):
+      with open(filename, 'w', encoding='utf-8') as f:
+          json.dump(tasks, f, ensure_ascii=False, indent=2)
+
+  def load_tasks(filename):
+      try:
+          with open(filename, 'r', encoding='utf-8') as f:
+              return json.load(f)
+      except FileNotFoundError:
+          return []
+
+  # テスト実行
+  tasks = []
+  tasks = add_task(tasks, "Pythonの勉強")
+  tasks = add_task(tasks, "買い物")
+  show_tasks(tasks)
+  tasks = complete_task(tasks, 1)
+  show_tasks(tasks)
+
+initial_files: []
+
+tests:
+  - name: "add_task が正しく動作するか"
+    description: "1つのタスクを追加したとき、id・name・completed が正しく設定されているか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = []
+          tasks = exec_globals['add_task'](tasks, "テストタスク")
+          if len(tasks) == 1 and tasks[0]["name"] == "テストタスク" and tasks[0]["id"] == 1 and tasks[0]["completed"] == False:
+              result = {"passed": True, "message": "✓ タスクが正しく追加されました"}
+          else:
+              result = {"passed": False, "message": f"✗ タスクの追加が正しくありません。実際: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "複数タスク追加で id が増えるか"
+    description: "2つのタスクを追加したとき、id がそれぞれ 1 と 2 になるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = []
+          tasks = exec_globals['add_task'](tasks, "タスク1")
+          tasks = exec_globals['add_task'](tasks, "タスク2")
+          if len(tasks) == 2 and tasks[0]["id"] == 1 and tasks[1]["id"] == 2:
+              result = {"passed": True, "message": "✓ 複数タスクの id が正しく割り当てられています"}
+          else:
+              result = {"passed": False, "message": f"✗ id が正しくありません。実際: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "complete_task が正しく動作するか"
+    description: "指定した id のタスクの completed が True になるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = [{"id": 1, "name": "タスク1", "completed": False}]
+          tasks = exec_globals['complete_task'](tasks, 1)
+          if tasks[0]["completed"] == True:
+              result = {"passed": True, "message": "✓ タスクが正しく完了になりました"}
+          else:
+              result = {"passed": False, "message": f"✗ タスクが完了になっていません。実際: {tasks}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "save_tasks と load_tasks が動作するか"
+    description: "タスクを JSON ファイルに保存して、再び読み込んだとき同じデータになるか確認する"
+    code: |
+      try:
+          import json as _json
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          tasks = [{"id": 1, "name": "保存テスト", "completed": False}]
+          exec_globals['save_tasks'](tasks, "test_tasks.json")
+          loaded = exec_globals['load_tasks']("test_tasks.json")
+          if loaded == tasks:
+              result = {"passed": True, "message": "✓ タスクの保存・読み込みが正しく動作しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 保存・読み込みが正しくありません。期待: {tasks}, 実際: {loaded}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "load_tasks はファイルがなければ空リストを返すか"
+    description: "存在しない JSON ファイルを読み込もうとしたとき、空リストが返されるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          loaded = exec_globals['load_tasks']("nonexistent_tasks_99999.json")
+          if loaded == []:
+              result = {"passed": True, "message": "✓ ファイルがない場合は空リストを返します"}
+          else:
+              result = {"passed": False, "message": f"✗ 空リストを返すべきです。実際: {loaded}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

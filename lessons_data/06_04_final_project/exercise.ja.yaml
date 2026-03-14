@@ -1,0 +1,41 @@
+lesson:
+  number: "06_04"
+  id: "06_04_final_project"
+  title: "最終プロジェクト：タスク管理アプリ"
+
+task_description: |
+  <p>タスク管理アプリを完成させましょう！5つの関数を実装してください。</p>
+  <ol>
+    <li><strong>add_task(tasks, task_name)</strong>：タスクをリストに追加して返す</li>
+    <li><strong>complete_task(tasks, task_id)</strong>：指定 id のタスクを完了にして返す</li>
+    <li><strong>show_tasks(tasks)</strong>：タスク一覧を表示する</li>
+    <li><strong>save_tasks(tasks, filename)</strong>：タスクを JSON ファイルに保存する</li>
+    <li><strong>load_tasks(filename)</strong>：JSON ファイルからタスクを読み込む</li>
+  </ol>
+  <h3>タスクのデータ構造</h3>
+  <p>各タスクは次の形式の辞書です：<code>{"id": 1, "name": "タスク名", "completed": False}</code></p>
+
+instructions:
+  - "<code>add_task</code>：新しい id は <code>max([t['id'] for t in tasks], default=0) + 1</code> で計算します"
+  - "<code>complete_task</code>：ループで id が一致するタスクを探し、<code>completed</code> を <code>True</code> にします"
+  - "<code>show_tasks</code>：完了は <code>[✓] id: name</code>、未完了は <code>[ ] id: name</code> の形式で表示します"
+  - "<code>save_tasks</code>：<code>json.dump(tasks, f, ensure_ascii=False, indent=2)</code> を使います"
+  - "<code>load_tasks</code>：<code>json.load(f)</code> で読み込み、ファイルがなければ空リストを返します"
+  - "ファイルの先頭に <code>import json</code> があります。変更しないでください"
+
+hints:
+  - hint: |
+      <code>add_task</code> の新しい id の計算：<br>
+      <code>new_id = max([t["id"] for t in tasks], default=0) + 1</code><br>
+      <code>tasks.append({"id": new_id, "name": task_name, "completed": False})</code>
+  - hint: |
+      <code>complete_task</code> のループ：<br>
+      <code>for task in tasks:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if task["id"] == task_id:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>task["completed"] = True</code>
+  - hint: |
+      <code>show_tasks</code> の表示：<br>
+      <code>status = "✓" if task["completed"] else " "</code><br>
+      <code>print(f"[{status}] {task['id']}: {task['name']}")</code>
+  - hint: |
+      <code>save_tasks</code> と <code>load_tasks</code> は前のレッスン（ファイル操作）のパターンと同じです。ただし <code>f.write()</code> の代わりに <code>json.dump()</code>、<code>f.read()</code> の代わりに <code>json.load()</code> を使います。

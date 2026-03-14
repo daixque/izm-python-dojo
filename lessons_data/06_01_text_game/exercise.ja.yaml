@@ -1,0 +1,58 @@
+lesson:
+  number: "06_01"
+  id: "06_01_text_game"
+  title: "テキストベースゲーム"
+
+task_description: |
+  <p>数当てゲームの中核となる2つの関数を実装しましょう。</p>
+  <h3>実装する関数</h3>
+  <ul>
+    <li><strong>check_guess(secret, guess)</strong>：予想を判定する関数</li>
+    <li><strong>play_round(secret, guesses)</strong>：一連の予想リストを処理する関数</li>
+  </ul>
+  <h3>check_guess の仕様</h3>
+  <ul>
+    <li><code>guess</code> が <code>secret</code> より小さければ <code>"Too low"</code> を返す</li>
+    <li><code>guess</code> が <code>secret</code> より大きければ <code>"Too high"</code> を返す</li>
+    <li><code>guess</code> が <code>secret</code> と同じなら <code>"Correct"</code> を返す</li>
+  </ul>
+  <h3>play_round の仕様</h3>
+  <ul>
+    <li><code>guesses</code>：予想のリスト（例: <code>[30, 70, 50]</code>）</li>
+    <li>各予想を順に <code>check_guess</code> でチェックする</li>
+    <li><code>"Correct"</code> になったら <strong>(試行回数, "Correct")</strong> のタプルを返す</li>
+    <li>全て外れた場合は <strong>(guesses の長さ, 最後の判定結果)</strong> を返す</li>
+  </ul>
+
+instructions:
+  - "<code>check_guess(secret, guess)</code> を実装する：<code>if</code>/<code>elif</code>/<code>else</code> で3パターンに分岐する"
+  - "<code>play_round(secret, guesses)</code> を実装する：<code>for</code> ループで各予想を処理する"
+  - "<code>enumerate(guesses, 1)</code> を使うと試行回数（1始まり）を簡単に管理できる"
+  - "正解（<code>\"Correct\"</code>）が見つかった時点で <code>return</code> でタプルを返す"
+  - "全て外れた場合は最後の判定結果を含むタプルを返す"
+
+hints:
+  - hint: |
+      <code>check_guess</code> の基本構造：<br>
+      <code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      <code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+  - hint: |
+      <code>play_round</code> では <code>enumerate</code> を使うと便利です：<br>
+      <code>for i, guess in enumerate(guesses, 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = check_guess(secret, guess)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if result == "Correct":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return (i, "Correct")</code>
+  - hint: |
+      全て外れた場合（ループが最後まで回った後）：<br>
+      <code>return (len(guesses), check_guess(secret, guesses[-1]))</code><br>
+      <code>guesses[-1]</code> でリストの最後の要素を取得できます。
+  - hint: |
+      テスト実行の期待結果：<br>
+      <code>check_guess(50, 30)</code> → <code>"Too low"</code><br>
+      <code>check_guess(50, 70)</code> → <code>"Too high"</code><br>
+      <code>check_guess(50, 50)</code> → <code>"Correct"</code><br>
+      <code>play_round(50, [30, 70, 50])</code> → <code>(3, 'Correct')</code>

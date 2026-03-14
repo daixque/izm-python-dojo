@@ -1,0 +1,96 @@
+initial_code: |
+  def add(a, b):
+      # Write your code here
+      # Add a and b together and return the result
+      pass
+
+  print(add(3, 5))      # 8
+  print(add(10, 20))    # 30
+  print(add(-5, 3))     # -2
+
+solution_code: |
+  def add(a, b):
+      return a + b
+
+  print(add(3, 5))
+  print(add(10, 20))
+  print(add(-5, 3))
+
+initial_files: []
+
+tests:
+  - name: "Check add(3, 5)"
+    description: "add(3, 5) should return 8"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function add is not defined"}
+          else:
+              test_result = exec_globals['add'](3, 5)
+              if test_result == 8:
+                  result = {"passed": True, "message": "✓ add(3, 5) = 8 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(3, 5) should return 8. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check add(10, 20)"
+    description: "add(10, 20) should return 30"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function add is not defined"}
+          else:
+              test_result = exec_globals['add'](10, 20)
+              if test_result == 30:
+                  result = {"passed": True, "message": "✓ add(10, 20) = 30 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(10, 20) should return 30. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Negative numbers test"
+    description: "add(-5, 3) should return -2 (negative numbers)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function add is not defined"}
+          else:
+              test_result = exec_globals['add'](-5, 3)
+              if test_result == -2:
+                  result = {"passed": True, "message": "✓ add(-5, 3) = -2 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(-5, 3) should return -2. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Floating point test"
+    description: "add(1.5, 2.5) should return 4.0 (floats)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function add is not defined"}
+          else:
+              test_result = exec_globals['add'](1.5, 2.5)
+              if test_result == 4.0:
+                  result = {"passed": True, "message": "✓ add(1.5, 2.5) = 4.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(1.5, 2.5) should return 4.0. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

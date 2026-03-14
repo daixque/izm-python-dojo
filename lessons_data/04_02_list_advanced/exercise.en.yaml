@@ -1,0 +1,40 @@
+lesson:
+  number: "04_02"
+  id: "04_02_list_advanced"
+  title: "List Operations"
+
+task_description: |
+  <p>Implement the function <code>find_max(numbers)</code>.</p>
+  <p><strong>numbers</strong>: a non-empty list of numbers</p>
+  <p>Return the <strong>maximum value</strong> in the list. Do <em>not</em> use the built-in <code>max()</code> function — instead, use a <code>for</code> loop to compare all elements.</p>
+  <h3>Examples</h3>
+  <pre>  find_max([3, 7, 2, 9, 1])    → 9
+  find_max([5])                → 5
+  find_max([-5, -2, -10, -1]) → -1</pre>
+
+instructions:
+  - "The first line <code>max_value = numbers[0]</code> is already provided"
+  - "Use a <code>for</code> loop to examine every element in <code>numbers</code> one by one"
+  - "If the current element is greater than <code>max_value</code>, update <code>max_value</code> with that element"
+  - "After the loop ends, return <code>max_value</code>"
+
+hints:
+  - hint: |
+      Use a for loop to iterate over all elements:<br>
+      <code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># update max_value if num is larger</code>
+  - hint: |
+      Compare the current element and update the maximum:<br>
+      <code>if num > max_value:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = num</code>
+  - hint: |
+      The loop variable <code>num</code> holds each element in turn.<br>
+      Whenever you find a value larger than <code>max_value</code>, update <code>max_value</code> to track the running maximum.
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def find_max(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = numbers[0]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if num > max_value:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = num</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return max_value</code>

@@ -1,0 +1,98 @@
+initial_code: |
+  def get_element(fruits, index):
+      # ここにコードを書いてください
+      # index が 0 以上かつ len(fruits) 未満なら fruits[index] を返す
+      # そうでなければ None を返す
+      pass
+
+  # テスト実行
+  print(get_element(["apple", "banana", "orange"], 0))  # apple
+  print(get_element(["apple", "banana", "orange"], 2))  # orange
+  print(get_element(["apple", "banana"], 5))            # None
+
+solution_code: |
+  def get_element(fruits, index):
+      if 0 <= index < len(fruits):
+          return fruits[index]
+      else:
+          return None
+
+  # テスト実行
+  print(get_element(["apple", "banana", "orange"], 0))
+  print(get_element(["apple", "banana", "orange"], 2))
+  print(get_element(["apple", "banana"], 5))
+
+initial_files: []
+
+tests:
+  - name: "先頭要素の取得"
+    description: "get_element([\"apple\", \"banana\", \"orange\"], 0) が \"apple\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_element が定義されていません"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana", "orange"], 0)
+              if test_result == "apple":
+                  result = {"passed": True, "message": "✓ インデックス 0 で 'apple' が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 'apple', 実際の値: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "末尾要素の取得"
+    description: "get_element([\"apple\", \"banana\", \"orange\"], 2) が \"orange\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_element が定義されていません"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana", "orange"], 2)
+              if test_result == "orange":
+                  result = {"passed": True, "message": "✓ インデックス 2 で 'orange' が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 'orange', 実際の値: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "範囲外インデックスの処理"
+    description: "get_element([\"apple\", \"banana\"], 5) が None を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_element が定義されていません"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana"], 5)
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ 範囲外インデックスで None が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: None, 実際の値: '{test_result}'（範囲外のインデックスは None を返す必要があります）"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "1要素リストの取得"
+    description: "get_element([\"apple\"], 0) が \"apple\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_element が定義されていません"}
+          else:
+              test_result = exec_globals['get_element'](["apple"], 0)
+              if test_result == "apple":
+                  result = {"passed": True, "message": "✓ 1要素リストからインデックス 0 で 'apple' が正しく返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 'apple', 実際の値: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

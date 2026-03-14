@@ -1,0 +1,39 @@
+lesson:
+  number: "03_02"
+  id: "03_02_for_advanced"
+  title: "Advanced for Loops"
+
+task_description: |
+  <p>Implement the function <code>sum_numbers(n)</code>.</p>
+  <p>This function returns the <strong>sum of all integers from 1 to n</strong>.</p>
+  <h3>Example Output</h3>
+  <p>For example, calling <code>sum_numbers(5)</code> computes:</p>
+  <pre>  1 + 2 + 3 + 4 + 5 = 15</pre>
+  <p>so it returns <code>15</code>.</p>
+  <p><code>sum_numbers(10)</code> returns <code>55</code>, and <code>sum_numbers(100)</code> returns <code>5050</code>.</p>
+
+instructions:
+  - "The function definition and the initialization <code>total = 0</code> are already provided. Implement the loop."
+  - "Use a <code>for</code> loop with <code>range(1, n + 1)</code> to iterate from 1 to n"
+  - "Add each value to the total each iteration using <code>total += i</code>"
+  - "After the loop, return the total with <code>return total</code> (already written for you)"
+
+hints:
+  - hint: |
+      Pattern for computing a sum:<br>
+      <code>total = 0</code><br>
+      <code>for i in range(1, n + 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>total += i</code>
+  - hint: |
+      <code>range(1, n + 1)</code> generates 1, 2, 3, ..., n.<br>
+      We write <code>n + 1</code> because the stop value is excluded.
+  - hint: |
+      <code>total += i</code> is the same as <code>total = total + i</code>.<br>
+      Each iteration adds the current value of <code>i</code> to <code>total</code>.
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def sum_numbers(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>total = 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(1, n + 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>total += i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return total</code>

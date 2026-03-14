@@ -1,0 +1,119 @@
+initial_code: |
+  def save_memo(filename, content):
+      # ここにコードを書いてください
+      # with open(filename, 'w', encoding='utf-8') as f: を使う
+      # f.write(content) でファイルに書き込む
+      pass
+
+  def load_memo(filename):
+      # ここにコードを書いてください
+      # try: で open して read() して返す
+      # except FileNotFoundError: で None を返す
+      pass
+
+  # テスト実行
+  save_memo("memo.txt", "これはメモです")
+  content = load_memo("memo.txt")
+  print(content)  # "これはメモです"
+
+  missing = load_memo("notfound.txt")
+  print(missing)  # None
+
+solution_code: |
+  def save_memo(filename, content):
+      with open(filename, 'w', encoding='utf-8') as f:
+          f.write(content)
+
+  def load_memo(filename):
+      try:
+          with open(filename, 'r', encoding='utf-8') as f:
+              return f.read()
+      except FileNotFoundError:
+          return None
+
+  # テスト実行
+  save_memo("memo.txt", "これはメモです")
+  content = load_memo("memo.txt")
+  print(content)
+
+  missing = load_memo("notfound.txt")
+  print(missing)
+
+initial_files: []
+
+tests:
+  - name: "save_memo が動作するか"
+    description: "save_memo を呼び出してファイルが正しく保存されているか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("test_save.txt", "テスト内容")
+
+          with open("test_save.txt", 'r', encoding='utf-8') as f:
+              saved = f.read()
+
+          if saved == "テスト内容":
+              result = {"passed": True, "message": "✓ ファイルへの保存が正しく動作しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 保存された内容が正しくありません。期待: 'テスト内容', 実際: '{saved}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "load_memo が保存した内容を読み込めるか"
+    description: "save_memo で保存した内容を load_memo で正しく読み込めるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("test_load.txt", "読み込みテスト")
+          loaded = exec_globals['load_memo']("test_load.txt")
+
+          if loaded == "読み込みテスト":
+              result = {"passed": True, "message": "✓ ファイルの読み込みが正しく動作しています"}
+          else:
+              result = {"passed": False, "message": f"✗ 読み込んだ内容が正しくありません。期待: '読み込みテスト', 実際: '{loaded}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "存在しないファイルは None を返すか"
+    description: "存在しないファイルを読み込もうとしたとき None が返されるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          result_val = exec_globals['load_memo']("nonexistent_12345.txt")
+
+          if result_val is None:
+              result = {"passed": True, "message": "✓ 存在しないファイルは None を返します"}
+          else:
+              result = {"passed": False, "message": f"✗ 存在しないファイルは None を返すべきです。実際: {result_val}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "複数のメモを保存・読み込みできるか"
+    description: "複数のファイルをそれぞれ正しく保存・読み込みできるか確認する"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          exec_globals['save_memo']("memo1.txt", "メモ1")
+          exec_globals['save_memo']("memo2.txt", "メモ2")
+
+          content1 = exec_globals['load_memo']("memo1.txt")
+          content2 = exec_globals['load_memo']("memo2.txt")
+
+          if content1 == "メモ1" and content2 == "メモ2":
+              result = {"passed": True, "message": "✓ 複数のファイルを正しく保存・読み込みできています"}
+          else:
+              result = {"passed": False, "message": f"✗ 複数ファイルの処理が正しくありません。memo1='{content1}', memo2='{content2}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

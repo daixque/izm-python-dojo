@@ -1,0 +1,34 @@
+lesson:
+  number: "06_03"
+  id: "06_03_file"
+  title: "File Operations Basics"
+
+task_description: |
+  <p>As a basic feature of a memo app, implement two functions to save and load text files.</p>
+  <ol>
+    <li><strong>save_memo(filename, content)</strong>: A function that saves text to a file</li>
+    <li><strong>load_memo(filename)</strong>: A function that reads text from a file</li>
+  </ol>
+
+instructions:
+  - "In the <code>save_memo</code> function, use <code>with open(filename, 'w', encoding='utf-8') as f:</code> to open the file, and <code>f.write(content)</code> to write the content"
+  - "In the <code>load_memo</code> function, use <code>with open(filename, 'r', encoding='utf-8') as f:</code> inside a <code>try:</code> block, and return the content with <code>f.read()</code>"
+  - "If the file does not exist (<code>FileNotFoundError</code>), return <code>None</code>"
+  - "Do not modify the test code outside the functions"
+
+hints:
+  - hint: |
+      Basic structure of the <code>save_memo</code> function:<br>
+      <code>with open(filename, 'w', encoding='utf-8') as f:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>f.write(content)</code>
+  - hint: |
+      Basic structure of the <code>load_memo</code> function:<br>
+      <code>try:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>with open(filename, 'r', encoding='utf-8') as f:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return f.read()</code><br>
+      <code>except FileNotFoundError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>
+  - hint: |
+      <code>pass</code> means "do nothing". Once you've written your implementation, remove the <code>pass</code>.
+  - hint: |
+      To handle missing files: calling <code>load_memo("notfound.txt")</code> raises <code>FileNotFoundError</code>. Catch it with <code>except FileNotFoundError:</code> and return <code>None</code>.

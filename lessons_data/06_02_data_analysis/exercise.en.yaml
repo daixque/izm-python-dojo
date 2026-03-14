@@ -1,0 +1,65 @@
+lesson:
+  number: "06_02"
+  id: "06_02_data_analysis"
+  title: "Data Analysis Program"
+
+task_description: |
+  <p>Let's implement three functions that analyze student grade data.</p>
+  <h3>Functions to Implement</h3>
+  <ul>
+    <li><strong>calculate_average(scores)</strong>: Calculate the average score for each student</li>
+    <li><strong>find_top_student(averages)</strong>: Return the name of the student with the highest average</li>
+    <li><strong>count_passing(averages, passing_score=60)</strong>: Return the number of passing students</li>
+  </ul>
+  <h3>Specification for calculate_average</h3>
+  <ul>
+    <li>Argument <code>scores</code>: in the format <code>{"Alice": [85, 90, 88], ...}</code></li>
+    <li>Return value: in the format <code>{"Alice": 87.666..., ...}</code> (average for each student)</li>
+    <li>Use <code>sum()</code> and <code>len()</code> to calculate the average</li>
+  </ul>
+  <h3>Specification for find_top_student</h3>
+  <ul>
+    <li>Argument <code>averages</code>: in the format <code>{"Alice": 87.67, ...}</code></li>
+    <li>Return value: the name (string) of the student with the highest average</li>
+  </ul>
+  <h3>Specification for count_passing</h3>
+  <ul>
+    <li>Argument <code>averages</code>: in the format <code>{"Alice": 87.67, ...}</code></li>
+    <li>Argument <code>passing_score</code>: the passing threshold (default 60)</li>
+    <li>Return value: the number of students with averages at or above the passing score (integer)</li>
+  </ul>
+
+instructions:
+  - "For <code>calculate_average</code>: loop with <code>scores.items()</code>, divide each list's <code>sum()</code> by its <code>len()</code>"
+  - "For <code>find_top_student</code>: loop with <code>averages.items()</code>, tracking the student name as the maximum is updated"
+  - "For <code>count_passing</code>: loop with <code>averages.values()</code>, increment <code>count</code> when the average is at or above <code>passing_score</code>"
+  - "The default argument <code>passing_score=60</code> is already defined — no changes needed there"
+
+hints:
+  - hint: |
+      Structure of <code>calculate_average</code>:<br>
+      <code>averages = {}</code><br>
+      <code>for name, score_list in scores.items():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>averages[name] = sum(score_list) / len(score_list)</code><br>
+      <code>return averages</code>
+  - hint: |
+      Structure of <code>find_top_student</code>:<br>
+      <code>top_student = None</code><br>
+      <code>max_avg = -1</code><br>
+      <code>for name, avg in averages.items():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt; max_avg:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>max_avg = avg</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top_student = name</code><br>
+      <code>return top_student</code>
+  - hint: |
+      Structure of <code>count_passing</code>:<br>
+      <code>count = 0</code><br>
+      <code>for avg in averages.values():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt;= passing_score:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>count += 1</code><br>
+      <code>return count</code>
+  - hint: |
+      Expected results for the test run (using sample data):<br>
+      Averages: Alice≈87.67, Bob≈72.33, Charlie≈57.67<br>
+      Top student: Alice<br>
+      Passing count: 2 (Alice and Bob score 60 or above)

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン05_01: 関数の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン05_01: 関数の基礎</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>add(a, b)</code> を実装しましょう。</p>
+<p>2つの数値 <code>a</code> と <code>b</code> を受け取り、その<strong>合計を return 文で返す</strong>関数を作ります。</p>
+<h3>実行例</h3>
+<pre>  print(add(3, 5))    # 8
+print(add(10, 20))  # 30
+print(add(-5, 3))   # -2</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>関数定義 <code>def add(a, b):</code> は用意済みです。関数の中身を実装してください</li>
+                            <li><code>a</code> と <code>b</code> を足した結果を計算します</li>
+                            <li><code>return</code> 文を使って計算結果を返します</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li><code>return</code> 文の使い方：<br>
+<code>def add(a, b):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+<code>???</code> の部分に <code>a</code> と <code>b</code> を足す式を書きます。
+</li>
+                            <li>足し算は <code>+</code> 演算子を使います：<br>
+<code>a + b</code> で <code>a</code> と <code>b</code> の合計が計算できます。
+</li>
+                            <li>完成した関数はこのような形になります：<br>
+<code>def add(a, b):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return a + b</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "05_01_function_basic";
+        const INITIAL_CODE = "def add(a, b):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # a \u3068 b \u3092\u8db3\u3057\u305f\u7d50\u679c\u3092 return \u3067\u8fd4\u3059\n    pass\n\nprint(add(3, 5))      # 8\nprint(add(10, 20))    # 30\nprint(add(-5, 3))     # -2\n";
+        const SOLUTION_CODE = "def add(a, b):\n    return a + b\n\nprint(add(3, 5))\nprint(add(10, 20))\nprint(add(-5, 3))\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 add \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](3, 5)\n        if test_result == 8:\n            result = {\"passed\": True, \"message\": \"\u2713 add(3, 5) = 8 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(3, 5) \u306f 8 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "add(3, 5) \u304c 8 \u3092\u8fd4\u3059\u304b", "name": "add(3, 5) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 add \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](10, 20)\n        if test_result == 30:\n            result = {\"passed\": True, \"message\": \"\u2713 add(10, 20) = 30 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(10, 20) \u306f 30 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "add(10, 20) \u304c 30 \u3092\u8fd4\u3059\u304b", "name": "add(10, 20) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 add \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](-5, 3)\n        if test_result == -2:\n            result = {\"passed\": True, \"message\": \"\u2713 add(-5, 3) = -2 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(-5, 3) \u306f -2 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "add(-5, 3) \u304c -2 \u3092\u8fd4\u3059\u304b\uff08\u8ca0\u306e\u6570\uff09", "name": "\u8ca0\u306e\u6570\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 add \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](1.5, 2.5)\n        if test_result == 4.0:\n            result = {\"passed\": True, \"message\": \"\u2713 add(1.5, 2.5) = 4.0 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(1.5, 2.5) \u306f 4.0 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "add(1.5, 2.5) \u304c 4.0 \u3092\u8fd4\u3059\u304b\uff08\u6d6e\u52d5\u5c0f\u6570\u70b9\u6570\uff09", "name": "\u5c0f\u6570\u306e\u30c6\u30b9\u30c8"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+lesson:
+  number: "06_03"
+  id: "06_03_file"
+  title: "ファイル操作の基礎"
+
+content: |
+  <section class="section">
+    <h2>📁 ファイル操作とは</h2>
+    <p>これまで作ったプログラムは、実行が終わるとデータが消えてしまいました。<strong>ファイル操作</strong>を使うと、データをファイルに保存して、次回の実行でも読み込むことができます。</p>
+    <p>Pythonでは <code>open()</code> 関数を使ってファイルを開き、データを読み書きします。</p>
+  </section>
+
+  <section class="section">
+    <h2>🔓 open() 関数とモード</h2>
+    <p><code>open(filename, mode)</code> でファイルを開きます。<code>mode</code> には次のものがあります：</p>
+    <ul>
+      <li><code>'r'</code>：読み込み（Read）。ファイルが存在しないとエラー</li>
+      <li><code>'w'</code>：書き込み（Write）。ファイルが存在しない場合は新規作成、存在する場合は上書き</li>
+      <li><code>'a'</code>：追加書き込み（Append）。ファイルの末尾に追加</li>
+    </ul>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">ファイルへの書き込み（'w' モード）</div>
+      <div class="example-code">f = open('hello.txt', 'w', encoding='utf-8')<br>f.write('こんにちは、Python！')<br>f.close()</div>
+      <div class="example-explanation"><code>open()</code> でファイルを開き、<code>write()</code> で書き込み、最後に <code>close()</code> で閉じます。<code>encoding='utf-8'</code> を指定すると日本語も正しく保存できます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">ファイルからの読み込み（'r' モード）</div>
+      <div class="example-code">f = open('hello.txt', 'r', encoding='utf-8')<br>content = f.read()<br>f.close()<br>print(content)  # こんにちは、Python！</div>
+      <div class="example-explanation"><code>read()</code> でファイルの内容をすべて文字列として読み込みます。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🛡️ with 文 - 自動クローズ</h2>
+    <p><code>close()</code> を忘れると、ファイルが正しく保存されないことがあります。<strong><code>with</code> 文</strong>を使うと、ブロックを抜けたときに自動的にファイルが閉じられます。</p>
+    <p>Pythonでは <code>with</code> 文を使うのが推奨されるやり方です。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">with 文の構文</div>
+      <div class="example-code">with open('hello.txt', 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('Hello, World!')<br># ブロックを抜けると自動的に close() される</div>
+      <div class="example-explanation"><code>as f</code> でファイルオブジェクトに名前をつけます。インデントブロックを抜けると自動的に <code>close()</code> が呼ばれます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">with 文で読み込み</div>
+      <div class="example-code">with open('hello.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = f.read()<br>print(content)  # Hello, World!</div>
+      <div class="example-explanation">読み込みでも <code>with</code> 文を使えます。<code>content</code> はブロックの外でも使えます。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚠️ FileNotFoundError の処理</h2>
+    <p>存在しないファイルを <code>'r'</code> モードで開こうとすると、<code>FileNotFoundError</code> が発生します。<code>try/except</code> を使ってエラーを処理しましょう。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">try/except で FileNotFoundError を捕捉</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;with open('missing.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;print(content)<br>except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("ファイルが見つかりません")</div>
+      <div class="example-explanation">ファイルが存在しないときは <code>FileNotFoundError</code> を捕捉して、適切なメッセージを表示したり、代わりの処理をしたりできます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">関数として組み合わせる</div>
+      <div class="example-code">def read_file(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br><br>result = read_file("data.txt")<br>if result is None:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("ファイルが存在しません")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(result)</div>
+      <div class="example-explanation">ファイルが存在しない場合に <code>None</code> を返す関数パターンは実用的です。<code>is None</code> でチェックして処理を分岐させましょう。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🌏 テキストファイルと文字コード</h2>
+    <p>日本語などのマルチバイト文字を扱う場合、<code>encoding='utf-8'</code> を指定することが重要です。指定しないと、環境によって文字化けが起きることがあります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">日本語ファイルの保存と読み込み</div>
+      <div class="example-code"># 日本語を保存<br>with open('japanese.txt', 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('日本語のテキストです')<br><br># 日本語を読み込み<br>with open('japanese.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;text = f.read()<br>print(text)  # 日本語のテキストです</div>
+      <div class="example-explanation">書き込みと読み込みの両方で <code>encoding='utf-8'</code> を指定することで、日本語が正しく扱えます。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>open(filename, mode, encoding='utf-8')</code> でファイルを開く</li>
+      <li>モード: <code>'r'</code>（読み込み）、<code>'w'</code>（書き込み）、<code>'a'</code>（追加）</li>
+      <li><code>with</code> 文を使うと自動的に <code>close()</code> される</li>
+      <li><code>f.write(text)</code> で書き込み、<code>f.read()</code> で読み込み</li>
+      <li>存在しないファイルは <code>FileNotFoundError</code> → <code>try/except</code> で処理</li>
+      <li>日本語を扱う場合は必ず <code>encoding='utf-8'</code> を指定</li>
+    </ul>
+  </section>

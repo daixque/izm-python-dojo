@@ -1,0 +1,40 @@
+lesson:
+  number: "04_02"
+  id: "04_02_list_advanced"
+  title: "リストの操作"
+
+task_description: |
+  <p>関数 <code>find_max(numbers)</code> を実装しましょう。</p>
+  <p><strong>numbers</strong>: 数値のリスト（空ではありません）</p>
+  <p>リストの中の<strong>最大値</strong>を返します。ただし、<code>max()</code> 関数は使わず、<code>for</code> ループで全要素を比較して求めてください。</p>
+  <h3>例</h3>
+  <pre>  find_max([3, 7, 2, 9, 1])    → 9
+  find_max([5])                → 5
+  find_max([-5, -2, -10, -1]) → -1</pre>
+
+instructions:
+  - "関数の最初の行 <code>max_value = numbers[0]</code> はすでに用意されています"
+  - "<code>for</code> ループで <code>numbers</code> のすべての要素を1つずつ確認する"
+  - "各要素が <code>max_value</code> より大きければ、<code>max_value</code> をその要素で更新する"
+  - "ループが終わったら <code>max_value</code> を返す"
+
+hints:
+  - hint: |
+      for ループで全要素を確認します：<br>
+      <code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># num が max_value より大きければ更新</code>
+  - hint: |
+      現在の要素と最大値を比較して更新します：<br>
+      <code>if num > max_value:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = num</code>
+  - hint: |
+      ループ変数 <code>num</code> を使って、リストの各要素を順番に見ていきます。<br>
+      <code>max_value</code> より大きい値が見つかれば、<code>max_value</code> を更新することで最大値を追跡できます。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def find_max(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = numbers[0]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for num in numbers:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if num > max_value:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>max_value = num</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return max_value</code>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン03_03: while ループ</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン03_03: while ループ</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>check_guess(secret, guess)</code> を実装しましょう。</p>
+<p>この関数は数当てゲームのヒントを返します。</p>
+<ul>
+  <li><code>guess</code> が <code>secret</code> より小さければ → <code>"Too low"</code> を返す</li>
+  <li><code>guess</code> が <code>secret</code> より大きければ → <code>"Too high"</code> を返す</li>
+  <li><code>guess</code> が <code>secret</code> と同じなら → <code>"Correct"</code> を返す</li>
+</ul>
+<h3>実行例</h3>
+<pre>  check_guess(50, 30)  → "Too low"
+check_guess(50, 70)  → "Too high"
+check_guess(50, 50)  → "Correct"</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>関数の枠組みは用意済みです。<code>if</code> / <code>elif</code> / <code>else</code> を使って3つの場合に分けて実装してください</li>
+                            <li><code>guess < secret</code> なら <code>"Too low"</code> を返す</li>
+                            <li><code>guess > secret</code> なら <code>"Too high"</code> を返す</li>
+                            <li>それ以外（<code>guess == secret</code>）なら <code>"Correct"</code> を返す</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>if / elif / else の基本形：<br>
+<code>if guess &lt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+<code>elif guess &gt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+<code>else:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+</li>
+                            <li><code>guess &lt; secret</code> は「guess が secret より小さい」という条件です。<br>
+例えば <code>check_guess(50, 30)</code> のとき、guess=30 は secret=50 より小さいので "Too low" です。
+</li>
+                            <li>文字列を返すには <code>return "文字列"</code> と書きます。<br>
+戻り値は <code>"Too low"</code>、<code>"Too high"</code>、<code>"Correct"</code> のいずれかです（大文字・小文字に注意）。
+</li>
+                            <li>完成した関数はこのような形になります：<br>
+<code>def check_guess(secret, guess):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if guess &lt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>elif guess &gt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>else:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "03_03_while";
+        const INITIAL_CODE = "def check_guess(secret, guess):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # guess \u304c secret \u3088\u308a\u5c0f\u3055\u3051\u308c\u3070 \"Too low\" \u3092\u8fd4\u3059\n    # guess \u304c secret \u3088\u308a\u5927\u304d\u3051\u308c\u3070 \"Too high\" \u3092\u8fd4\u3059\n    # guess \u304c secret \u3068\u540c\u3058\u306a\u3089 \"Correct\" \u3092\u8fd4\u3059\n    pass\n\n# \u30b2\u30fc\u30e0\u3092\u8a66\u3057\u3066\u307f\u3088\u3046\uff08\u30c6\u30b9\u30c8\u5f8c\u306b\u30b3\u30e1\u30f3\u30c8\u3092\u5916\u3057\u3066\u904a\u3079\u307e\u3059\uff09\n# import random\n# secret = random.randint(1, 100)\n# while True:\n#     guess = int(input(\"\u4e88\u60f3\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044 (1-100): \"))\n#     result = check_guess(secret, guess)\n#     print(result)\n#     if result == \"Correct\":\n#         break\n";
+        const SOLUTION_CODE = "def check_guess(secret, guess):\n    if guess \u003c secret:\n        return \"Too low\"\n    elif guess \u003e secret:\n        return \"Too high\"\n    else:\n        return \"Correct\"\n\n# \u30b2\u30fc\u30e0\u3092\u8a66\u3057\u3066\u307f\u3088\u3046\uff08\u30c6\u30b9\u30c8\u5f8c\u306b\u30b3\u30e1\u30f3\u30c8\u3092\u5916\u3057\u3066\u904a\u3079\u307e\u3059\uff09\n# import random\n# secret = random.randint(1, 100)\n# while True:\n#     guess = int(input(\"\u4e88\u60f3\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044 (1-100): \"))\n#     result = check_guess(secret, guess)\n#     print(result)\n#     if result == \"Correct\":\n#         break\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027check_guess\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 check_guess \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027check_guess\u0027](50, 30)\n        if test_result == \"Too low\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 30) = \\\"Too low\\\" \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 30) \u306f \\\"Too low\\\" \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {repr(test_result)}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "guess \u304c secret \u3088\u308a\u5c0f\u3055\u3044\u3068\u304d \"Too low\" \u3092\u8fd4\u3059\u304b", "name": "Too low \u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027check_guess\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 check_guess \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027check_guess\u0027](50, 70)\n        if test_result == \"Too high\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 70) = \\\"Too high\\\" \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 70) \u306f \\\"Too high\\\" \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {repr(test_result)}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "guess \u304c secret \u3088\u308a\u5927\u304d\u3044\u3068\u304d \"Too high\" \u3092\u8fd4\u3059\u304b", "name": "Too high \u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027check_guess\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 check_guess \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027check_guess\u0027](50, 50)\n        if test_result == \"Correct\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 50) = \\\"Correct\\\" \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 50) \u306f \\\"Correct\\\" \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {repr(test_result)}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "guess \u304c secret \u3068\u7b49\u3057\u3044\u3068\u304d \"Correct\" \u3092\u8fd4\u3059\u304b", "name": "Correct \u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027check_guess\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 check_guess \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        r1 = exec_globals[\u0027check_guess\u0027](1, 1)\n        r2 = exec_globals[\u0027check_guess\u0027](100, 99)\n\n        if r1 == \"Correct\" and r2 == \"Too low\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u5883\u754c\u5024\u30c6\u30b9\u30c8\u901a\u904e: check_guess(1, 1)=\\\"Correct\\\", check_guess(100, 99)=\\\"Too low\\\"\"}\n        else:\n            msgs = []\n            if r1 != \"Correct\":\n                msgs.append(f\"check_guess(1, 1) \u306f \\\"Correct\\\" \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {repr(r1)}\")\n            if r2 != \"Too low\":\n                msgs.append(f\"check_guess(100, 99) \u306f \\\"Too low\\\" \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {repr(r2)}\")\n            result = {\"passed\": False, \"message\": \"\u2717 \" + \" / \".join(msgs)}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u6975\u7aef\u306a\u5024\u3067\u3082\u6b63\u3057\u304f\u52d5\u4f5c\u3059\u308b\u304b", "name": "\u5883\u754c\u5024\u30c6\u30b9\u30c8"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

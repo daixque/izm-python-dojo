@@ -1,0 +1,122 @@
+initial_code: |
+  def check_guess(secret, guess):
+      # Write your code here
+      # If guess is less than secret, return "Too low"
+      # If guess is greater than secret, return "Too high"
+      # If guess equals secret, return "Correct"
+      pass
+
+  # Try the game! (Uncomment after testing to play)
+  # import random
+  # secret = random.randint(1, 100)
+  # while True:
+  #     guess = int(input("Enter your guess (1-100): "))
+  #     result = check_guess(secret, guess)
+  #     print(result)
+  #     if result == "Correct":
+  #         break
+
+solution_code: |
+  def check_guess(secret, guess):
+      if guess < secret:
+          return "Too low"
+      elif guess > secret:
+          return "Too high"
+      else:
+          return "Correct"
+
+  # Try the game! (Uncomment after testing to play)
+  # import random
+  # secret = random.randint(1, 100)
+  # while True:
+  #     guess = int(input("Enter your guess (1-100): "))
+  #     result = check_guess(secret, guess)
+  #     print(result)
+  #     if result == "Correct":
+  #         break
+
+initial_files: []
+
+tests:
+  - name: "Test Too low"
+    description: "Returns \"Too low\" when guess is less than secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function check_guess is not defined"}
+          else:
+              test_result = exec_globals['check_guess'](50, 30)
+              if test_result == "Too low":
+                  result = {"passed": True, "message": "✓ check_guess(50, 30) = \"Too low\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 30) should be \"Too low\". Got: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Test Too high"
+    description: "Returns \"Too high\" when guess is greater than secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function check_guess is not defined"}
+          else:
+              test_result = exec_globals['check_guess'](50, 70)
+              if test_result == "Too high":
+                  result = {"passed": True, "message": "✓ check_guess(50, 70) = \"Too high\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 70) should be \"Too high\". Got: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Test Correct"
+    description: "Returns \"Correct\" when guess equals secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function check_guess is not defined"}
+          else:
+              test_result = exec_globals['check_guess'](50, 50)
+              if test_result == "Correct":
+                  result = {"passed": True, "message": "✓ check_guess(50, 50) = \"Correct\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 50) should be \"Correct\". Got: {repr(test_result)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Boundary value test"
+    description: "Works correctly with edge case values"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'check_guess' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function check_guess is not defined"}
+          else:
+              r1 = exec_globals['check_guess'](1, 1)
+              r2 = exec_globals['check_guess'](100, 99)
+
+              if r1 == "Correct" and r2 == "Too low":
+                  result = {"passed": True, "message": "✓ Boundary tests passed: check_guess(1, 1)=\"Correct\", check_guess(100, 99)=\"Too low\""}
+              else:
+                  msgs = []
+                  if r1 != "Correct":
+                      msgs.append(f"check_guess(1, 1) should be \"Correct\". Got: {repr(r1)}")
+                  if r2 != "Too low":
+                      msgs.append(f"check_guess(100, 99) should be \"Too low\". Got: {repr(r2)}")
+                  result = {"passed": False, "message": "✗ " + " / ".join(msgs)}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

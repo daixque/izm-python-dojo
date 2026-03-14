@@ -1,0 +1,100 @@
+initial_code: |
+  def sum_numbers(n):
+      total = 0
+      # Write your code here
+      # Use a for loop to iterate from 1 to n and add each value to total
+      return total
+
+  print(sum_numbers(5))   # Should be 15
+  print(sum_numbers(10))  # Should be 55
+
+solution_code: |
+  def sum_numbers(n):
+      total = 0
+      for i in range(1, n + 1):
+          total += i
+      return total
+
+  print(sum_numbers(5))
+  print(sum_numbers(10))
+
+initial_files: []
+
+tests:
+  - name: "Test sum_numbers(5)"
+    description: "Sum from 1 to 5 should be 15"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function sum_numbers is not defined"}
+          else:
+              test_result = exec_globals['sum_numbers'](5)
+              if test_result == 15:
+                  result = {"passed": True, "message": "✓ sum_numbers(5) = 15 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(5) should be 15. Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Test sum_numbers(10)"
+    description: "Sum from 1 to 10 should be 55"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function sum_numbers is not defined"}
+          else:
+              test_result = exec_globals['sum_numbers'](10)
+              if test_result == 55:
+                  result = {"passed": True, "message": "✓ sum_numbers(10) = 55 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(10) should be 55. Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Test sum_numbers(100)"
+    description: "Sum from 1 to 100 should be 5050"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function sum_numbers is not defined"}
+          else:
+              test_result = exec_globals['sum_numbers'](100)
+              if test_result == 5050:
+                  result = {"passed": True, "message": "✓ sum_numbers(100) = 5050 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum_numbers(100) should be 5050. Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Return type check"
+    description: "Function should return a number, not None"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'sum_numbers' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function sum_numbers is not defined"}
+          else:
+              test_result = exec_globals['sum_numbers'](5)
+              if isinstance(test_result, (int, float)):
+                  result = {"passed": True, "message": "✓ Function correctly returns a number"}
+              elif test_result is None:
+                  result = {"passed": False, "message": "✗ Function returns None. Did you forget 'return total'?"}
+              else:
+                  result = {"passed": False, "message": f"✗ Function returns {type(test_result).__name__} instead of a number"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

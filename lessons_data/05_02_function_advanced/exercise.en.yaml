@@ -1,0 +1,47 @@
+lesson:
+  number: "05_02"
+  id: "05_02_function_advanced"
+  title: "Advanced Functions"
+
+task_description: |
+  <p>Implement the function <code>calculate(a, b, operation="add")</code>.</p>
+  <p>It receives two numbers <code>a</code> and <code>b</code>, and an operation type <code>operation</code>, then returns the result of the specified operation.</p>
+  <h3>Operation Types</h3>
+  <ul>
+    <li><code>"add"</code>: return <code>a + b</code> (default)</li>
+    <li><code>"subtract"</code>: return <code>a - b</code></li>
+    <li><code>"multiply"</code>: return <code>a * b</code></li>
+    <li><code>"divide"</code>: return <code>a / b</code> (return <code>None</code> if <code>b</code> is 0)</li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  print(calculate(10, 5))                  # 15 (default is addition)
+  print(calculate(10, 5, "subtract"))      # 5
+  print(calculate(10, 5, "multiply"))      # 50
+  print(calculate(10, 5, "divide"))        # 2.0
+  print(calculate(10, 0, "divide"))        # None</pre>
+
+instructions:
+  - "The function signature <code>def calculate(a, b, operation=\"add\"):</code> is already provided"
+  - "Use <code>if</code> / <code>elif</code> to branch based on the value of <code>operation</code>"
+  - "Return the result of each operation using a <code>return</code> statement"
+  - "For division (<code>\"divide\"</code>), return <code>None</code> when <code>b == 0</code>"
+
+hints:
+  - hint: |
+      Branch based on the value of <code>operation</code>:<br>
+      <code>if operation == "add":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      <code>elif operation == "subtract":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      Check for division by zero:<br>
+      <code>elif operation == "divide":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if b == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code>
+  - hint: |
+      The four arithmetic operators:<br>
+      Addition: <code>a + b</code><br>
+      Subtraction: <code>a - b</code><br>
+      Multiplication: <code>a * b</code><br>
+      Division: <code>a / b</code>

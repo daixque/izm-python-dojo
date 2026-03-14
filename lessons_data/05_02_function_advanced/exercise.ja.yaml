@@ -1,0 +1,47 @@
+lesson:
+  number: "05_02"
+  id: "05_02_function_advanced"
+  title: "関数の応用"
+
+task_description: |
+  <p>関数 <code>calculate(a, b, operation="add")</code> を実装しましょう。</p>
+  <p>2つの数値 <code>a</code>、<code>b</code> と演算の種類 <code>operation</code> を受け取り、指定された演算の結果を返します。</p>
+  <h3>operationの種類</h3>
+  <ul>
+    <li><code>"add"</code>: <code>a + b</code> を返す（デフォルト）</li>
+    <li><code>"subtract"</code>: <code>a - b</code> を返す</li>
+    <li><code>"multiply"</code>: <code>a * b</code> を返す</li>
+    <li><code>"divide"</code>: <code>a / b</code> を返す（<code>b</code> が 0 のときは <code>None</code> を返す）</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  print(calculate(10, 5))                  # 15 (デフォルトは加算)
+  print(calculate(10, 5, "subtract"))      # 5
+  print(calculate(10, 5, "multiply"))      # 50
+  print(calculate(10, 5, "divide"))        # 2.0
+  print(calculate(10, 0, "divide"))        # None</pre>
+
+instructions:
+  - "関数シグネチャ <code>def calculate(a, b, operation=\"add\"):</code> は用意済みです"
+  - "<code>if</code> / <code>elif</code> を使って <code>operation</code> の値に応じた処理を分岐させます"
+  - "各演算の結果を <code>return</code> 文で返します"
+  - "除算（<code>\"divide\"</code>）のとき、<code>b == 0</code> なら <code>None</code> を返します"
+
+hints:
+  - hint: |
+      <code>operation</code> の値に応じて処理を分岐させます：<br>
+      <code>if operation == "add":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      <code>elif operation == "subtract":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      除算のときはゼロ除算を確認します：<br>
+      <code>elif operation == "divide":</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if b == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code>
+  - hint: |
+      4つの演算子：<br>
+      加算: <code>a + b</code><br>
+      減算: <code>a - b</code><br>
+      乗算: <code>a * b</code><br>
+      除算: <code>a / b</code>

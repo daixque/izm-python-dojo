@@ -1,0 +1,99 @@
+lesson:
+  number: "06_02"
+  id: "06_02_data_analysis"
+  title: "データ集計プログラム"
+
+content: |
+  <section class="section">
+    <h2>📊 実践プロジェクト：データ集計プログラム</h2>
+    <p>このレッスンでは、リストと辞書を組み合わせてデータを管理・集計するプログラムを作ります。学校の成績管理システムを例に、実際のデータ分析の基礎を学びましょう。</p>
+  </section>
+
+  <section class="section">
+    <h2>📚 辞書でデータを管理する</h2>
+    <p>複数の生徒のスコアリストを管理するには、辞書が便利です。キーに生徒名、値にスコアのリストを格納します。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">スコアデータの構造</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Charlie": [55, 60, 58]<br>}<br><br># 特定の生徒のスコアにアクセス<br>print(scores["Alice"])   # [85, 90, 88]<br>print(scores["Bob"][0])  # 70（最初のスコア）</div>
+      <div class="example-explanation">辞書のキーに生徒名、値にスコアリストを格納します。<code>scores["Alice"]</code> でAliceのスコアリストを取得できます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">items() を使ったループ</div>
+      <div class="example-code">for name, score_list in scores.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}: {score_list}")<br><br># 出力:<br># Alice: [85, 90, 88]<br># Bob: [70, 75, 72]<br># Charlie: [55, 60, 58]</div>
+      <div class="example-explanation"><code>dict.items()</code> を使うと、辞書のキーと値のペアを同時に取得できます。生徒名とスコアリストを一度に処理するときに便利です。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🧮 sum() と len() を使った平均計算</h2>
+    <p>リストの平均値は <code>sum()</code>（合計）と <code>len()</code>（要素数）を使って計算できます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">平均点の計算</div>
+      <div class="example-code">scores_alice = [85, 90, 88]<br><br># 合計を要素数で割る<br>average = sum(scores_alice) / len(scores_alice)<br>print(average)  # 87.666...<br><br># 小数点2桁に丸める場合<br>print(round(average, 2))  # 87.67</div>
+      <div class="example-explanation"><code>sum([85, 90, 88])</code> は <code>263</code>、<code>len([85, 90, 88])</code> は <code>3</code> なので、平均は <code>263 / 3 ≈ 87.67</code> になります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">全生徒の平均を辞書に格納する</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72]<br>}<br><br>averages = {}<br>for name, score_list in scores.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;averages[name] = sum(score_list) / len(score_list)<br><br>print(averages)<br># {'Alice': 87.666..., 'Bob': 72.333...}</div>
+      <div class="example-explanation">空の辞書 <code>averages = {}</code> を作り、ループの中で各生徒の平均を計算して格納します。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏆 最大値を持つキーを探す</h2>
+    <p>辞書の中で最も高い値を持つキーを探すには、ループで比較しながら最大値を更新していく方法が基本です。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">最高得点者を見つける</div>
+      <div class="example-code">averages = {"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67}<br><br>top_student = None<br>max_avg = -1<br><br>for name, avg in averages.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;if avg &gt; max_avg:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max_avg = avg<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top_student = name<br><br>print(top_student)  # Alice</div>
+      <div class="example-explanation">
+        <code>max_avg = -1</code> と初期化しておくと、どんな正のスコアでも最初の比較でTrueになります。<br>
+        ループで各生徒の平均を比較し、最大値が更新されるたびに <code>top_student</code> も更新します。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">values() を使った合格者カウント</div>
+      <div class="example-code">averages = {"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67}<br>passing_score = 60<br><br>count = 0<br>for avg in averages.values():<br>&nbsp;&nbsp;&nbsp;&nbsp;if avg &gt;= passing_score:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br><br>print(count)  # 2（Alice と Bob）</div>
+      <div class="example-explanation"><code>dict.values()</code> は辞書の値だけを取得します。キーが不要で値だけ処理したい場合に使います。ここでは合格点以上の人数をカウントしています。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏗️ 3つの関数でシステムを設計する</h2>
+    <p>データ分析プログラムも関数に分けることで、それぞれの役割が明確になります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">関数を組み合わせた処理の流れ</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Charlie": [55, 60, 58]<br>}<br><br># ステップ1: 平均を計算<br>averages = calculate_average(scores)<br>print("平均点:", averages)<br><br># ステップ2: トップ生徒を探す<br>top = find_top_student(averages)<br>print("トップ:", top)<br><br># ステップ3: 合格者数を数える<br>passing = count_passing(averages)<br>print("合格者数:", passing)</div>
+      <div class="example-explanation">
+        3つの関数を順番に呼び出すことで、データの流れが明確になります：<br>
+        1. <code>calculate_average()</code> でスコアリストを平均値の辞書に変換<br>
+        2. <code>find_top_student()</code> で最高得点者を取得<br>
+        3. <code>count_passing()</code> で合格者数を集計
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li>辞書のキーに名前、値にリストを格納するとデータを整理できる</li>
+      <li><code>dict.items()</code> でキーと値のペアを同時に取得できる</li>
+      <li><code>sum(list) / len(list)</code> でリストの平均を計算できる</li>
+      <li><code>dict.values()</code> で辞書の値だけを取得できる</li>
+      <li>最大値を持つキーは、変数で最大値を管理しながらループで比較して見つける</li>
+    </ul>
+  </section>

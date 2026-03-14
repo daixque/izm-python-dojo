@@ -1,0 +1,48 @@
+lesson:
+  number: "03_03"
+  id: "03_03_while"
+  title: "while ループ"
+
+task_description: |
+  <p>関数 <code>check_guess(secret, guess)</code> を実装しましょう。</p>
+  <p>この関数は数当てゲームのヒントを返します。</p>
+  <ul>
+    <li><code>guess</code> が <code>secret</code> より小さければ → <code>"Too low"</code> を返す</li>
+    <li><code>guess</code> が <code>secret</code> より大きければ → <code>"Too high"</code> を返す</li>
+    <li><code>guess</code> が <code>secret</code> と同じなら → <code>"Correct"</code> を返す</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  check_guess(50, 30)  → "Too low"
+  check_guess(50, 70)  → "Too high"
+  check_guess(50, 50)  → "Correct"</pre>
+
+instructions:
+  - "関数の枠組みは用意済みです。<code>if</code> / <code>elif</code> / <code>else</code> を使って3つの場合に分けて実装してください"
+  - "<code>guess < secret</code> なら <code>\"Too low\"</code> を返す"
+  - "<code>guess > secret</code> なら <code>\"Too high\"</code> を返す"
+  - "それ以外（<code>guess == secret</code>）なら <code>\"Correct\"</code> を返す"
+
+hints:
+  - hint: |
+      if / elif / else の基本形：<br>
+      <code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      <code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+  - hint: |
+      <code>guess &lt; secret</code> は「guess が secret より小さい」という条件です。<br>
+      例えば <code>check_guess(50, 30)</code> のとき、guess=30 は secret=50 より小さいので "Too low" です。
+  - hint: |
+      文字列を返すには <code>return "文字列"</code> と書きます。<br>
+      戻り値は <code>"Too low"</code>、<code>"Too high"</code>、<code>"Correct"</code> のいずれかです（大文字・小文字に注意）。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def check_guess(secret, guess):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>

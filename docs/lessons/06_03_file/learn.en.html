@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson06_03: File Operations Basics</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">File Operations Basics</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>📁 What are File Operations?</h2>
+  <p>Programs we've written so far lose their data when they stop running. With <strong>file operations</strong>, you can save data to a file and read it back the next time the program runs.</p>
+  <p>In Python, you use the <code>open()</code> function to open a file and read or write data.</p>
+</section>
+
+<section class="section">
+  <h2>🔓 The open() Function and Modes</h2>
+  <p>Use <code>open(filename, mode)</code> to open a file. The available <code>mode</code> values are:</p>
+  <ul>
+    <li><code>'r'</code>: Read mode. Raises an error if the file doesn't exist</li>
+    <li><code>'w'</code>: Write mode. Creates the file if it doesn't exist; overwrites if it does</li>
+    <li><code>'a'</code>: Append mode. Adds content to the end of the file</li>
+  </ul>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Writing to a File ('w' mode)</div>
+    <div class="example-code">f = open('hello.txt', 'w', encoding='utf-8')<br>f.write('Hello, Python!')<br>f.close()</div>
+    <div class="example-explanation">Open the file with <code>open()</code>, write with <code>write()</code>, and finally close with <code>close()</code>. Specifying <code>encoding='utf-8'</code> ensures text is saved correctly.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Reading from a File ('r' mode)</div>
+    <div class="example-code">f = open('hello.txt', 'r', encoding='utf-8')<br>content = f.read()<br>f.close()<br>print(content)  # Hello, Python!</div>
+    <div class="example-explanation"><code>read()</code> reads the entire file content as a string.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🛡️ The with Statement - Automatic Close</h2>
+  <p>Forgetting to call <code>close()</code> can cause the file to not be saved properly. The <strong><code>with</code> statement</strong> automatically closes the file when the block ends.</p>
+  <p>Using the <code>with</code> statement is the recommended approach in Python.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">with Statement Syntax</div>
+    <div class="example-code">with open('hello.txt', 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('Hello, World!')<br># close() is called automatically when the block ends</div>
+    <div class="example-explanation"><code>as f</code> gives a name to the file object. <code>close()</code> is called automatically when the indented block ends.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Reading with the with Statement</div>
+    <div class="example-code">with open('hello.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = f.read()<br>print(content)  # Hello, World!</div>
+    <div class="example-explanation">You can use the <code>with</code> statement for reading too. The <code>content</code> variable is accessible outside the block.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⚠️ Handling FileNotFoundError</h2>
+  <p>Trying to open a non-existent file in <code>'r'</code> mode raises a <code>FileNotFoundError</code>. Use <code>try/except</code> to handle this error gracefully.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Catching FileNotFoundError with try/except</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;with open('missing.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;print(content)<br>except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("File not found")</div>
+    <div class="example-explanation">When the file doesn't exist, catch the <code>FileNotFoundError</code> to display an appropriate message or provide alternative processing.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Combining into a Function</div>
+    <div class="example-code">def read_file(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br><br>result = read_file("data.txt")<br>if result is None:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("File does not exist")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(result)</div>
+    <div class="example-explanation">Returning <code>None</code> when a file doesn't exist is a practical pattern. Use <code>is None</code> to check and branch your logic accordingly.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🌏 Text Files and Character Encoding</h2>
+  <p>When handling multi-byte characters, it's important to specify <code>encoding='utf-8'</code>. Without it, text may become garbled depending on the environment.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Saving and Reading Text Files</div>
+    <div class="example-code"># Save text<br>with open('notes.txt', 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('Hello from Python!')<br><br># Read text<br>with open('notes.txt', 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;text = f.read()<br>print(text)  # Hello from Python!</div>
+    <div class="example-explanation">Specifying <code>encoding='utf-8'</code> for both writing and reading ensures text is handled correctly across different systems.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li>Use <code>open(filename, mode, encoding='utf-8')</code> to open a file</li>
+    <li>Modes: <code>'r'</code> (read), <code>'w'</code> (write), <code>'a'</code> (append)</li>
+    <li>The <code>with</code> statement automatically calls <code>close()</code></li>
+    <li><code>f.write(text)</code> to write, <code>f.read()</code> to read</li>
+    <li>Non-existent files raise <code>FileNotFoundError</code> → handle with <code>try/except</code></li>
+    <li>Always specify <code>encoding='utf-8'</code> for reliable text handling</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

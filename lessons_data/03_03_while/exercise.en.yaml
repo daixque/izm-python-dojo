@@ -1,0 +1,48 @@
+lesson:
+  number: "03_03"
+  id: "03_03_while"
+  title: "while Loops"
+
+task_description: |
+  <p>Implement the function <code>check_guess(secret, guess)</code>.</p>
+  <p>This function returns a hint for a number guessing game.</p>
+  <ul>
+    <li>If <code>guess</code> is less than <code>secret</code> → return <code>"Too low"</code></li>
+    <li>If <code>guess</code> is greater than <code>secret</code> → return <code>"Too high"</code></li>
+    <li>If <code>guess</code> equals <code>secret</code> → return <code>"Correct"</code></li>
+  </ul>
+  <h3>Example</h3>
+  <pre>  check_guess(50, 30)  → "Too low"
+  check_guess(50, 70)  → "Too high"
+  check_guess(50, 50)  → "Correct"</pre>
+
+instructions:
+  - "The function skeleton is already provided. Use <code>if</code> / <code>elif</code> / <code>else</code> to handle the three cases."
+  - "If <code>guess < secret</code>, return <code>\"Too low\"</code>"
+  - "If <code>guess > secret</code>, return <code>\"Too high\"</code>"
+  - "Otherwise (<code>guess == secret</code>), return <code>\"Correct\"</code>"
+
+hints:
+  - hint: |
+      Basic if / elif / else structure:<br>
+      <code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      <code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+  - hint: |
+      <code>guess &lt; secret</code> means "guess is smaller than secret".<br>
+      For example, when calling <code>check_guess(50, 30)</code>, guess=30 is less than secret=50, so return "Too low".
+  - hint: |
+      To return a string, write <code>return "string"</code>.<br>
+      The return values are exactly: <code>"Too low"</code>, <code>"Too high"</code>, or <code>"Correct"</code> (case-sensitive).
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def check_guess(secret, guess):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if guess &lt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>elif guess &gt; secret:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>

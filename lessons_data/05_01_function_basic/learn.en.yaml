@@ -1,0 +1,130 @@
+lesson:
+  number: "05_01"
+  id: "05_01_function_basic"
+  title: "Function Basics"
+
+content: |
+  <section class="section">
+    <h2>⚙️ What is a Function?</h2>
+    <p>When writing programs, you often find yourself repeating the same operations multiple times.</p>
+    <p>A <strong>function</strong> is a named block of code that groups a set of operations together.</p>
+    <p>Once defined, you can call it as many times as you need.</p>
+    <p>For example, you can create functions like "add two numbers" or "display a greeting" and reuse them throughout your program.</p>
+  </section>
+
+  <section class="section">
+    <h2>📝 Defining and Calling Functions</h2>
+    <p>In Python, you define a function using the <code>def</code> keyword.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic Function Syntax</div>
+      <div class="example-code">def function_name():<br>&nbsp;&nbsp;&nbsp;&nbsp;# Write your code here<br>&nbsp;&nbsp;&nbsp;&nbsp;statement1<br>&nbsp;&nbsp;&nbsp;&nbsp;statement2</div>
+      <div class="example-explanation">
+        <strong>Key points:</strong><br>
+        - Write the function name after <code>def</code><br>
+        - Add <code>()</code> after the function name<br>
+        - Add <code>:</code> at the end of the line<br>
+        - Indent the function body with 4 spaces
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Defining and Calling a Function</div>
+      <div class="example-code">def say_hello():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Hello!")<br><br>say_hello()&nbsp;&nbsp;# Call the function<br>say_hello()&nbsp;&nbsp;# Can be called multiple times</div>
+      <div class="example-explanation">
+        Write <code>say_hello()</code> to call the function.<br>
+        The power of functions is that you can call them as many times as you need.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔧 Using Parameters (Arguments)</h2>
+    <p>By adding <strong>parameters</strong> to a function, you can pass values when calling it.</p>
+    <p>The values you pass when calling the function are called <strong>arguments</strong>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Function with Parameters</div>
+      <div class="example-code">def greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Hello, {name}!")<br><br>greet("Alice")&nbsp;&nbsp;# Hello, Alice!<br>greet("Bob")&nbsp;&nbsp;&nbsp;&nbsp;# Hello, Bob!</div>
+      <div class="example-explanation">
+        <code>name</code> is the parameter.<br>
+        When calling the function, you pass values like <code>"Alice"</code> or <code>"Bob"</code> as arguments.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Multiple Parameters</div>
+      <div class="example-code">def introduce(name, age):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Name: {name}")<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Age: {age}")<br><br>introduce("Alice", 13)</div>
+      <div class="example-explanation">
+        You can define multiple parameters separated by commas.<br>
+        When calling the function, pass values in the same order.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>↩️ The return Statement (Return Value)</h2>
+    <p>The <code>return</code> statement sends a result back to the caller.</p>
+    <p>This returned value is called the <strong>return value</strong>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Function with return</div>
+      <div class="example-code">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br><br>result = add(3, 5)<br>print(result)&nbsp;&nbsp;# 8</div>
+      <div class="example-explanation">
+        <code>return a + b</code> sends the calculated result back.<br>
+        You can store the return value in a variable with <code>result = add(3, 5)</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Using the Return Value Directly</div>
+      <div class="example-code">def multiply(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a * b<br><br># Pass the return value directly to print<br>print(multiply(4, 3))&nbsp;&nbsp;# 12<br>print(multiply(2, 7))&nbsp;&nbsp;# 14</div>
+      <div class="example-explanation">
+        You can also use the return value directly without storing it in a variable.<br>
+        <code>print(multiply(4, 3))</code> is the same as <code>print(12)</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Calling a Function Multiple Times</div>
+      <div class="example-code">def square(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * n<br><br>for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i} squared = {square(i)}")<br># 1 squared = 1<br># 2 squared = 4<br># 3 squared = 9<br># 4 squared = 16<br># 5 squared = 25</div>
+      <div class="example-explanation">
+        You can call a function inside a loop.<br>
+        Functions let you reuse code efficiently.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔍 Functions Without a Return Value</h2>
+    <p>Functions without a <code>return</code> statement automatically return <code>None</code> (nothing).</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Function Without return</div>
+      <div class="example-code">def say_hi():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Hi!")<br><br>result = say_hi()&nbsp;&nbsp;# Hi!<br>print(result)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# None</div>
+      <div class="example-explanation">
+        The return value of a function without <code>return</code> is <code>None</code>.<br>
+        <code>None</code> is Python's special value meaning "no value".
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li>Define a function with <code>def function_name():</code></li>
+      <li>The function body must be indented with 4 spaces</li>
+      <li>Call a function with <code>function_name()</code></li>
+      <li>Parameters let you pass values when calling the function</li>
+      <li><code>return</code> sends a result back to the caller</li>
+      <li>Functions without <code>return</code> return <code>None</code></li>
+    </ul>
+  </section>

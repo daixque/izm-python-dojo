@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson06_02: Data Analysis Program</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson06_02: Data Analysis Program</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Let's implement three functions that analyze student grade data.</p>
+<h3>Functions to Implement</h3>
+<ul>
+  <li><strong>calculate_average(scores)</strong>: Calculate the average score for each student</li>
+  <li><strong>find_top_student(averages)</strong>: Return the name of the student with the highest average</li>
+  <li><strong>count_passing(averages, passing_score=60)</strong>: Return the number of passing students</li>
+</ul>
+<h3>Specification for calculate_average</h3>
+<ul>
+  <li>Argument <code>scores</code>: in the format <code>{"Alice": [85, 90, 88], ...}</code></li>
+  <li>Return value: in the format <code>{"Alice": 87.666..., ...}</code> (average for each student)</li>
+  <li>Use <code>sum()</code> and <code>len()</code> to calculate the average</li>
+</ul>
+<h3>Specification for find_top_student</h3>
+<ul>
+  <li>Argument <code>averages</code>: in the format <code>{"Alice": 87.67, ...}</code></li>
+  <li>Return value: the name (string) of the student with the highest average</li>
+</ul>
+<h3>Specification for count_passing</h3>
+<ul>
+  <li>Argument <code>averages</code>: in the format <code>{"Alice": 87.67, ...}</code></li>
+  <li>Argument <code>passing_score</code>: the passing threshold (default 60)</li>
+  <li>Return value: the number of students with averages at or above the passing score (integer)</li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>For <code>calculate_average</code>: loop with <code>scores.items()</code>, divide each list's <code>sum()</code> by its <code>len()</code></li>
+                            <li>For <code>find_top_student</code>: loop with <code>averages.items()</code>, tracking the student name as the maximum is updated</li>
+                            <li>For <code>count_passing</code>: loop with <code>averages.values()</code>, increment <code>count</code> when the average is at or above <code>passing_score</code></li>
+                            <li>The default argument <code>passing_score=60</code> is already defined — no changes needed there</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Structure of <code>calculate_average</code>:<br>
+<code>averages = {}</code><br>
+<code>for name, score_list in scores.items():</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>averages[name] = sum(score_list) / len(score_list)</code><br>
+<code>return averages</code>
+</li>
+                            <li>Structure of <code>find_top_student</code>:<br>
+<code>top_student = None</code><br>
+<code>max_avg = -1</code><br>
+<code>for name, avg in averages.items():</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt; max_avg:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>max_avg = avg</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top_student = name</code><br>
+<code>return top_student</code>
+</li>
+                            <li>Structure of <code>count_passing</code>:<br>
+<code>count = 0</code><br>
+<code>for avg in averages.values():</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt;= passing_score:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>count += 1</code><br>
+<code>return count</code>
+</li>
+                            <li>Expected results for the test run (using sample data):<br>
+Averages: Alice≈87.67, Bob≈72.33, Charlie≈57.67<br>
+Top student: Alice<br>
+Passing count: 2 (Alice and Bob score 60 or above)
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "06_02_data_analysis";
+        const INITIAL_CODE = "def calculate_average(scores):\n    averages = {}\n    # Write your code here\n    # Use scores.items() to get each student\u0027s name and score list\n    # Calculate each student\u0027s average and store it in averages\n    return averages\n\ndef find_top_student(averages):\n    top_student = None\n    max_avg = -1\n    # Write your code here\n    # Use averages.items() to get each student\u0027s name and average\n    # Store the name of the student with the highest average in top_student\n    return top_student\n\ndef count_passing(averages, passing_score=60):\n    count = 0\n    # Write your code here\n    # Use averages.values() to get each average\n    # Increment count if the average is at or above passing_score\n    return count\n\n# Test runs\nscores = {\n    \"Alice\": [85, 90, 88],\n    \"Bob\": [70, 75, 72],\n    \"Charlie\": [55, 60, 58]\n}\naverages = calculate_average(scores)\nprint(\"Averages:\", averages)\nprint(\"Top student:\", find_top_student(averages))\nprint(\"Passing count:\", count_passing(averages))\n";
+        const SOLUTION_CODE = "def calculate_average(scores):\n    averages = {}\n    for name, score_list in scores.items():\n        averages[name] = sum(score_list) / len(score_list)\n    return averages\n\ndef find_top_student(averages):\n    top_student = None\n    max_avg = -1\n    for name, avg in averages.items():\n        if avg \u003e max_avg:\n            max_avg = avg\n            top_student = name\n    return top_student\n\ndef count_passing(averages, passing_score=60):\n    count = 0\n    for avg in averages.values():\n        if avg \u003e= passing_score:\n            count += 1\n    return count\n\n# Test runs\nscores = {\n    \"Alice\": [85, 90, 88],\n    \"Bob\": [70, 75, 72],\n    \"Charlie\": [55, 60, 58]\n}\naverages = calculate_average(scores)\nprint(\"Averages:\", averages)\nprint(\"Top student:\", find_top_student(averages))\nprint(\"Passing count:\", count_passing(averages))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    calculate_average = exec_globals.get(\"calculate_average\")\n    if calculate_average is None:\n        result = {\"passed\": False, \"message\": \"\u2717 calculate_average function is not defined\"}\n    else:\n        res = calculate_average({\"Alice\": [80, 90, 100]})\n        if isinstance(res, dict) and \"Alice\" in res and abs(res[\"Alice\"] - 90.0) \u003c 0.01:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate_average({\u0027Alice\u0027: [80, 90, 100]}) correctly returned {\u0027Alice\u0027: 90.0}\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate_average returned wrong value. Expected: {{\u0027Alice\u0027: 90.0}}, Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate_average({\u0027Alice\u0027: [80, 90, 100]}) returns {\u0027Alice\u0027: 90.0}", "name": "calculate_average: Average calculation"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    find_top_student = exec_globals.get(\"find_top_student\")\n    if find_top_student is None:\n        result = {\"passed\": False, \"message\": \"\u2717 find_top_student function is not defined\"}\n    else:\n        res = find_top_student({\"Alice\": 87.67, \"Bob\": 72.33, \"Charlie\": 57.67})\n        if res == \"Alice\":\n            result = {\"passed\": True, \"message\": \"\u2713 find_top_student correctly returned \u0027Alice\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 find_top_student returned wrong value. Expected: \u0027Alice\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "find_top_student({\u0027Alice\u0027: 87.67, \u0027Bob\u0027: 72.33, \u0027Charlie\u0027: 57.67}) returns \u0027Alice\u0027", "name": "find_top_student: Finding the top scorer"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    count_passing = exec_globals.get(\"count_passing\")\n    if count_passing is None:\n        result = {\"passed\": False, \"message\": \"\u2717 count_passing function is not defined\"}\n    else:\n        res = count_passing({\"Alice\": 87.67, \"Bob\": 72.33, \"Charlie\": 57.67})\n        if res == 2:\n            result = {\"passed\": True, \"message\": \"\u2713 count_passing correctly returned 2 (Alice and Bob pass)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 count_passing returned wrong value. Expected: 2, Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "With passing score 60, Alice(87.67) and Bob(72.33) pass, Charlie(57.67) does not \u2192 2 students", "name": "count_passing: Count with default passing score"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    count_passing = exec_globals.get(\"count_passing\")\n    if count_passing is None:\n        result = {\"passed\": False, \"message\": \"\u2717 count_passing function is not defined\"}\n    else:\n        res = count_passing({\"Alice\": 87.67}, passing_score=90)\n        if res == 0:\n            result = {\"passed\": True, \"message\": \"\u2713 count_passing(averages, passing_score=90) correctly returned 0\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 count_passing(averages, passing_score=90) returned wrong value. Expected: 0, Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "With passing score 90, Alice(87.67) does not pass \u2192 0 students", "name": "count_passing: Custom passing score"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    calculate_average = exec_globals.get(\"calculate_average\")\n    find_top_student = exec_globals.get(\"find_top_student\")\n    count_passing = exec_globals.get(\"count_passing\")\n    if None in (calculate_average, find_top_student, count_passing):\n        result = {\"passed\": False, \"message\": \"\u2717 All three functions must be defined\"}\n    else:\n        scores = {\"Alice\": [85, 90, 88], \"Bob\": [70, 75, 72], \"Charlie\": [55, 60, 58]}\n        averages = calculate_average(scores)\n        top = find_top_student(averages)\n        passing = count_passing(averages)\n        if top == \"Alice\" and passing == 2 and abs(averages.get(\"Alice\", 0) - (85+90+88)/3) \u003c 0.01:\n            result = {\"passed\": True, \"message\": \"\u2713 All three functions work together correctly. Top student: Alice, Passing count: 2\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Results are incorrect. Expected: top=\u0027Alice\u0027, passing=2. Got: top=\u0027{top}\u0027, passing={passing}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that all three functions work together correctly with sample data", "name": "Integration test: All three functions combined"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

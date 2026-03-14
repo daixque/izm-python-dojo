@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson06_01: Text-Based Game</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson06_01: Text-Based Game</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Let's implement the two core functions of a number guessing game.</p>
+<h3>Functions to Implement</h3>
+<ul>
+  <li><strong>check_guess(secret, guess)</strong>: A function that judges a guess</li>
+  <li><strong>play_round(secret, guesses)</strong>: A function that processes a list of guesses</li>
+</ul>
+<h3>Specification for check_guess</h3>
+<ul>
+  <li>If <code>guess</code> is less than <code>secret</code>, return <code>"Too low"</code></li>
+  <li>If <code>guess</code> is greater than <code>secret</code>, return <code>"Too high"</code></li>
+  <li>If <code>guess</code> equals <code>secret</code>, return <code>"Correct"</code></li>
+</ul>
+<h3>Specification for play_round</h3>
+<ul>
+  <li><code>guesses</code>: a list of guesses (e.g., <code>[30, 70, 50]</code>)</li>
+  <li>Check each guess in order using <code>check_guess</code></li>
+  <li>When <code>"Correct"</code> is found, return a tuple <strong>(number of attempts, "Correct")</strong></li>
+  <li>If all guesses are wrong, return <strong>(length of guesses, last judgment result)</strong></li>
+</ul>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Implement <code>check_guess(secret, guess)</code>: use <code>if</code>/<code>elif</code>/<code>else</code> to handle the three cases</li>
+                            <li>Implement <code>play_round(secret, guesses)</code>: process each guess using a <code>for</code> loop</li>
+                            <li>Using <code>enumerate(guesses, 1)</code> makes it easy to track attempt counts starting from 1</li>
+                            <li>Return the tuple as soon as <code>"Correct"</code> is found</li>
+                            <li>After the loop, return a tuple with the last judgment result if no guess was correct</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Basic structure of <code>check_guess</code>:<br>
+<code>if guess &lt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too low"</code><br>
+<code>elif guess &gt; secret:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Too high"</code><br>
+<code>else:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return "Correct"</code>
+</li>
+                            <li>For <code>play_round</code>, using <code>enumerate</code> is helpful:<br>
+<code>for i, guess in enumerate(guesses, 1):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>result = check_guess(secret, guess)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if result == "Correct":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return (i, "Correct")</code>
+</li>
+                            <li>After the loop (all guesses were wrong):<br>
+<code>return (len(guesses), check_guess(secret, guesses[-1]))</code><br>
+<code>guesses[-1]</code> accesses the last element of the list.
+</li>
+                            <li>Expected results for the test runs:<br>
+<code>check_guess(50, 30)</code> → <code>"Too low"</code><br>
+<code>check_guess(50, 70)</code> → <code>"Too high"</code><br>
+<code>check_guess(50, 50)</code> → <code>"Correct"</code><br>
+<code>play_round(50, [30, 70, 50])</code> → <code>(3, 'Correct')</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "06_01_text_game";
+        const INITIAL_CODE = "def check_guess(secret, guess):\n    # Write your code here\n    # If guess is less than secret, return \"Too low\"\n    # If guess is greater than secret, return \"Too high\"\n    # If guess equals secret, return \"Correct\"\n    pass\n\ndef play_round(secret, guesses):\n    # Write your code here\n    # Check each element in guesses using check_guess\n    # When \"Correct\" is found, return (attempt_number, \"Correct\")\n    # If all wrong, return (len(guesses), last_judgment)\n    pass\n\n# Test runs\nprint(check_guess(50, 30))   # Too low\nprint(check_guess(50, 70))   # Too high\nprint(check_guess(50, 50))   # Correct\nprint(play_round(50, [30, 70, 50]))  # (3, \u0027Correct\u0027)\n";
+        const SOLUTION_CODE = "def check_guess(secret, guess):\n    if guess \u003c secret:\n        return \"Too low\"\n    elif guess \u003e secret:\n        return \"Too high\"\n    else:\n        return \"Correct\"\n\ndef play_round(secret, guesses):\n    for i, guess in enumerate(guesses, 1):\n        result = check_guess(secret, guess)\n        if result == \"Correct\":\n            return (i, \"Correct\")\n    return (len(guesses), check_guess(secret, guesses[-1]))\n\n# Test runs\nprint(check_guess(50, 30))\nprint(check_guess(50, 70))\nprint(check_guess(50, 50))\nprint(play_round(50, [30, 70, 50]))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 30)\n        if res == \"Too low\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 30) correctly returned \u0027Too low\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 30) returned wrong value. Expected: \u0027Too low\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Too low\u0027 when guess is less than secret", "name": "check_guess: Too low judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 70)\n        if res == \"Too high\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 70) correctly returned \u0027Too high\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 70) returned wrong value. Expected: \u0027Too high\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Too high\u0027 when guess is greater than secret", "name": "check_guess: Too high judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 50)\n        if res == \"Correct\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 50) correctly returned \u0027Correct\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 50) returned wrong value. Expected: \u0027Correct\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Correct\u0027 when guess equals secret", "name": "check_guess: Correct judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    play_round = exec_globals.get(\"play_round\")\n    if play_round is None:\n        result = {\"passed\": False, \"message\": \"\u2717 play_round function is not defined\"}\n    else:\n        res = play_round(50, [30, 70, 50])\n        if isinstance(res, tuple) and res[1] == \"Correct\" and res[0] == 3:\n            result = {\"passed\": True, \"message\": \"\u2713 play_round(50, [30, 70, 50]) correctly returned (3, \u0027Correct\u0027)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 play_round(50, [30, 70, 50]) returned wrong value. Expected: (3, \u0027Correct\u0027), Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "play_round(50, [30, 70, 50]) returns (3, \u0027Correct\u0027)", "name": "play_round: Correct on 3rd attempt"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    play_round = exec_globals.get(\"play_round\")\n    if play_round is None:\n        result = {\"passed\": False, \"message\": \"\u2717 play_round function is not defined\"}\n    else:\n        res = play_round(50, [50])\n        if isinstance(res, tuple) and res == (1, \"Correct\"):\n            result = {\"passed\": True, \"message\": \"\u2713 play_round(50, [50]) correctly returned (1, \u0027Correct\u0027)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 play_round(50, [50]) returned wrong value. Expected: (1, \u0027Correct\u0027), Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "play_round(50, [50]) returns (1, \u0027Correct\u0027)", "name": "play_round: Correct on 1st attempt"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

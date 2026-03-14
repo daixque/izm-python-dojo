@@ -1,0 +1,140 @@
+initial_code: |
+  def check_guess(secret, guess):
+      # Write your code here
+      # If guess is less than secret, return "Too low"
+      # If guess is greater than secret, return "Too high"
+      # If guess equals secret, return "Correct"
+      pass
+
+  def play_round(secret, guesses):
+      # Write your code here
+      # Check each element in guesses using check_guess
+      # When "Correct" is found, return (attempt_number, "Correct")
+      # If all wrong, return (len(guesses), last_judgment)
+      pass
+
+  # Test runs
+  print(check_guess(50, 30))   # Too low
+  print(check_guess(50, 70))   # Too high
+  print(check_guess(50, 50))   # Correct
+  print(play_round(50, [30, 70, 50]))  # (3, 'Correct')
+
+solution_code: |
+  def check_guess(secret, guess):
+      if guess < secret:
+          return "Too low"
+      elif guess > secret:
+          return "Too high"
+      else:
+          return "Correct"
+
+  def play_round(secret, guesses):
+      for i, guess in enumerate(guesses, 1):
+          result = check_guess(secret, guess)
+          if result == "Correct":
+              return (i, "Correct")
+      return (len(guesses), check_guess(secret, guesses[-1]))
+
+  # Test runs
+  print(check_guess(50, 30))
+  print(check_guess(50, 70))
+  print(check_guess(50, 50))
+  print(play_round(50, [30, 70, 50]))
+
+initial_files: []
+
+tests:
+  - name: "check_guess: Too low judgment"
+    description: "Returns 'Too low' when guess is less than secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess function is not defined"}
+          else:
+              res = check_guess(50, 30)
+              if res == "Too low":
+                  result = {"passed": True, "message": "✓ check_guess(50, 30) correctly returned 'Too low'"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 30) returned wrong value. Expected: 'Too low', Got: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "check_guess: Too high judgment"
+    description: "Returns 'Too high' when guess is greater than secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess function is not defined"}
+          else:
+              res = check_guess(50, 70)
+              if res == "Too high":
+                  result = {"passed": True, "message": "✓ check_guess(50, 70) correctly returned 'Too high'"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 70) returned wrong value. Expected: 'Too high', Got: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "check_guess: Correct judgment"
+    description: "Returns 'Correct' when guess equals secret"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess function is not defined"}
+          else:
+              res = check_guess(50, 50)
+              if res == "Correct":
+                  result = {"passed": True, "message": "✓ check_guess(50, 50) correctly returned 'Correct'"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 50) returned wrong value. Expected: 'Correct', Got: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "play_round: Correct on 3rd attempt"
+    description: "play_round(50, [30, 70, 50]) returns (3, 'Correct')"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          play_round = exec_globals.get("play_round")
+          if play_round is None:
+              result = {"passed": False, "message": "✗ play_round function is not defined"}
+          else:
+              res = play_round(50, [30, 70, 50])
+              if isinstance(res, tuple) and res[1] == "Correct" and res[0] == 3:
+                  result = {"passed": True, "message": "✓ play_round(50, [30, 70, 50]) correctly returned (3, 'Correct')"}
+              else:
+                  result = {"passed": False, "message": f"✗ play_round(50, [30, 70, 50]) returned wrong value. Expected: (3, 'Correct'), Got: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "play_round: Correct on 1st attempt"
+    description: "play_round(50, [50]) returns (1, 'Correct')"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          play_round = exec_globals.get("play_round")
+          if play_round is None:
+              result = {"passed": False, "message": "✗ play_round function is not defined"}
+          else:
+              res = play_round(50, [50])
+              if isinstance(res, tuple) and res == (1, "Correct"):
+                  result = {"passed": True, "message": "✓ play_round(50, [50]) correctly returned (1, 'Correct')"}
+              else:
+                  result = {"passed": False, "message": f"✗ play_round(50, [50]) returned wrong value. Expected: (1, 'Correct'), Got: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

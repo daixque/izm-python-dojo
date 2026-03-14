@@ -1,0 +1,98 @@
+initial_code: |
+  def filter_even(numbers):
+      result = []
+      # ここにコードを書いてください
+      # for ループで numbers の各要素を確認し、
+      # 偶数（num % 2 == 0）なら result に追加する
+      return result
+
+  print(filter_even([1, 2, 3, 4, 5, 6]))  # [2, 4, 6]
+  print(filter_even([1, 3, 5]))           # []
+  print(filter_even([10, 15, 20, 25]))    # [10, 20]
+
+solution_code: |
+  def filter_even(numbers):
+      result = []
+      for num in numbers:
+          if num % 2 == 0:
+              result.append(num)
+      return result
+
+  print(filter_even([1, 2, 3, 4, 5, 6]))
+  print(filter_even([1, 3, 5]))
+  print(filter_even([10, 15, 20, 25]))
+
+initial_files: []
+
+tests:
+  - name: "偶数フィルタリングの基本テスト"
+    description: "filter_even([1, 2, 3, 4, 5, 6]) が [2, 4, 6] を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 filter_even が定義されていません"}
+          else:
+              test_result = exec_globals['filter_even']([1, 2, 3, 4, 5, 6])
+              if test_result == [2, 4, 6]:
+                  result = {"passed": True, "message": "✓ 正解です！偶数 [2, 4, 6] が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: [2, 4, 6], 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "偶数が含まれない場合のテスト"
+    description: "filter_even([1, 3, 5]) が [] を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 filter_even が定義されていません"}
+          else:
+              test_result = exec_globals['filter_even']([1, 3, 5])
+              if test_result == []:
+                  result = {"passed": True, "message": "✓ 正解です！偶数がない場合は空リスト [] が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: [], 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "混在リストのテスト"
+    description: "filter_even([10, 15, 20, 25]) が [10, 20] を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 filter_even が定義されていません"}
+          else:
+              test_result = exec_globals['filter_even']([10, 15, 20, 25])
+              if test_result == [10, 20]:
+                  result = {"passed": True, "message": "✓ 正解です！[10, 20] が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: [10, 20], 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "全要素が偶数の場合のテスト"
+    description: "filter_even([2, 4, 6]) が [2, 4, 6] を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 filter_even が定義されていません"}
+          else:
+              test_result = exec_globals['filter_even']([2, 4, 6])
+              if test_result == [2, 4, 6]:
+                  result = {"passed": True, "message": "✓ 正解です！全要素が偶数の場合も正しく動作しています"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: [2, 4, 6], 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

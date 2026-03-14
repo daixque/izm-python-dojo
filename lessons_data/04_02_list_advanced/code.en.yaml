@@ -1,0 +1,98 @@
+initial_code: |
+  def find_max(numbers):
+      max_value = numbers[0]  # initialize with the first element
+      # Write your code here
+      # Use a for loop to check each element in numbers,
+      # and update max_value if the current element is larger
+      return max_value
+
+  print(find_max([3, 7, 2, 9, 1]))      # 9
+  print(find_max([5]))                   # 5
+  print(find_max([-5, -2, -10, -1]))    # -1
+
+solution_code: |
+  def find_max(numbers):
+      max_value = numbers[0]
+      for num in numbers:
+          if num > max_value:
+              max_value = num
+      return max_value
+
+  print(find_max([3, 7, 2, 9, 1]))
+  print(find_max([5]))
+  print(find_max([-5, -2, -10, -1]))
+
+initial_files: []
+
+tests:
+  - name: "Maximum of a multi-element list"
+    description: "find_max([3, 7, 2, 9, 1]) should return 9"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function find_max is not defined"}
+          else:
+              test_result = exec_globals['find_max']([3, 7, 2, 9, 1])
+              if test_result == 9:
+                  result = {"passed": True, "message": "✓ Maximum of [3, 7, 2, 9, 1] correctly returned 9"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 9, Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Maximum of a single-element list"
+    description: "find_max([5]) should return 5"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function find_max is not defined"}
+          else:
+              test_result = exec_globals['find_max']([5])
+              if test_result == 5:
+                  result = {"passed": True, "message": "✓ Maximum of [5] correctly returned 5"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 5, Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Maximum of an all-negative list"
+    description: "find_max([-5, -2, -10, -1]) should return -1"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function find_max is not defined"}
+          else:
+              test_result = exec_globals['find_max']([-5, -2, -10, -1])
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ Maximum of [-5, -2, -10, -1] correctly returned -1"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: -1, Actual: {test_result} (make sure your solution works with all-negative lists)"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Maximum of a list with all same values"
+    description: "find_max([1, 1, 1]) should return 1"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'find_max' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function find_max is not defined"}
+          else:
+              test_result = exec_globals['find_max']([1, 1, 1])
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ Maximum of [1, 1, 1] correctly returned 1"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 1, Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

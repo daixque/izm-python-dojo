@@ -1,0 +1,100 @@
+initial_code: |
+  def get_score(students, name):
+      # ここにコードを書いてください
+      # name が students に存在すれば students[name] を返す
+      # 存在しなければ -1 を返す
+      pass
+
+  # テスト実行
+  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  print(get_score(students, "Alice"))    # 85
+  print(get_score(students, "Bob"))      # 92
+  print(get_score(students, "Dave"))     # -1
+
+solution_code: |
+  def get_score(students, name):
+      if name in students:
+          return students[name]
+      else:
+          return -1
+
+  # テスト実行
+  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  print(get_score(students, "Alice"))
+  print(get_score(students, "Bob"))
+  print(get_score(students, "Dave"))
+
+initial_files: []
+
+tests:
+  - name: "存在するキーの取得テスト"
+    description: "get_score({...}, 'Alice') が 85 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_score が定義されていません"}
+          else:
+              test_result = exec_globals['get_score']({"Alice": 85, "Bob": 92, "Charlie": 78}, "Alice")
+              if test_result == 85:
+                  result = {"passed": True, "message": "✓ 正解です！Alice の点数 85 が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: 85, 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "存在しないキーのテスト"
+    description: "get_score({...}, 'Charlie') が -1 を返すか（存在しない名前）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_score が定義されていません"}
+          else:
+              test_result = exec_globals['get_score']({"Alice": 85, "Bob": 92}, "Charlie")
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ 正解です！存在しない名前には -1 が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: -1, 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "日本語名のテスト"
+    description: "get_score({'田中': 88, '佐藤': 95}, '佐藤') が 95 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_score が定義されていません"}
+          else:
+              test_result = exec_globals['get_score']({"田中": 88, "佐藤": 95}, "佐藤")
+              if test_result == 95:
+                  result = {"passed": True, "message": "✓ 正解です！佐藤の点数 95 が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: 95, 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "空の辞書のテスト"
+    description: "get_score({}, 'Alice') が -1 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_score' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_score が定義されていません"}
+          else:
+              test_result = exec_globals['get_score']({}, "Alice")
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ 正解です！空の辞書でも -1 が返されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待: -1, 実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

@@ -1,0 +1,98 @@
+initial_code: |
+  def filter_even(numbers):
+      result = []
+      # Write your code here
+      # Use a for loop to check each element of numbers,
+      # and append it to result if it is even (num % 2 == 0)
+      return result
+
+  print(filter_even([1, 2, 3, 4, 5, 6]))  # [2, 4, 6]
+  print(filter_even([1, 3, 5]))           # []
+  print(filter_even([10, 15, 20, 25]))    # [10, 20]
+
+solution_code: |
+  def filter_even(numbers):
+      result = []
+      for num in numbers:
+          if num % 2 == 0:
+              result.append(num)
+      return result
+
+  print(filter_even([1, 2, 3, 4, 5, 6]))
+  print(filter_even([1, 3, 5]))
+  print(filter_even([10, 15, 20, 25]))
+
+initial_files: []
+
+tests:
+  - name: "Basic even filter test"
+    description: "Does filter_even([1, 2, 3, 4, 5, 6]) return [2, 4, 6]?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function filter_even is not defined"}
+          else:
+              test_result = exec_globals['filter_even']([1, 2, 3, 4, 5, 6])
+              if test_result == [2, 4, 6]:
+                  result = {"passed": True, "message": "✓ Correct! Even numbers [2, 4, 6] were returned"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: [2, 4, 6], Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "No even numbers test"
+    description: "Does filter_even([1, 3, 5]) return []?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function filter_even is not defined"}
+          else:
+              test_result = exec_globals['filter_even']([1, 3, 5])
+              if test_result == []:
+                  result = {"passed": True, "message": "✓ Correct! An empty list [] is returned when there are no even numbers"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: [], Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Mixed list test"
+    description: "Does filter_even([10, 15, 20, 25]) return [10, 20]?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function filter_even is not defined"}
+          else:
+              test_result = exec_globals['filter_even']([10, 15, 20, 25])
+              if test_result == [10, 20]:
+                  result = {"passed": True, "message": "✓ Correct! [10, 20] was returned"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: [10, 20], Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "All even numbers test"
+    description: "Does filter_even([2, 4, 6]) return [2, 4, 6]?"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'filter_even' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function filter_even is not defined"}
+          else:
+              test_result = exec_globals['filter_even']([2, 4, 6])
+              if test_result == [2, 4, 6]:
+                  result = {"passed": True, "message": "✓ Correct! Works correctly when all elements are even"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: [2, 4, 6], Got: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

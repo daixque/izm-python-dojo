@@ -1,0 +1,65 @@
+lesson:
+  number: "06_02"
+  id: "06_02_data_analysis"
+  title: "データ集計プログラム"
+
+task_description: |
+  <p>生徒の成績データを集計する3つの関数を実装しましょう。</p>
+  <h3>実装する関数</h3>
+  <ul>
+    <li><strong>calculate_average(scores)</strong>：各生徒の平均点を計算する</li>
+    <li><strong>find_top_student(averages)</strong>：最高平均点の生徒名を返す</li>
+    <li><strong>count_passing(averages, passing_score=60)</strong>：合格者数を返す</li>
+  </ul>
+  <h3>calculate_average の仕様</h3>
+  <ul>
+    <li>引数 <code>scores</code>：<code>{"Alice": [85, 90, 88], ...}</code> の形式</li>
+    <li>戻り値：<code>{"Alice": 87.666..., ...}</code> の形式（各生徒の平均値）</li>
+    <li><code>sum()</code> と <code>len()</code> を使って平均を計算する</li>
+  </ul>
+  <h3>find_top_student の仕様</h3>
+  <ul>
+    <li>引数 <code>averages</code>：<code>{"Alice": 87.67, ...}</code> の形式</li>
+    <li>戻り値：最高平均点の生徒の名前（文字列）</li>
+  </ul>
+  <h3>count_passing の仕様</h3>
+  <ul>
+    <li>引数 <code>averages</code>：<code>{"Alice": 87.67, ...}</code> の形式</li>
+    <li>引数 <code>passing_score</code>：合格点（デフォルト 60）</li>
+    <li>戻り値：合格点以上の生徒の数（整数）</li>
+  </ul>
+
+instructions:
+  - "<code>calculate_average</code>：<code>scores.items()</code> でループし、各リストの <code>sum()</code> を <code>len()</code> で割る"
+  - "<code>find_top_student</code>：<code>averages.items()</code> でループし、最大値を更新しながら生徒名を追跡する"
+  - "<code>count_passing</code>：<code>averages.values()</code> でループし、<code>passing_score</code> 以上の場合に <code>count</code> を増やす"
+  - "デフォルト引数 <code>passing_score=60</code> は既に定義されているので変更不要"
+
+hints:
+  - hint: |
+      <code>calculate_average</code> の構造：<br>
+      <code>averages = {}</code><br>
+      <code>for name, score_list in scores.items():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>averages[name] = sum(score_list) / len(score_list)</code><br>
+      <code>return averages</code>
+  - hint: |
+      <code>find_top_student</code> の構造：<br>
+      <code>top_student = None</code><br>
+      <code>max_avg = -1</code><br>
+      <code>for name, avg in averages.items():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt; max_avg:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>max_avg = avg</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>top_student = name</code><br>
+      <code>return top_student</code>
+  - hint: |
+      <code>count_passing</code> の構造：<br>
+      <code>count = 0</code><br>
+      <code>for avg in averages.values():</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if avg &gt;= passing_score:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>count += 1</code><br>
+      <code>return count</code>
+  - hint: |
+      テスト実行の期待結果（サンプルデータ使用）：<br>
+      平均点: Alice≈87.67、Bob≈72.33、Charlie≈57.67<br>
+      トップ: Alice<br>
+      合格者数: 2（Alice と Bob が60点以上）

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson06_04: Final Project: Task Manager App</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Final Project: Task Manager App</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🎯 Welcome to the Final Project</h2>
+  <p>Let's use everything we've learned so far to build a <strong>task manager app</strong>!</p>
+  <p>This project combines the following concepts:</p>
+  <ul>
+    <li>Lists and dictionaries (data management)</li>
+    <li>Functions (breaking logic into components)</li>
+    <li>Conditionals and loops (implementing logic)</li>
+    <li>File operations (persisting data)</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>🗂️ Designing the Data Structure</h2>
+  <p>Before writing a program, it's important to design <strong>what data structure to use</strong>.</p>
+  <p>In this app, we'll manage tasks as a "list of dictionaries":</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Task Data Structure</div>
+    <div class="example-code">tasks = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 1, "name": "Study Python", "completed": False},<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 2, "name": "Go shopping", "completed": True},<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 3, "name": "Write diary", "completed": False}<br>]</div>
+    <div class="example-explanation">
+      Each task is a dictionary with three keys:<br>
+      - <code>id</code>: Identification number for the task (integer)<br>
+      - <code>name</code>: Name of the task (string)<br>
+      - <code>completed</code>: Completion flag (True/False)
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>➕ Adding a Task</h2>
+  <p>When adding a new task, we automatically assign a new <code>id</code>. We'll use the <code>max()</code> function with the <code>default</code> argument.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Example Implementation of add_task</div>
+    <div class="example-code">def add_task(tasks, task_name):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_id = max([t["id"] for t in tasks], default=0) + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;tasks.append({"id": new_id, "name": task_name, "completed": False})<br>&nbsp;&nbsp;&nbsp;&nbsp;return tasks</div>
+    <div class="example-explanation">
+      <code>[t["id"] for t in tasks]</code> is a list comprehension that extracts all task ids.<br>
+      <code>max(..., default=0)</code> returns 0 when the list is empty. Adding 1 means the first task gets id 1.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✅ Completing a Task</h2>
+  <p>Find the task with the specified id and change its <code>completed</code> value to <code>True</code>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Example Implementation of complete_task</div>
+    <div class="example-code">def complete_task(tasks, task_id):<br>&nbsp;&nbsp;&nbsp;&nbsp;for task in tasks:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if task["id"] == task_id:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task["completed"] = True<br>&nbsp;&nbsp;&nbsp;&nbsp;return tasks</div>
+    <div class="example-explanation">Loop through all tasks, and when a matching id is found, set <code>completed</code> to <code>True</code>. Dictionaries in a list can be modified directly.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📋 Displaying Tasks</h2>
+  <p>Change the display based on the value of <code>completed</code>. Use <code>✓</code> and a space to indicate status.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Example Implementation of show_tasks</div>
+    <div class="example-code">def show_tasks(tasks):<br>&nbsp;&nbsp;&nbsp;&nbsp;for task in tasks:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "✓" if task["completed"] else " "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"[{status}] {task['id']}: {task['name']}")</div>
+    <div class="example-explanation">
+      The ternary expression <code>A if condition else B</code> allows a one-line solution.<br>
+      Output example: <code>[ ] 1: Study Python</code>, <code>[✓] 2: Go shopping</code>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💾 Saving Data with the json Module</h2>
+  <p>To save complex data like lists and dictionaries, use the <code>json</code> module. JSON format allows data to be saved and loaded as text.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Saving in JSON Format</div>
+    <div class="example-code">import json<br><br>def save_tasks(tasks, filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json.dump(tasks, f, ensure_ascii=False, indent=2)</div>
+    <div class="example-explanation">
+      <code>json.dump(data, file)</code> writes data to a file in JSON format.<br>
+      <code>ensure_ascii=False</code> preserves non-ASCII characters, and <code>indent=2</code> formats the output for readability.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Loading from JSON Format</div>
+    <div class="example-code">def load_tasks(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return json.load(f)<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return []</div>
+    <div class="example-explanation">
+      <code>json.load(file)</code> reads a JSON file and returns Python data (lists, dicts, etc.).<br>
+      If the file doesn't exist, it returns an empty list <code>[]</code>.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔗 Putting It All Together</h2>
+  <p>Combining these functions creates a complete task manager app.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Task Manager App Usage Example</div>
+    <div class="example-code">import json<br><br># Load tasks (or start with empty list)<br>tasks = load_tasks("tasks.json")<br><br># Add tasks<br>tasks = add_task(tasks, "Study Python")<br>tasks = add_task(tasks, "Go shopping")<br><br># Display list<br>show_tasks(tasks)<br># [ ] 1: Study Python<br># [ ] 2: Go shopping<br><br># Complete a task<br>tasks = complete_task(tasks, 1)<br>show_tasks(tasks)<br># [✓] 1: Study Python<br># [ ] 2: Go shopping<br><br># Save to file<br>save_tasks(tasks, "tasks.json")</div>
+    <div class="example-explanation">Each function works as an independent component, and combining them completes the app. This is the foundation of good program design!</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li>Designing the data structure first is important (in this case, a list of dictionaries)</li>
+    <li>Implement each feature as an independent function</li>
+    <li>The <code>json</code> module can save lists and dictionaries to files</li>
+    <li><code>json.dump()</code> to save, <code>json.load()</code> to load</li>
+    <li>Build large apps by combining small, focused functions</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson04_02: List Operations</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">List Operations</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>📋 Getting More Out of Lists</h2>
+  <p>In the previous lesson you learned the basics of lists. In this lesson, you'll learn how to add and remove elements, slice lists, sort them, and search within them.</p>
+</section>
+
+<section class="section">
+  <h2>➕ Adding Elements: append() and insert()</h2>
+  <p>There are two main ways to add new elements to a list.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">append(): Add to the End</div>
+    <div class="example-code">fruits = ["apple", "banana"]<br>fruits.append("orange")<br>print(fruits)  # ['apple', 'banana', 'orange']<br><br>fruits.append("grape")<br>print(fruits)  # ['apple', 'banana', 'orange', 'grape']</div>
+    <div class="example-explanation">
+      <code>append(value)</code> adds an element to the <strong>end</strong> of the list.<br>
+      This is the most common way to add elements to a list.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">insert(): Add at a Specific Position</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>fruits.insert(1, "grape")  # insert at index 1<br>print(fruits)  # ['apple', 'grape', 'banana', 'orange']</div>
+    <div class="example-explanation">
+      <code>insert(index, value)</code> inserts an element at the specified position.<br>
+      Existing elements shift to the right.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>➖ Removing Elements: remove() and pop()</h2>
+  <p>There are also two ways to remove elements from a list.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">remove(): Remove by Value</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>fruits.remove("banana")<br>print(fruits)  # ['apple', 'orange']</div>
+    <div class="example-explanation">
+      <code>remove(value)</code> removes the element with the specified value.<br>
+      If duplicates exist, only the first occurrence is removed.<br>
+      Specifying a value that doesn't exist raises a <code>ValueError</code>.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">pop(): Remove by Index (and Return the Value)</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br>removed = fruits.pop(1)  # remove index 1 and return it<br>print(removed)  # banana<br>print(fruits)   # ['apple', 'orange']<br><br>last = fruits.pop()  # no argument removes the last element<br>print(last)   # orange<br>print(fruits) # ['apple']</div>
+    <div class="example-explanation">
+      <code>pop(index)</code> removes the element at the given index and returns its value.<br>
+      <code>pop()</code> with no argument removes and returns the last element.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✂️ Slicing: Extract Part of a List</h2>
+  <p><strong>Slicing</strong> lets you extract a portion of a list into a new list.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Slicing Basics</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange", "grape", "melon"]<br>print(fruits[1:3])   # ['banana', 'orange'] (index 1 up to but not including 3)<br>print(fruits[0:2])   # ['apple', 'banana']<br>print(fruits[2:])    # ['orange', 'grape', 'melon'] (from index 2 to end)<br>print(fruits[:3])    # ['apple', 'banana', 'orange'] (up to but not including 3)</div>
+    <div class="example-explanation">
+      <code>list[start:end]</code> extracts elements from the start index up to (but <strong>not including</strong>) the end index.<br>
+      Omitting start means "from the beginning"; omitting end means "to the end".
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔤 Sorting: sort() and sorted()</h2>
+  <p>There are two ways to sort the elements of a list.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">sort(): Sort the List In-Place</div>
+    <div class="example-code">numbers = [3, 1, 4, 1, 5, 9, 2, 6]<br>numbers.sort()<br>print(numbers)  # [1, 1, 2, 3, 4, 5, 6, 9]<br><br>numbers.sort(reverse=True)  # descending order<br>print(numbers)  # [9, 6, 5, 4, 3, 2, 1, 1]</div>
+    <div class="example-explanation">
+      <code>sort()</code> sorts the list in-place (<strong>the original list is changed</strong>).<br>
+      Use <code>reverse=True</code> for descending order.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">sorted(): Return a New Sorted List</div>
+    <div class="example-code">numbers = [3, 1, 4, 1, 5, 9, 2, 6]<br>sorted_numbers = sorted(numbers)<br>print(sorted_numbers)  # [1, 1, 2, 3, 4, 5, 6, 9]<br>print(numbers)         # [3, 1, 4, 1, 5, 9, 2, 6] (original unchanged)</div>
+    <div class="example-explanation">
+      <code>sorted(list)</code> returns a <strong>new sorted list</strong> without modifying the original.<br>
+      Use this when you need to keep the original data intact.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 The in Operator: Searching a List</h2>
+  <p>The <code>in</code> operator lets you check whether a specific value is in a list.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Using the in Operator</div>
+    <div class="example-code">fruits = ["apple", "banana", "orange"]<br><br>print("apple" in fruits)      # True (found)<br>print("grape" in fruits)      # False (not found)<br>print("grape" not in fruits)  # True (not found)<br><br>if "banana" in fruits:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("We have bananas!")</div>
+    <div class="example-explanation">
+      <code>value in list</code> returns <code>True</code> if the value is in the list, otherwise <code>False</code>.<br>
+      Use <code>not in</code> to check for the absence of a value.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>append(value)</code>: add an element to the end</li>
+    <li><code>insert(index, value)</code>: insert an element at a specific position</li>
+    <li><code>remove(value)</code>: remove an element by value</li>
+    <li><code>pop(index)</code>: remove an element by index and return it</li>
+    <li><code>list[start:end]</code>: slice to extract a portion</li>
+    <li><code>sort()</code>: sort the list in-place</li>
+    <li><code>sorted(list)</code>: return a new sorted list</li>
+    <li><code>value in list</code>: check if an element is present</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

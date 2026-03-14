@@ -1,0 +1,170 @@
+initial_code: |
+  def calculate_average(scores):
+      averages = {}
+      # Write your code here
+      # Use scores.items() to get each student's name and score list
+      # Calculate each student's average and store it in averages
+      return averages
+
+  def find_top_student(averages):
+      top_student = None
+      max_avg = -1
+      # Write your code here
+      # Use averages.items() to get each student's name and average
+      # Store the name of the student with the highest average in top_student
+      return top_student
+
+  def count_passing(averages, passing_score=60):
+      count = 0
+      # Write your code here
+      # Use averages.values() to get each average
+      # Increment count if the average is at or above passing_score
+      return count
+
+  # Test runs
+  scores = {
+      "Alice": [85, 90, 88],
+      "Bob": [70, 75, 72],
+      "Charlie": [55, 60, 58]
+  }
+  averages = calculate_average(scores)
+  print("Averages:", averages)
+  print("Top student:", find_top_student(averages))
+  print("Passing count:", count_passing(averages))
+
+solution_code: |
+  def calculate_average(scores):
+      averages = {}
+      for name, score_list in scores.items():
+          averages[name] = sum(score_list) / len(score_list)
+      return averages
+
+  def find_top_student(averages):
+      top_student = None
+      max_avg = -1
+      for name, avg in averages.items():
+          if avg > max_avg:
+              max_avg = avg
+              top_student = name
+      return top_student
+
+  def count_passing(averages, passing_score=60):
+      count = 0
+      for avg in averages.values():
+          if avg >= passing_score:
+              count += 1
+      return count
+
+  # Test runs
+  scores = {
+      "Alice": [85, 90, 88],
+      "Bob": [70, 75, 72],
+      "Charlie": [55, 60, 58]
+  }
+  averages = calculate_average(scores)
+  print("Averages:", averages)
+  print("Top student:", find_top_student(averages))
+  print("Passing count:", count_passing(averages))
+
+initial_files: []
+
+tests:
+  - name: "calculate_average: Average calculation"
+    description: "calculate_average({'Alice': [80, 90, 100]}) returns {'Alice': 90.0}"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          calculate_average = exec_globals.get("calculate_average")
+          if calculate_average is None:
+              result = {"passed": False, "message": "✗ calculate_average function is not defined"}
+          else:
+              res = calculate_average({"Alice": [80, 90, 100]})
+              if isinstance(res, dict) and "Alice" in res and abs(res["Alice"] - 90.0) < 0.01:
+                  result = {"passed": True, "message": "✓ calculate_average({'Alice': [80, 90, 100]}) correctly returned {'Alice': 90.0}"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate_average returned wrong value. Expected: {{'Alice': 90.0}}, Got: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "find_top_student: Finding the top scorer"
+    description: "find_top_student({'Alice': 87.67, 'Bob': 72.33, 'Charlie': 57.67}) returns 'Alice'"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          find_top_student = exec_globals.get("find_top_student")
+          if find_top_student is None:
+              result = {"passed": False, "message": "✗ find_top_student function is not defined"}
+          else:
+              res = find_top_student({"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67})
+              if res == "Alice":
+                  result = {"passed": True, "message": "✓ find_top_student correctly returned 'Alice'"}
+              else:
+                  result = {"passed": False, "message": f"✗ find_top_student returned wrong value. Expected: 'Alice', Got: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "count_passing: Count with default passing score"
+    description: "With passing score 60, Alice(87.67) and Bob(72.33) pass, Charlie(57.67) does not → 2 students"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          count_passing = exec_globals.get("count_passing")
+          if count_passing is None:
+              result = {"passed": False, "message": "✗ count_passing function is not defined"}
+          else:
+              res = count_passing({"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67})
+              if res == 2:
+                  result = {"passed": True, "message": "✓ count_passing correctly returned 2 (Alice and Bob pass)"}
+              else:
+                  result = {"passed": False, "message": f"✗ count_passing returned wrong value. Expected: 2, Got: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "count_passing: Custom passing score"
+    description: "With passing score 90, Alice(87.67) does not pass → 0 students"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          count_passing = exec_globals.get("count_passing")
+          if count_passing is None:
+              result = {"passed": False, "message": "✗ count_passing function is not defined"}
+          else:
+              res = count_passing({"Alice": 87.67}, passing_score=90)
+              if res == 0:
+                  result = {"passed": True, "message": "✓ count_passing(averages, passing_score=90) correctly returned 0"}
+              else:
+                  result = {"passed": False, "message": f"✗ count_passing(averages, passing_score=90) returned wrong value. Expected: 0, Got: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Integration test: All three functions combined"
+    description: "Verify that all three functions work together correctly with sample data"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          calculate_average = exec_globals.get("calculate_average")
+          find_top_student = exec_globals.get("find_top_student")
+          count_passing = exec_globals.get("count_passing")
+          if None in (calculate_average, find_top_student, count_passing):
+              result = {"passed": False, "message": "✗ All three functions must be defined"}
+          else:
+              scores = {"Alice": [85, 90, 88], "Bob": [70, 75, 72], "Charlie": [55, 60, 58]}
+              averages = calculate_average(scores)
+              top = find_top_student(averages)
+              passing = count_passing(averages)
+              if top == "Alice" and passing == 2 and abs(averages.get("Alice", 0) - (85+90+88)/3) < 0.01:
+                  result = {"passed": True, "message": "✓ All three functions work together correctly. Top student: Alice, Passing count: 2"}
+              else:
+                  result = {"passed": False, "message": f"✗ Results are incorrect. Expected: top='Alice', passing=2. Got: top='{top}', passing={passing}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

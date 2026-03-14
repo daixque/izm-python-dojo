@@ -84,6 +84,20 @@
           "title": "for ループの基礎",
           "description": "九九の表を表示する関数 print_multiplication_table(n) を実装しましょう。\nn の段の九九を1から9まで表示します。\n出力形式\n例えば print_multiplication_table(3) を呼び出すと：\n3 × 1 = 3\n3 × 2 = 6\n3 × 3 = 9\n3 × 4 = 12\n3 × 5 = 15\n3 × 6 = 18\n3 × 7 = 21\n3 × 8 = 24\n3 × 9 = 27\nのように表示されます。",
           "available": true
+        },
+        {
+          "id": "03_02_for_advanced",
+          "number": "03_02",
+          "title": "for ループの応用",
+          "description": "関数 sum_numbers(n) を実装しましょう。\nこの関数は 1 から n までの整数の合計を返します。\n出力例\n例えば sum_numbers(5) を呼び出すと：\n  1 + 2 + 3 + 4 + 5 = 15\nなので 15 を返します。\nsum_numbers(10) は 55 を、sum_numbers(100) は 5050 を返します。",
+          "available": true
+        },
+        {
+          "id": "03_03_while",
+          "number": "03_03",
+          "title": "while ループ",
+          "description": "関数 check_guess(secret, guess) を実装しましょう。\nこの関数は数当てゲームのヒントを返します。\n\n  guess が secret より小さければ → \"Too low\" を返す\n  guess が secret より大きければ → \"Too high\" を返す\n  guess が secret と同じなら → \"Correct\" を返す\n\n実行例\n  check_guess(50, 30)  → \"Too low\"\ncheck_guess(50, 70)  → \"Too high\"\ncheck_guess(50, 50)  → \"Correct\"",
+          "available": true
         }
       ]
     },
@@ -92,21 +106,94 @@
       "number": 4,
       "title": "データ構造",
       "description": "複数のデータをまとめて扱う方法を学びます",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "04_01_list_basic",
+          "number": "04_01",
+          "title": "リストの基礎",
+          "description": "関数 get_element(fruits, index) を実装しましょう。\nfruits: 果物名の文字列リスト\nindex: 取得したい要素の 0 始まりのインデックス\n指定されたインデックスの要素を返します。インデックスが範囲外の場合は None を返します。\n例\n  get_element([\"apple\", \"banana\", \"orange\"], 0)  → \"apple\"\nget_element([\"apple\", \"banana\", \"orange\"], 2)  → \"orange\"\nget_element([\"apple\", \"banana\"], 5)            → None（範囲外）",
+          "available": true
+        },
+        {
+          "id": "04_02_list_advanced",
+          "number": "04_02",
+          "title": "リストの操作",
+          "description": "関数 find_max(numbers) を実装しましょう。\nnumbers: 数値のリスト（空ではありません）\nリストの中の最大値を返します。ただし、max() 関数は使わず、for ループで全要素を比較して求めてください。\n例\n  find_max([3, 7, 2, 9, 1])    → 9\nfind_max([5])                → 5\nfind_max([-5, -2, -10, -1]) → -1",
+          "available": true
+        },
+        {
+          "id": "04_03_list_loop",
+          "number": "04_03",
+          "title": "for ループとリスト",
+          "description": "関数 filter_even(numbers) を実装しましょう。\n整数のリスト numbers を受け取り、偶数のみを含む新しいリストを返します。\n実行例\n  filter_even([1, 2, 3, 4, 5, 6])  # [2, 4, 6]\nfilter_even([1, 3, 5])            # []\nfilter_even([10, 15, 20, 25])     # [10, 20]",
+          "available": true
+        },
+        {
+          "id": "04_04_dict",
+          "number": "04_04",
+          "title": "辞書の基礎",
+          "description": "関数 get_score(students, name) を実装しましょう。\nstudents は生徒名をキー、点数を値とする辞書です。name で指定された生徒の点数を返します。\n生徒が辞書に存在しない場合は -1 を返してください。\n実行例\n  students = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nget_score(students, \"Alice\")    # 85\nget_score(students, \"Bob\")      # 92\nget_score(students, \"Dave\")     # -1（存在しない）",
+          "available": true
+        }
+      ]
     },
     {
       "id": "chapter5",
       "number": 5,
       "title": "関数",
       "description": "再利用可能なコードの書き方を学びます",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "05_01_function_basic",
+          "number": "05_01",
+          "title": "関数の基礎",
+          "description": "関数 add(a, b) を実装しましょう。\n2つの数値 a と b を受け取り、その合計を return 文で返す関数を作ります。\n実行例\n  print(add(3, 5))    # 8\nprint(add(10, 20))  # 30\nprint(add(-5, 3))   # -2",
+          "available": true
+        },
+        {
+          "id": "05_02_function_advanced",
+          "number": "05_02",
+          "title": "関数の応用",
+          "description": "関数 calculate(a, b, operation=\"add\") を実装しましょう。\n2つの数値 a、b と演算の種類 operation を受け取り、指定された演算の結果を返します。\noperationの種類\n\n  \"add\": a + b を返す（デフォルト）\n  \"subtract\": a - b を返す\n  \"multiply\": a * b を返す\n  \"divide\": a / b を返す（b が 0 のときは None を返す）\n\n実行例\n  print(calculate(10, 5))                  # 15 (デフォルトは加算)\nprint(calculate(10, 5, \"subtract\"))      # 5\nprint(calculate(10, 5, \"multiply\"))      # 50\nprint(calculate(10, 5, \"divide\"))        # 2.0\nprint(calculate(10, 0, \"divide\"))        # None",
+          "available": true
+        }
+      ]
     },
     {
       "id": "chapter6",
       "number": 6,
       "title": "実践プロジェクト",
       "description": "学んだことを活かして実用的なプログラムを作ります",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "06_01_text_game",
+          "number": "06_01",
+          "title": "テキストベースゲーム",
+          "description": "数当てゲームの中核となる2つの関数を実装しましょう。\n実装する関数\n\n  check_guess(secret, guess)：予想を判定する関数\n  play_round(secret, guesses)：一連の予想リストを処理する関数\n\ncheck_guess の仕様\n\n  guess が secret より小さければ \"Too low\" を返す\n  guess が secret より大きければ \"Too high\" を返す\n  guess が secret と同じなら \"Correct\" を返す\n\nplay_round の仕様\n\n  guesses：予想のリスト（例: [30, 70, 50]）\n  各予想を順に check_guess でチェックする\n  \"Correct\" になったら (試行回数, \"Correct\") のタプルを返す\n  全て外れた場合は (guesses の長さ, 最後の判定結果) を返す",
+          "available": true
+        },
+        {
+          "id": "06_02_data_analysis",
+          "number": "06_02",
+          "title": "データ集計プログラム",
+          "description": "生徒の成績データを集計する3つの関数を実装しましょう。\n実装する関数\n\n  calculate_average(scores)：各生徒の平均点を計算する\n  find_top_student(averages)：最高平均点の生徒名を返す\n  count_passing(averages, passing_score=60)：合格者数を返す\n\ncalculate_average の仕様\n\n  引数 scores：{\"Alice\": [85, 90, 88], ...} の形式\n  戻り値：{\"Alice\": 87.666..., ...} の形式（各生徒の平均値）\n  sum() と len() を使って平均を計算する\n\nfind_top_student の仕様\n\n  引数 averages：{\"Alice\": 87.67, ...} の形式\n  戻り値：最高平均点の生徒の名前（文字列）\n\ncount_passing の仕様\n\n  引数 averages：{\"Alice\": 87.67, ...} の形式\n  引数 passing_score：合格点（デフォルト 60）\n  戻り値：合格点以上の生徒の数（整数）",
+          "available": true
+        },
+        {
+          "id": "06_03_file",
+          "number": "06_03",
+          "title": "ファイル操作の基礎",
+          "description": "メモ帳アプリの基本機能として、テキストファイルを保存・読み込みする2つの関数を実装しましょう。\n\n  save_memo(filename, content)：テキストをファイルに保存する関数\n  load_memo(filename)：ファイルからテキストを読み込む関数",
+          "available": true
+        },
+        {
+          "id": "06_04_final_project",
+          "number": "06_04",
+          "title": "最終プロジェクト：タスク管理アプリ",
+          "description": "タスク管理アプリを完成させましょう！5つの関数を実装してください。\n\n  add_task(tasks, task_name)：タスクをリストに追加して返す\n  complete_task(tasks, task_id)：指定 id のタスクを完了にして返す\n  show_tasks(tasks)：タスク一覧を表示する\n  save_tasks(tasks, filename)：タスクを JSON ファイルに保存する\n  load_tasks(filename)：JSON ファイルからタスクを読み込む\n\nタスクのデータ構造\n各タスクは次の形式の辞書です：{\"id\": 1, \"name\": \"タスク名\", \"completed\": False}",
+          "available": true
+        }
+      ]
     }
   ]
 }

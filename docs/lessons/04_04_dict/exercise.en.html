@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson04_04: Dictionary Basics</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson04_04: Dictionary Basics</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>get_score(students, name)</code>.</p>
+<p><code>students</code> is a dictionary with student names as keys and scores as values. Return the score for the student specified by <code>name</code>.</p>
+<p>If the student does not exist in the dictionary, return <strong>-1</strong>.</p>
+<h3>Examples</h3>
+<pre>  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+get_score(students, "Alice")    # 85
+get_score(students, "Bob")      # 92
+get_score(students, "Dave")     # -1 (not found)</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Use the <code>in</code> operator to check whether <code>name</code> exists in <code>students</code></li>
+                            <li>If it exists, return <code>students[name]</code></li>
+                            <li>If it does not exist, return <code>-1</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Use the in operator to check for the key:<br>
+<code>if name in students:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code># name exists in the dictionary</code>
+</li>
+                            <li>If it exists, return the value from the dictionary:<br>
+<code>return students[name]</code>
+</li>
+                            <li>If it does not exist, return -1:<br>
+<code>else:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>
+</li>
+                            <li>You can also write this in one line using <code>.get()</code>:<br>
+<code>return students.get(name, -1)</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "04_04_dict";
+        const INITIAL_CODE = "def get_score(students, name):\n    # Write your code here\n    # If name exists in students, return students[name]\n    # Otherwise, return -1\n    pass\n\n# Test run\nstudents = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(get_score(students, \"Alice\"))    # 85\nprint(get_score(students, \"Bob\"))      # 92\nprint(get_score(students, \"Dave\"))     # -1\n";
+        const SOLUTION_CODE = "def get_score(students, name):\n    if name in students:\n        return students[name]\n    else:\n        return -1\n\n# Test run\nstudents = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(get_score(students, \"Alice\"))\nprint(get_score(students, \"Bob\"))\nprint(get_score(students, \"Dave\"))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_score is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}, \"Alice\")\n        if test_result == 85:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! Alice\u0027s score of 85 was returned\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: 85, Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does get_score({...}, \u0027Alice\u0027) return 85?", "name": "Existing key retrieval test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_score is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"Alice\": 85, \"Bob\": 92}, \"Charlie\")\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! -1 is returned for a name that does not exist\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: -1, Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does get_score({...}, \u0027Charlie\u0027) return -1 (name not found)?", "name": "Missing key test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_score is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"\u7530\u4e2d\": 88, \"\u4f50\u85e4\": 95}, \"\u4f50\u85e4\")\n        if test_result == 95:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! Score 95 was returned for \u4f50\u85e4\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: 95, Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does get_score({\u0027\u7530\u4e2d\u0027: 88, \u0027\u4f50\u85e4\u0027: 95}, \u0027\u4f50\u85e4\u0027) return 95?", "name": "Japanese names test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_score is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({}, \"Alice\")\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! -1 is returned for an empty dictionary\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: -1, Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does get_score({}, \u0027Alice\u0027) return -1?", "name": "Empty dictionary test"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+lesson:
+  number: "04_04"
+  id: "04_04_dict"
+  title: "Dictionary Basics"
+
+task_description: |
+  <p>Implement the function <code>get_score(students, name)</code>.</p>
+  <p><code>students</code> is a dictionary with student names as keys and scores as values. Return the score for the student specified by <code>name</code>.</p>
+  <p>If the student does not exist in the dictionary, return <strong>-1</strong>.</p>
+  <h3>Examples</h3>
+  <pre>  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  get_score(students, "Alice")    # 85
+  get_score(students, "Bob")      # 92
+  get_score(students, "Dave")     # -1 (not found)</pre>
+
+instructions:
+  - "Use the <code>in</code> operator to check whether <code>name</code> exists in <code>students</code>"
+  - "If it exists, return <code>students[name]</code>"
+  - "If it does not exist, return <code>-1</code>"
+
+hints:
+  - hint: |
+      Use the in operator to check for the key:<br>
+      <code>if name in students:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># name exists in the dictionary</code>
+  - hint: |
+      If it exists, return the value from the dictionary:<br>
+      <code>return students[name]</code>
+  - hint: |
+      If it does not exist, return -1:<br>
+      <code>else:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>
+  - hint: |
+      You can also write this in one line using <code>.get()</code>:<br>
+      <code>return students.get(name, -1)</code>

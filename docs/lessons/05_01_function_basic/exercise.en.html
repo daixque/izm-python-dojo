@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson05_01: Function Basics</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson05_01: Function Basics</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>add(a, b)</code>.</p>
+<p>The function receives two numbers <code>a</code> and <code>b</code>, and <strong>returns their sum using a return statement</strong>.</p>
+<h3>Example Output</h3>
+<pre>  print(add(3, 5))    # 8
+print(add(10, 20))  # 30
+print(add(-5, 3))   # -2</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>The function definition <code>def add(a, b):</code> is already provided. Implement the function body.</li>
+                            <li>Calculate the sum of <code>a</code> and <code>b</code></li>
+                            <li>Use a <code>return</code> statement to return the result</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>How to use the <code>return</code> statement:<br>
+<code>def add(a, b):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+Replace <code>???</code> with an expression that adds <code>a</code> and <code>b</code>.
+</li>
+                            <li>Use the <code>+</code> operator for addition:<br>
+<code>a + b</code> calculates the sum of <code>a</code> and <code>b</code>.
+</li>
+                            <li>The completed function looks like this:<br>
+<code>def add(a, b):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return a + b</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "05_01_function_basic";
+        const INITIAL_CODE = "def add(a, b):\n    # Write your code here\n    # Add a and b together and return the result\n    pass\n\nprint(add(3, 5))      # 8\nprint(add(10, 20))    # 30\nprint(add(-5, 3))     # -2\n";
+        const SOLUTION_CODE = "def add(a, b):\n    return a + b\n\nprint(add(3, 5))\nprint(add(10, 20))\nprint(add(-5, 3))\n";
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function add is not defined\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](3, 5)\n        if test_result == 8:\n            result = {\"passed\": True, \"message\": \"\u2713 add(3, 5) = 8 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(3, 5) should return 8. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "add(3, 5) should return 8", "name": "Check add(3, 5)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function add is not defined\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](10, 20)\n        if test_result == 30:\n            result = {\"passed\": True, \"message\": \"\u2713 add(10, 20) = 30 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(10, 20) should return 30. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "add(10, 20) should return 30", "name": "Check add(10, 20)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function add is not defined\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](-5, 3)\n        if test_result == -2:\n            result = {\"passed\": True, \"message\": \"\u2713 add(-5, 3) = -2 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(-5, 3) should return -2. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "add(-5, 3) should return -2 (negative numbers)", "name": "Negative numbers test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027add\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function add is not defined\"}\n    else:\n        test_result = exec_globals[\u0027add\u0027](1.5, 2.5)\n        if test_result == 4.0:\n            result = {\"passed\": True, \"message\": \"\u2713 add(1.5, 2.5) = 4.0 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 add(1.5, 2.5) should return 4.0. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "add(1.5, 2.5) should return 4.0 (floats)", "name": "Floating point test"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

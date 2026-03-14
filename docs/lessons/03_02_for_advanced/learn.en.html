@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson03_02: Advanced for Loops</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Advanced for Loops</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔢 Advanced range()</h2>
+  <p>In the previous lesson, you learned the basics of <code>range()</code>.</p>
+  <p>In this lesson, we will master the three-argument form: <code>range(start, stop, step)</code>.</p>
+  <p>The <strong>step</strong> controls how much the number increases (or decreases) each iteration.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Print only even numbers (step 2)</div>
+    <div class="example-code">for i in range(0, 10, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 0, 2, 4, 6, 8</div>
+    <div class="example-explanation">
+      <code>range(0, 10, 2)</code> starts at 0, increases by 2, and generates numbers less than 10.<br>
+      By specifying a step of 2, you can extract only even numbers.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Countdown (step -1)</div>
+    <div class="example-code">for i in range(10, 0, -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1</div>
+    <div class="example-explanation">
+      A negative step makes the numbers decrease.<br>
+      <code>range(10, 0, -1)</code> counts from 10 down to 1 (0 is not included).
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Print multiples of 5 (step 5)</div>
+    <div class="example-code">for i in range(5, 26, 5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 5, 10, 15, 20, 25</div>
+    <div class="example-explanation">
+      <code>range(5, 26, 5)</code> starts at 5, increases by 5, and generates up to 25.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🧮 Calculations Inside Loops - Computing a Sum</h2>
+  <p>Using a loop, you can easily calculate the sum of many numbers.</p>
+  <p>The key is to use a <strong>accumulator variable</strong> to hold the running total.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Calculate the sum of 1 to 5</div>
+    <div class="example-code">total = 0<br>for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>print(total)<br># Output: 15</div>
+    <div class="example-explanation">
+      <strong>Steps:</strong><br>
+      1. Initialize the accumulator: <code>total = 0</code><br>
+      2. Add <code>i</code> to total each iteration: <code>total += i</code><br>
+      3. After the loop, <code>total</code> holds the sum<br>
+      <br>
+      <code>+=</code> means "add to the current value" (same as <code>total = total + i</code>).
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Counter variable pattern</div>
+    <div class="example-code">count = 0<br>for i in range(1, 11):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(f"Even count: {count}")<br># Output: Even count: 5</div>
+    <div class="example-explanation">
+      Besides summing, you can also <strong>count</strong> how many elements meet a condition.<br>
+      <code>%</code> is the modulo operator. <code>i % 2 == 0</code> checks if a number is even.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 Calculating an Average</h2>
+  <p>Once you have a sum, you can calculate the <strong>average</strong> by dividing by the count.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Calculate the average of 1 to 10</div>
+    <div class="example-code">total = 0<br>n = 10<br>for i in range(1, n + 1):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>average = total / n<br>print(f"Sum: {total}")<br>print(f"Average: {average}")<br># Output: Sum: 55<br># &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Average: 5.5</div>
+    <div class="example-explanation">
+      This expresses the formula <strong>sum ÷ count = average</strong> in code.<br>
+      <code>range(1, n + 1)</code> iterates from 1 to n (since n + 1 itself is excluded).
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>range(start, stop, step)</code> lets you control the interval between values</li>
+    <li>A negative step enables counting down</li>
+    <li>To compute a sum, initialize <code>total = 0</code> then add with <code>total += i</code> each iteration</li>
+    <li><code>+=</code> means "add to the current value" (<code>x += 1</code> is the same as <code>x = x + 1</code>)</li>
+    <li>Dividing the sum by the count gives the average</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

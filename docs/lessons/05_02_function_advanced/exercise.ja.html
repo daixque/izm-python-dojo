@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン05_02: 関数の応用</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン05_02: 関数の応用</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>calculate(a, b, operation="add")</code> を実装しましょう。</p>
+<p>2つの数値 <code>a</code>、<code>b</code> と演算の種類 <code>operation</code> を受け取り、指定された演算の結果を返します。</p>
+<h3>operationの種類</h3>
+<ul>
+  <li><code>"add"</code>: <code>a + b</code> を返す（デフォルト）</li>
+  <li><code>"subtract"</code>: <code>a - b</code> を返す</li>
+  <li><code>"multiply"</code>: <code>a * b</code> を返す</li>
+  <li><code>"divide"</code>: <code>a / b</code> を返す（<code>b</code> が 0 のときは <code>None</code> を返す）</li>
+</ul>
+<h3>実行例</h3>
+<pre>  print(calculate(10, 5))                  # 15 (デフォルトは加算)
+print(calculate(10, 5, "subtract"))      # 5
+print(calculate(10, 5, "multiply"))      # 50
+print(calculate(10, 5, "divide"))        # 2.0
+print(calculate(10, 0, "divide"))        # None</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>関数シグネチャ <code>def calculate(a, b, operation="add"):</code> は用意済みです</li>
+                            <li><code>if</code> / <code>elif</code> を使って <code>operation</code> の値に応じた処理を分岐させます</li>
+                            <li>各演算の結果を <code>return</code> 文で返します</li>
+                            <li>除算（<code>"divide"</code>）のとき、<code>b == 0</code> なら <code>None</code> を返します</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li><code>operation</code> の値に応じて処理を分岐させます：<br>
+<code>if operation == "add":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+<code>elif operation == "subtract":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+</li>
+                            <li>除算のときはゼロ除算を確認します：<br>
+<code>elif operation == "divide":</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if b == 0:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code>
+</li>
+                            <li>4つの演算子：<br>
+加算: <code>a + b</code><br>
+減算: <code>a - b</code><br>
+乗算: <code>a * b</code><br>
+除算: <code>a / b</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "05_02_function_advanced";
+        const INITIAL_CODE = "def calculate(a, b, operation=\"add\"):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # operation \u306b\u5fdc\u3058\u3066\u8a08\u7b97\u3092\u884c\u3044\u3001\u7d50\u679c\u3092\u8fd4\u3059\n    # \"add\": a + b\n    # \"subtract\": a - b\n    # \"multiply\": a * b\n    # \"divide\": a / b (b \u304c 0 \u306e\u3068\u304d\u306f None)\n    pass\n\nprint(calculate(10, 5))                  # 15 (\u30c7\u30d5\u30a9\u30eb\u30c8\u306f\u52a0\u7b97)\nprint(calculate(10, 5, \"subtract\"))      # 5\nprint(calculate(10, 5, \"multiply\"))      # 50\nprint(calculate(10, 5, \"divide\"))        # 2.0\nprint(calculate(10, 0, \"divide\"))        # None\n";
+        const SOLUTION_CODE = "def calculate(a, b, operation=\"add\"):\n    if operation == \"add\":\n        return a + b\n    elif operation == \"subtract\":\n        return a - b\n    elif operation == \"multiply\":\n        return a * b\n    elif operation == \"divide\":\n        if b == 0:\n            return None\n        return a / b\n\nprint(calculate(10, 5))\nprint(calculate(10, 5, \"subtract\"))\nprint(calculate(10, 5, \"multiply\"))\nprint(calculate(10, 5, \"divide\"))\nprint(calculate(10, 0, \"divide\"))\n";
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 calculate \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5)\n        if test_result == 15:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5) = 15 \u6b63\u89e3\u3067\u3059\uff08\u30c7\u30d5\u30a9\u30eb\u30c8\u306e\u52a0\u7b97\uff09\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5) \u306f 15 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "calculate(10, 5) \u304c\u30c7\u30d5\u30a9\u30eb\u30c8\u306e\u52a0\u7b97\u3067 15 \u3092\u8fd4\u3059\u304b", "name": "\u30c7\u30d5\u30a9\u30eb\u30c8\u52a0\u7b97\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 calculate \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"subtract\")\n        if test_result == 5:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"subtract\\\") = 5 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"subtract\\\") \u306f 5 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"subtract\") \u304c 5 \u3092\u8fd4\u3059\u304b", "name": "\u6e1b\u7b97\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 calculate \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"multiply\")\n        if test_result == 50:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"multiply\\\") = 50 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"multiply\\\") \u306f 50 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"multiply\") \u304c 50 \u3092\u8fd4\u3059\u304b", "name": "\u4e57\u7b97\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 calculate \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"divide\")\n        if test_result == 2.0:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"divide\\\") = 2.0 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"divide\\\") \u306f 2.0 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"divide\") \u304c 2.0 \u3092\u8fd4\u3059\u304b", "name": "\u9664\u7b97\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 calculate \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 0, \"divide\")\n        if test_result is None:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 0, \\\"divide\\\") = None \u6b63\u89e3\u3067\u3059\uff08\u30bc\u30ed\u9664\u7b97\uff09\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 0, \\\"divide\\\") \u306f None \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "calculate(10, 0, \"divide\") \u304c None \u3092\u8fd4\u3059\u304b", "name": "\u30bc\u30ed\u9664\u7b97\u306e\u30c6\u30b9\u30c8"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE
+            });
+        });
+    </script>
+</body>
+</html>

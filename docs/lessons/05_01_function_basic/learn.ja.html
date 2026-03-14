@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン05_01: 関数の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">関数の基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>⚙️ 関数とは何か</h2>
+  <p>プログラムを書いていると、同じ処理を何度も繰り返す場面がよくあります。</p>
+  <p><strong>関数（かんすう）</strong>とは、よく使う処理をまとめて名前をつけたものです。</p>
+  <p>一度定義しておけば、何度でも呼び出して使うことができます。</p>
+  <p>例えば「2つの数を足す」「あいさつを表示する」など、ひとまとまりの処理に名前をつけて再利用できます。</p>
+</section>
+
+<section class="section">
+  <h2>📝 関数の定義と呼び出し</h2>
+  <p>Pythonでは <code>def</code> キーワードを使って関数を定義します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">関数の基本構文</div>
+    <div class="example-code">def 関数名():<br>&nbsp;&nbsp;&nbsp;&nbsp;# 処理をここに書く<br>&nbsp;&nbsp;&nbsp;&nbsp;処理1<br>&nbsp;&nbsp;&nbsp;&nbsp;処理2</div>
+    <div class="example-explanation">
+      <strong>ポイント：</strong><br>
+      - <code>def</code> のあとに関数名を書く<br>
+      - 関数名のあとに <code>()</code> を書く<br>
+      - 行末に <code>:</code> を書く<br>
+      - 関数の中の処理はインデント（4スペース）で書く
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">関数の定義と呼び出し</div>
+    <div class="example-code">def say_hello():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("こんにちは！")<br><br>say_hello()&nbsp;&nbsp;# 呼び出し<br>say_hello()&nbsp;&nbsp;# 何度でも呼び出せる</div>
+    <div class="example-explanation">
+      <code>say_hello()</code> と書くことで関数を呼び出せます。<br>
+      何度でも呼び出すことができるのが関数の便利なところです。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔧 パラメータ（引数）の使い方</h2>
+  <p>関数に<strong>パラメータ（仮引数）</strong>を設定すると、呼び出す時に値を渡すことができます。</p>
+  <p>渡す値のことを<strong>引数（実引数）</strong>と言います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">パラメータありの関数</div>
+    <div class="example-code">def greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"こんにちは、{name}さん！")<br><br>greet("太郎")&nbsp;&nbsp;# こんにちは、太郎さん！<br>greet("花子")&nbsp;&nbsp;# こんにちは、花子さん！</div>
+    <div class="example-explanation">
+      <code>name</code> がパラメータ（仮引数）です。<br>
+      関数を呼び出す時に <code>"太郎"</code> や <code>"花子"</code> という値（実引数）を渡しています。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">複数のパラメータ</div>
+    <div class="example-code">def introduce(name, age):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"名前: {name}")<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"年齢: {age}歳")<br><br>introduce("太郎", 13)</div>
+    <div class="example-explanation">
+      パラメータは <code>,</code> で区切って複数設定できます。<br>
+      呼び出す時も同じ順番で値を渡します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>↩️ return 文（戻り値）</h2>
+  <p><code>return</code> 文を使うと、関数の結果を呼び出し元に返すことができます。</p>
+  <p>この返された値のことを<strong>戻り値</strong>と言います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">return を使う関数</div>
+    <div class="example-code">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br><br>result = add(3, 5)<br>print(result)&nbsp;&nbsp;# 8</div>
+    <div class="example-explanation">
+      <code>return a + b</code> で計算結果を返しています。<br>
+      <code>result = add(3, 5)</code> で戻り値を変数に代入できます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">戻り値をそのまま使う</div>
+    <div class="example-code">def multiply(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a * b<br><br># 戻り値をそのまま print に渡す<br>print(multiply(4, 3))&nbsp;&nbsp;# 12<br>print(multiply(2, 7))&nbsp;&nbsp;# 14</div>
+    <div class="example-explanation">
+      戻り値は変数に代入せず、そのまま使うこともできます。<br>
+      <code>print(multiply(4, 3))</code> は <code>print(12)</code> と同じです。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">関数を複数回呼び出す</div>
+    <div class="example-code">def square(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * n<br><br>for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i}の二乗 = {square(i)}")<br># 1の二乗 = 1<br># 2の二乗 = 4<br># 3の二乗 = 9<br># 4の二乗 = 16<br># 5の二乗 = 25</div>
+    <div class="example-explanation">
+      ループの中で関数を呼び出すこともできます。<br>
+      関数を使うと、処理を再利用できて便利です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 戻り値のない関数</h2>
+  <p><code>return</code> 文を書かない関数は、自動的に <code>None</code>（何もない）を返します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">return なしの関数</div>
+    <div class="example-code">def say_hi():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("やあ！")<br><br>result = say_hi()&nbsp;&nbsp;# やあ！<br>print(result)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# None</div>
+    <div class="example-explanation">
+      <code>return</code> がない関数の戻り値は <code>None</code> です。<br>
+      <code>None</code> は「値がない」ことを表すPythonの特別な値です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>def 関数名():</code> で関数を定義する</li>
+    <li>関数の中の処理はインデント（4スペース）で書く</li>
+    <li><code>関数名()</code> で関数を呼び出す</li>
+    <li>パラメータ（仮引数）を使うと、呼び出す時に値を渡せる</li>
+    <li><code>return</code> で計算結果などを呼び出し元に返せる</li>
+    <li><code>return</code> がない関数は <code>None</code> を返す</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

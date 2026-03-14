@@ -1,0 +1,99 @@
+lesson:
+  number: "06_02"
+  id: "06_02_data_analysis"
+  title: "Data Analysis Program"
+
+content: |
+  <section class="section">
+    <h2>📊 Practical Project: Data Analysis Program</h2>
+    <p>In this lesson, we'll build a program that manages and analyzes data by combining lists and dictionaries. Using a school grade management system as our example, we'll learn the basics of real-world data analysis.</p>
+  </section>
+
+  <section class="section">
+    <h2>📚 Managing Data with Dictionaries</h2>
+    <p>Dictionaries are perfect for managing score lists for multiple students. We store student names as keys and their score lists as values.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Score Data Structure</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Charlie": [55, 60, 58]<br>}<br><br># Access a specific student's scores<br>print(scores["Alice"])   # [85, 90, 88]<br>print(scores["Bob"][0])  # 70 (first score)</div>
+      <div class="example-explanation">Student names are dictionary keys, and their score lists are the values. <code>scores["Alice"]</code> retrieves Alice's list of scores.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Looping with items()</div>
+      <div class="example-code">for name, score_list in scores.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}: {score_list}")<br><br># Output:<br># Alice: [85, 90, 88]<br># Bob: [70, 75, 72]<br># Charlie: [55, 60, 58]</div>
+      <div class="example-explanation"><code>dict.items()</code> gives you both the key and value at the same time. This is convenient when you need to process student names and score lists together.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🧮 Calculating Averages with sum() and len()</h2>
+    <p>You can calculate the average of a list using <code>sum()</code> (total) divided by <code>len()</code> (number of elements).</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Calculating Average Score</div>
+      <div class="example-code">scores_alice = [85, 90, 88]<br><br># Divide total by count<br>average = sum(scores_alice) / len(scores_alice)<br>print(average)  # 87.666...<br><br># Round to 2 decimal places<br>print(round(average, 2))  # 87.67</div>
+      <div class="example-explanation"><code>sum([85, 90, 88])</code> is <code>263</code>, and <code>len([85, 90, 88])</code> is <code>3</code>, so the average is <code>263 / 3 ≈ 87.67</code>.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Storing All Students' Averages in a Dictionary</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72]<br>}<br><br>averages = {}<br>for name, score_list in scores.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;averages[name] = sum(score_list) / len(score_list)<br><br>print(averages)<br># {'Alice': 87.666..., 'Bob': 72.333...}</div>
+      <div class="example-explanation">Create an empty dictionary <code>averages = {}</code>, then calculate and store each student's average inside the loop.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏆 Finding the Key with the Maximum Value</h2>
+    <p>To find the key with the highest value in a dictionary, the basic approach is to loop through all entries while updating a tracked maximum.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Finding the Top Student</div>
+      <div class="example-code">averages = {"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67}<br><br>top_student = None<br>max_avg = -1<br><br>for name, avg in averages.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;if avg &gt; max_avg:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max_avg = avg<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top_student = name<br><br>print(top_student)  # Alice</div>
+      <div class="example-explanation">
+        Initializing <code>max_avg = -1</code> ensures the first comparison always updates the maximum.<br>
+        We compare each student's average and update <code>top_student</code> whenever a new maximum is found.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Counting Passing Students with values()</div>
+      <div class="example-code">averages = {"Alice": 87.67, "Bob": 72.33, "Charlie": 57.67}<br>passing_score = 60<br><br>count = 0<br>for avg in averages.values():<br>&nbsp;&nbsp;&nbsp;&nbsp;if avg &gt;= passing_score:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br><br>print(count)  # 2 (Alice and Bob)</div>
+      <div class="example-explanation"><code>dict.values()</code> gives you just the values without the keys. It's useful when you only need to process the values. Here we count how many students scored at or above the passing score.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏗️ Designing a System with Three Functions</h2>
+    <p>Breaking data analysis programs into functions makes each responsibility clear.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Processing Flow with Combined Functions</div>
+      <div class="example-code">scores = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Alice": [85, 90, 88],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Bob": [70, 75, 72],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Charlie": [55, 60, 58]<br>}<br><br># Step 1: Calculate averages<br>averages = calculate_average(scores)<br>print("Averages:", averages)<br><br># Step 2: Find top student<br>top = find_top_student(averages)<br>print("Top student:", top)<br><br># Step 3: Count passing students<br>passing = count_passing(averages)<br>print("Passing count:", passing)</div>
+      <div class="example-explanation">
+        Calling the three functions in sequence makes the data flow clear:<br>
+        1. <code>calculate_average()</code> converts score lists into an averages dictionary<br>
+        2. <code>find_top_student()</code> retrieves the highest scoring student<br>
+        3. <code>count_passing()</code> tallies the number of passing students
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li>Storing names as dictionary keys and lists as values organizes data effectively</li>
+      <li><code>dict.items()</code> retrieves key-value pairs simultaneously</li>
+      <li><code>sum(list) / len(list)</code> calculates the average of a list</li>
+      <li><code>dict.values()</code> retrieves only the values from a dictionary</li>
+      <li>Find the key with the maximum value by tracking the max in a variable and comparing in a loop</li>
+    </ul>
+  </section>

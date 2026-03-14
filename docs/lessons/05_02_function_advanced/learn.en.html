@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson05_02: Advanced Functions</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Advanced Functions</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>⚙️ Default Arguments</h2>
+  <p>You can set <strong>default values</strong> for function parameters.</p>
+  <p>Parameters with default values can be omitted when calling the function. If omitted, the default value is used.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Defining and Using Default Arguments</div>
+    <div class="example-code">def greet(name, greeting="Hello"):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{greeting}, {name}!")<br><br>greet("Alice")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Hello, Alice!<br>greet("Bob", "Good morning")&nbsp;&nbsp;# Good morning, Bob!</div>
+    <div class="example-explanation">
+      Set a default value using <code>=</code> like <code>greeting="Hello"</code>.<br>
+      When you call <code>greet("Alice")</code> without a second argument, <code>"Hello"</code> is used.<br>
+      When you pass a value like <code>greet("Bob", "Good morning")</code>, it overrides the default.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Multiple Default Arguments</div>
+    <div class="example-code">def power(base, exponent=2):<br>&nbsp;&nbsp;&nbsp;&nbsp;return base ** exponent<br><br>print(power(3))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 9 (3 squared)<br>print(power(3, 3))&nbsp;&nbsp;# 27 (3 cubed)<br>print(power(2, 10))&nbsp;# 1024 (2 to the 10th)</div>
+    <div class="example-explanation">
+      <code>exponent=2</code> is the default value.<br>
+      Without specifying, it squares; with a value, it raises to any power.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🏷️ Keyword Arguments</h2>
+  <p>When calling a function, you can pass values by <strong>specifying the parameter name</strong>.</p>
+  <p>These are called <strong>keyword arguments</strong>. They are useful because the order doesn't matter.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Calling with Keyword Arguments</div>
+    <div class="example-code">def introduce(name, age, city):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}, age {age}, from {city}")<br><br># Normal call (in order)<br>introduce("Alice", 13, "New York")<br><br># Keyword arguments (any order)<br>introduce(age=13, city="New York", name="Alice")</div>
+    <div class="example-explanation">
+      Using keyword arguments allows you to pass arguments in any order.<br>
+      It also makes the code more readable by showing which value goes to which parameter.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Combining Default and Keyword Arguments</div>
+    <div class="example-code">def create_profile(name, age, role="student"):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f"{name} (age {age}) - {role}"<br><br>print(create_profile("Alice", 13))<br># Alice (age 13) - student<br><br>print(create_profile("Mr. Smith", 35, role="teacher"))<br># Mr. Smith (age 35) - teacher</div>
+    <div class="example-explanation">
+      Combining default arguments and keyword arguments makes flexible functions.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📦 Multiple Return Values</h2>
+  <p>Python functions can return multiple values at once using <code>return</code>.</p>
+  <p>Multiple values are returned together as a <strong>tuple</strong>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Returning Multiple Values</div>
+    <div class="example-code">def min_max(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;return min(numbers), max(numbers)<br><br>minimum, maximum = min_max([3, 1, 4, 1, 5, 9])<br>print(f"Min: {minimum}")&nbsp;&nbsp;# Min: 1<br>print(f"Max: {maximum}")&nbsp;&nbsp;# Max: 9</div>
+    <div class="example-explanation">
+      <code>return min(numbers), max(numbers)</code> returns two values.<br>
+      You can unpack them with <code>minimum, maximum = ...</code>.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Receiving as a Tuple</div>
+    <div class="example-code">def divide_with_remainder(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;quotient = a // b<br>&nbsp;&nbsp;&nbsp;&nbsp;remainder = a % b<br>&nbsp;&nbsp;&nbsp;&nbsp;return quotient, remainder<br><br>result = divide_with_remainder(17, 5)<br>print(result)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# (3, 2)<br>print(result[0])&nbsp;&nbsp;# 3 (quotient)<br>print(result[1])&nbsp;&nbsp;# 2 (remainder)</div>
+    <div class="example-explanation">
+      The return value is a tuple (a group of multiple values).<br>
+      Access each value with <code>result[0]</code> or <code>result[1]</code>.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔭 Variable Scope</h2>
+  <p><strong>Scope</strong> refers to the area where a variable can be used.</p>
+  <p>Variables created inside a function (local variables) can only be used within that function.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Local vs Global Variables</div>
+    <div class="example-code">message = "global variable"&nbsp;&nbsp;# outside function<br><br>def show_scope():<br>&nbsp;&nbsp;&nbsp;&nbsp;local_var = "local variable"&nbsp;&nbsp;# inside function<br>&nbsp;&nbsp;&nbsp;&nbsp;print(local_var)&nbsp;&nbsp;# OK<br>&nbsp;&nbsp;&nbsp;&nbsp;print(message)&nbsp;&nbsp;&nbsp;&nbsp;# OK (can read outer variable)<br><br>show_scope()<br># print(local_var)&nbsp;&nbsp;# Error! Can't use outside</div>
+    <div class="example-explanation">
+      <strong>Local variable</strong>: Created inside a function. Only accessible within that function.<br>
+      <strong>Global variable</strong>: Created outside a function. Readable from anywhere.<br>
+      Local variables disappear when the function ends.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📖 Docstrings</h2>
+  <p>You can write a description enclosed in <code>"""</code> right after the function definition. This is called a <strong>docstring</strong>.</p>
+  <p>Documenting the purpose and usage of a function makes your code much more readable.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Writing a Docstring</div>
+    <div class="example-code">def add(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;"""Return the sum of two numbers.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Args:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a: The first number<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b: The second number<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The sum of a and b<br>&nbsp;&nbsp;&nbsp;&nbsp;"""<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b<br><br>print(add.__doc__)&nbsp;&nbsp;# Display docstring</div>
+    <div class="example-explanation">
+      Write the function description inside <code>"""..."""</code>.<br>
+      Access the docstring with <code>function_name.__doc__</code>.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li>Default arguments <code>def func(x, y=10):</code> create optional parameters</li>
+    <li>Keyword arguments <code>func(y=5, x=3)</code> let you pass arguments in any order</li>
+    <li><code>return a, b</code> returns multiple values as a tuple</li>
+    <li>Local variables are only valid inside the function; global variables can be read from anywhere</li>
+    <li>Docstrings document the function's purpose and make code more readable</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

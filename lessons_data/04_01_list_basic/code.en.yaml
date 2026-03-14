@@ -1,0 +1,98 @@
+initial_code: |
+  def get_element(fruits, index):
+      # Write your code here
+      # If index is >= 0 and < len(fruits), return fruits[index]
+      # Otherwise, return None
+      pass
+
+  # Test run
+  print(get_element(["apple", "banana", "orange"], 0))  # apple
+  print(get_element(["apple", "banana", "orange"], 2))  # orange
+  print(get_element(["apple", "banana"], 5))            # None
+
+solution_code: |
+  def get_element(fruits, index):
+      if 0 <= index < len(fruits):
+          return fruits[index]
+      else:
+          return None
+
+  # Test run
+  print(get_element(["apple", "banana", "orange"], 0))
+  print(get_element(["apple", "banana", "orange"], 2))
+  print(get_element(["apple", "banana"], 5))
+
+initial_files: []
+
+tests:
+  - name: "Get first element"
+    description: "get_element([\"apple\", \"banana\", \"orange\"], 0) should return \"apple\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_element is not defined"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana", "orange"], 0)
+              if test_result == "apple":
+                  result = {"passed": True, "message": "✓ Index 0 correctly returned 'apple'"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 'apple', Actual: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Get last element"
+    description: "get_element([\"apple\", \"banana\", \"orange\"], 2) should return \"orange\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_element is not defined"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana", "orange"], 2)
+              if test_result == "orange":
+                  result = {"passed": True, "message": "✓ Index 2 correctly returned 'orange'"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 'orange', Actual: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Out-of-range index returns None"
+    description: "get_element([\"apple\", \"banana\"], 5) should return None"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_element is not defined"}
+          else:
+              test_result = exec_globals['get_element'](["apple", "banana"], 5)
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ Out-of-range index correctly returned None"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: None, Actual: '{test_result}' (out-of-range index must return None)"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Single-element list"
+    description: "get_element([\"apple\"], 0) should return \"apple\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_element' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_element is not defined"}
+          else:
+              test_result = exec_globals['get_element'](["apple"], 0)
+              if test_result == "apple":
+                  result = {"passed": True, "message": "✓ Index 0 on a single-element list correctly returned 'apple'"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 'apple', Actual: '{test_result}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

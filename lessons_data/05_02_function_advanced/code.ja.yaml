@@ -1,0 +1,132 @@
+initial_code: |
+  def calculate(a, b, operation="add"):
+      # ここにコードを書いてください
+      # operation に応じて計算を行い、結果を返す
+      # "add": a + b
+      # "subtract": a - b
+      # "multiply": a * b
+      # "divide": a / b (b が 0 のときは None)
+      pass
+
+  print(calculate(10, 5))                  # 15 (デフォルトは加算)
+  print(calculate(10, 5, "subtract"))      # 5
+  print(calculate(10, 5, "multiply"))      # 50
+  print(calculate(10, 5, "divide"))        # 2.0
+  print(calculate(10, 0, "divide"))        # None
+
+solution_code: |
+  def calculate(a, b, operation="add"):
+      if operation == "add":
+          return a + b
+      elif operation == "subtract":
+          return a - b
+      elif operation == "multiply":
+          return a * b
+      elif operation == "divide":
+          if b == 0:
+              return None
+          return a / b
+
+  print(calculate(10, 5))
+  print(calculate(10, 5, "subtract"))
+  print(calculate(10, 5, "multiply"))
+  print(calculate(10, 5, "divide"))
+  print(calculate(10, 0, "divide"))
+
+initial_files: []
+
+tests:
+  - name: "デフォルト加算のテスト"
+    description: "calculate(10, 5) がデフォルトの加算で 15 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 calculate が定義されていません"}
+          else:
+              test_result = exec_globals['calculate'](10, 5)
+              if test_result == 15:
+                  result = {"passed": True, "message": "✓ calculate(10, 5) = 15 正解です（デフォルトの加算）"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5) は 15 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "減算のテスト"
+    description: "calculate(10, 5, \"subtract\") が 5 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 calculate が定義されていません"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "subtract")
+              if test_result == 5:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"subtract\") = 5 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"subtract\") は 5 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "乗算のテスト"
+    description: "calculate(10, 5, \"multiply\") が 50 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 calculate が定義されていません"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "multiply")
+              if test_result == 50:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"multiply\") = 50 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"multiply\") は 50 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "除算のテスト"
+    description: "calculate(10, 5, \"divide\") が 2.0 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 calculate が定義されていません"}
+          else:
+              test_result = exec_globals['calculate'](10, 5, "divide")
+              if test_result == 2.0:
+                  result = {"passed": True, "message": "✓ calculate(10, 5, \"divide\") = 2.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 5, \"divide\") は 2.0 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "ゼロ除算のテスト"
+    description: "calculate(10, 0, \"divide\") が None を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'calculate' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 calculate が定義されていません"}
+          else:
+              test_result = exec_globals['calculate'](10, 0, "divide")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ calculate(10, 0, \"divide\") = None 正解です（ゼロ除算）"}
+              else:
+                  result = {"passed": False, "message": f"✗ calculate(10, 0, \"divide\") は None になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

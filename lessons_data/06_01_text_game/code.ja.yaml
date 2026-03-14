@@ -1,0 +1,140 @@
+initial_code: |
+  def check_guess(secret, guess):
+      # ここにコードを書いてください
+      # guess が secret より小さければ "Too low"
+      # guess が secret より大きければ "Too high"
+      # guess が secret と同じなら "Correct"
+      pass
+
+  def play_round(secret, guesses):
+      # ここにコードを書いてください
+      # guesses リストの各要素を順に check_guess でチェックする
+      # "Correct" になったら (試行回数, "Correct") を返す
+      # 全て外れたら (len(guesses), 最後の判定) を返す
+      pass
+
+  # テスト実行
+  print(check_guess(50, 30))   # Too low
+  print(check_guess(50, 70))   # Too high
+  print(check_guess(50, 50))   # Correct
+  print(play_round(50, [30, 70, 50]))  # (3, 'Correct')
+
+solution_code: |
+  def check_guess(secret, guess):
+      if guess < secret:
+          return "Too low"
+      elif guess > secret:
+          return "Too high"
+      else:
+          return "Correct"
+
+  def play_round(secret, guesses):
+      for i, guess in enumerate(guesses, 1):
+          result = check_guess(secret, guess)
+          if result == "Correct":
+              return (i, "Correct")
+      return (len(guesses), check_guess(secret, guesses[-1]))
+
+  # テスト実行
+  print(check_guess(50, 30))
+  print(check_guess(50, 70))
+  print(check_guess(50, 50))
+  print(play_round(50, [30, 70, 50]))
+
+initial_files: []
+
+tests:
+  - name: "check_guess: Too low の判定"
+    description: "guess が secret より小さい場合は 'Too low' を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess 関数が定義されていません"}
+          else:
+              res = check_guess(50, 30)
+              if res == "Too low":
+                  result = {"passed": True, "message": "✓ check_guess(50, 30) が正しく 'Too low' を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 30) の結果が正しくありません。期待値: 'Too low'、実際: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "check_guess: Too high の判定"
+    description: "guess が secret より大きい場合は 'Too high' を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess 関数が定義されていません"}
+          else:
+              res = check_guess(50, 70)
+              if res == "Too high":
+                  result = {"passed": True, "message": "✓ check_guess(50, 70) が正しく 'Too high' を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 70) の結果が正しくありません。期待値: 'Too high'、実際: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "check_guess: Correct の判定"
+    description: "guess が secret と同じ場合は 'Correct' を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          check_guess = exec_globals.get("check_guess")
+          if check_guess is None:
+              result = {"passed": False, "message": "✗ check_guess 関数が定義されていません"}
+          else:
+              res = check_guess(50, 50)
+              if res == "Correct":
+                  result = {"passed": True, "message": "✓ check_guess(50, 50) が正しく 'Correct' を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ check_guess(50, 50) の結果が正しくありません。期待値: 'Correct'、実際: '{res}'"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "play_round: 3回目で正解"
+    description: "play_round(50, [30, 70, 50]) は (3, 'Correct') を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          play_round = exec_globals.get("play_round")
+          if play_round is None:
+              result = {"passed": False, "message": "✗ play_round 関数が定義されていません"}
+          else:
+              res = play_round(50, [30, 70, 50])
+              if isinstance(res, tuple) and res[1] == "Correct" and res[0] == 3:
+                  result = {"passed": True, "message": "✓ play_round(50, [30, 70, 50]) が正しく (3, 'Correct') を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ play_round(50, [30, 70, 50]) の結果が正しくありません。期待値: (3, 'Correct')、実際: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "play_round: 1回目で正解"
+    description: "play_round(50, [50]) は (1, 'Correct') を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          play_round = exec_globals.get("play_round")
+          if play_round is None:
+              result = {"passed": False, "message": "✗ play_round 関数が定義されていません"}
+          else:
+              res = play_round(50, [50])
+              if isinstance(res, tuple) and res == (1, "Correct"):
+                  result = {"passed": True, "message": "✓ play_round(50, [50]) が正しく (1, 'Correct') を返しました"}
+              else:
+                  result = {"passed": False, "message": f"✗ play_round(50, [50]) の結果が正しくありません。期待値: (1, 'Correct')、実際: {res}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

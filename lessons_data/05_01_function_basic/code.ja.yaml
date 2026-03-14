@@ -1,0 +1,96 @@
+initial_code: |
+  def add(a, b):
+      # ここにコードを書いてください
+      # a と b を足した結果を return で返す
+      pass
+
+  print(add(3, 5))      # 8
+  print(add(10, 20))    # 30
+  print(add(-5, 3))     # -2
+
+solution_code: |
+  def add(a, b):
+      return a + b
+
+  print(add(3, 5))
+  print(add(10, 20))
+  print(add(-5, 3))
+
+initial_files: []
+
+tests:
+  - name: "add(3, 5) の確認"
+    description: "add(3, 5) が 8 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 add が定義されていません"}
+          else:
+              test_result = exec_globals['add'](3, 5)
+              if test_result == 8:
+                  result = {"passed": True, "message": "✓ add(3, 5) = 8 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(3, 5) は 8 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "add(10, 20) の確認"
+    description: "add(10, 20) が 30 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 add が定義されていません"}
+          else:
+              test_result = exec_globals['add'](10, 20)
+              if test_result == 30:
+                  result = {"passed": True, "message": "✓ add(10, 20) = 30 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(10, 20) は 30 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "負の数のテスト"
+    description: "add(-5, 3) が -2 を返すか（負の数）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 add が定義されていません"}
+          else:
+              test_result = exec_globals['add'](-5, 3)
+              if test_result == -2:
+                  result = {"passed": True, "message": "✓ add(-5, 3) = -2 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(-5, 3) は -2 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "小数のテスト"
+    description: "add(1.5, 2.5) が 4.0 を返すか（浮動小数点数）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'add' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 add が定義されていません"}
+          else:
+              test_result = exec_globals['add'](1.5, 2.5)
+              if test_result == 4.0:
+                  result = {"passed": True, "message": "✓ add(1.5, 2.5) = 4.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ add(1.5, 2.5) は 4.0 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

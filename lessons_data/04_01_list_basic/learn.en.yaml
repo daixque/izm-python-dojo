@@ -1,0 +1,120 @@
+lesson:
+  number: "04_01"
+  id: "04_01_list_basic"
+  title: "List Basics"
+
+content: |
+  <section class="section">
+    <h2>📋 What is a List?</h2>
+    <p>In programming, we often want to handle multiple pieces of data together.</p>
+    <p>For example, managing 5 fruit names with 5 separate variables is inconvenient.</p>
+    <p>A <strong>list</strong> lets you group multiple data values into a single variable.</p>
+  </section>
+
+  <section class="section">
+    <h2>📝 Creating a List</h2>
+    <p>A list is created by placing data separated by commas inside <code>[ ]</code> (square brackets).</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Creating and Printing a List</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits)<br># Output: ['apple', 'banana', 'orange']</div>
+      <div class="example-explanation">
+        Three fruit names are grouped into a list.<br>
+        <strong>Key points:</strong><br>
+        - Place data inside <code>[ ]</code><br>
+        - Separate data with commas <code>,</code><br>
+        - Strings are wrapped in <code>" "</code>
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">List of Numbers</div>
+      <div class="example-code">scores = [85, 92, 78, 95, 60]<br>print(scores)<br># Output: [85, 92, 78, 95, 60]</div>
+      <div class="example-explanation">
+        Numbers can also be grouped in a list. Unlike strings, <code>" "</code> is not needed.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔢 Accessing Elements with Indexes</h2>
+    <p>Each element in a list can be accessed using an <strong>index (number)</strong>.</p>
+    <p>Indexes <strong>start from 0</strong> (zero-based indexing).</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Index Access (Positive Indexes)</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[0])  # apple (1st)<br>print(fruits[1])  # banana (2nd)<br>print(fruits[2])  # orange (3rd)</div>
+      <div class="example-explanation">
+        <strong>Important:</strong> The first element has index <code>0</code>, not <code>1</code>.<br>
+        <code>fruits[0]</code> → "apple" (first)<br>
+        <code>fruits[1]</code> → "banana" (second)<br>
+        <code>fruits[2]</code> → "orange" (third)
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Negative Indexes (Access from the End)</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[-1])  # orange (last)<br>print(fruits[-2])  # banana (2nd from last)<br>print(fruits[-3])  # apple (3rd from last)</div>
+      <div class="example-explanation">
+        <code>-1</code> is the last element, <code>-2</code> is the second-to-last, and so on.<br>
+        This lets you access the last element without knowing the list's length.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📏 List Length: len()</h2>
+    <p>The <code>len()</code> function returns the number of elements (length) in a list.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Using len()</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(len(fruits))  # 3<br><br>scores = [85, 92, 78, 95, 60]<br>print(len(scores))  # 5</div>
+      <div class="example-explanation">
+        <code>len(list)</code> returns the number of elements.<br>
+        The last element's index is <code>len(list) - 1</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Checking the Valid Index Range</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>n = len(fruits)  # 3<br>print(n - 1)     # 2 (last valid index)<br><br># Valid indexes: 0, 1, 2<br># fruits[3] → Error! (out of range)</div>
+      <div class="example-explanation">
+        <strong>Note:</strong> Using an out-of-range index causes an <code>IndexError</code>.<br>
+        Valid indexes are from <code>0</code> to <code>len(list) - 1</code>.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✏️ Modifying List Elements</h2>
+    <p>You can overwrite a specific element in a list using its index.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Changing an Element</div>
+      <div class="example-code">fruits = ["apple", "banana", "orange"]<br>print(fruits[0])  # apple<br><br>fruits[0] = "grape"  # change the 1st element<br>print(fruits[0])  # grape<br>print(fruits)     # ['grape', 'banana', 'orange']</div>
+      <div class="example-explanation">
+        Use <code>list[index] = new_value</code> to change an element.<br>
+        This works just like assigning a value to a variable.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li>A list groups data together using <code>[ ]</code></li>
+      <li>Indexes <strong>start from 0</strong> (zero-based)</li>
+      <li><code>list[0]</code> is the first element; <code>list[-1]</code> is the last</li>
+      <li><code>len(list)</code> returns the number of elements</li>
+      <li><code>list[index] = value</code> changes an element</li>
+      <li>Out-of-range indexes cause an <code>IndexError</code></li>
+    </ul>
+  </section>

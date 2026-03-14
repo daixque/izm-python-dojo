@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson03_03: while Loops</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">while Loops</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔄 What is a while Loop?</h2>
+  <p>A <code>for</code> loop repeats a fixed number of times.</p>
+  <p>A <code>while</code> loop <strong>keeps repeating as long as a condition is True</strong>.</p>
+  <p>Use it when you don't know in advance how many times you need to repeat, but you know the stopping condition.</p>
+</section>
+
+<section class="section">
+  <h2>📝 Basic while Loop Syntax</h2>
+  <p>A while loop is written like this.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic while Loop</div>
+    <div class="example-code">count = 0<br>while count &lt; 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(count)<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br># Output: 0, 1, 2, 3, 4</div>
+    <div class="example-explanation">
+      <strong>Steps:</strong><br>
+      1. Initialize the variable: <code>count = 0</code><br>
+      2. <code>while count &lt; 5:</code> — repeat while count is less than 5<br>
+      3. Inside the loop, increase count with <code>count += 1</code><br>
+      4. When count reaches 5, the condition becomes False and the loop ends<br>
+      <br>
+      <strong>Important:</strong> Forgetting <code>count += 1</code> will cause an infinite loop!
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Structure of a while Loop</div>
+    <div class="example-code">while condition:<br>&nbsp;&nbsp;&nbsp;&nbsp;code to repeat<br>&nbsp;&nbsp;&nbsp;&nbsp;update the condition</div>
+    <div class="example-explanation">
+      While the condition is <code>True</code>, the indented code repeats.<br>
+      When the condition becomes <code>False</code>, the loop exits.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⛔ The break Statement - Exit a Loop Early</h2>
+  <p>Use <code>break</code> to immediately exit a loop at any point.</p>
+  <p>It is commonly paired with <code>while True:</code> (an infinite loop).</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Exit a loop with break</div>
+    <div class="example-code">count = 0<br>while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(count)<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if count >= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br># Output: 0, 1, 2</div>
+    <div class="example-explanation">
+      <code>while True:</code> creates an infinite loop that runs forever.<br>
+      Executing <code>break</code> immediately exits the loop.<br>
+      Here, the loop exits when count reaches 3.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Number guessing game concept</div>
+    <div class="example-code">secret = 7<br>while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;guess = int(input("Enter a number: "))<br>&nbsp;&nbsp;&nbsp;&nbsp;if guess == secret:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Correct!")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Wrong!")</div>
+    <div class="example-explanation">
+      The loop keeps accepting input until the correct answer is given.<br>
+      <code>break</code> exits the loop when the guess is correct.<br>
+      This is a great example of "repeat until some condition is met."
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⏭ The continue Statement - Skip to the Next Iteration</h2>
+  <p>Use <code>continue</code> to skip the rest of the current iteration and move to the next one.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Print only odd numbers (skip evens)</div>
+    <div class="example-code">i = 0<br>while i &lt; 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 1, 3, 5, 7, 9</div>
+    <div class="example-explanation">
+      When <code>i</code> is even, <code>continue</code> skips the <code>print(i)</code> and jumps to the next iteration.<br>
+      As a result, only odd numbers are printed.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⚠️ Watch Out for Infinite Loops</h2>
+  <p>If a while loop's condition never becomes False, the program will run forever.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Example of an infinite loop (Danger!)</div>
+    <div class="example-code"># BAD example (do not run)<br>count = 0<br>while count &lt; 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(count)<br>&nbsp;&nbsp;&nbsp;&nbsp;# Forgot to increment count!</div>
+    <div class="example-explanation">
+      Because <code>count</code> never changes, the condition is always <code>True</code>.<br>
+      <strong>Prevention:</strong> Always make sure the while loop condition will eventually become False.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>while condition:</code> — repeats as long as the condition is True</li>
+    <li>Always update the loop variable to prevent infinite loops</li>
+    <li><code>break</code> — immediately exits the loop</li>
+    <li><code>continue</code> — skips the rest of the current iteration and moves to the next</li>
+    <li><code>while True:</code> + <code>break</code> is a pattern for "check the condition later"</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

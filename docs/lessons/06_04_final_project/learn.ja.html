@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン06_04: 最終プロジェクト：タスク管理アプリ</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">最終プロジェクト：タスク管理アプリ</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🎯 最終プロジェクトへようこそ</h2>
+  <p>これまでのレッスンで学んだことをすべて活かして、<strong>タスク管理アプリ</strong>を作りましょう！</p>
+  <p>今回のプロジェクトでは、次の知識を組み合わせます：</p>
+  <ul>
+    <li>リスト・辞書（データの管理）</li>
+    <li>関数（処理の部品化）</li>
+    <li>条件分岐・ループ（ロジックの実装）</li>
+    <li>ファイル操作（データの永続化）</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>🗂️ データ構造の設計</h2>
+  <p>プログラムを作る前に、<strong>どのようなデータ構造を使うか</strong>を設計することが大切です。</p>
+  <p>このアプリでは、タスクを「辞書のリスト」として管理します：</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">タスクのデータ構造</div>
+    <div class="example-code">tasks = [<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 1, "name": "Pythonの勉強", "completed": False},<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 2, "name": "買い物", "completed": True},<br>&nbsp;&nbsp;&nbsp;&nbsp;{"id": 3, "name": "日記を書く", "completed": False}<br>]</div>
+    <div class="example-explanation">
+      各タスクは3つのキーを持つ辞書です：<br>
+      ・<code>id</code>：タスクの識別番号（整数）<br>
+      ・<code>name</code>：タスクの名前（文字列）<br>
+      ・<code>completed</code>：完了フラグ（True/False）
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>➕ タスクの追加</h2>
+  <p>新しいタスクを追加するとき、新しい <code>id</code> を自動的に割り当てます。<code>max()</code> 関数と <code>default</code> 引数を使います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">add_task 関数の実装例</div>
+    <div class="example-code">def add_task(tasks, task_name):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_id = max([t["id"] for t in tasks], default=0) + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;tasks.append({"id": new_id, "name": task_name, "completed": False})<br>&nbsp;&nbsp;&nbsp;&nbsp;return tasks</div>
+    <div class="example-explanation">
+      <code>[t["id"] for t in tasks]</code> はリスト内包表記で、全タスクの id を取り出します。<br>
+      <code>max(..., default=0)</code> はリストが空のとき 0 を返します。これに +1 することで、最初のタスクの id は 1 になります。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✅ タスクの完了</h2>
+  <p>指定した id のタスクを探して、<code>completed</code> を <code>True</code> に変更します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">complete_task 関数の実装例</div>
+    <div class="example-code">def complete_task(tasks, task_id):<br>&nbsp;&nbsp;&nbsp;&nbsp;for task in tasks:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if task["id"] == task_id:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task["completed"] = True<br>&nbsp;&nbsp;&nbsp;&nbsp;return tasks</div>
+    <div class="example-explanation">ループで全タスクを調べ、id が一致したタスクの <code>completed</code> を <code>True</code> に変えます。辞書はリストの要素なので、直接変更できます。</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📋 タスクの表示</h2>
+  <p><code>completed</code> の値によって、表示を変えましょう。<code>✓</code> と空白でステータスを表現します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">show_tasks 関数の実装例</div>
+    <div class="example-code">def show_tasks(tasks):<br>&nbsp;&nbsp;&nbsp;&nbsp;for task in tasks:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "✓" if task["completed"] else " "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"[{status}] {task['id']}: {task['name']}")</div>
+    <div class="example-explanation">
+      三項演算子 <code>A if 条件 else B</code> を使うと1行で書けます。<br>
+      出力例：<code>[ ] 1: Pythonの勉強</code>、<code>[✓] 2: 買い物</code>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💾 json モジュールでデータを保存</h2>
+  <p>リストや辞書などの複雑なデータを保存するには、<code>json</code> モジュールを使います。JSON形式はデータを文字列として保存・読み込みできます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">JSON 形式での保存</div>
+    <div class="example-code">import json<br><br>def save_tasks(tasks, filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'w', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json.dump(tasks, f, ensure_ascii=False, indent=2)</div>
+    <div class="example-explanation">
+      <code>json.dump(data, file)</code> でデータをJSON形式でファイルに書き込みます。<br>
+      <code>ensure_ascii=False</code> で日本語もそのまま保存、<code>indent=2</code> で見やすく整形されます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">JSON 形式での読み込み</div>
+    <div class="example-code">def load_tasks(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'r', encoding='utf-8') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return json.load(f)<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return []</div>
+    <div class="example-explanation">
+      <code>json.load(file)</code> でJSONファイルをPythonのデータ（リスト・辞書など）として読み込みます。<br>
+      ファイルが存在しない場合は空リスト <code>[]</code> を返します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔗 すべてを組み合わせる</h2>
+  <p>これらの関数を組み合わせてタスク管理アプリを作ることができます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">タスク管理アプリの使用例</div>
+    <div class="example-code">import json<br><br># タスクを読み込む（または空リストで開始）<br>tasks = load_tasks("tasks.json")<br><br># タスクを追加<br>tasks = add_task(tasks, "Pythonの勉強")<br>tasks = add_task(tasks, "買い物")<br><br># 一覧を表示<br>show_tasks(tasks)<br># [ ] 1: Pythonの勉強<br># [ ] 2: 買い物<br><br># タスクを完了にする<br>tasks = complete_task(tasks, 1)<br>show_tasks(tasks)<br># [✓] 1: Pythonの勉強<br># [ ] 2: 買い物<br><br># ファイルに保存<br>save_tasks(tasks, "tasks.json")</div>
+    <div class="example-explanation">各関数が独立した部品として機能し、組み合わせることでアプリが完成します。これがプログラムの設計の基本です！</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li>データ構造を先に設計することが大切（今回は辞書のリスト）</li>
+    <li>各機能を独立した関数として実装する</li>
+    <li><code>json</code> モジュールでリストや辞書をファイルに保存できる</li>
+    <li><code>json.dump()</code> で保存、<code>json.load()</code> で読み込み</li>
+    <li>小さな関数を組み合わせて大きなアプリを作る</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

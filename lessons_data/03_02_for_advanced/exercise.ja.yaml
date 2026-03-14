@@ -1,0 +1,39 @@
+lesson:
+  number: "03_02"
+  id: "03_02_for_advanced"
+  title: "for ループの応用"
+
+task_description: |
+  <p>関数 <code>sum_numbers(n)</code> を実装しましょう。</p>
+  <p>この関数は <strong>1 から n までの整数の合計</strong>を返します。</p>
+  <h3>出力例</h3>
+  <p>例えば <code>sum_numbers(5)</code> を呼び出すと：</p>
+  <pre>  1 + 2 + 3 + 4 + 5 = 15</pre>
+  <p>なので <code>15</code> を返します。</p>
+  <p><code>sum_numbers(10)</code> は <code>55</code> を、<code>sum_numbers(100)</code> は <code>5050</code> を返します。</p>
+
+instructions:
+  - "関数の定義と <code>total = 0</code> の初期化は用意済みです。ループ部分を実装してください"
+  - "<code>for</code> ループと <code>range(1, n + 1)</code> を使って 1 から n まで繰り返します"
+  - "ループのたびに <code>total += i</code> で合計に加算します"
+  - "ループが終わったら <code>return total</code> で合計を返します（<code>return total</code> はすでに書かれています）"
+
+hints:
+  - hint: |
+      合計を求めるパターン：<br>
+      <code>total = 0</code><br>
+      <code>for i in range(1, n + 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>total += i</code>
+  - hint: |
+      <code>range(1, n + 1)</code> は 1, 2, 3, ..., n を生成します。<br>
+      <code>n + 1</code> としているのは、終了値が含まれないためです。
+  - hint: |
+      <code>total += i</code> は <code>total = total + i</code> と同じ意味です。<br>
+      ループのたびに <code>i</code> の値が <code>total</code> に加算されていきます。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def sum_numbers(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>total = 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(1, n + 1):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>total += i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return total</code>
