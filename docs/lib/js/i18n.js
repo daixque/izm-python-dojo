@@ -274,7 +274,7 @@ function getLessonFilePath() {
 
 // レッスンメタデータファイルのパスを取得
 function getMetadataFilePath() {
-    return `lessons/metadata.${currentLang}.json`;
+    return `lessons/metadata.${currentLang}.json?v=${Date.now()}`;
 }
 
 // グローバルに公開

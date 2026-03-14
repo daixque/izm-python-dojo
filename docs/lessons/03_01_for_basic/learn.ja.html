@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン03_01: for ループの基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">for ループの基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔄 繰り返し処理とは</h2>
+  <p>プログラムでは、同じような処理を何度も繰り返すことがよくあります。</p>
+  <p>例えば、1から10まで数字を表示したいとき、<code>print(1)</code>、<code>print(2)</code>…と10行書くのは大変です。</p>
+  <p><strong>ループ（繰り返し）</strong>を使えば、短いコードで何度でも同じ処理を実行できます。</p>
+</section>
+
+<section class="section">
+  <h2>📝 for ループの基本構文</h2>
+  <p><code>for</code> ループは、指定した回数だけ処理を繰り返します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">for ループの基本</div>
+    <div class="example-code">for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>
+    <div class="example-explanation">
+      このコードは 0, 1, 2, 3, 4 と5回出力します。<br>
+      <strong>ポイント：</strong><br>
+      - <code>i</code> がループ変数（繰り返しのたびに値が変わる）<br>
+      - <code>range(5)</code> は 0 から 4 までの数を生成<br>
+      - <code>:</code> の後の処理がインデント（4スペース）で書かれる
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">for ループの構造</div>
+    <div class="example-code">for ループ変数 in range(回数):<br>&nbsp;&nbsp;&nbsp;&nbsp;繰り返す処理</div>
+    <div class="example-explanation">
+      <strong>重要：</strong> インデント（字下げ）が必須です。<br>
+      繰り返したい処理はすべてインデントして書きます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔢 range() 関数の使い方</h2>
+  <p><code>range()</code> 関数は、数の並びを生成します。使い方は3パターンあります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">range(終了): 0 から始まる</div>
+    <div class="example-code">for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：0, 1, 2</div>
+    <div class="example-explanation"><code>range(3)</code> は 0, 1, 2 を生成します（3は含まれません）。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">range(開始, 終了): 開始を指定する</div>
+    <div class="example-code">for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：1, 2, 3</div>
+    <div class="example-explanation"><code>range(1, 4)</code> は 1, 2, 3 を生成します（4は含まれません）。</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">range(開始, 終了, ステップ): 間隔を指定する</div>
+    <div class="example-code">for i in range(0, 10, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># 出力：0, 2, 4, 6, 8</div>
+    <div class="example-explanation"><code>range(0, 10, 2)</code> は 2 おきに 0, 2, 4, 6, 8 を生成します。</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🧮 ループ変数を使った計算</h2>
+  <p>ループ変数 <code>i</code> を使って、繰り返しのたびに変わる計算ができます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">1から5の2倍を表示</div>
+    <div class="example-code">for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i * 2)<br># 出力：2, 4, 6, 8, 10</div>
+    <div class="example-explanation">
+      <code>i</code> が 1, 2, 3, 4, 5 と変わるたびに <code>i * 2</code> を計算して表示します。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">フォーマット文字列との組み合わせ</div>
+    <div class="example-code">for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i} × 3 = {i * 3}")<br># 出力：<br># 1 × 3 = 3<br># 2 × 3 = 6<br># 3 × 3 = 9</div>
+    <div class="example-explanation">
+      <code>f"..."</code> はフォーマット文字列です。<code>{}</code> の中に変数や式を書くと、その値が埋め込まれます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 実用例 - 九九の表</h2>
+  <p>for ループを使えば、九九の表を簡単に作れます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">3の段の九九</div>
+    <div class="example-code">n = 3<br>for i in range(1, 10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{n} × {i} = {n * i}")<br># 出力：<br># 3 × 1 = 3<br># 3 × 2 = 6<br># 3 × 3 = 9<br># ...<br># 3 × 9 = 27</div>
+    <div class="example-explanation">
+      <code>range(1, 10)</code> で 1 から 9 まで繰り返します（10は含まれません）。<br>
+      毎回 <code>n × i = n*i</code> の形式で表示されます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>for i in range(n):</code> で n 回繰り返す</li>
+    <li><code>range(開始, 終了)</code> で開始と終了を指定できる</li>
+    <li>ループ変数（<code>i</code>）は繰り返しのたびに自動で変わる</li>
+    <li>繰り返す処理はインデント（4スペース）で書く</li>
+    <li><code>f"{変数}"</code> でループ変数を文字列に埋め込める</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

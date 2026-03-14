@@ -1,0 +1,130 @@
+initial_code: |
+  def print_multiplication_table(n):
+      # Write your code here
+      # Use a for loop with range(1, 10) to iterate from 1 to 9
+      # Print each line in the format "n × i = n*i"
+      pass
+
+  # Test run
+  print_multiplication_table(3)
+
+initial_files: []
+
+tests:
+  - name: "Check 2's table"
+    description: "print_multiplication_table(2) should correctly print 9 lines of the 2 times table"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function print_multiplication_table is not defined"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](2)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"2 × {i} = {2 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ 2's table is displayed correctly"}
+              else:
+                  result = {"passed": False, "message": "✗ 2's table is incorrect.\nExpected:\n" + "\n".join(expected) + f"\n\nActual:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check 7's table"
+    description: "print_multiplication_table(7) should correctly print 9 lines of the 7 times table"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function print_multiplication_table is not defined"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](7)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"7 × {i} = {7 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ 7's table is displayed correctly"}
+              else:
+                  result = {"passed": False, "message": "✗ 7's table is incorrect.\nExpected:\n" + "\n".join(expected) + f"\n\nActual:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check number of output lines"
+    description: "Should output exactly 9 lines from 1 to 9"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function print_multiplication_table is not defined"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](5)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = [l for l in output.strip().split('\n') if l]
+              if len(lines) == 9:
+                  result = {"passed": True, "message": "✓ 9 lines are output correctly"}
+              else:
+                  result = {"passed": False, "message": f"✗ 9 lines are required (1×n through 9×n). Actual: {len(lines)} lines\nOutput:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check output format"
+    description: "Output should be in the format 'n × i = result'"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function print_multiplication_table is not defined"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](3)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"3 × {i} = {3 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ Output format is correct: '3 × i = result'"}
+              else:
+                  result = {"passed": False, "message": "✗ Output format is incorrect.\nExpected:\n" + "\n".join(expected) + f"\n\nActual:\n{output.strip()}\n\nMake sure to use the format 'n × i = n*i' with spaces around × and =."}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

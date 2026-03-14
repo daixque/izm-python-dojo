@@ -28,6 +28,8 @@ exercise:
   button_run: "▶ 実行"
   button_test: "✓ テスト"
   button_reset: "🔄 リセット"
+  button_solution: "💡 回答を見る"
+  solution_confirm: "模範解答をエディタに表示します。自分でトライしてみましたか？"
   button_clear: "クリア"
   back_to_menu: "← 目次に戻る"
   back_to_learn: "📚 説明に戻る"

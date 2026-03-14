@@ -1,0 +1,43 @@
+lesson:
+  number: "03_01"
+  id: "03_01_for_basic"
+  title: "for Loop Basics"
+
+task_description: |
+  <p>Implement the function <code>print_multiplication_table(n)</code> that prints a multiplication table.</p>
+  <p>It displays <strong>the n-times table</strong> from 1 to 9.</p>
+  <h3>Output Format</h3>
+  <p>For example, calling <code>print_multiplication_table(3)</code> should produce:</p>
+  <pre>3 × 1 = 3
+  3 × 2 = 6
+  3 × 3 = 9
+  3 × 4 = 12
+  3 × 5 = 15
+  3 × 6 = 18
+  3 × 7 = 21
+  3 × 8 = 24
+  3 × 9 = 27</pre>
+
+instructions:
+  - "The function definition and its call are already provided. Implement the function body."
+  - "Use a <code>for</code> loop with <code>range(1, 10)</code> to iterate from 1 to 9"
+  - "Print each line in the format <code>f\"{n} × {i} = {n * i}\"</code>"
+  - "Use × (multiplication sign) and = with single spaces between them"
+
+hints:
+  - hint: |
+      Basic for loop structure:<br>
+      <code>for i in range(1, 10):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># write the code to repeat here</code>
+  - hint: |
+      <code>range(1, 10)</code> generates 1, 2, 3, ..., 9 (10 is not included).<br>
+      This lets you iterate from 1 to 9.
+  - hint: |
+      Use a format string to print each line:<br>
+      <code>print(f"{n} × {i} = {n * i}")</code><br>
+      <code>n</code> is the table number, <code>i</code> is the loop variable.
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def print_multiplication_table(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(1, 10):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>print(f"{n} × {i} = {n * i}")</code>

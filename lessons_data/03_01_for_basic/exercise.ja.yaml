@@ -1,0 +1,44 @@
+lesson:
+  number: "03_01"
+  id: "03_01_for_basic"
+  title: "for ループの基礎"
+
+task_description: |
+  <p>九九の表を表示する関数 <code>print_multiplication_table(n)</code> を実装しましょう。</p>
+  <p><strong>n の段の九九</strong>を1から9まで表示します。</p>
+  <h3>出力形式</h3>
+  <p>例えば <code>print_multiplication_table(3)</code> を呼び出すと：</p>
+  <pre>3 × 1 = 3
+  3 × 2 = 6
+  3 × 3 = 9
+  3 × 4 = 12
+  3 × 5 = 15
+  3 × 6 = 18
+  3 × 7 = 21
+  3 × 8 = 24
+  3 × 9 = 27</pre>
+  <p>のように表示されます。</p>
+
+instructions:
+  - "関数の定義と呼び出し部分は用意済みです。関数の中身を実装してください"
+  - "<code>for</code> ループと <code>range(1, 10)</code> を使って 1 から 9 まで繰り返します"
+  - "各行は <code>f\"{n} × {i} = {n * i}\"</code> の形式で表示します"
+  - "× は掛け算記号（全角）、= は等号です。半角スペースで区切ります"
+
+hints:
+  - hint: |
+      for ループの基本形：<br>
+      <code>for i in range(1, 10):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code># ここに繰り返す処理を書く</code>
+  - hint: |
+      <code>range(1, 10)</code> は 1, 2, 3, ..., 9 を生成します（10は含まれません）。<br>
+      これで 1 から 9 まで繰り返せます。
+  - hint: |
+      フォーマット文字列を使って出力します：<br>
+      <code>print(f"{n} × {i} = {n * i}")</code><br>
+      <code>n</code> は段数、<code>i</code> はループ変数です。
+  - hint: |
+      完成した関数はこのような形になります：<br>
+      <code>def print_multiplication_table(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(1, 10):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>print(f"{n} × {i} = {n * i}")</code>

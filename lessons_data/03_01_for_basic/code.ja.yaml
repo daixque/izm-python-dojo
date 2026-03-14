@@ -1,0 +1,131 @@
+initial_code: |
+  def print_multiplication_table(n):
+      # ここにコードを書いてください
+      # for ループと range(1, 10) を使って 1 から 9 まで繰り返す
+      # 各行を「n × i = n*i」の形式で表示する
+      pass
+
+  # テスト実行
+  print_multiplication_table(3)
+
+initial_files: []
+
+tests:
+  - name: "2の段の確認"
+    description: "print_multiplication_table(2) が 2の段を正しく9行表示するか"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 print_multiplication_table が定義されていません"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](2)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"2 × {i} = {2 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ 2の段が正しく表示されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 2の段が正しくありません。\n期待される出力:\n" + "\n".join(expected) + f"\n\n実際の出力:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "7の段の確認"
+    description: "print_multiplication_table(7) が 7の段を正しく9行表示するか"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 print_multiplication_table が定義されていません"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](7)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"7 × {i} = {7 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ 7の段が正しく表示されました"}
+              else:
+                  result = {"passed": False, "message": f"✗ 7の段が正しくありません。\n期待される出力:\n" + "\n".join(expected) + f"\n\n実際の出力:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "出力行数の確認"
+    description: "1から9まで9行が正しく出力されるか"
+    code: |
+      import io
+      import sys
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 print_multiplication_table が定義されていません"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](5)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = [l for l in output.strip().split('\n') if l]
+              if len(lines) == 9:
+                  result = {"passed": True, "message": "✓ 9行が正しく出力されています"}
+              else:
+                  result = {"passed": False, "message": f"✗ 9行の出力が必要です（1×n から 9×n）。実際: {len(lines)}行\n出力内容:\n{output.strip()}"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "出力形式の確認"
+    description: "「n × i = 結果」の形式で出力されているか"
+    code: |
+      import io
+      import sys
+      import re
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'print_multiplication_table' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 print_multiplication_table が定義されていません"}
+          else:
+              old_stdout = sys.stdout
+              sys.stdout = buffer = io.StringIO()
+              exec_globals['print_multiplication_table'](3)
+              output = buffer.getvalue()
+              sys.stdout = old_stdout
+
+              lines = output.strip().split('\n')
+              expected = [f"3 × {i} = {3 * i}" for i in range(1, 10)]
+
+              if lines == expected:
+                  result = {"passed": True, "message": "✓ 出力形式が正しく「3 × i = 結果」の形式になっています"}
+              else:
+                  result = {"passed": False, "message": f"✗ 出力形式が正しくありません。\n期待される出力:\n" + "\n".join(expected) + f"\n\n実際の出力:\n{output.strip()}\n\n各行を「{3} × i = {3}*i」の形式で出力してください。× と = の前後にスペースが必要です。"}
+      except Exception as e:
+          sys.stdout = sys.__stdout__
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

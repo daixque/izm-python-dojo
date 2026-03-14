@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson03_01: for Loop Basics</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson03_01: for Loop Basics</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>print_multiplication_table(n)</code> that prints a multiplication table.</p>
+<p>It displays <strong>the n-times table</strong> from 1 to 9.</p>
+<h3>Output Format</h3>
+<p>For example, calling <code>print_multiplication_table(3)</code> should produce:</p>
+<pre>3 × 1 = 3
+3 × 2 = 6
+3 × 3 = 9
+3 × 4 = 12
+3 × 5 = 15
+3 × 6 = 18
+3 × 7 = 21
+3 × 8 = 24
+3 × 9 = 27</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>The function definition and its call are already provided. Implement the function body.</li>
+                            <li>Use a <code>for</code> loop with <code>range(1, 10)</code> to iterate from 1 to 9</li>
+                            <li>Print each line in the format <code>f"{n} × {i} = {n * i}"</code></li>
+                            <li>Use × (multiplication sign) and = with single spaces between them</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Basic for loop structure:<br>
+<code>for i in range(1, 10):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code># write the code to repeat here</code>
+</li>
+                            <li><code>range(1, 10)</code> generates 1, 2, 3, ..., 9 (10 is not included).<br>
+This lets you iterate from 1 to 9.
+</li>
+                            <li>Use a format string to print each line:<br>
+<code>print(f"{n} × {i} = {n * i}")</code><br>
+<code>n</code> is the table number, <code>i</code> is the loop variable.
+</li>
+                            <li>The completed function looks like this:<br>
+<code>def print_multiplication_table(n):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(1, 10):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>print(f"{n} × {i} = {n * i}")</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタとコンソール -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "03_01_for_basic";
+        const INITIAL_CODE = "def print_multiplication_table(n):\n    # Write your code here\n    # Use a for loop with range(1, 10) to iterate from 1 to 9\n    # Print each line in the format \"n \u00d7 i = n*i\"\n    pass\n\n# Test run\nprint_multiplication_table(3)\n";
+
+        const TESTS = [{"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](2)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"2 \u00d7 {i} = {2 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 2\u0027s table is displayed correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 2\u0027s table is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "print_multiplication_table(2) should correctly print 9 lines of the 2 times table", "name": "Check 2\u0027s table"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](7)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"7 \u00d7 {i} = {7 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 7\u0027s table is displayed correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 7\u0027s table is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "print_multiplication_table(7) should correctly print 9 lines of the 7 times table", "name": "Check 7\u0027s table"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](5)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = [l for l in output.strip().split(\u0027\\n\u0027) if l]\n        if len(lines) == 9:\n            result = {\"passed\": True, \"message\": \"\u2713 9 lines are output correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 9 lines are required (1\u00d7n through 9\u00d7n). Actual: {len(lines)} lines\\nOutput:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Should output exactly 9 lines from 1 to 9", "name": "Check number of output lines"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](3)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"3 \u00d7 {i} = {3 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 Output format is correct: \u00273 \u00d7 i = result\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Output format is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\\n\\nMake sure to use the format \u0027n \u00d7 i = n*i\u0027 with spaces around \u00d7 and =.\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Output should be in the format \u0027n \u00d7 i = result\u0027", "name": "Check output format"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES
+            });
+        });
+    </script>
+</body>
+</html>

@@ -28,6 +28,8 @@ exercise:
   button_run: "▶ Run"
   button_test: "✓ Test"
   button_reset: "🔄 Reset"
+  button_solution: "💡 View Answer"
+  solution_confirm: "This will show the model answer in the editor. Have you tried solving it yourself?"
   button_clear: "Clear"
   back_to_menu: "← Back to Menu"
   back_to_learn: "📚 Back to Learn"

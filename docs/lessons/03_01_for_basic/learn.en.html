@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson03_01: for Loop Basics</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">for Loop Basics</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔄 What is Repetition?</h2>
+  <p>In programming, we often need to repeat the same operation many times.</p>
+  <p>For example, if you want to print numbers from 1 to 10, writing <code>print(1)</code>, <code>print(2)</code>… ten times is tedious.</p>
+  <p>Using <strong>loops (repetition)</strong>, you can execute the same process many times with short code.</p>
+</section>
+
+<section class="section">
+  <h2>📝 Basic for Loop Syntax</h2>
+  <p>A <code>for</code> loop repeats a process a specified number of times.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic for Loop</div>
+    <div class="example-code">for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>
+    <div class="example-explanation">
+      This code outputs 0, 1, 2, 3, 4 five times.<br>
+      <strong>Key points:</strong><br>
+      - <code>i</code> is the loop variable (its value changes with each iteration)<br>
+      - <code>range(5)</code> generates numbers from 0 to 4<br>
+      - The code to repeat is written with indentation (4 spaces) after <code>:</code>
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Structure of a for Loop</div>
+    <div class="example-code">for loop_variable in range(count):<br>&nbsp;&nbsp;&nbsp;&nbsp;code to repeat</div>
+    <div class="example-explanation">
+      <strong>Important:</strong> Indentation is required.<br>
+      All code you want to repeat must be indented.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔢 How to Use range()</h2>
+  <p>The <code>range()</code> function generates a sequence of numbers. There are 3 ways to use it.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">range(end): Starts from 0</div>
+    <div class="example-code">for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 0, 1, 2</div>
+    <div class="example-explanation"><code>range(3)</code> generates 0, 1, 2 (3 is not included).</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">range(start, end): Specify a start</div>
+    <div class="example-code">for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 1, 2, 3</div>
+    <div class="example-explanation"><code>range(1, 4)</code> generates 1, 2, 3 (4 is not included).</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">range(start, end, step): Specify an interval</div>
+    <div class="example-code">for i in range(0, 10, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br># Output: 0, 2, 4, 6, 8</div>
+    <div class="example-explanation"><code>range(0, 10, 2)</code> generates 0, 2, 4, 6, 8 in steps of 2.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🧮 Calculations with Loop Variables</h2>
+  <p>You can use the loop variable <code>i</code> to perform calculations that change with each iteration.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Print doubles from 1 to 5</div>
+    <div class="example-code">for i in range(1, 6):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i * 2)<br># Output: 2, 4, 6, 8, 10</div>
+    <div class="example-explanation">
+      As <code>i</code> changes from 1, 2, 3, 4, 5, it calculates and prints <code>i * 2</code> each time.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Combined with Format Strings</div>
+    <div class="example-code">for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{i} × 3 = {i * 3}")<br># Output:<br># 1 × 3 = 3<br># 2 × 3 = 6<br># 3 × 3 = 9</div>
+    <div class="example-explanation">
+      <code>f"..."</code> is a format string. Values or expressions inside <code>{}</code> are embedded directly into the string.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 Practical Example - Multiplication Table</h2>
+  <p>Using a for loop, you can easily create a multiplication table.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">3's Multiplication Table</div>
+    <div class="example-code">n = 3<br>for i in range(1, 10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"{n} × {i} = {n * i}")<br># Output:<br># 3 × 1 = 3<br># 3 × 2 = 6<br># 3 × 3 = 9<br># ...<br># 3 × 9 = 27</div>
+    <div class="example-explanation">
+      <code>range(1, 10)</code> repeats from 1 to 9 (10 is not included).<br>
+      Each iteration prints in the format <code>n × i = n*i</code>.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>for i in range(n):</code> repeats n times</li>
+    <li><code>range(start, end)</code> lets you specify the start and end</li>
+    <li>The loop variable (<code>i</code>) automatically changes with each iteration</li>
+    <li>Code to repeat is written with indentation (4 spaces)</li>
+    <li><code>f"{variable}"</code> embeds the loop variable into a string</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

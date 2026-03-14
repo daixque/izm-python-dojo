@@ -67,7 +67,7 @@
                         </h4>
                         <ul class="hints-content" style="display: none;">
                             {% for item in hints %}
-                            <li>{{ item|safe }}</li>
+                            <li>{% if item is mapping %}{{ item.hint|safe }}{% else %}{{ item|safe }}{% endif %}</li>
                             {% endfor %}
                         </ul>
                     </div>
