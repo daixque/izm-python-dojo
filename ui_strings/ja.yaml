@@ -32,6 +32,7 @@ exercise:
   button_clear: "クリア"
   back_to_menu: "← 目次に戻る"
   back_to_learn: "📚 説明に戻る"
+  next_lesson: "次のレッスンへ →"
   status_ready: "準備完了"
   status_running: "実行中..."
   status_testing: "テスト中..."

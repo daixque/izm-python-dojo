@@ -143,7 +143,7 @@ def validate_code_yaml(data, filename):
         raise ValidationError(f"{filename}: " + ", ".join(errors))
 
 
-def build_lesson(lesson_dir, env, languages=['ja', 'en']):
+def build_lesson(lesson_dir, env, languages=['ja', 'en'], next_lesson=None):
     """
     1つのレッスンをビルドする
     
@@ -158,6 +158,7 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
     # 各言語でビルド
     for lang in languages:
         print(f"  🌐 Building {lang}...")
+        next_lesson_for_lang = next_lesson.get(lang) if next_lesson else None
         
         # code.{lang}.yaml を読み込み（言語別）
         code_lang_yaml_path = lesson_dir / f"code.{lang}.yaml"
@@ -257,7 +258,8 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
                     solution_code=code_data.get('solution_code', ''),
                     tests=tests_for_template,
                     enable_matplotlib=code_data.get('enable_matplotlib', False),
-                    required_packages=code_data.get('required_packages', [])
+                    required_packages=code_data.get('required_packages', []),
+                    next_lesson=next_lesson_for_lang
                 )
                 
                 # 出力先ディレクトリを作成
@@ -471,11 +473,37 @@ def main():
         # 全レッスンをビルド
         lesson_dirs = sorted([d for d in lessons_data_dir.iterdir() if d.is_dir()])
     
+    # 全レッスンの次レッスン情報を事前計算（ソート済みの全レッスンリストから）
+    all_lesson_dirs = sorted([d for d in lessons_data_dir.iterdir() if d.is_dir()])
+    # 各言語ごとにlesson_id→タイトルのマップを作成
+    next_lesson_map = {}  # lesson_id -> {lang: {id, title}}
+    for languages_iter in [['ja', 'en']]:
+        for lang in languages_iter:
+            lesson_ids_for_lang = []
+            for ld in all_lesson_dirs:
+                learn_file = ld / f"learn.{lang}.yaml"
+                if learn_file.exists():
+                    lesson_ids_for_lang.append(ld.name)
+            for i, lid in enumerate(lesson_ids_for_lang):
+                if i + 1 < len(lesson_ids_for_lang):
+                    next_lid = lesson_ids_for_lang[i + 1]
+                    # 次のレッスンのタイトルを取得
+                    next_learn_file = lessons_data_dir / next_lid / f"learn.{lang}.yaml"
+                    try:
+                        with open(next_learn_file, 'r', encoding='utf-8') as f:
+                            next_learn_data = yaml.safe_load(f)
+                        next_title = next_learn_data.get('lesson', {}).get('title', next_lid)
+                    except Exception:
+                        next_title = next_lid
+                    if lid not in next_lesson_map:
+                        next_lesson_map[lid] = {}
+                    next_lesson_map[lid][lang] = {'id': next_lid, 'title': next_title}
+
     # 各レッスンをビルド
     total = 0
     for lesson_dir in lesson_dirs:
         if lesson_dir.is_dir():
-            build_lesson(lesson_dir, env)
+            build_lesson(lesson_dir, env, next_lesson=next_lesson_map.get(lesson_dir.name))
             total += 1
     
     print(f"\n✨ Build complete! ({total} lessons processed)")

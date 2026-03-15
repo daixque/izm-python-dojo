@@ -140,9 +140,11 @@
                 <a href="../../index.html" class="btn btn-secondary">{{ ui.exercise.back_to_menu }}</a>
                 <a href="learn.{{ lang }}.html" class="btn btn-link">{{ ui.exercise.back_to_learn }}</a>
             </div>
+            {% if next_lesson %}
             <div class="footer-next">
-                <!-- 次のレッスンがある場合はここに追加 -->
+                <a href="../{{ next_lesson.id }}/learn.{{ lang }}.html" class="btn btn-primary">{{ ui.exercise.next_lesson }}<br><small>{{ next_lesson.title }}</small></a>
             </div>
+            {% endif %}
         </footer>
     </div>
 

@@ -32,6 +32,7 @@ exercise:
   button_clear: "Clear"
   back_to_menu: "← Back to Menu"
   back_to_learn: "📚 Back to Learn"
+  next_lesson: "Next Lesson →"
   status_ready: "Ready"
   status_running: "Running..."
   status_testing: "Testing..."
