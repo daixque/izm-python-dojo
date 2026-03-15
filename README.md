@@ -424,6 +424,61 @@ result
 - `builtins.input` の復元は `except` 内でも必ず行う
 - テストごとに異なる入力値をモックできる（例：テスト2は `"5"`、テスト3は `"-3"`）
 - `inputs:` フィールド（旧仕様）は現在のシステムでは機能しないため、使用しないこと
+- `inspect.getsource()` は Pyodide の `exec()` 環境では動作しない。コードの内容を検査する場合は `user_code` 文字列を直接検索すること（例：`'factorial(' in user_code`）
+
+## ブラウザテスト
+
+各レッスンの **模範解答（solution_code）が実際にブラウザ上でテストをパスするか** を自動確認するテストスイートが用意されています。
+
+### セットアップ
+
+```bash
+pip install pytest pytest-playwright
+playwright install chromium
+```
+
+### 実行方法
+
+```bash
+# 全レッスン（40件）をテスト
+python test.py
+
+# 特定のレッスンのみ
+python test.py -k 01_01_hello
+
+# ブラウザを表示しながら実行（デバッグ用）
+python test.py --headed
+```
+
+### テストの仕組み
+
+1. `docs/` を配信するローカルHTTPサーバーを起動
+2. 各レッスンの `exercise.ja.html` をヘッドレスChromiumで開く
+3. Pyodide の初期化完了を待機（`#status` が「準備完了」になるまで）
+4. ページ内の `SOLUTION_CODE` をエディタに注入
+5. テストボタンをクリックし、全テスト項目がパスすることを確認
+
+### ファイル構成
+
+```
+test.py              # エントリーポイント
+test/
+  conftest.py        # HTTPサーバー起動フィクスチャ
+  helpers.py         # ページ操作ユーティリティ
+  lesson_params.py   # テスト対象レッスンの列挙
+  test_lessons.py    # パラメータ化テスト本体
+```
+
+### レッスンを追加・修正した場合
+
+**レッスンの追加や模範解答・テストコードを変更した際は、必ず `python test.py` を実行してすべてのテストが通過することを確認してください。**
+
+```bash
+# ビルド後にテストを実行
+python3 build.py && python test.py
+```
+
+テストが失敗した場合は、失敗したレッスン ID とテスト名・エラーメッセージが表示されます。模範解答またはテストコードの修正後、再度テストを実行して確認してください。
 
 ## 設計思想
 

@@ -83,15 +83,14 @@ tests:
     description: "factorial 関数が再帰呼び出しを使っているか"
     code: |
       try:
-          import inspect
-          exec_globals = {}
-          exec(user_code, exec_globals)
-
-          if 'factorial' not in exec_globals:
+          # user_code 文字列を直接検査して再帰呼び出しを確認
+          # "def factorial" より後ろに "factorial(" が含まれるか調べる
+          def_pos = user_code.find('def factorial')
+          if def_pos == -1:
               result = {"passed": False, "message": "✗ 関数 factorial が定義されていません"}
           else:
-              source = inspect.getsource(exec_globals['factorial'])
-              if 'factorial' in source.split('def factorial')[1]:
+              body = user_code[def_pos + len('def factorial'):]
+              if 'factorial(' in body:
                   result = {"passed": True, "message": "✓ 再帰呼び出しが使われています"}
               else:
                   result = {"passed": False, "message": "✗ factorial 関数の中で factorial を再帰呼び出ししてください"}

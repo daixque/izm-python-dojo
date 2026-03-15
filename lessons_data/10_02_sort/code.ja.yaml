@@ -109,15 +109,13 @@ tests:
     description: "bubble_sort の実装に sort() や sorted() が使われていないか"
     code: |
       try:
-          import inspect
-          exec_globals = {}
-          exec(user_code, exec_globals)
-
-          if 'bubble_sort' not in exec_globals:
+          # user_code 文字列を直接検査して sort()/sorted() の使用を確認
+          def_pos = user_code.find('def bubble_sort')
+          if def_pos == -1:
               result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
           else:
-              source = inspect.getsource(exec_globals['bubble_sort'])
-              if '.sort(' in source or 'sorted(' in source:
+              body = user_code[def_pos:]
+              if '.sort(' in body or 'sorted(' in body:
                   result = {"passed": False, "message": "✗ sort() や sorted() を使わずにバブルソートのアルゴリズムを実装してください"}
               else:
                   result = {"passed": True, "message": "✓ sort()/sorted() を使わずに実装されています"}

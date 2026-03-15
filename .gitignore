@@ -1,2 +1,5 @@
 memo.md
 instructions
+
+.pytest_cache/
+__pycache__/

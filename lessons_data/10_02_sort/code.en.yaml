@@ -109,15 +109,12 @@ tests:
     description: "Implementation should not use sort() or sorted()"
     code: |
       try:
-          import inspect
-          exec_globals = {}
-          exec(user_code, exec_globals)
-
-          if 'bubble_sort' not in exec_globals:
+          def_pos = user_code.find('def bubble_sort')
+          if def_pos == -1:
               result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
           else:
-              source = inspect.getsource(exec_globals['bubble_sort'])
-              if '.sort(' in source or 'sorted(' in source:
+              body = user_code[def_pos:]
+              if '.sort(' in body or 'sorted(' in body:
                   result = {"passed": False, "message": "✗ Please implement the bubble sort algorithm without using sort() or sorted()"}
               else:
                   result = {"passed": True, "message": "✓ Implementation does not use sort()/sorted()"}

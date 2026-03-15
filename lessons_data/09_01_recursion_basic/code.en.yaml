@@ -83,15 +83,12 @@ tests:
     description: "factorial function should use a recursive call"
     code: |
       try:
-          import inspect
-          exec_globals = {}
-          exec(user_code, exec_globals)
-
-          if 'factorial' not in exec_globals:
+          def_pos = user_code.find('def factorial')
+          if def_pos == -1:
               result = {"passed": False, "message": "✗ Function factorial is not defined"}
           else:
-              source = inspect.getsource(exec_globals['factorial'])
-              if 'factorial' in source.split('def factorial')[1]:
+              body = user_code[def_pos + len('def factorial'):]
+              if 'factorial(' in body:
                   result = {"passed": True, "message": "✓ Recursive call is present"}
               else:
                   result = {"passed": False, "message": "✗ Please call factorial recursively inside the function"}
