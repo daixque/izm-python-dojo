@@ -40,7 +40,7 @@
         </header>
 
         <!-- メインコンテンツ -->
-        <div class="main-content">
+        <div class="main-content{% if enable_matplotlib %} has-matplotlib{% endif %}">
             <!-- 左側：タスクパネル -->
             <aside class="task-panel">
                 <div class="task-header">
@@ -74,7 +74,8 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            {% if enable_matplotlib %}<div class="code-graph-container">{% endif %}
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -101,6 +102,21 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
+            {% if enable_matplotlib %}
+            <!-- リサイザー -->
+            <div class="resizer" id="matplotlib-resizer"></div>
+
+            <!-- Matplotlib グラフ出力パネル -->
+            <div class="matplotlib-panel">
+                <div class="matplotlib-panel-header">
+                    <span class="matplotlib-panel-label">{% if lang == 'ja' %}グラフ出力{% else %}Graph Output{% endif %}</span>
+                    <button id="btn-clear-plot" class="btn btn-small">{% if lang == 'ja' %}クリア{% else %}Clear{% endif %}</button>
+                </div>
+                <div id="matplotlib-output" class="matplotlib-output"></div>
+            </div>
+            </div>{# end code-graph-container #}
+            {% endif %}
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -163,6 +179,7 @@
         const LESSON_ID = "{{ lesson.id }}";
         const INITIAL_CODE = {{ initial_code|tojson }};
         const SOLUTION_CODE = {{ solution_code|tojson }};
+        const ENABLE_MATPLOTLIB = {{ enable_matplotlib|tojson }};
 
         const TESTS = {{ tests|tojson }};
         
@@ -181,7 +198,8 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

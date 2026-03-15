@@ -1,0 +1,34 @@
+lesson:
+  number: "13_01"
+  id: "13_01_plot_basic"
+  title: "基本的なグラフ"
+description: "Matplotlibを使って棒グラフを描き、データを視覚化する方法を学びます。"
+
+task_description: |
+  <p>1〜6月の月別売上データを<strong>棒グラフ</strong>で表示するプログラムを完成させましょう。</p>
+  <h3>実装内容</h3>
+  <ul>
+    <li><code>plt.bar(months, sales)</code> で棒グラフを描く</li>
+    <li><code>plt.title("Monthly Sales")</code> でグラフのタイトルを設定する</li>
+    <li><code>plt.xlabel("Month")</code> でx軸（横軸）のラベルを設定する</li>
+    <li><code>plt.ylabel("Sales (10k yen)")</code> でy軸（縦軸）のラベルを設定する</li>
+    <li><code>plt.show()</code> でグラフを表示する</li>
+  </ul>
+  <p>コードを実行すると、右の「グラフ出力」エリアにグラフが表示されます。</p>
+
+instructions:
+  - "<code>plt.bar(x, y)</code> の第1引数に<strong>x軸のデータ</strong>（months）、第2引数に<strong>棒の高さ</strong>（sales）を渡します"
+  - "<code>plt.title()</code>、<code>plt.xlabel()</code>、<code>plt.ylabel()</code> はそれぞれ文字列を引数に取ります"
+  - "最後に <code>plt.show()</code> を呼ばないとグラフが表示されません"
+
+hints:
+  - hint: |
+      棒グラフの基本的な書き方：<br>
+      <code>plt.bar(months, sales)</code><br>
+      <code>plt.title("Monthly Sales")</code><br>
+      <code>plt.xlabel("Month")</code><br>
+      <code>plt.ylabel("Sales (10k yen)")</code><br>
+      <code>plt.show()</code>
+  - hint: |
+      <code>plt.bar()</code> の引数は <code>(x軸データ, 棒の高さ)</code> の順番です。<br>
+      x軸に月（1〜6）、棒の高さに売上（120, 150, ...）を渡します。

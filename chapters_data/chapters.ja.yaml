@@ -28,3 +28,8 @@ chapters:
     number: "06"
     title: "実践プロジェクト"
     description: "学んだことを活かして実用的なプログラムを作ります"
+
+  - id: "chapter13"
+    number: "13"
+    title: "グラフ描画（Matplotlib）"
+    description: "データを視覚化してグラフを描く方法を学びます"

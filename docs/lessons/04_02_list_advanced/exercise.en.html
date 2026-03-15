@@ -94,7 +94,7 @@ Whenever you find a value larger than <code>max_value</code>, update <code>max_v
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -119,6 +119,7 @@ Whenever you find a value larger than <code>max_value</code>, update <code>max_v
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -181,6 +182,7 @@ Whenever you find a value larger than <code>max_value</code>, update <code>max_v
         const LESSON_ID = "04_02_list_advanced";
         const INITIAL_CODE = "def find_max(numbers):\n    max_value = numbers[0]  # initialize with the first element\n    # Write your code here\n    # Use a for loop to check each element in numbers,\n    # and update max_value if the current element is larger\n    return max_value\n\nprint(find_max([3, 7, 2, 9, 1]))      # 9\nprint(find_max([5]))                   # 5\nprint(find_max([-5, -2, -10, -1]))    # -1\n";
         const SOLUTION_CODE = "def find_max(numbers):\n    max_value = numbers[0]\n    for num in numbers:\n        if num \u003e max_value:\n            max_value = num\n    return max_value\n\nprint(find_max([3, 7, 2, 9, 1]))\nprint(find_max([5]))\nprint(find_max([-5, -2, -10, -1]))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function find_max is not defined\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([3, 7, 2, 9, 1])\n        if test_result == 9:\n            result = {\"passed\": True, \"message\": \"\u2713 Maximum of [3, 7, 2, 9, 1] correctly returned 9\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: 9, Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "find_max([3, 7, 2, 9, 1]) should return 9", "name": "Maximum of a multi-element list"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function find_max is not defined\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([5])\n        if test_result == 5:\n            result = {\"passed\": True, \"message\": \"\u2713 Maximum of [5] correctly returned 5\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: 5, Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "find_max([5]) should return 5", "name": "Maximum of a single-element list"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function find_max is not defined\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([-5, -2, -10, -1])\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 Maximum of [-5, -2, -10, -1] correctly returned -1\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: -1, Actual: {test_result} (make sure your solution works with all-negative lists)\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "find_max([-5, -2, -10, -1]) should return -1", "name": "Maximum of an all-negative list"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function find_max is not defined\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([1, 1, 1])\n        if test_result == 1:\n            result = {\"passed\": True, \"message\": \"\u2713 Maximum of [1, 1, 1] correctly returned 1\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: 1, Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "find_max([1, 1, 1]) should return 1", "name": "Maximum of a list with all same values"}];
         
@@ -199,7 +201,8 @@ Whenever you find a value larger than <code>max_value</code>, update <code>max_v
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

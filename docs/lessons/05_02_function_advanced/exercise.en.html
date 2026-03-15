@@ -101,7 +101,7 @@ Division: <code>a / b</code>
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -126,6 +126,7 @@ Division: <code>a / b</code>
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -188,6 +189,7 @@ Division: <code>a / b</code>
         const LESSON_ID = "05_02_function_advanced";
         const INITIAL_CODE = "def calculate(a, b, operation=\"add\"):\n    # Write your code here\n    # Perform calculation based on operation and return the result\n    # \"add\": a + b\n    # \"subtract\": a - b\n    # \"multiply\": a * b\n    # \"divide\": a / b (return None if b is 0)\n    pass\n\nprint(calculate(10, 5))                  # 15 (default is addition)\nprint(calculate(10, 5, \"subtract\"))      # 5\nprint(calculate(10, 5, \"multiply\"))      # 50\nprint(calculate(10, 5, \"divide\"))        # 2.0\nprint(calculate(10, 0, \"divide\"))        # None\n";
         const SOLUTION_CODE = "def calculate(a, b, operation=\"add\"):\n    if operation == \"add\":\n        return a + b\n    elif operation == \"subtract\":\n        return a - b\n    elif operation == \"multiply\":\n        return a * b\n    elif operation == \"divide\":\n        if b == 0:\n            return None\n        return a / b\n\nprint(calculate(10, 5))\nprint(calculate(10, 5, \"subtract\"))\nprint(calculate(10, 5, \"multiply\"))\nprint(calculate(10, 5, \"divide\"))\nprint(calculate(10, 0, \"divide\"))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5)\n        if test_result == 15:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5) = 15 Correct! (default addition)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5) should return 15. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5) should return 15 with default addition", "name": "Default addition test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"subtract\")\n        if test_result == 5:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"subtract\\\") = 5 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"subtract\\\") should return 5. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"subtract\") should return 5", "name": "Subtraction test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"multiply\")\n        if test_result == 50:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"multiply\\\") = 50 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"multiply\\\") should return 50. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"multiply\") should return 50", "name": "Multiplication test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 5, \"divide\")\n        if test_result == 2.0:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 5, \\\"divide\\\") = 2.0 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 5, \\\"divide\\\") should return 2.0. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 5, \"divide\") should return 2.0", "name": "Division test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027calculate\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function calculate is not defined\"}\n    else:\n        test_result = exec_globals[\u0027calculate\u0027](10, 0, \"divide\")\n        if test_result is None:\n            result = {\"passed\": True, \"message\": \"\u2713 calculate(10, 0, \\\"divide\\\") = None Correct! (division by zero)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 calculate(10, 0, \\\"divide\\\") should return None. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "calculate(10, 0, \"divide\") should return None", "name": "Division by zero test"}];
         
@@ -206,7 +208,8 @@ Division: <code>a / b</code>
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

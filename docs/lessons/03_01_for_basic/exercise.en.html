@@ -97,7 +97,7 @@ This lets you iterate from 1 to 9.
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -122,6 +122,7 @@ This lets you iterate from 1 to 9.
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -184,6 +185,7 @@ This lets you iterate from 1 to 9.
         const LESSON_ID = "03_01_for_basic";
         const INITIAL_CODE = "def print_multiplication_table(n):\n    # Write your code here\n    # Use a for loop with range(1, 10) to iterate from 1 to 9\n    # Print each line in the format \"n \u00d7 i = n*i\"\n    pass\n\n# Test run\nprint_multiplication_table(3)\n";
         const SOLUTION_CODE = "def print_multiplication_table(n):\n    for i in range(1, 10):\n        print(f\"{n} \u00d7 {i} = {n * i}\")\n\n# Test run\nprint_multiplication_table(3)\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](2)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"2 \u00d7 {i} = {2 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 2\u0027s table is displayed correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 2\u0027s table is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "print_multiplication_table(2) should correctly print 9 lines of the 2 times table", "name": "Check 2\u0027s table"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](7)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"7 \u00d7 {i} = {7 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 7\u0027s table is displayed correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 7\u0027s table is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "print_multiplication_table(7) should correctly print 9 lines of the 7 times table", "name": "Check 7\u0027s table"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](5)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = [l for l in output.strip().split(\u0027\\n\u0027) if l]\n        if len(lines) == 9:\n            result = {\"passed\": True, \"message\": \"\u2713 9 lines are output correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 9 lines are required (1\u00d7n through 9\u00d7n). Actual: {len(lines)} lines\\nOutput:\\n{output.strip()}\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Should output exactly 9 lines from 1 to 9", "name": "Check number of output lines"}, {"code": "lang = \"en\"\nimport io\nimport sys\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027print_multiplication_table\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function print_multiplication_table is not defined\"}\n    else:\n        old_stdout = sys.stdout\n        sys.stdout = buffer = io.StringIO()\n        exec_globals[\u0027print_multiplication_table\u0027](3)\n        output = buffer.getvalue()\n        sys.stdout = old_stdout\n\n        lines = output.strip().split(\u0027\\n\u0027)\n        expected = [f\"3 \u00d7 {i} = {3 * i}\" for i in range(1, 10)]\n\n        if lines == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 Output format is correct: \u00273 \u00d7 i = result\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Output format is incorrect.\\nExpected:\\n\" + \"\\n\".join(expected) + f\"\\n\\nActual:\\n{output.strip()}\\n\\nMake sure to use the format \u0027n \u00d7 i = n*i\u0027 with spaces around \u00d7 and =.\"}\nexcept Exception as e:\n    sys.stdout = sys.__stdout__\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Output should be in the format \u0027n \u00d7 i = result\u0027", "name": "Check output format"}];
         
@@ -202,7 +204,8 @@ This lets you iterate from 1 to 9.
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

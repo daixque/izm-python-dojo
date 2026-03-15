@@ -43,6 +43,45 @@ function setupHintsPanel() {
 }
 
 /**
+ * matplotlib パネルのドラッグリサイズを設定
+ */
+function setupMatplotlibResizer() {
+    const resizer = document.getElementById('matplotlib-resizer');
+    const codePanel = document.querySelector('.code-panel');
+    if (!resizer || !codePanel) return;
+
+    let isResizing = false;
+    let startX = 0;
+    let startWidth = 0;
+
+    resizer.addEventListener('mousedown', (e) => {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = codePanel.offsetWidth;
+        resizer.classList.add('dragging');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const dx = e.clientX - startX;
+        const newWidth = Math.max(280, startWidth + dx);
+        codePanel.style.flex = 'none';
+        codePanel.style.width = newWidth + 'px';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isResizing) return;
+        isResizing = false;
+        resizer.classList.remove('dragging');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    });
+}
+
+/**
  * コンソール出力関数
  */
 function appendToConsole(text, type = 'output') {
@@ -67,6 +106,16 @@ function clearConsole() {
 }
 
 /**
+ * matplotlib 出力エリアをクリア
+ */
+function clearMatplotlib() {
+    const output = document.getElementById('matplotlib-output');
+    if (output) {
+        output.innerHTML = '';
+    }
+}
+
+/**
  * 共通の初期化処理
  */
 async function initializeExercise(config = {}) {
@@ -74,7 +123,8 @@ async function initializeExercise(config = {}) {
         initialCode = '',
         tests = [],
         initialFiles = [],
-        solutionCode = ''
+        solutionCode = '',
+        enableMatplotlib = false
     } = config;
 
     // 初期コードを保存
@@ -106,9 +156,14 @@ async function initializeExercise(config = {}) {
     if (tests.length > 0) {
         window.tester.setTests(tests);
     }
-    
+
     // タスクパネルの折りたたみ機能
     setupTaskPanel();
+
+    // matplotlib リサイザーの設定（matplotlib レッスンのみ）
+    if (enableMatplotlib) {
+        setupMatplotlibResizer();
+    }
     
     // ヒントセクションの折りたたみ機能
     setupHintsPanel();
@@ -126,12 +181,23 @@ async function initializeExercise(config = {}) {
     }
     
     await window.pyodideRunner.init();
-    
+
+    // Matplotlib が有効な場合は初期化（ボタン有効化より前に完了させる）
+    if (enableMatplotlib) {
+        await window.pyodideRunner.initMatplotlib();
+    }
+
     // 初期ファイルをロード
     await window.fileExplorer.loadInitialFiles();
-    
+
+    // すべての初期化完了後にボタンを有効化
+    const runBtn = document.getElementById('btn-run');
+    if (runBtn) runBtn.disabled = false;
+    const testBtn = document.getElementById('btn-test');
+    if (testBtn) testBtn.disabled = false;
+
     if (statusElement) {
-        statusElement.textContent = t('status_ready', '準備完了');
+        statusElement.textContent = t('status_ready', '準備完了 ✓');
     }
 }
 
@@ -149,6 +215,7 @@ function setupButtons() {
             const code = window.monacoEditor.getContent();
             if (code.trim()) {
                 clearConsole();
+                clearMatplotlib();
                 appendToConsole(t('msg_executing', 'コードを実行中...'), 'info');
                 
                 // インタラクティブモードに設定（prompt()を使用）
@@ -230,13 +297,14 @@ function setupButtons() {
     if (btnReset) {
         btnReset.addEventListener('click', () => {
             window.monacoEditor.setContent(savedInitialCode);
-            
+
             // 保存されたコードも削除
             if (typeof LESSON_ID !== 'undefined') {
                 window.monacoEditor.clearSavedCode(LESSON_ID);
             }
-            
+
             clearConsole();
+            clearMatplotlib();
             appendToConsole(t('msg_codeReset', 'コードをリセットしました'), 'info');
         });
     }
@@ -255,6 +323,12 @@ function setupButtons() {
     if (btnClear) {
         btnClear.addEventListener('click', clearConsole);
     }
+
+    // グラフクリアボタン（matplotlib レッスン専用）
+    const btnClearPlot = document.getElementById('btn-clear-plot');
+    if (btnClearPlot) {
+        btnClearPlot.addEventListener('click', clearMatplotlib);
+    }
     
     // テスト結果オーバーレイの閉じるボタン
     const btnCloseResults = document.getElementById('btn-close-results');
@@ -271,3 +345,4 @@ function setupButtons() {
 // コンソール関数をグローバルに公開（runner.jsから使用できるように）
 window.appendToConsole = appendToConsole;
 window.clearConsole = clearConsole;
+window.clearMatplotlib = clearMatplotlib;

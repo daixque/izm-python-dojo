@@ -194,6 +194,21 @@
           "available": true
         }
       ]
+    },
+    {
+      "id": "chapter13",
+      "number": 13,
+      "title": "グラフ描画（Matplotlib）",
+      "description": "データを視覚化してグラフを描く方法を学びます",
+      "lessons": [
+        {
+          "id": "13_01_plot_basic",
+          "number": "13_01",
+          "title": "基本的なグラフ",
+          "description": "Matplotlibを使って棒グラフを描き、データを視覚化する方法を学びます。",
+          "available": true
+        }
+      ]
     }
   ]
 }

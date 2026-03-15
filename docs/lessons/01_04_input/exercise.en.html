@@ -72,7 +72,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -97,6 +97,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -159,6 +160,7 @@
         const LESSON_ID = "01_04_input";
         const INITIAL_CODE = "# Use input() to get a name and display a greeting\n";
         const SOLUTION_CODE = "name = input(\"Enter your name: \")\nprint(f\"Hello, {name}!\")\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Check if input() is used\n    if \u0027input(\u0027 not in user_code:\n        result = {\"passed\": False, \"message\": \"\u2717 Please use the input() function\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 input() function is used\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if input() is used to get the name", "name": "Test 1: Using input() to get name"}, {"code": "lang = \"en\"\nimport sys\nimport builtins\nfrom io import StringIO\n\nold_stdout = sys.stdout\nold_input = builtins.input\ntry:\n    sys.stdout = StringIO()\n    builtins.input = lambda *args: \"Taro\"\n\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    builtins.input = old_input\n\n    if \"Taro\" in output:\n        result = {\"passed\": True, \"message\": \"\u2713 Entered name is correctly displayed\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Please display the name received from input()\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    builtins.input = old_input\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if greeting is displayed using the entered name", "name": "Test 2: Displaying greeting correctly"}, {"code": "lang = \"en\"\nimport sys\nimport builtins\nfrom io import StringIO\n\nold_stdout = sys.stdout\nold_input = builtins.input\ntry:\n    sys.stdout = StringIO()\n    builtins.input = lambda *args: \"Hanako\"\n\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    builtins.input = old_input\n\n    greeting_words = [\"Hello\", \"Hi\", \"Hey\", \"Greetings\"]\n    has_greeting = any(word.lower() in output.lower() for word in greeting_words)\n    has_name = \"Hanako\" in output\n\n    if has_greeting and has_name:\n        result = {\"passed\": True, \"message\": \"\u2713 Greeting format is correct\"}\n    elif not has_greeting:\n        result = {\"passed\": False, \"message\": \"\u2717 Please include a greeting word (Hello, etc.)\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Please include the entered name\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    builtins.input = old_input\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if greeting words like \u0027Hello\u0027 are included", "name": "Test 3: Greeting format is correct"}];
         
@@ -177,7 +179,8 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

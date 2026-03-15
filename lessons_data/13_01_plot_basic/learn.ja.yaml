@@ -1,0 +1,53 @@
+lesson:
+  number: "13_01"
+  id: "13_01_plot_basic"
+  title: "基本的なグラフ"
+
+content: |
+  <section class="section">
+    <h2>📊 Matplotlib とは</h2>
+    <p>Matplotlib（マットプロットリブ）は、Pythonでグラフや図を描くためのライブラリです。棒グラフ・折れ線グラフ・散布図など、さまざまな種類のグラフを簡単に作れます。</p>
+    <p>データを「数字の羅列」のまま見るよりも、グラフにすることで傾向や特徴をひと目で把握できます。これを<strong>データの視覚化（ビジュアライゼーション）</strong>と呼びます。</p>
+  </section>
+
+  <section class="section">
+    <h2>🔧 Matplotlib の基本的な使い方</h2>
+    <p>Matplotlib を使うには、まず <code>matplotlib.pyplot</code> を <code>plt</code> という名前でインポートします。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">インポートの方法</div>
+      <div class="example-code">import matplotlib.pyplot as plt</div>
+      <div class="example-explanation"><code>as plt</code> とすることで、以後 <code>plt.bar()</code> のように短い名前で使えます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">棒グラフを描く</div>
+      <div class="example-code">x = [1, 2, 3]<br>y = [10, 25, 15]<br><br>plt.bar(x, y)<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.bar(x, y)</code> で棒グラフを作成します。<code>x</code> が各棒の位置、<code>y</code> が棒の高さです。<code>plt.show()</code> を呼ぶとグラフが表示されます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">タイトルと軸ラベルを設定する</div>
+      <div class="example-code">plt.bar(x, y)<br>plt.title("売上グラフ")   # タイトル<br>plt.xlabel("月")         # x軸ラベル<br>plt.ylabel("売上（万円）") # y軸ラベル<br>plt.show()</div>
+      <div class="example-explanation">グラフに説明を加えることで、何を表しているのかが一目でわかるようになります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">折れ線グラフを描く</div>
+      <div class="example-code">x = [1, 2, 3, 4, 5]<br>y = [10, 15, 12, 20, 18]<br><br>plt.plot(x, y)<br>plt.title("気温の変化")<br>plt.xlabel("日")<br>plt.ylabel("気温（℃）")<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.bar()</code> の代わりに <code>plt.plot()</code> を使うと折れ線グラフになります。時間の流れに沿った変化を表すときに便利です。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 グラフを描く手順</h2>
+    <ol>
+      <li><code>import matplotlib.pyplot as plt</code> でインポートする</li>
+      <li>データを変数に用意する</li>
+      <li><code>plt.bar()</code> や <code>plt.plot()</code> でグラフの種類を指定する</li>
+      <li><code>plt.title()</code>、<code>plt.xlabel()</code>、<code>plt.ylabel()</code> でラベルを設定する</li>
+      <li><code>plt.show()</code> でグラフを表示する</li>
+    </ol>
+  </section>

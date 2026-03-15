@@ -112,7 +112,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -137,6 +137,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -199,6 +200,7 @@
         const LESSON_ID = "06_01_text_game";
         const INITIAL_CODE = "def check_guess(secret, guess):\n    # Write your code here\n    # If guess is less than secret, return \"Too low\"\n    # If guess is greater than secret, return \"Too high\"\n    # If guess equals secret, return \"Correct\"\n    pass\n\ndef play_round(secret, guesses):\n    # Write your code here\n    # Check each element in guesses using check_guess\n    # When \"Correct\" is found, return (attempt_number, \"Correct\")\n    # If all wrong, return (len(guesses), last_judgment)\n    pass\n\n# Test runs\nprint(check_guess(50, 30))   # Too low\nprint(check_guess(50, 70))   # Too high\nprint(check_guess(50, 50))   # Correct\nprint(play_round(50, [30, 70, 50]))  # (3, \u0027Correct\u0027)\n";
         const SOLUTION_CODE = "def check_guess(secret, guess):\n    if guess \u003c secret:\n        return \"Too low\"\n    elif guess \u003e secret:\n        return \"Too high\"\n    else:\n        return \"Correct\"\n\ndef play_round(secret, guesses):\n    for i, guess in enumerate(guesses, 1):\n        result = check_guess(secret, guess)\n        if result == \"Correct\":\n            return (i, \"Correct\")\n    return (len(guesses), check_guess(secret, guesses[-1]))\n\n# Test runs\nprint(check_guess(50, 30))\nprint(check_guess(50, 70))\nprint(check_guess(50, 50))\nprint(play_round(50, [30, 70, 50]))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 30)\n        if res == \"Too low\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 30) correctly returned \u0027Too low\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 30) returned wrong value. Expected: \u0027Too low\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Too low\u0027 when guess is less than secret", "name": "check_guess: Too low judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 70)\n        if res == \"Too high\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 70) correctly returned \u0027Too high\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 70) returned wrong value. Expected: \u0027Too high\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Too high\u0027 when guess is greater than secret", "name": "check_guess: Too high judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    check_guess = exec_globals.get(\"check_guess\")\n    if check_guess is None:\n        result = {\"passed\": False, \"message\": \"\u2717 check_guess function is not defined\"}\n    else:\n        res = check_guess(50, 50)\n        if res == \"Correct\":\n            result = {\"passed\": True, \"message\": \"\u2713 check_guess(50, 50) correctly returned \u0027Correct\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 check_guess(50, 50) returned wrong value. Expected: \u0027Correct\u0027, Got: \u0027{res}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Returns \u0027Correct\u0027 when guess equals secret", "name": "check_guess: Correct judgment"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    play_round = exec_globals.get(\"play_round\")\n    if play_round is None:\n        result = {\"passed\": False, \"message\": \"\u2717 play_round function is not defined\"}\n    else:\n        res = play_round(50, [30, 70, 50])\n        if isinstance(res, tuple) and res[1] == \"Correct\" and res[0] == 3:\n            result = {\"passed\": True, \"message\": \"\u2713 play_round(50, [30, 70, 50]) correctly returned (3, \u0027Correct\u0027)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 play_round(50, [30, 70, 50]) returned wrong value. Expected: (3, \u0027Correct\u0027), Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "play_round(50, [30, 70, 50]) returns (3, \u0027Correct\u0027)", "name": "play_round: Correct on 3rd attempt"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    play_round = exec_globals.get(\"play_round\")\n    if play_round is None:\n        result = {\"passed\": False, \"message\": \"\u2717 play_round function is not defined\"}\n    else:\n        res = play_round(50, [50])\n        if isinstance(res, tuple) and res == (1, \"Correct\"):\n            result = {\"passed\": True, \"message\": \"\u2713 play_round(50, [50]) correctly returned (1, \u0027Correct\u0027)\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 play_round(50, [50]) returned wrong value. Expected: (1, \u0027Correct\u0027), Got: {res}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "play_round(50, [50]) returns (1, \u0027Correct\u0027)", "name": "play_round: Correct on 1st attempt"}];
         
@@ -217,7 +219,8 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

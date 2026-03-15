@@ -97,7 +97,7 @@ Valid indexes are 0, 1, 2 (index 3 is out of range).
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -122,6 +122,7 @@ Valid indexes are 0, 1, 2 (index 3 is out of range).
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -184,6 +185,7 @@ Valid indexes are 0, 1, 2 (index 3 is out of range).
         const LESSON_ID = "04_01_list_basic";
         const INITIAL_CODE = "def get_element(fruits, index):\n    # Write your code here\n    # If index is \u003e= 0 and \u003c len(fruits), return fruits[index]\n    # Otherwise, return None\n    pass\n\n# Test run\nprint(get_element([\"apple\", \"banana\", \"orange\"], 0))  # apple\nprint(get_element([\"apple\", \"banana\", \"orange\"], 2))  # orange\nprint(get_element([\"apple\", \"banana\"], 5))            # None\n";
         const SOLUTION_CODE = "def get_element(fruits, index):\n    if 0 \u003c= index \u003c len(fruits):\n        return fruits[index]\n    else:\n        return None\n\n# Test run\nprint(get_element([\"apple\", \"banana\", \"orange\"], 0))\nprint(get_element([\"apple\", \"banana\", \"orange\"], 2))\nprint(get_element([\"apple\", \"banana\"], 5))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_element is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\", \"orange\"], 0)\n        if test_result == \"apple\":\n            result = {\"passed\": True, \"message\": \"\u2713 Index 0 correctly returned \u0027apple\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: \u0027apple\u0027, Actual: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\", \"orange\"], 0) should return \"apple\"", "name": "Get first element"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_element is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\", \"orange\"], 2)\n        if test_result == \"orange\":\n            result = {\"passed\": True, \"message\": \"\u2713 Index 2 correctly returned \u0027orange\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: \u0027orange\u0027, Actual: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\", \"orange\"], 2) should return \"orange\"", "name": "Get last element"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_element is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\"], 5)\n        if test_result is None:\n            result = {\"passed\": True, \"message\": \"\u2713 Out-of-range index correctly returned None\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: None, Actual: \u0027{test_result}\u0027 (out-of-range index must return None)\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\"], 5) should return None", "name": "Out-of-range index returns None"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function get_element is not defined\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\"], 0)\n        if test_result == \"apple\":\n            result = {\"passed\": True, \"message\": \"\u2713 Index 0 on a single-element list correctly returned \u0027apple\u0027\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: \u0027apple\u0027, Actual: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\"], 0) should return \"apple\"", "name": "Single-element list"}];
         
@@ -202,7 +204,8 @@ Valid indexes are 0, 1, 2 (index 3 is out of range).
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

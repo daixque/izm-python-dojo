@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise - Lesson01_05: Debugging Basics</title>
+    <title>Exercise - Lesson13_01: Basic Charts</title>
     <link rel="stylesheet" href="../../lib/css/exercise.css">
     <!-- Monaco Editor -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
@@ -24,7 +24,7 @@
             <div class="site-title">
                 <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
             </div>
-            <h1 id="lesson-title">📝 Lesson01_05: Debugging Basics</h1>
+            <h1 id="lesson-title">📝 Lesson13_01: Basic Charts</h1>
             <div class="header-right">
                 <div class="status">
                     <span id="status">Preparing...</span>
@@ -36,7 +36,7 @@
         </header>
 
         <!-- メインコンテンツ -->
-        <div class="main-content">
+        <div class="main-content has-matplotlib">
             <!-- 左側：タスクパネル -->
             <aside class="task-panel">
                 <div class="task-header">
@@ -46,22 +46,24 @@
                 <div class="task-content">
                     <div class="task-description">
                         <h3>📋 Task</h3>
-                        <p>The following code has 3 bugs. Read the error messages and fix all the bugs.</p>
-<p>After fixing them, verify that it works correctly.</p>
-<p><strong>Expected behavior:</strong></p>
+                        <p>Complete a program that displays monthly sales data (January to June) as a <strong>bar chart</strong>.</p>
+<h3>What to implement</h3>
 <ul>
-  <li>Display "Taro-kun will be 16 years old next year"</li>
-  <li>Display "Height is 160cm, and if it grows 10cm, it will be 170cm"</li>
+  <li>Use <code>plt.bar(months, sales)</code> to draw the bar chart</li>
+  <li>Use <code>plt.title("Monthly Sales")</code> to set the chart title</li>
+  <li>Use <code>plt.xlabel("Month")</code> to set the x-axis label</li>
+  <li>Use <code>plt.ylabel("Sales (10k yen)")</code> to set the y-axis label</li>
+  <li>Use <code>plt.show()</code> to display the chart</li>
 </ul>
+<p>After running your code, the chart will appear in the "Graph Output" area below the console.</p>
 
                     </div>
                     <div class="instructions">
                         <h4>✏️ Instructions</h4>
                         <ul>
-                            <li>Read error messages carefully to identify problematic lines</li>
-                            <li>Fix bugs one by one</li>
-                            <li>Test your code with the run button</li>
-                            <li>Once all bugs are fixed, verify with tests</li>
+                            <li>Pass <strong>x-axis data</strong> (months) as the first argument and <strong>bar heights</strong> (sales) as the second argument to <code>plt.bar(x, y)</code></li>
+                            <li><code>plt.title()</code>, <code>plt.xlabel()</code>, and <code>plt.ylabel()</code> each take a string argument</li>
+                            <li>Always call <code>plt.show()</code> at the end — without it, the chart won't be displayed</li>
                         </ul>
                     </div>
                     <div class="hints">
@@ -70,17 +72,23 @@
                             💡 Hints
                         </h4>
                         <ul class="hints-content" style="display: none;">
-                            <li>Bug 1: Cannot add a string and a number. Convert one of them</li>
-                            <li>Bug 2: Variable name spelling is incorrect (name vs namae)</li>
-                            <li>Bug 3: Calculation is wrong. If it grows 10cm...?</li>
-                            <li>Take your time and fix them one by one</li>
+                            <li>Basic bar chart structure:<br>
+<code>plt.bar(months, sales)</code><br>
+<code>plt.title("Monthly Sales")</code><br>
+<code>plt.xlabel("Month")</code><br>
+<code>plt.ylabel("Sales (10k yen)")</code><br>
+<code>plt.show()</code>
+</li>
+                            <li>The arguments to <code>plt.bar()</code> are <code>(x_data, heights)</code> in that order.<br>
+Pass months (1–6) for the x-axis and sales (120, 150, ...) for the bar heights.
+</li>
                         </ul>
                     </div>
                 </div>
             </aside>
 
             <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
-            <div class="code-panel">
+<div class="code-graph-container">            <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
                     <div class="editor-header">
@@ -105,7 +113,18 @@
                 </div>
             </div>
 
+            <!-- リサイザー -->
+            <div class="resizer" id="matplotlib-resizer"></div>
 
+            <!-- Matplotlib グラフ出力パネル -->
+            <div class="matplotlib-panel">
+                <div class="matplotlib-panel-header">
+                    <span class="matplotlib-panel-label">Graph Output</span>
+                    <button id="btn-clear-plot" class="btn btn-small">Clear</button>
+                </div>
+                <div id="matplotlib-output" class="matplotlib-output"></div>
+            </div>
+            </div>
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
                 <div class="file-explorer-header">
@@ -164,12 +183,12 @@
     
     <!-- アプリケーションスクリプト -->
     <script>
-        const LESSON_ID = "01_05_debug";
-        const INITIAL_CODE = "# This code has 3 bugs. Please fix them.\n\n# Taro\u0027s information\nname = \"Taro\"\nage = 15\n\n# Calculate next year\u0027s age (Bug 1: type conversion needed)\nnext_age = age + \"1\"\n\n# Display (Bug 2: variable name typo)\nprint(namae + \" will be \" + str(next_age) + \" years old next year\")\n\n# Height information (Bug 3: calculation error)\nheight = 160\nprint(\"Height is \" + str(height) + \"cm, if it grows 10cm it will be \" + str(height + 1) + \"cm\")\n";
-        const SOLUTION_CODE = "# Taro\u0027s information\nname = \"Taro\"\nage = 15\n\n# Calculate next year\u0027s age (Bug 1 fixed: int + 1)\nnext_age = age + 1\n\n# Display (Bug 2 fixed: namae \u2192 name)\nprint(name + \" will be \" + str(next_age) + \" years old next year\")\n\n# Height information (Bug 3 fixed: +1 \u2192 +10)\nheight = 160\nprint(\"Height is \" + str(height) + \"cm, if it grows 10cm it will be \" + str(height + 10) + \"cm\")\n";
-        const ENABLE_MATPLOTLIB = false;
+        const LESSON_ID = "13_01_plot_basic";
+        const INITIAL_CODE = "import matplotlib.pyplot as plt\n\n# Data (monthly sales Jan\u2013Jun)\nmonths = [1, 2, 3, 4, 5, 6]\nsales = [120, 150, 130, 170, 160, 200]\n\n# Write your code here:\n# Use plt.bar() to draw a bar chart\n# Use plt.title() to set the title to \"Monthly Sales\"\n# Use plt.xlabel() to set the x-axis label to \"Month\"\n# Use plt.ylabel() to set the y-axis label to \"Sales (10k yen)\"\n# Use plt.show() to display the chart\n";
+        const SOLUTION_CODE = "import matplotlib.pyplot as plt\n\nmonths = [1, 2, 3, 4, 5, 6]\nsales = [120, 150, 130, 170, 160, 200]\n\nplt.bar(months, sales)\nplt.title(\"Monthly Sales\")\nplt.xlabel(\"Month\")\nplt.ylabel(\"Sales (10k yen)\")\nplt.show()\n";
+        const ENABLE_MATPLOTLIB = true;
 
-        const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Check if print() is used\n    if \u0027print(\u0027 not in user_code:\n        result = {\"passed\": False, \"message\": \"\u2717 Please use the print() function\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 print() function is used\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if print statement is used correctly", "name": "Test 1: Basic syntax is correct"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Get output\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # If executed without errors, OK\n    result = {\"passed\": True, \"message\": \"\u2713 Program ran without errors\"}\n        \nexcept Exception as e:\n    sys.stdout = old_stdout\n    error_msg = str(e)\n    \n    # Provide hints based on error type\n    if \"NameError\" in error_msg:\n        hint = \"Check the spelling of variable names (name vs namae)\"\n    elif \"TypeError\" in error_msg:\n        hint = \"Type conversion (int() or str()) may be needed\"\n    else:\n        hint = \"Read the error message carefully\"\n    \n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {error_msg}\\nHint: {hint}\"}\n\nresult\n", "description": "Check if all bugs are fixed and code runs without errors", "name": "Test 2: Program runs without errors"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Get output\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check expected output content\n    has_taro = \"Taro\" in output\n    has_16 = \"16\" in output and \"years old\" in output  # 15 + 1 = 16\n    has_170 = \"170cm\" in output  # 160 + 10 = 170\n    \n    if has_taro and has_16 and has_170:\n        result = {\"passed\": True, \"message\": \"\u2713 Correct content is displayed\"}\n    else:\n        missing = []\n        if not has_taro:\n            missing.append(\"\u0027Taro\u0027\")\n        if not has_16:\n            missing.append(\"\u002716 years old\u0027 (15+1)\")\n        if not has_170:\n            missing.append(\"\u0027170cm\u0027 (160+10)\")\n        \n        result = {\"passed\": False, \"message\": f\"\u2717 Output is missing or incorrect: {\u0027, \u0027.join(missing)}\"}\n        \nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if expected content is displayed correctly", "name": "Test 3: Correct output"}];
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    import matplotlib\n    matplotlib.use(\u0027agg\u0027)\n    import matplotlib.pyplot as plt\n    from unittest.mock import patch\n    with patch(\u0027matplotlib.pyplot.show\u0027):\n        exec_globals = {}\n        exec(user_code, exec_globals)\n    result = {\"passed\": True, \"message\": \"\u2713 Code executed without errors\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Execution error: {str(e)}\"}\nresult\n", "description": "Check that the chart drawing code executes correctly", "name": "Code runs without errors"}, {"code": "lang = \"en\"\ntry:\n    import matplotlib\n    matplotlib.use(\u0027agg\u0027)\n    import matplotlib.pyplot as plt\n    from unittest.mock import patch\n    bar_args = []\n    orig_bar = plt.bar\n    def mock_bar(*args, **kwargs):\n        bar_args.append(args)\n        return orig_bar(*args, **kwargs)\n    with patch(\u0027matplotlib.pyplot.show\u0027):\n        with patch(\u0027matplotlib.pyplot.bar\u0027, side_effect=mock_bar):\n            exec_globals = {}\n            exec(user_code, exec_globals)\n    if bar_args:\n        result = {\"passed\": True, \"message\": \"\u2713 plt.bar() is called\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Use plt.bar() to draw a bar chart\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Check that plt.bar(months, sales) is called", "name": "plt.bar() is used to draw the chart"}, {"code": "lang = \"en\"\ntry:\n    import matplotlib\n    matplotlib.use(\u0027agg\u0027)\n    import matplotlib.pyplot as plt\n    from unittest.mock import patch\n    title_args = []\n    def mock_title(*args, **kwargs): title_args.extend(args)\n    with patch(\u0027matplotlib.pyplot.show\u0027):\n        with patch(\u0027matplotlib.pyplot.title\u0027, side_effect=mock_title):\n            exec_globals = {}\n            exec(user_code, exec_globals)\n    if title_args and \"Monthly Sales\" in str(title_args[0]):\n        result = {\"passed\": True, \"message\": \"\u2713 Title is set to \u0027Monthly Sales\u0027\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Use plt.title(\u0027Monthly Sales\u0027) to set the title (current: {title_args})\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Check that plt.title(\u0027Monthly Sales\u0027) is called", "name": "Title is set correctly"}, {"code": "lang = \"en\"\ntry:\n    import matplotlib\n    matplotlib.use(\u0027agg\u0027)\n    import matplotlib.pyplot as plt\n    from unittest.mock import patch\n    xlabel_args = []\n    ylabel_args = []\n    def mock_xlabel(*args, **kwargs): xlabel_args.extend(args)\n    def mock_ylabel(*args, **kwargs): ylabel_args.extend(args)\n    with patch(\u0027matplotlib.pyplot.show\u0027):\n        with patch(\u0027matplotlib.pyplot.xlabel\u0027, side_effect=mock_xlabel):\n            with patch(\u0027matplotlib.pyplot.ylabel\u0027, side_effect=mock_ylabel):\n                exec_globals = {}\n                exec(user_code, exec_globals)\n    x_ok = bool(xlabel_args)\n    y_ok = bool(ylabel_args)\n    if x_ok and y_ok:\n        result = {\"passed\": True, \"message\": \"\u2713 Both x-axis and y-axis labels are set\"}\n    elif not x_ok:\n        result = {\"passed\": False, \"message\": \"\u2717 Use plt.xlabel() to set the x-axis label\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Use plt.ylabel() to set the y-axis label\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Check that plt.xlabel() and plt.ylabel() are called", "name": "x-axis and y-axis labels are set"}];
         
         // 事前ロードするファイル（データ分析などのレッスンで使用）
         const INITIAL_FILES = [];

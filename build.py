@@ -255,7 +255,8 @@ def build_lesson(lesson_dir, env, languages=['ja', 'en']):
                     initial_code=code_data['initial_code'],
                     initial_files=code_data.get('initial_files', []),
                     solution_code=code_data.get('solution_code', ''),
-                    tests=tests_for_template
+                    tests=tests_for_template,
+                    enable_matplotlib=code_data.get('enable_matplotlib', False)
                 )
                 
                 # 出力先ディレクトリを作成

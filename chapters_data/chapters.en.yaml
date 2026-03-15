@@ -28,3 +28,8 @@ chapters:
     number: "06"
     title: "Practical Projects"
     description: "Apply your knowledge to build real programs"
+
+  - id: "chapter13"
+    number: "13"
+    title: "Graph Drawing (Matplotlib)"
+    description: "Learn to visualize data by drawing charts and graphs"

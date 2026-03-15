@@ -91,7 +91,7 @@ filter_even([10, 15, 20, 25])     # [10, 20]</pre>
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -116,6 +116,7 @@ filter_even([10, 15, 20, 25])     # [10, 20]</pre>
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -178,6 +179,7 @@ filter_even([10, 15, 20, 25])     # [10, 20]</pre>
         const LESSON_ID = "04_03_list_loop";
         const INITIAL_CODE = "def filter_even(numbers):\n    result = []\n    # Write your code here\n    # Use a for loop to check each element of numbers,\n    # and append it to result if it is even (num % 2 == 0)\n    return result\n\nprint(filter_even([1, 2, 3, 4, 5, 6]))  # [2, 4, 6]\nprint(filter_even([1, 3, 5]))           # []\nprint(filter_even([10, 15, 20, 25]))    # [10, 20]\n";
         const SOLUTION_CODE = "def filter_even(numbers):\n    result = []\n    for num in numbers:\n        if num % 2 == 0:\n            result.append(num)\n    return result\n\nprint(filter_even([1, 2, 3, 4, 5, 6]))\nprint(filter_even([1, 3, 5]))\nprint(filter_even([10, 15, 20, 25]))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027filter_even\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function filter_even is not defined\"}\n    else:\n        test_result = exec_globals[\u0027filter_even\u0027]([1, 2, 3, 4, 5, 6])\n        if test_result == [2, 4, 6]:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! Even numbers [2, 4, 6] were returned\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: [2, 4, 6], Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does filter_even([1, 2, 3, 4, 5, 6]) return [2, 4, 6]?", "name": "Basic even filter test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027filter_even\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function filter_even is not defined\"}\n    else:\n        test_result = exec_globals[\u0027filter_even\u0027]([1, 3, 5])\n        if test_result == []:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! An empty list [] is returned when there are no even numbers\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: [], Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does filter_even([1, 3, 5]) return []?", "name": "No even numbers test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027filter_even\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function filter_even is not defined\"}\n    else:\n        test_result = exec_globals[\u0027filter_even\u0027]([10, 15, 20, 25])\n        if test_result == [10, 20]:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! [10, 20] was returned\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: [10, 20], Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does filter_even([10, 15, 20, 25]) return [10, 20]?", "name": "Mixed list test"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027filter_even\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function filter_even is not defined\"}\n    else:\n        test_result = exec_globals[\u0027filter_even\u0027]([2, 4, 6])\n        if test_result == [2, 4, 6]:\n            result = {\"passed\": True, \"message\": \"\u2713 Correct! Works correctly when all elements are even\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: [2, 4, 6], Got: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does filter_even([2, 4, 6]) return [2, 4, 6]?", "name": "All even numbers test"}];
         
@@ -196,7 +198,8 @@ filter_even([10, 15, 20, 25])     # [10, 20]</pre>
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>

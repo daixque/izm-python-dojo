@@ -89,7 +89,7 @@ get_score(students, "Dave")     # -1（存在しない）</pre>
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -114,6 +114,7 @@ get_score(students, "Dave")     # -1（存在しない）</pre>
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -176,6 +177,7 @@ get_score(students, "Dave")     # -1（存在しない）</pre>
         const LESSON_ID = "04_04_dict";
         const INITIAL_CODE = "def get_score(students, name):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # name \u304c students \u306b\u5b58\u5728\u3059\u308c\u3070 students[name] \u3092\u8fd4\u3059\n    # \u5b58\u5728\u3057\u306a\u3051\u308c\u3070 -1 \u3092\u8fd4\u3059\n    pass\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nstudents = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(get_score(students, \"Alice\"))    # 85\nprint(get_score(students, \"Bob\"))      # 92\nprint(get_score(students, \"Dave\"))     # -1\n";
         const SOLUTION_CODE = "def get_score(students, name):\n    if name in students:\n        return students[name]\n    else:\n        return -1\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nstudents = {\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}\nprint(get_score(students, \"Alice\"))\nprint(get_score(students, \"Bob\"))\nprint(get_score(students, \"Dave\"))\n";
+        const ENABLE_MATPLOTLIB = false;
 
         const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_score \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"Alice\": 85, \"Bob\": 92, \"Charlie\": 78}, \"Alice\")\n        if test_result == 85:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01Alice \u306e\u70b9\u6570 85 \u304c\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: 85, \u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_score({...}, \u0027Alice\u0027) \u304c 85 \u3092\u8fd4\u3059\u304b", "name": "\u5b58\u5728\u3059\u308b\u30ad\u30fc\u306e\u53d6\u5f97\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_score \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"Alice\": 85, \"Bob\": 92}, \"Charlie\")\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01\u5b58\u5728\u3057\u306a\u3044\u540d\u524d\u306b\u306f -1 \u304c\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: -1, \u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_score({...}, \u0027Charlie\u0027) \u304c -1 \u3092\u8fd4\u3059\u304b\uff08\u5b58\u5728\u3057\u306a\u3044\u540d\u524d\uff09", "name": "\u5b58\u5728\u3057\u306a\u3044\u30ad\u30fc\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_score \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({\"\u7530\u4e2d\": 88, \"\u4f50\u85e4\": 95}, \"\u4f50\u85e4\")\n        if test_result == 95:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01\u4f50\u85e4\u306e\u70b9\u6570 95 \u304c\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: 95, \u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_score({\u0027\u7530\u4e2d\u0027: 88, \u0027\u4f50\u85e4\u0027: 95}, \u0027\u4f50\u85e4\u0027) \u304c 95 \u3092\u8fd4\u3059\u304b", "name": "\u65e5\u672c\u8a9e\u540d\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_score\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_score \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_score\u0027]({}, \"Alice\")\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\uff01\u7a7a\u306e\u8f9e\u66f8\u3067\u3082 -1 \u304c\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85: -1, \u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_score({}, \u0027Alice\u0027) \u304c -1 \u3092\u8fd4\u3059\u304b", "name": "\u7a7a\u306e\u8f9e\u66f8\u306e\u30c6\u30b9\u30c8"}];
         
@@ -194,7 +196,8 @@ get_score(students, "Dave")     # -1（存在しない）</pre>
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB
             });
         });
     </script>
