@@ -1,11 +1,11 @@
 lesson:
   number: "06_04"
-  id: "06_04_final_project"
-  title: "最終プロジェクト：タスク管理アプリ"
+  id: "06_04_todo_app"
+  title: "実力テスト：タスク管理アプリ"
 
 content: |
   <section class="section">
-    <h2>🎯 最終プロジェクトへようこそ</h2>
+    <h2>🎯 実力テストへようこそ</h2>
     <p>これまでのレッスンで学んだことをすべて活かして、<strong>タスク管理アプリ</strong>を作りましょう！</p>
     <p>今回のプロジェクトでは、次の知識を組み合わせます：</p>
     <ul>

@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>演習課題 - レッスン06_04: 最終プロジェクト：タスク管理アプリ</title>
+    <title>演習課題 - レッスン06_04: 実力テスト：タスク管理アプリ</title>
     <link rel="stylesheet" href="../../lib/css/exercise.css">
     <!-- Monaco Editor -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
@@ -24,7 +24,7 @@
             <div class="site-title">
                 <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
             </div>
-            <h1 id="lesson-title">📝 レッスン06_04: 最終プロジェクト：タスク管理アプリ</h1>
+            <h1 id="lesson-title">📝 レッスン06_04: 実力テスト：タスク管理アプリ</h1>
             <div class="header-right">
                 <div class="status">
                     <span id="status">準備中...</span>
@@ -180,7 +180,7 @@
     
     <!-- アプリケーションスクリプト -->
     <script>
-        const LESSON_ID = "06_04_final_project";
+        const LESSON_ID = "06_04_todo_app";
         const INITIAL_CODE = "import json\n\ndef add_task(tasks, task_name):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # \u65b0\u3057\u3044 id \u3092\u8a08\u7b97\uff08tasks \u304c\u7a7a\u306a\u3089 1\u3001\u305d\u3046\u3067\u306a\u3051\u308c\u3070\u6700\u5927 id + 1\uff09\n    # {\"id\": new_id, \"name\": task_name, \"completed\": False} \u3092 tasks \u306b\u8ffd\u52a0\n    # tasks \u3092\u8fd4\u3059\n    pass\n\ndef complete_task(tasks, task_id):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # tasks \u306e\u4e2d\u304b\u3089 id \u304c task_id \u306e\u30bf\u30b9\u30af\u3092\u63a2\u3057\u3066 completed \u3092 True \u306b\u3059\u308b\n    # tasks \u3092\u8fd4\u3059\n    pass\n\ndef show_tasks(tasks):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # \u5404\u30bf\u30b9\u30af\u3092 \"[\u2713] id: name\" \u307e\u305f\u306f \"[ ] id: name\" \u306e\u5f62\u5f0f\u3067\u8868\u793a\u3059\u308b\n    pass\n\ndef save_tasks(tasks, filename):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # json.dump() \u3092\u4f7f\u3063\u3066 tasks \u3092\u30d5\u30a1\u30a4\u30eb\u306b\u4fdd\u5b58\u3059\u308b\n    pass\n\ndef load_tasks(filename):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # json.load() \u3067\u30d5\u30a1\u30a4\u30eb\u304b\u3089\u8aad\u307f\u8fbc\u3093\u3067\u8fd4\u3059\n    # FileNotFoundError \u306a\u3089\u7a7a\u30ea\u30b9\u30c8\u3092\u8fd4\u3059\n    pass\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\ntasks = []\ntasks = add_task(tasks, \"Python\u306e\u52c9\u5f37\")\ntasks = add_task(tasks, \"\u8cb7\u3044\u7269\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
         const SOLUTION_CODE = "import json\n\ndef add_task(tasks, task_name):\n    new_id = max([t[\"id\"] for t in tasks], default=0) + 1\n    tasks.append({\"id\": new_id, \"name\": task_name, \"completed\": False})\n    return tasks\n\ndef complete_task(tasks, task_id):\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task[\"completed\"] = True\n    return tasks\n\ndef show_tasks(tasks):\n    for task in tasks:\n        status = \"\u2713\" if task[\"completed\"] else \" \"\n        print(f\"[{status}] {task[\u0027id\u0027]}: {task[\u0027name\u0027]}\")\n\ndef save_tasks(tasks, filename):\n    with open(filename, \u0027w\u0027, encoding=\u0027utf-8\u0027) as f:\n        json.dump(tasks, f, ensure_ascii=False, indent=2)\n\ndef load_tasks(filename):\n    try:\n        with open(filename, \u0027r\u0027, encoding=\u0027utf-8\u0027) as f:\n            return json.load(f)\n    except FileNotFoundError:\n        return []\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\ntasks = []\ntasks = add_task(tasks, \"Python\u306e\u52c9\u5f37\")\ntasks = add_task(tasks, \"\u8cb7\u3044\u7269\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
         const ENABLE_MATPLOTLIB = false;

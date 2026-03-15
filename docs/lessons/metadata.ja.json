@@ -187,9 +187,9 @@
           "available": true
         },
         {
-          "id": "06_04_final_project",
+          "id": "06_04_todo_app",
           "number": "06_04",
-          "title": "最終プロジェクト：タスク管理アプリ",
+          "title": "実力テスト：タスク管理アプリ",
           "description": "これまで学んだ全ての知識を組み合わせて、タスク管理アプリを完成させます。",
           "available": true
         }
