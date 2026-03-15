@@ -1,0 +1,152 @@
+required_packages:
+  - sqlite3
+
+initial_code: |
+  import sqlite3
+
+  # データベースの準備
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25),
+      (2, "Bob", 30),
+      (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_adult_users(conn, min_age):
+      # ここにコードを書いてください
+      # cursor = conn.cursor() でカーソルを取得
+      # WHERE age >= ? でmin_age以上のユーザーを絞り込む
+      # ORDER BY age で年齢順に並べ替える
+      # cursor.fetchall() で結果を返す
+      pass
+
+  print(get_adult_users(conn, 25))  # [(1, 'Alice', 25), (2, 'Bob', 30)]
+  print(get_adult_users(conn, 30))  # [(2, 'Bob', 30)]
+
+solution_code: |
+  import sqlite3
+
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_adult_users(conn, min_age):
+      cursor = conn.cursor()
+      cursor.execute("SELECT * FROM users WHERE age >= ? ORDER BY age", (min_age,))
+      return cursor.fetchall()
+
+  print(get_adult_users(conn, 25))
+  print(get_adult_users(conn, 30))
+
+initial_files: []
+
+tests:
+  - name: "get_adult_users 関数が定義されているか"
+    description: "関数 get_adult_users が定義されているか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_adult_users が定義されていません"}
+          else:
+              result = {"passed": True, "message": "✓ 関数 get_adult_users が定義されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "min_age=25 で正しく絞り込めるか"
+    description: "age >= 25 のユーザーが年齢順に返されるか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_adult_users が定義されていません"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 25)
+              expected = [(1, 'Alice', 25), (2, 'Bob', 30)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ 正解です（min_age=25）"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "min_age=30 で正しく絞り込めるか"
+    description: "age >= 30 のユーザーのみ返されるか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_adult_users が定義されていません"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 30)
+              expected = [(2, 'Bob', 30)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ 正解です（min_age=30）"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "結果が年齢順に並んでいるか"
+    description: "ORDER BY age で昇順に並んでいるか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (3, "Charlie", 22), (1, "Alice", 25), (2, "Bob", 30)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_adult_users が定義されていません"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 22)
+              ages = [row[2] for row in r]
+              if ages == sorted(ages):
+                  result = {"passed": True, "message": f"✓ 年齢順（昇順）に並んでいます: {ages}"}
+              else:
+                  result = {"passed": False, "message": f"✗ ORDER BY age で年齢順に並べてください。実際: {ages}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

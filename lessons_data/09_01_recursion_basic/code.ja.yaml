@@ -1,0 +1,100 @@
+initial_code: |
+  def factorial(n):
+      # ここにコードを書いてください
+      # ベースケース：n == 0 のとき 1 を返す
+      # 再帰ケース：n * factorial(n - 1) を返す
+      pass
+
+  print(factorial(0))   # 1
+  print(factorial(5))   # 120
+  print(factorial(10))  # 3628800
+
+solution_code: |
+  def factorial(n):
+      if n == 0:
+          return 1
+      return n * factorial(n - 1)
+
+  print(factorial(0))
+  print(factorial(5))
+  print(factorial(10))
+
+initial_files: []
+
+tests:
+  - name: "factorial(0) の確認"
+    description: "factorial(0) が 1 を返すか（ベースケース）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 factorial が定義されていません"}
+          else:
+              test_result = exec_globals['factorial'](0)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ factorial(0) = 1 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(0) は 1 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "factorial(5) の確認"
+    description: "factorial(5) が 120 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 factorial が定義されていません"}
+          else:
+              test_result = exec_globals['factorial'](5)
+              if test_result == 120:
+                  result = {"passed": True, "message": "✓ factorial(5) = 120 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(5) は 120 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "factorial(10) の確認"
+    description: "factorial(10) が 3628800 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 factorial が定義されていません"}
+          else:
+              test_result = exec_globals['factorial'](10)
+              if test_result == 3628800:
+                  result = {"passed": True, "message": "✓ factorial(10) = 3628800 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(10) は 3628800 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "再帰を使っているか確認"
+    description: "factorial 関数が再帰呼び出しを使っているか"
+    code: |
+      try:
+          import inspect
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 factorial が定義されていません"}
+          else:
+              source = inspect.getsource(exec_globals['factorial'])
+              if 'factorial' in source.split('def factorial')[1]:
+                  result = {"passed": True, "message": "✓ 再帰呼び出しが使われています"}
+              else:
+                  result = {"passed": False, "message": "✗ factorial 関数の中で factorial を再帰呼び出ししてください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

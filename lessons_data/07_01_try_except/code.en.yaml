@@ -1,0 +1,100 @@
+initial_code: |
+  def safe_int(value):
+      # Write your code here
+      # Convert value to an integer and return it
+      # Return None if conversion fails
+      pass
+
+  print(safe_int("42"))    # 42
+  print(safe_int("abc"))   # None
+  print(safe_int("3.14"))  # None
+
+solution_code: |
+  def safe_int(value):
+      try:
+          return int(value)
+      except ValueError:
+          return None
+
+  print(safe_int("42"))
+  print(safe_int("abc"))
+  print(safe_int("3.14"))
+
+initial_files: []
+
+tests:
+  - name: "Check safe_int(\"42\")"
+    description: "safe_int(\"42\") should return 42"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_int is not defined"}
+          else:
+              test_result = exec_globals['safe_int']("42")
+              if test_result == 42:
+                  result = {"passed": True, "message": "✓ safe_int(\"42\") = 42 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"42\") should return 42. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_int(\"abc\")"
+    description: "safe_int(\"abc\") should return None"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_int is not defined"}
+          else:
+              test_result = exec_globals['safe_int']("abc")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ safe_int(\"abc\") = None Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"abc\") should return None. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_int(\"3.14\")"
+    description: "safe_int(\"3.14\") should return None (string with decimal point)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_int is not defined"}
+          else:
+              test_result = exec_globals['safe_int']("3.14")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ safe_int(\"3.14\") = None Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"3.14\") should return None. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_int(\"-5\")"
+    description: "safe_int(\"-5\") should return -5 (negative number)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_int is not defined"}
+          else:
+              test_result = exec_globals['safe_int']("-5")
+              if test_result == -5:
+                  result = {"passed": True, "message": "✓ safe_int(\"-5\") = -5 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"-5\") should return -5. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

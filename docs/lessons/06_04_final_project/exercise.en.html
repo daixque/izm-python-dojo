@@ -95,7 +95,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -120,6 +120,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -182,6 +183,8 @@
         const LESSON_ID = "06_04_final_project";
         const INITIAL_CODE = "import json\n\ndef add_task(tasks, task_name):\n    # Write your code here\n    # Calculate new id (1 if tasks is empty, otherwise max id + 1)\n    # Append {\"id\": new_id, \"name\": task_name, \"completed\": False} to tasks\n    # Return tasks\n    pass\n\ndef complete_task(tasks, task_id):\n    # Write your code here\n    # Find the task with the matching task_id and set completed to True\n    # Return tasks\n    pass\n\ndef show_tasks(tasks):\n    # Write your code here\n    # Display each task as \"[\u2713] id: name\" or \"[ ] id: name\"\n    pass\n\ndef save_tasks(tasks, filename):\n    # Write your code here\n    # Use json.dump() to save tasks to a file\n    pass\n\ndef load_tasks(filename):\n    # Write your code here\n    # Use json.load() to read from a file and return it\n    # Return an empty list if FileNotFoundError occurs\n    pass\n\n# Test run\ntasks = []\ntasks = add_task(tasks, \"Study Python\")\ntasks = add_task(tasks, \"Go shopping\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
         const SOLUTION_CODE = "import json\n\ndef add_task(tasks, task_name):\n    new_id = max([t[\"id\"] for t in tasks], default=0) + 1\n    tasks.append({\"id\": new_id, \"name\": task_name, \"completed\": False})\n    return tasks\n\ndef complete_task(tasks, task_id):\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task[\"completed\"] = True\n    return tasks\n\ndef show_tasks(tasks):\n    for task in tasks:\n        status = \"\u2713\" if task[\"completed\"] else \" \"\n        print(f\"[{status}] {task[\u0027id\u0027]}: {task[\u0027name\u0027]}\")\n\ndef save_tasks(tasks, filename):\n    with open(filename, \u0027w\u0027, encoding=\u0027utf-8\u0027) as f:\n        json.dump(tasks, f, ensure_ascii=False, indent=2)\n\ndef load_tasks(filename):\n    try:\n        with open(filename, \u0027r\u0027, encoding=\u0027utf-8\u0027) as f:\n            return json.load(f)\n    except FileNotFoundError:\n        return []\n\n# Test run\ntasks = []\ntasks = add_task(tasks, \"Study Python\")\ntasks = add_task(tasks, \"Go shopping\")\nshow_tasks(tasks)\ntasks = complete_task(tasks, 1)\nshow_tasks(tasks)\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = []\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Test task\")\n    if len(tasks) == 1 and tasks[0][\"name\"] == \"Test task\" and tasks[0][\"id\"] == 1 and tasks[0][\"completed\"] == False:\n        result = {\"passed\": True, \"message\": \"\u2713 Task was added correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Task addition is incorrect. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that after adding one task, id, name, and completed are set correctly", "name": "Does add_task work correctly?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = []\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Task 1\")\n    tasks = exec_globals[\u0027add_task\u0027](tasks, \"Task 2\")\n    if len(tasks) == 2 and tasks[0][\"id\"] == 1 and tasks[1][\"id\"] == 2:\n        result = {\"passed\": True, \"message\": \"\u2713 Multiple task ids are assigned correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Ids are incorrect. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that when adding 2 tasks, their ids are 1 and 2 respectively", "name": "Do ids increment when adding multiple tasks?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = [{\"id\": 1, \"name\": \"Task 1\", \"completed\": False}]\n    tasks = exec_globals[\u0027complete_task\u0027](tasks, 1)\n    if tasks[0][\"completed\"] == True:\n        result = {\"passed\": True, \"message\": \"\u2713 Task was marked as complete correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Task was not marked as complete. Actual: {tasks}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that the completed field of the specified task becomes True", "name": "Does complete_task work correctly?"}, {"code": "lang = \"en\"\ntry:\n    import json as _json\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    tasks = [{\"id\": 1, \"name\": \"Save test\", \"completed\": False}]\n    exec_globals[\u0027save_tasks\u0027](tasks, \"test_tasks.json\")\n    loaded = exec_globals[\u0027load_tasks\u0027](\"test_tasks.json\")\n    if loaded == tasks:\n        result = {\"passed\": True, \"message\": \"\u2713 Task saving and loading works correctly\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Saving and loading is incorrect. Expected: {tasks}, Actual: {loaded}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that saving tasks to a JSON file and loading them back yields the same data", "name": "Do save_tasks and load_tasks work?"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    loaded = exec_globals[\u0027load_tasks\u0027](\"nonexistent_tasks_99999.json\")\n    if loaded == []:\n        result = {\"passed\": True, \"message\": \"\u2713 Returns an empty list when file does not exist\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 Should return an empty list. Actual: {loaded}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Verify that an empty list is returned when trying to load a non-existent JSON file", "name": "Does load_tasks return an empty list when file is missing?"}];
         
@@ -200,7 +203,9 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

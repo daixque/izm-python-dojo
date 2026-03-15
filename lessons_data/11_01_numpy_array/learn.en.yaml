@@ -1,0 +1,127 @@
+lesson:
+  number: "11_01"
+  id: "11_01_numpy_array"
+  title: "Creating and Manipulating Arrays"
+
+content: |
+  <section class="section">
+    <h2>📦 What is NumPy?</h2>
+    <p>NumPy is a Python library for fast <strong>numerical computation</strong>.</p>
+    <p>While Python's built-in lists can do calculations, NumPy is <strong>many times faster</strong>.</p>
+    <p>It is used in science, math, data analysis, artificial intelligence, and many other fields.</p>
+    <p>To use NumPy, start your program with <code>import numpy as np</code>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Importing NumPy</div>
+      <div class="example-code">import numpy as np<br><br># Now we can use NumPy features with the name "np"</div>
+      <div class="example-explanation">
+        <code>as np</code> means "use NumPy under the short name np".<br>
+        This convention is used universally by NumPy programmers worldwide.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔢 Creating Arrays with np.array()</h2>
+    <p>NumPy arrays (<strong>ndarray</strong>) are created with <code>np.array()</code>.</p>
+    <p>Pass a Python list and it will be converted into a NumPy array.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Creating an Array</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4, 5])<br>print(a)       # [1 2 3 4 5]<br>print(type(a)) # &lt;class 'numpy.ndarray'&gt;</div>
+      <div class="example-explanation">
+        Passing a list to <code>np.array()</code> creates a NumPy array.<br>
+        The type of a NumPy array is called <code>ndarray</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Array of Floats</div>
+      <div class="example-code">import numpy as np<br><br>b = np.array([1.5, 2.5, 3.5])<br>print(b)       # [1.5 2.5 3.5]<br>print(b.dtype) # float64</div>
+      <div class="example-explanation">
+        When you include decimal numbers, the array automatically uses the floating-point type (<code>float64</code>).
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📐 shape and dtype</h2>
+    <p>NumPy arrays have two important attributes: <code>shape</code> (dimensions) and <code>dtype</code> (data type).</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Checking shape and dtype</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40])<br>print(a.shape)  # (4,)  ← 1D array with 4 elements<br>print(a.dtype)  # int64 ← integer type</div>
+      <div class="example-explanation">
+        <code>shape</code> describes the "form" of the array. <code>(4,)</code> means a 1-dimensional array with 4 elements.<br>
+        <code>dtype</code> shows the type of data stored (integers, floats, etc.).
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✂️ Indexing and Slicing</h2>
+    <p>Accessing elements in a NumPy array works the same way as Python lists.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Accessing Elements by Index</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40, 50])<br>print(a[0])   # 10 (first element)<br>print(a[2])   # 30 (third element)<br>print(a[-1])  # 50 (last element)</div>
+      <div class="example-explanation">
+        Indices start at <code>0</code>.<br>
+        Negative indices count from the end of the array.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Slicing to Get a Sub-array</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40, 50])<br>print(a[1:4])  # [20 30 40]<br>print(a[:3])   # [10 20 30]<br>print(a[2:])   # [30 40 50]</div>
+      <div class="example-explanation">
+        Use <code>a[start:stop]</code> to extract a portion of the array.<br>
+        The element at the stop index is not included (same rule as Python lists).
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>➕ Array Arithmetic</h2>
+    <p>NumPy array operations are performed <strong>element-wise</strong>.</p>
+    <p>This is very different from Python lists.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Operations Between Arrays</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4])<br>b = np.array([10, 20, 30, 40])<br><br>print(a + b)   # [11 22 33 44]<br>print(b - a)   # [ 9 18 27 36]<br>print(a * b)   # [ 10  40  90 160]<br>print(b / a)   # [10. 10. 10. 10.]</div>
+      <div class="example-explanation">
+        Each element is combined with the corresponding element at the same position.<br>
+        <code>a + b</code> is equivalent to <code>[1+10, 2+20, 3+30, 4+40]</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Operations with a Scalar</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4, 5])<br><br>print(a * 2)    # [ 2  4  6  8 10]<br>print(a + 100)  # [101 102 103 104 105]<br>print(a ** 2)   # [ 1  4  9 16 25]</div>
+      <div class="example-explanation">
+        When combining an array with a single number (scalar), the operation is applied to every element.<br>
+        This is called <strong>broadcasting</strong>.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li>Import NumPy with <code>import numpy as np</code></li>
+      <li>Create a NumPy array from a list using <code>np.array([...])</code></li>
+      <li>Use <code>.shape</code> to check dimensions and <code>.dtype</code> to check the data type</li>
+      <li>Indexing and slicing work the same way as Python lists</li>
+      <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> between arrays operate element-wise</li>
+    </ul>
+  </section>

@@ -1,0 +1,125 @@
+required_packages:
+  - sqlite3
+
+initial_code: |
+  import sqlite3
+
+  # Create an in-memory database
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+
+  # Create a table
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+
+  # Insert rows
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25),
+      (2, "Bob", 30),
+      (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_all_users(conn):
+      # Write your code here:
+      # Get a cursor with: cursor = conn.cursor()
+      # Execute a SELECT query: cursor.execute("SELECT * FROM users")
+      # Return all rows: return cursor.fetchall()
+      pass
+
+  print(get_all_users(conn))
+
+solution_code: |
+  import sqlite3
+
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_all_users(conn):
+      cursor = conn.cursor()
+      cursor.execute("SELECT * FROM users")
+      return cursor.fetchall()
+
+  print(get_all_users(conn))
+
+initial_files: []
+
+tests:
+  - name: "get_all_users function is defined"
+    description: "Check that the function get_all_users is defined"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_all_users is not defined"}
+          else:
+              result = {"passed": True, "message": "✓ Function get_all_users is defined"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "get_all_users returns all rows"
+    description: "Check that all 3 user rows are returned correctly"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_all_users is not defined"}
+          else:
+              r = exec_globals['get_all_users'](conn)
+              expected = [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Result does not match expected: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Return value is a list of tuples"
+    description: "Check that fetchall() returns a list"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_all_users is not defined"}
+          else:
+              r = exec_globals['get_all_users'](conn)
+              if isinstance(r, list):
+                  result = {"passed": True, "message": f"✓ A list is returned ({len(r)} row(s))"}
+              else:
+                  result = {"passed": False, "message": f"✗ Use cursor.fetchall() to return a list. Actual type: {type(r)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

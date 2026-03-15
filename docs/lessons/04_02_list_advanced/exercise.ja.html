@@ -94,7 +94,7 @@ find_max([-5, -2, -10, -1]) → -1</pre>
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -119,6 +119,7 @@ find_max([-5, -2, -10, -1]) → -1</pre>
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -181,6 +182,8 @@ find_max([-5, -2, -10, -1]) → -1</pre>
         const LESSON_ID = "04_02_list_advanced";
         const INITIAL_CODE = "def find_max(numbers):\n    max_value = numbers[0]  # \u6700\u521d\u306e\u8981\u7d20\u3092\u6700\u5927\u5024\u3068\u3057\u3066\u521d\u671f\u5316\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # for \u30eb\u30fc\u30d7\u3067 numbers \u306e\u5404\u8981\u7d20\u3092\u78ba\u8a8d\u3057\u3001\n    # max_value \u3088\u308a\u5927\u304d\u3051\u308c\u3070 max_value \u3092\u66f4\u65b0\u3059\u308b\n    return max_value\n\nprint(find_max([3, 7, 2, 9, 1]))      # 9\nprint(find_max([5]))                   # 5\nprint(find_max([-5, -2, -10, -1]))    # -1\n";
         const SOLUTION_CODE = "def find_max(numbers):\n    max_value = numbers[0]\n    for num in numbers:\n        if num \u003e max_value:\n            max_value = num\n    return max_value\n\nprint(find_max([3, 7, 2, 9, 1]))\nprint(find_max([5]))\nprint(find_max([-5, -2, -10, -1]))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 find_max \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([3, 7, 2, 9, 1])\n        if test_result == 9:\n            result = {\"passed\": True, \"message\": \"\u2713 [3, 7, 2, 9, 1] \u306e\u6700\u5927\u5024 9 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 9, \u5b9f\u969b\u306e\u5024: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "find_max([3, 7, 2, 9, 1]) \u304c 9 \u3092\u8fd4\u3059\u304b", "name": "\u8907\u6570\u8981\u7d20\u30ea\u30b9\u30c8\u306e\u6700\u5927\u5024"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 find_max \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([5])\n        if test_result == 5:\n            result = {\"passed\": True, \"message\": \"\u2713 [5] \u306e\u6700\u5927\u5024 5 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 5, \u5b9f\u969b\u306e\u5024: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "find_max([5]) \u304c 5 \u3092\u8fd4\u3059\u304b", "name": "1\u8981\u7d20\u30ea\u30b9\u30c8\u306e\u6700\u5927\u5024"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 find_max \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([-5, -2, -10, -1])\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 [-5, -2, -10, -1] \u306e\u6700\u5927\u5024 -1 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: -1, \u5b9f\u969b\u306e\u5024: {test_result}\uff08\u3059\u3079\u3066\u8ca0\u306e\u6570\u306e\u30ea\u30b9\u30c8\u3067\u3082\u6b63\u3057\u304f\u6700\u5927\u5024\u3092\u6c42\u3081\u3066\u304f\u3060\u3055\u3044\uff09\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "find_max([-5, -2, -10, -1]) \u304c -1 \u3092\u8fd4\u3059\u304b", "name": "\u8ca0\u306e\u6570\u30ea\u30b9\u30c8\u306e\u6700\u5927\u5024"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027find_max\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 find_max \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027find_max\u0027]([1, 1, 1])\n        if test_result == 1:\n            result = {\"passed\": True, \"message\": \"\u2713 [1, 1, 1] \u306e\u6700\u5927\u5024 1 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 1, \u5b9f\u969b\u306e\u5024: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "find_max([1, 1, 1]) \u304c 1 \u3092\u8fd4\u3059\u304b", "name": "\u540c\u3058\u5024\u306e\u30ea\u30b9\u30c8\u306e\u6700\u5927\u5024"}];
         
@@ -199,7 +202,9 @@ find_max([-5, -2, -10, -1]) → -1</pre>
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

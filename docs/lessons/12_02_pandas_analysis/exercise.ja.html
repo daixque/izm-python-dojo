@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン12_02: データ集計とフィルタリング</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン12_02: データ集計とフィルタリング</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>passing_average(df, score_col, threshold=60)</code> を実装しましょう。</p>
+<p>指定した列で <code>threshold</code>（しきい値）以上のスコアを持つ行だけを取り出し、その<strong>平均値</strong>を返します。</p>
+<h3>引数</h3>
+<ul>
+  <li><code>df</code>: PandasのDataFrame</li>
+  <li><code>score_col</code>: スコアが入っている列名（文字列）</li>
+  <li><code>threshold</code>: 合格ラインのスコア（デフォルトは <code>60</code>）</li>
+</ul>
+<h3>実行例</h3>
+<pre>  import pandas as pd
+df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+print(passing_average(df, "score", threshold=60))  # 80.0
+# 70, 80, 90 の平均 = 80.0</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li><code>import pandas as pd</code> を先頭に書いてください</li>
+                            <li><code>df[df[score_col] >= threshold]</code> で合格点以上の行を取り出します</li>
+                            <li>絞り込んだデータの <code>score_col</code> 列の平均（<code>.mean()</code>）を返します</li>
+                            <li>デフォルト引数 <code>threshold=60</code> を関数のシグネチャに含めてください</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>条件フィルタリングの書き方：<br>
+<code>passing = df[df[score_col] >= threshold]</code><br>
+これでthreshold以上のスコアを持つ行だけが残ります。
+</li>
+                            <li>フィルタリングした後で平均を計算します：<br>
+<code>passing[score_col].mean()</code>
+</li>
+                            <li>完成形はこのようになります：<br>
+<code>def passing_average(df, score_col, threshold=60):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>passing = df[df[score_col] >= threshold]</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return passing[score_col].mean()</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "12_02_pandas_analysis";
+        const INITIAL_CODE = "import pandas as pd\n\ndef passing_average(df, score_col, threshold=60):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # threshold\u4ee5\u4e0a\u306e\u30b9\u30b3\u30a2\u306e\u884c\u3092\u53d6\u308a\u51fa\u3057\u3001\u305d\u306e\u5e73\u5747\u3092\u8fd4\u3059\n    pass\n\n# \u30c6\u30b9\u30c8\u7528\u306eDataFrame\u3092\u4f5c\u6210\u3057\u3066\u78ba\u8a8d\u3057\u3066\u307f\u3088\u3046\ntest_df = pd.DataFrame({\"score\": [50, 70, 80, 40, 90]})\nprint(passing_average(test_df, \"score\", threshold=60))  # 80.0\n";
+        const SOLUTION_CODE = "import pandas as pd\n\ndef passing_average(df, score_col, threshold=60):\n    passing = df[df[score_col] \u003e= threshold]\n    return passing[score_col].mean()\n\ntest_df = pd.DataFrame({\"score\": [50, 70, 80, 40, 90]})\nprint(passing_average(test_df, \"score\", threshold=60))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = ["numpy", "pandas"];
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    import pandas as pd\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027passing_average\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 passing_average \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_df = pd.DataFrame({\"score\": [50, 70, 80, 40, 90]})\n        r = exec_globals[\u0027passing_average\u0027](test_df, \"score\", threshold=60)\n        if r == 80.0:\n            result = {\"passed\": True, \"message\": \"\u2713 passing_average = 80.0 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 80.0, \u5b9f\u969b: {r}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u30b9\u30b3\u30a2 [50, 70, 80, 40, 90] \u3067threshold=60\u306e\u3068\u304d 80.0 \u3092\u8fd4\u3059\u304b", "name": "\u57fa\u672c\u30c6\u30b9\u30c8: threshold=60 \u306e\u30c7\u30d5\u30a9\u30eb\u30c8\u52d5\u4f5c"}, {"code": "lang = \"ja\"\ntry:\n    import pandas as pd\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027passing_average\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 passing_average \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_df = pd.DataFrame({\"score\": [50, 70, 80, 40, 90]})\n        r = exec_globals[\u0027passing_average\u0027](test_df, \"score\")\n        if r == 80.0:\n            result = {\"passed\": True, \"message\": \"\u2713 \u30c7\u30d5\u30a9\u30eb\u30c8\u5f15\u6570 threshold=60 \u3067 80.0 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 80.0 (threshold=60\u306e\u30c7\u30d5\u30a9\u30eb\u30c8), \u5b9f\u969b: {r}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "threshold \u3092\u6307\u5b9a\u3057\u306a\u3044\u5834\u5408\u3001\u30c7\u30d5\u30a9\u30eb\u30c8\u5024 60 \u304c\u4f7f\u308f\u308c\u308b\u304b", "name": "\u30c7\u30d5\u30a9\u30eb\u30c8\u5f15\u6570\u306e\u30c6\u30b9\u30c8: threshold\u7701\u7565"}, {"code": "lang = \"ja\"\ntry:\n    import pandas as pd\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027passing_average\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 passing_average \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_df = pd.DataFrame({\"score\": [50, 70, 80, 40, 90]})\n        r = exec_globals[\u0027passing_average\u0027](test_df, \"score\", threshold=80)\n        if r == 85.0:\n            result = {\"passed\": True, \"message\": \"\u2713 threshold=80 \u3067 85.0 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: 85.0, \u5b9f\u969b: {r}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "threshold=80 \u306e\u3068\u304d [80, 90] \u306e\u5e73\u5747 85.0 \u3092\u8fd4\u3059\u304b", "name": "\u9ad8\u3044threshold\u3067\u306e\u30c6\u30b9\u30c8"}, {"code": "lang = \"ja\"\ntry:\n    import pandas as pd\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027passing_average\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 passing_average \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_df = pd.DataFrame({\"name\": [\"Alice\", \"Bob\", \"Charlie\", \"Dave\"], \"points\": [55, 75, 65, 45]})\n        r = exec_globals[\u0027passing_average\u0027](test_df, \"points\", threshold=60)\n        expected = (75 + 65) / 2\n        if abs(r - expected) \u003c 0.01:\n            result = {\"passed\": True, \"message\": f\"\u2713 points\u5217 threshold=60 \u3067 {r:.1f} \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: {expected:.1f}, \u5b9f\u969b: {r}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u0027points\u0027 \u5217\u3067\u30d5\u30a3\u30eb\u30bf\u30ea\u30f3\u30b0\u304c\u6b63\u3057\u304f\u52d5\u304f\u304b", "name": "\u5225\u306e\u5217\u540d\u3067\u306e\u30c6\u30b9\u30c8"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

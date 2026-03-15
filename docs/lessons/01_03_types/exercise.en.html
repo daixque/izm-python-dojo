@@ -74,7 +74,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -99,6 +99,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -161,6 +162,8 @@
         const LESSON_ID = "01_03_types";
         const INITIAL_CODE = "# Write your code here\n";
         const SOLUTION_CODE = "num1 = \"50\"\nnum2 = \"30\"\ntotal = int(num1) + int(num2)\nprint(f\"The sum is {total}\")\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Check if num1 and num2 are defined\n    if \u0027num1\u0027 not in exec_globals or \u0027num2\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Please define variables num1 and num2\"}\n    elif exec_globals.get(\u0027num1\u0027) != \"50\" or exec_globals.get(\u0027num2\u0027) != \"30\":\n        result = {\"passed\": False, \"message\": \"\u2717 Assign \\\"50\\\" to num1 and \\\"30\\\" to num2\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 Variables are correctly defined\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if variables num1 and num2 are assigned as strings", "name": "Test 1: num1 and num2 are defined as strings"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Execute user code\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    \n    # Expected sum value\n    expected_sum = 80\n    \n    # Check if calculation was performed\n    # (stored in a variable or included in output)\n    has_correct_calculation = False\n    \n    # Check sum from variables\n    for var_name, var_value in exec_globals.items():\n        if isinstance(var_value, int) and var_value == expected_sum:\n            has_correct_calculation = True\n            break\n    \n    if has_correct_calculation:\n        result = {\"passed\": True, \"message\": \"\u2713 Correctly converted and calculated\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Use int() to convert strings to integers and calculate the sum\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if strings are converted to integers and sum is calculated", "name": "Test 2: Correctly converting types and calculating"}, {"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\ntry:\n    # Capture standard output\n    old_stdout = sys.stdout\n    sys.stdout = StringIO()\n    \n    exec_globals = {}\n    exec(user_code, exec_globals)\n    output = sys.stdout.getvalue()\n    sys.stdout = old_stdout\n    \n    # Check if 80 is in output\n    if \"80\" in output:\n        # Check if \"sum\" or \"Sum\" is included\n        if \"sum\" in output.lower():\n            result = {\"passed\": True, \"message\": \"\u2713 Result is correctly displayed\"}\n        else:\n            result = {\"passed\": True, \"message\": \"\u2713 Result is displayed\"}\n    else:\n        result = {\"passed\": False, \"message\": \"\u2717 Sum (80) is not displayed\"}\nexcept Exception as e:\n    sys.stdout = old_stdout\n    result = {\"passed\": False, \"message\": f\"\u2717 Error occurred: {str(e)}\"}\n\nresult\n", "description": "Check if output is in the format \u0027The sum is 80\u0027", "name": "Test 3: Result is displayed in correct format"}];
         
@@ -179,7 +182,9 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

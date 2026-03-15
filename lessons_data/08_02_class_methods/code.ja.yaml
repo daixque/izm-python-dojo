@@ -1,0 +1,129 @@
+initial_code: |
+  class Counter:
+      # ここにコードを書いてください
+      # __init__ でカウントを 0 に初期化する
+      # increment() でカウントを 1 増やす
+      # reset() でカウントを 0 に戻す
+      # get_count() で現在のカウントを返す
+      pass
+
+  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())  # 2
+  c.reset()
+  print(c.get_count())  # 0
+
+solution_code: |
+  class Counter:
+      def __init__(self):
+          self.count = 0
+
+      def increment(self):
+          self.count += 1
+
+      def reset(self):
+          self.count = 0
+
+      def get_count(self):
+          return self.count
+
+  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())
+  c.reset()
+  print(c.get_count())
+
+initial_files: []
+
+tests:
+  - name: "increment() と get_count() の確認"
+    description: "increment() を2回呼んだあと get_count() が 2 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Counter が定義されていません"}
+          else:
+              c = exec_globals['Counter']()
+              c.increment()
+              c.increment()
+              count = c.get_count()
+              if count == 2:
+                  result = {"passed": True, "message": "✓ increment() × 2 → get_count() = 2 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ get_count() は 2 になるはずです。実際: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "reset() の確認"
+    description: "reset() を呼んだあと get_count() が 0 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Counter が定義されていません"}
+          else:
+              c = exec_globals['Counter']()
+              c.increment()
+              c.increment()
+              c.increment()
+              c.reset()
+              count = c.get_count()
+              if count == 0:
+                  result = {"passed": True, "message": "✓ reset() 後 get_count() = 0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ reset() 後の get_count() は 0 になるはずです。実際: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "初期値の確認"
+    description: "Counter() の初期カウントが 0 か"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Counter が定義されていません"}
+          else:
+              c = exec_globals['Counter']()
+              count = c.get_count()
+              if count == 0:
+                  result = {"passed": True, "message": "✓ 初期カウント = 0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 初期カウントは 0 になるはずです。実際: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "複数インスタンスの独立確認"
+    description: "2つの Counter が独立して動作するか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Counter が定義されていません"}
+          else:
+              c1 = exec_globals['Counter']()
+              c2 = exec_globals['Counter']()
+              c1.increment()
+              c1.increment()
+              c1.increment()
+              c2.increment()
+              if c1.get_count() == 3 and c2.get_count() == 1:
+                  result = {"passed": True, "message": "✓ c1=3, c2=1 インスタンスが独立して動作しています 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ c1={c1.get_count()}, c2={c2.get_count()} — インスタンスが独立していません"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

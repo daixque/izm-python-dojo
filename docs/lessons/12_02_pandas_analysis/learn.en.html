@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson12_02: Data Aggregation and Filtering</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Data Aggregation and Filtering</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔎 Filtering Data with Conditions</h2>
+  <p>In Pandas, you can extract only the rows that match a condition. This is called <strong>filtering</strong>.</p>
+  <p>For example, you can easily pull out "only students who scored 70 or above".</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic Conditional Filtering</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie", "Dave"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90, 45]<br>})<br><br># Keep only rows where score >= 70<br>passing = df[df["score"] >= 70]<br>print(passing)<br>#       name  score<br># 0    Alice     80<br># 2  Charlie     90</div>
+    <div class="example-explanation">
+      <code>df[df["score"] >= 70]</code> extracts rows where the score column is 70 or more.<br>
+      <code>df["score"] >= 70</code> creates a True/False condition, and only the True rows are kept.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Multiple Conditions</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie", "Dave"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90, 45],<br>&nbsp;&nbsp;&nbsp;&nbsp;"class": ["A", "B", "A", "B"]<br>})<br><br># Class A AND score >= 70<br>result = df[(df["class"] == "A") &amp; (df["score"] >= 70)]<br>print(result)</div>
+    <div class="example-explanation">
+      Use <code>&amp;</code> (AND) or <code>|</code> (OR) to combine multiple conditions.<br>
+      Make sure to wrap each condition in parentheses <code>()</code>.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📦 Grouping Data with groupby()</h2>
+  <p><strong>groupby()</strong> lets you group data by the values in a column and then aggregate each group.</p>
+  <p>For example, you can calculate "average score per class" or "total points per team".</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Aggregating by Group</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"class": ["A", "B", "A", "B", "A"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 60, 90, 70, 85]<br>})<br><br># Average score per class<br>group_avg = df.groupby("class")["score"].mean()<br>print(group_avg)<br># class<br># A    85.0<br># B    65.0</div>
+    <div class="example-explanation">
+      <code>groupby("class")</code> creates groups based on the class column.<br>
+      <code>["score"].mean()</code> then calculates the average score for each group.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔃 Sorting Data with sort_values()</h2>
+  <p><strong>sort_values()</strong> lets you sort data by the values in a specified column.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Ascending and Descending Order</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90]<br>})<br><br># Sort ascending (lowest first)<br>asc = df.sort_values("score")<br>print(asc)<br><br># Sort descending (highest first)<br>desc = df.sort_values("score", ascending=False)<br>print(desc)</div>
+    <div class="example-explanation">
+      The default sort order is ascending (smallest to largest).<br>
+      Set <code>ascending=False</code> to sort in descending order (largest to smallest).
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>❓ Handling Missing Values (NaN)</h2>
+  <p>Real-world data often has missing entries. Pandas represents missing values as <strong>NaN</strong> (Not a Number).</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Working with NaN Data</div>
+    <div class="example-code">import pandas as pd<br>import numpy as np<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, np.nan, 90]<br>})<br><br># Check where NaN values are<br>print(df.isnull())<br><br># Mean ignoring NaN automatically<br>print(df["score"].mean())&nbsp;&nbsp;# 85.0</div>
+    <div class="example-explanation">
+      <code>isnull()</code> shows where NaN values are located.<br>
+      Aggregation functions like <code>mean()</code> <strong>automatically ignore NaN</strong> values.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Removing or Filling NaN</div>
+    <div class="example-code">import pandas as pd<br>import numpy as np<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, np.nan, 90, np.nan, 70]<br>})<br><br># Remove rows with NaN<br>clean = df.dropna()<br>print(clean)<br><br># Fill NaN with 0<br>filled = df.fillna(0)<br>print(filled)</div>
+    <div class="example-explanation">
+      <code>dropna()</code>: Removes rows that contain NaN values.<br>
+      <code>fillna(value)</code>: Replaces NaN with the specified value.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li>Use <code>df[df["column"] condition]</code> to filter rows matching a condition</li>
+    <li>Combine multiple conditions with <code>&amp;</code> (AND) or <code>|</code> (OR)</li>
+    <li>Use <code>groupby("column")</code> to aggregate data by group</li>
+    <li>Use <code>sort_values("column")</code> to sort data</li>
+    <li>NaN (missing values) are automatically ignored by functions like <code>mean()</code></li>
+    <li>Use <code>dropna()</code> or <code>fillna()</code> to handle missing values</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

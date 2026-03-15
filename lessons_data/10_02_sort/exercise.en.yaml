@@ -1,0 +1,45 @@
+lesson:
+  number: "10_02"
+  id: "10_02_sort"
+  title: "Sort Algorithms"
+description: "Implement bubble sort to sort a list of numbers in ascending order."
+
+task_description: |
+  <p>Implement the function <code>bubble_sort(numbers)</code> using the bubble sort algorithm.</p>
+  <p>Return a <strong>new list</strong> with the numbers from <code>numbers</code> sorted in ascending order (smallest first).</p>
+  <p><strong>Important:</strong> Do not use <code>sort()</code> or <code>sorted()</code>!</p>
+  <h3>Example Output</h3>
+  <pre>  print(bubble_sort([5, 3, 8, 1, 2]))     # [1, 2, 3, 5, 8]
+  print(bubble_sort([-3, 0, -1, 2]))      # [-3, -1, 0, 2]
+  print(bubble_sort([1]))                 # [1]</pre>
+
+instructions:
+  - "Use <code>numbers.copy()</code> to create a copy so the original list is not modified"
+  - "Outer loop runs n passes: <code>for i in range(n):</code>"
+  - "Inner loop compares neighbors: <code>for j in range(n - 1 - i):</code>"
+  - "If <code>result[j] > result[j+1]</code>, swap: <code>result[j], result[j+1] = result[j+1], result[j]</code>"
+  - "Return <code>result</code> at the end"
+
+hints:
+  - hint: |
+      Start by copying the list and getting its length:<br>
+      <code>def bubble_sort(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = numbers.copy()</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>n = len(result)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>for j in range(n - 1 - i):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code># write comparison and swap here</code>
+  - hint: |
+      Compare neighbors and swap if they are in the wrong order:<br>
+      <code>if result[j] > result[j + 1]:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result[j], result[j + 1] = result[j + 1], result[j]</code>
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def bubble_sort(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = numbers.copy()</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>n = len(result)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>for j in range(n - 1 - i):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if result[j] > result[j + 1]:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>result[j], result[j + 1] = result[j + 1], result[j]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return result</code>

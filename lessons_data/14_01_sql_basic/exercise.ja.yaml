@@ -1,0 +1,34 @@
+lesson:
+  number: "14_01"
+  id: "14_01_sql_basic"
+  title: "SQLの基礎"
+description: "データベースとテーブルの基本概念を理解し、Pythonのsqlite3モジュールでSELECT・INSERT・CREATE TABLEを使う方法を学びます。"
+
+task_description: |
+  <p>関数 <code>get_all_users(conn)</code> を実装しましょう。</p>
+  <p>テーブル <code>users</code> から<strong>全件</strong>を取得して返す関数です。</p>
+  <h3>テーブルの内容</h3>
+  <pre>  id | name    | age
+  ---+---------+----
+   1 | Alice   |  25
+   2 | Bob     |  30
+   3 | Charlie |  22</pre>
+  <h3>期待する戻り値</h3>
+  <pre>  [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]</pre>
+
+instructions:
+  - "テーブルの作成とデータの挿入はすでに用意されています"
+  - "<code>conn.cursor()</code> でカーソルを取得します"
+  - "<code>cursor.execute(\"SELECT * FROM users\")</code> で全件を取得するSQL文を実行します"
+  - "<code>cursor.fetchall()</code> で結果を全件取得して <code>return</code> します"
+
+hints:
+  - hint: |
+      SELECT文の基本：<br>
+      <code>cursor = conn.cursor()</code><br>
+      <code>cursor.execute("SELECT * FROM users")</code><br>
+      <code>return cursor.fetchall()</code>
+  - hint: |
+      <code>SELECT * FROM テーブル名</code> で全列・全行を取得できます。<br>
+      <code>fetchall()</code> は結果をタプルのリストとして返します。<br>
+      例: <code>[(1, 'Alice', 25), (2, 'Bob', 30)]</code>

@@ -1,0 +1,126 @@
+initial_code: |
+  def bubble_sort(numbers):
+      # ここにコードを書いてください
+      # numbers.copy() でコピーを作る
+      # 2重ループで隣り合う要素を比較・交換
+      # sort() や sorted() は使わないこと！
+      pass
+
+  print(bubble_sort([5, 3, 8, 1, 2]))   # [1, 2, 3, 5, 8]
+  print(bubble_sort([-3, 0, -1, 2]))    # [-3, -1, 0, 2]
+  print(bubble_sort([1]))               # [1]
+
+solution_code: |
+  def bubble_sort(numbers):
+      result = numbers.copy()
+      n = len(result)
+      for i in range(n):
+          for j in range(n - 1 - i):
+              if result[j] > result[j + 1]:
+                  result[j], result[j + 1] = result[j + 1], result[j]
+      return result
+
+  print(bubble_sort([5, 3, 8, 1, 2]))
+  print(bubble_sort([-3, 0, -1, 2]))
+  print(bubble_sort([1]))
+
+initial_files: []
+
+tests:
+  - name: "bubble_sort([5,3,8,1,2]) の確認"
+    description: "[5,3,8,1,2] を昇順に並び替えると [1,2,3,5,8]"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
+          else:
+              test_result = exec_globals['bubble_sort']([5, 3, 8, 1, 2])
+              if test_result == [1, 2, 3, 5, 8]:
+                  result = {"passed": True, "message": "✓ bubble_sort([5,3,8,1,2]) = [1,2,3,5,8] 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([5,3,8,1,2]) は [1,2,3,5,8] になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "bubble_sort([-3,0,-1,2]) の確認"
+    description: "負の数を含むリストも正しく並び替えられるか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
+          else:
+              test_result = exec_globals['bubble_sort']([-3, 0, -1, 2])
+              if test_result == [-3, -1, 0, 2]:
+                  result = {"passed": True, "message": "✓ bubble_sort([-3,0,-1,2]) = [-3,-1,0,2] 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([-3,0,-1,2]) は [-3,-1,0,2] になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "bubble_sort([1]) の確認"
+    description: "要素が1つのリストは [1] のままを返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
+          else:
+              test_result = exec_globals['bubble_sort']([1])
+              if test_result == [1]:
+                  result = {"passed": True, "message": "✓ bubble_sort([1]) = [1] 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([1]) は [1] になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "元のリストが変更されていないか確認"
+    description: "bubble_sort は新しいリストを返し、元のリストを変更しない"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
+          else:
+              original = [5, 3, 8, 1, 2]
+              original_copy = original.copy()
+              test_result = exec_globals['bubble_sort'](original)
+              if original == original_copy:
+                  result = {"passed": True, "message": "✓ 元のリストは変更されていません"}
+              else:
+                  result = {"passed": False, "message": f"✗ 元のリストが変更されました。numbers.copy() を使って新しいリストを返してください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "sort()/sorted() を使っていないか確認"
+    description: "bubble_sort の実装に sort() や sorted() が使われていないか"
+    code: |
+      try:
+          import inspect
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 bubble_sort が定義されていません"}
+          else:
+              source = inspect.getsource(exec_globals['bubble_sort'])
+              if '.sort(' in source or 'sorted(' in source:
+                  result = {"passed": False, "message": "✗ sort() や sorted() を使わずにバブルソートのアルゴリズムを実装してください"}
+              else:
+                  result = {"passed": True, "message": "✓ sort()/sorted() を使わずに実装されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

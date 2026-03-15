@@ -1,0 +1,40 @@
+lesson:
+  number: "07_02"
+  id: "07_02_exception_types"
+  title: "例外の種類"
+description: "複数の例外の種類を使い分けて、安全な割り算関数を実装します。"
+
+task_description: |
+  <p>関数 <code>safe_divide(a, b)</code> を実装しましょう。</p>
+  <p><code>a</code> を <code>b</code> で割った結果を返します。</p>
+  <p>エラーが発生した場合は、エラーの種類を文字列で返します。</p>
+  <h3>実行例</h3>
+  <pre>  print(safe_divide(10, 2))    # 5.0
+  print(safe_divide(10, 0))    # "ZeroDivisionError"
+  print(safe_divide(10, "a"))  # "TypeError"</pre>
+
+instructions:
+  - "関数シグネチャ <code>def safe_divide(a, b):</code> は用意済みです"
+  - "<code>try:</code> ブロックの中で <code>a / b</code> を計算して返します"
+  - "<code>except ZeroDivisionError:</code> で 0 除算エラーをキャッチし、文字列 <code>\"ZeroDivisionError\"</code> を返します"
+  - "<code>except TypeError:</code> で型エラーをキャッチし、文字列 <code>\"TypeError\"</code> を返します"
+
+hints:
+  - hint: |
+      複数の except を使う基本的な形：<br>
+      <code>def safe_divide(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>try:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>except ZeroDivisionError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>except TypeError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      エラーの種類の名前を文字列として返します：<br>
+      <code>except ZeroDivisionError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "ZeroDivisionError"</code><br>
+      <code>except TypeError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "TypeError"</code>
+  - hint: |
+      <code>10 / "a"</code> のように、数値でないものを使って割り算すると <code>TypeError</code> が発生します。<br>
+      <code>10 / 0</code> のように 0 で割ると <code>ZeroDivisionError</code> が発生します。

@@ -1,0 +1,103 @@
+lesson:
+  number: "09_02"
+  id: "09_02_recursion_advanced"
+  title: "再帰の応用"
+
+content: |
+  <section class="section">
+    <h2>🐚 フィボナッチ数列とは</h2>
+    <p><strong>フィボナッチ数列</strong>は、次のルールで並んでいる数の列です。</p>
+    <ul>
+      <li>最初の2つの数は <code>0</code> と <code>1</code></li>
+      <li>それ以降の数は、<strong>直前の2つの数を足したもの</strong></li>
+    </ul>
+    <p>実際に並べてみましょう：</p>
+    <p><code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...</code></p>
+    <ul>
+      <li>0番目 = 0</li>
+      <li>1番目 = 1</li>
+      <li>2番目 = 0 + 1 = 1</li>
+      <li>3番目 = 1 + 1 = 2</li>
+      <li>4番目 = 1 + 2 = 3</li>
+      <li>5番目 = 2 + 3 = 5</li>
+      <li>6番目 = 3 + 5 = 8</li>
+    </ul>
+    <p>フィボナッチ数列は自然界のいろんなところに現れます。花びらの枚数や、貝殻のらせんの形などにこのパターンが見られます。</p>
+  </section>
+
+  <section class="section">
+    <h2>🔄 フィボナッチを再帰で実装する</h2>
+    <p><code>fibonacci(n)</code> を数式で表すと：</p>
+    <ul>
+      <li><code>fibonacci(0) = 0</code>（ベースケース）</li>
+      <li><code>fibonacci(1) = 1</code>（ベースケース）</li>
+      <li><code>fibonacci(n) = fibonacci(n-1) + fibonacci(n-2)</code>（再帰ケース）</li>
+    </ul>
+    <p>これはそのまま再帰で書けます！</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">フィボナッチ数列の再帰実装</div>
+      <div class="example-code">def fibonacci(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# ベースケース（2つある！）<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 再帰ケース<br>&nbsp;&nbsp;&nbsp;&nbsp;return fibonacci(n - 1) + fibonacci(n - 2)<br><br>print(fibonacci(0))&nbsp;&nbsp;# 0<br>print(fibonacci(6))&nbsp;&nbsp;# 8<br>print(fibonacci(10)) # 55</div>
+      <div class="example-explanation">
+        ベースケースが2つあるのがポイントです！<br>
+        <code>fibonacci(0)</code> と <code>fibonacci(1)</code> が再帰の「土台」になります。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔁 再帰 vs ループ：どちらを使う？</h2>
+    <p>実は、再帰で書けることの多くはループでも書けます。どちらを使うべきか比べてみましょう。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">階乗：再帰バージョン vs ループバージョン</div>
+      <div class="example-code"># 再帰バージョン<br>def factorial_recursive(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * factorial_recursive(n - 1)<br><br># ループバージョン<br>def factorial_loop(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;result = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1, n + 1):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result *= i<br>&nbsp;&nbsp;&nbsp;&nbsp;return result<br><br>print(factorial_recursive(5))&nbsp;&nbsp;# 120<br>print(factorial_loop(5))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 120</div>
+      <div class="example-explanation">
+        どちらも同じ結果になります。<br>
+        <strong>再帰</strong>: コードが数式に近くて読みやすい場合がある<br>
+        <strong>ループ</strong>: 一般的に速くてメモリ効率がよい
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🐢 フィボナッチ再帰の問題点</h2>
+    <p>再帰版のフィボナッチには大きな問題があります。同じ計算を何度も繰り返してしまうのです。</p>
+    <p>たとえば <code>fibonacci(5)</code> を計算するとき、内部でこんなことが起きています：</p>
+    <p><code>fibonacci(5)</code><br>
+    → <code>fibonacci(4)</code> + <code>fibonacci(3)</code><br>
+    → (<code>fibonacci(3)</code> + <code>fibonacci(2)</code>) + (<code>fibonacci(2)</code> + <code>fibonacci(1)</code>)<br>
+    → ...</p>
+    <p><code>fibonacci(3)</code> が2回、<code>fibonacci(2)</code> が3回計算されています！nが大きくなるほど無駄な計算が爆発的に増えます。</p>
+  </section>
+
+  <section class="section">
+    <h2>⚡ メモ化（もじか）で高速化</h2>
+    <p><strong>メモ化（Memoization）</strong>とは、一度計算した結果を記録しておいて、同じ計算が来たときに記録から返すテクニックです。</p>
+    <p>「メモ」を取るように、計算結果を「覚えておく」のでメモ化と言います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">メモ化を使ったフィボナッチ</div>
+      <div class="example-code"># メモを保存する辞書<br>memo = {}<br><br>def fibonacci_fast(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# すでに計算済みなら記録から返す<br>&nbsp;&nbsp;&nbsp;&nbsp;if n in memo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return memo[n]<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# ベースケース<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 計算して結果を記録<br>&nbsp;&nbsp;&nbsp;&nbsp;result = fibonacci_fast(n-1) + fibonacci_fast(n-2)<br>&nbsp;&nbsp;&nbsp;&nbsp;memo[n] = result<br>&nbsp;&nbsp;&nbsp;&nbsp;return result<br><br>print(fibonacci_fast(10))&nbsp;&nbsp;# 55<br>print(fibonacci_fast(30))&nbsp;&nbsp;# 832040</div>
+      <div class="example-explanation">
+        辞書 <code>memo</code> に計算結果を保存することで、同じ計算を繰り返しません。<br>
+        これによりフィボナッチの計算がとても速くなります！
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><strong>フィボナッチ数列</strong>：前の2つの数を足した数が並ぶ数列</li>
+      <li>再帰でフィボナッチを実装できるが、そのままでは同じ計算を繰り返す</li>
+      <li>再帰はコードが数式に近く読みやすいが、ループより遅いことが多い</li>
+      <li><strong>メモ化</strong>：計算結果を辞書に保存して再利用することで高速化できる</li>
+    </ul>
+  </section>

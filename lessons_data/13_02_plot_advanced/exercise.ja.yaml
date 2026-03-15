@@ -1,0 +1,36 @@
+lesson:
+  number: "13_02"
+  id: "13_02_plot_advanced"
+  title: "グラフのカスタマイズ"
+description: "複数のデータ系列を1つのグラフに描き、凡例・グリッド線・散布図などのカスタマイズ方法を学びます。"
+
+task_description: |
+  <p>1〜12月の<strong>気温</strong>と<strong>降水量</strong>の両方を1つのグラフに描くプログラムを完成させましょう。</p>
+  <h3>実装内容</h3>
+  <ul>
+    <li><code>plt.plot(months, temperature, label="Temperature (°C)")</code> で気温の折れ線グラフを描く</li>
+    <li><code>plt.plot(months, rainfall, label="Rainfall (mm)")</code> で降水量の折れ線グラフを描く</li>
+    <li><code>plt.title("Monthly Temperature and Rainfall")</code> でタイトルを設定する</li>
+    <li><code>plt.xlabel("Month")</code> でx軸ラベルを設定する</li>
+    <li><code>plt.legend()</code> で凡例を表示する</li>
+    <li><code>plt.grid(True)</code> でグリッド線を表示する</li>
+    <li><code>plt.show()</code> でグラフを表示する</li>
+  </ul>
+  <p>コードを実行すると、右の「グラフ出力」エリアに2本の折れ線グラフが表示されます。</p>
+
+instructions:
+  - "<code>plt.plot()</code> を2回呼ぶことで、1つのグラフに複数のデータ系列を重ねて描けます"
+  - "<code>label=</code> 引数に文字列を渡すと、<code>plt.legend()</code> を呼んだときに凡例として表示されます"
+  - "<code>plt.grid(True)</code> でグリッド線（方眼紙のような線）を表示できます"
+
+hints:
+  - hint: |
+      2つのデータ系列を描く基本的な書き方：<br>
+      <code>plt.plot(months, temperature, label="Temperature (°C)")</code><br>
+      <code>plt.plot(months, rainfall, label="Rainfall (mm)")</code><br>
+      <code>plt.legend()</code>
+  - hint: |
+      凡例とグリッド線を追加するには：<br>
+      <code>plt.legend()</code>  # 凡例を表示<br>
+      <code>plt.grid(True)</code>  # グリッド線を表示<br>
+      これらは <code>plt.show()</code> より前に呼んでください。

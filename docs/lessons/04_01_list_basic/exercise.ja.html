@@ -97,7 +97,7 @@ get_element(["apple", "banana"], 5)            → None（範囲外）</pre>
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -122,6 +122,7 @@ get_element(["apple", "banana"], 5)            → None（範囲外）</pre>
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -184,6 +185,8 @@ get_element(["apple", "banana"], 5)            → None（範囲外）</pre>
         const LESSON_ID = "04_01_list_basic";
         const INITIAL_CODE = "def get_element(fruits, index):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # index \u304c 0 \u4ee5\u4e0a\u304b\u3064 len(fruits) \u672a\u6e80\u306a\u3089 fruits[index] \u3092\u8fd4\u3059\n    # \u305d\u3046\u3067\u306a\u3051\u308c\u3070 None \u3092\u8fd4\u3059\n    pass\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nprint(get_element([\"apple\", \"banana\", \"orange\"], 0))  # apple\nprint(get_element([\"apple\", \"banana\", \"orange\"], 2))  # orange\nprint(get_element([\"apple\", \"banana\"], 5))            # None\n";
         const SOLUTION_CODE = "def get_element(fruits, index):\n    if 0 \u003c= index \u003c len(fruits):\n        return fruits[index]\n    else:\n        return None\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nprint(get_element([\"apple\", \"banana\", \"orange\"], 0))\nprint(get_element([\"apple\", \"banana\", \"orange\"], 2))\nprint(get_element([\"apple\", \"banana\"], 5))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_element \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\", \"orange\"], 0)\n        if test_result == \"apple\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u30a4\u30f3\u30c7\u30c3\u30af\u30b9 0 \u3067 \u0027apple\u0027 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: \u0027apple\u0027, \u5b9f\u969b\u306e\u5024: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\", \"orange\"], 0) \u304c \"apple\" \u3092\u8fd4\u3059\u304b", "name": "\u5148\u982d\u8981\u7d20\u306e\u53d6\u5f97"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_element \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\", \"orange\"], 2)\n        if test_result == \"orange\":\n            result = {\"passed\": True, \"message\": \"\u2713 \u30a4\u30f3\u30c7\u30c3\u30af\u30b9 2 \u3067 \u0027orange\u0027 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: \u0027orange\u0027, \u5b9f\u969b\u306e\u5024: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\", \"orange\"], 2) \u304c \"orange\" \u3092\u8fd4\u3059\u304b", "name": "\u672b\u5c3e\u8981\u7d20\u306e\u53d6\u5f97"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_element \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\", \"banana\"], 5)\n        if test_result is None:\n            result = {\"passed\": True, \"message\": \"\u2713 \u7bc4\u56f2\u5916\u30a4\u30f3\u30c7\u30c3\u30af\u30b9\u3067 None \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: None, \u5b9f\u969b\u306e\u5024: \u0027{test_result}\u0027\uff08\u7bc4\u56f2\u5916\u306e\u30a4\u30f3\u30c7\u30c3\u30af\u30b9\u306f None \u3092\u8fd4\u3059\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\uff09\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\", \"banana\"], 5) \u304c None \u3092\u8fd4\u3059\u304b", "name": "\u7bc4\u56f2\u5916\u30a4\u30f3\u30c7\u30c3\u30af\u30b9\u306e\u51e6\u7406"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_element\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_element \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027get_element\u0027]([\"apple\"], 0)\n        if test_result == \"apple\":\n            result = {\"passed\": True, \"message\": \"\u2713 1\u8981\u7d20\u30ea\u30b9\u30c8\u304b\u3089\u30a4\u30f3\u30c7\u30c3\u30af\u30b9 0 \u3067 \u0027apple\u0027 \u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u307e\u3057\u305f\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024: \u0027apple\u0027, \u5b9f\u969b\u306e\u5024: \u0027{test_result}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "get_element([\"apple\"], 0) \u304c \"apple\" \u3092\u8fd4\u3059\u304b", "name": "1\u8981\u7d20\u30ea\u30b9\u30c8\u306e\u53d6\u5f97"}];
         
@@ -202,7 +205,9 @@ get_element(["apple", "banana"], 5)            → None（範囲外）</pre>
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

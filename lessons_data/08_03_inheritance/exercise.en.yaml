@@ -1,0 +1,49 @@
+lesson:
+  number: "08_03"
+  id: "08_03_inheritance"
+  title: "Inheritance"
+description: "Use inheritance to implement a base class and a derived class."
+
+task_description: |
+  <p>Implement a base class <code>Shape</code> and a class <code>Rectangle</code> that inherits from it.</p>
+  <h3>Shape class</h3>
+  <ul>
+    <li>Has a <code>name</code> attribute (set in <code>__init__</code>)</li>
+    <li><code>area()</code> method returns <code>0</code></li>
+  </ul>
+  <h3>Rectangle class (inherits from Shape)</h3>
+  <ul>
+    <li>Has <code>width</code> and <code>height</code> attributes</li>
+    <li><code>area()</code> method returns <code>width * height</code></li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  r = Rectangle(4, 5)
+  print(r.area())                     # 20
+  print(isinstance(r, Shape))         # True
+  print(isinstance(r, Rectangle))     # True</pre>
+
+instructions:
+  - "Define <code>class Shape:</code> with <code>__init__(self, name)</code> and <code>area(self)</code>"
+  - "Define <code>class Rectangle(Shape):</code> to inherit from Shape"
+  - "In Rectangle's <code>__init__(self, width, height)</code>, also call <code>super().__init__(\"Rectangle\")</code> to initialize the parent"
+  - "Rectangle's <code>area()</code> returns <code>self.width * self.height</code>"
+
+hints:
+  - hint: |
+      Basic Shape class:<br>
+      <code>class Shape:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = name</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def area(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 0</code>
+  - hint: |
+      Inheriting in Rectangle:<br>
+      <code>class Rectangle(Shape):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, width, height):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>super().__init__("Rectangle")</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.width = width</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.height = height</code>
+  - hint: |
+      Override area() in Rectangle:<br>
+      <code>def area(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return self.width * self.height</code>

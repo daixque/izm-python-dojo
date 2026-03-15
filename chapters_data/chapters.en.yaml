@@ -28,3 +28,48 @@ chapters:
     number: "06"
     title: "Practical Projects"
     description: "Apply your knowledge to build real programs"
+
+  - id: "chapter7"
+    number: "07"
+    title: "Error Handling"
+    description: "Learn to handle errors safely with exceptions"
+
+  - id: "chapter8"
+    number: "08"
+    title: "Classes and OOP"
+    description: "Learn to design programs using classes and objects"
+
+  - id: "chapter9"
+    number: "09"
+    title: "Recursion"
+    description: "Learn the concept of functions that call themselves"
+
+  - id: "chapter10"
+    number: "10"
+    title: "Introduction to Algorithms"
+    description: "Learn fundamental search and sort algorithms"
+
+  - id: "chapter11"
+    number: "11"
+    title: "NumPy Basics"
+    description: "Learn the NumPy library for numerical computation"
+
+  - id: "chapter12"
+    number: "12"
+    title: "Pandas Data Analysis"
+    description: "Learn the Pandas library for data analysis"
+
+  - id: "chapter13"
+    number: "13"
+    title: "Graph Drawing (Matplotlib)"
+    description: "Learn to visualize data by drawing charts and graphs"
+
+  - id: "chapter14"
+    number: "14"
+    title: "Databases and SQL"
+    description: "Learn database operations using SQLite"
+
+  - id: "chapter15"
+    number: "15"
+    title: "Advanced Projects"
+    description: "Take on practical projects combining all your knowledge"

@@ -1,0 +1,44 @@
+lesson:
+  number: "09_01"
+  id: "09_01_recursion_basic"
+  title: "Recursion Basics"
+description: "Implement a factorial function using recursion."
+
+task_description: |
+  <p>Implement the function <code>factorial(n)</code> using recursion.</p>
+  <p>It should return the factorial of <code>n</code> (<code>n!</code>), which is the product of all integers from 1 to n.</p>
+  <ul>
+    <li><code>0!</code> = 1 (special rule)</li>
+    <li><code>1!</code> = 1</li>
+    <li><code>5!</code> = 5 × 4 × 3 × 2 × 1 = 120</li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  print(factorial(0))   # 1
+  print(factorial(5))   # 120
+  print(factorial(10))  # 3628800</pre>
+
+instructions:
+  - "Base case: when <code>n == 0</code>, return <code>1</code>"
+  - "Recursive case: return <code>n * factorial(n - 1)</code>"
+  - "Use an <code>if</code> statement to separate the base case from the recursive case"
+
+hints:
+  - hint: |
+      Start with the base case:<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      What is the factorial of 0?
+  - hint: |
+      Now add the recursive case:<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return n * factorial(???)</code><br>
+      Since <code>n! = n × (n-1)!</code>, what should you pass to <code>factorial</code>?
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return n * factorial(n - 1)</code>

@@ -1,0 +1,33 @@
+lesson:
+  number: "14_02"
+  id: "14_02_sql_advanced"
+  title: "WHERE・集計・ORDER BY"
+description: "WHEREによる絞り込み、COUNT・AVG・MAX・MINなどの集計関数、ORDER BYによる並べ替えを学びます。"
+
+task_description: |
+  <p>関数 <code>get_adult_users(conn, min_age)</code> を実装しましょう。</p>
+  <p><code>users</code> テーブルから <code>age</code> が <code>min_age</code> 以上のユーザーを取得し、<strong>年齢の昇順</strong>で返す関数です。</p>
+  <h3>実行例</h3>
+  <pre>  get_adult_users(conn, 25)
+  # → [(1, 'Alice', 25), (2, 'Bob', 30)]
+
+  get_adult_users(conn, 30)
+  # → [(2, 'Bob', 30)]</pre>
+
+instructions:
+  - "テーブルの作成とデータの挿入はすでに用意されています"
+  - "<code>WHERE age >= ?</code> で <code>min_age</code> 以上のユーザーを絞り込みます"
+  - "<code>ORDER BY age</code> で年齢の昇順に並べ替えます"
+  - "<code>?</code> プレースホルダーに対応する値は <code>(min_age,)</code> のようにタプルで渡します"
+
+hints:
+  - hint: |
+      WHERE と ORDER BY を組み合わせた書き方：<br>
+      <code>cursor.execute(</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>"SELECT * FROM users WHERE age >= ? ORDER BY age",</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>(min_age,)</code><br>
+      <code>)</code>
+  - hint: |
+      <code>(min_age,)</code> の末尾のカンマに注意してください。<br>
+      これは要素が1つのタプルを作るためです。<br>
+      <code>(min_age)</code> と書くと単なる括弧になってしまいます。

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson10_01: Search Algorithms</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson10_01: Search Algorithms</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>linear_search(items, target)</code>.</p>
+<p>Search the list <code>items</code> for <code>target</code> using linear search (checking each element from the beginning). Return the index of the target if found, or <code>-1</code> if not found.</p>
+<h3>Example Output</h3>
+<pre>  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+print(linear_search([3, 1, 4, 1, 5], 1))  # 1 (first occurrence)</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Use a <code>for</code> loop with <code>range(len(items))</code> to check each index <code>i</code></li>
+                            <li>If <code>items[i] == target</code>, return <code>i</code></li>
+                            <li>If the loop finishes without finding the target, return <code>-1</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Loop through indices and compare each element:<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == ???:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code>
+</li>
+                            <li>After the loop, return -1 if not found:<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+</li>
+                            <li>The completed function looks like this:<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "10_01_search";
+        const INITIAL_CODE = "def linear_search(items, target):\n    # Write your code here\n    # Use a for loop to check each element from the beginning\n    # Return the index when found\n    # Return -1 if not found\n    pass\n\nprint(linear_search([3, 1, 4, 1, 5], 4))  # 2\nprint(linear_search([3, 1, 4, 1, 5], 9))  # -1\n";
+        const SOLUTION_CODE = "def linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\nprint(linear_search([3, 1, 4, 1, 5], 4))\nprint(linear_search([3, 1, 4, 1, 5], 9))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function linear_search is not defined\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 4)\n        if test_result == 2:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 4) = 2 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 4) should return 2. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Value 4 is at index 2", "name": "Check linear_search([3,1,4,1,5], 4)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function linear_search is not defined\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 9)\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 9) = -1 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 9) should return -1. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Value 9 is not in the list, so return -1", "name": "Check linear_search([3,1,4,1,5], 9)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function linear_search is not defined\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 1)\n        if test_result == 1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 1) = 1 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 1) should return 1. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Value 1 appears at index 1 and 3 \u2014 return the first occurrence (1)", "name": "Check linear_search([3,1,4,1,5], 1)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function linear_search is not defined\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([], 5)\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([], 5) = -1 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([], 5) should return -1. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Searching an empty list should return -1", "name": "Empty list test"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

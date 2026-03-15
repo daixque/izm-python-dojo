@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン09_01: 再帰の基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">再帰の基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔄 再帰（さいき）とは何か</h2>
+  <p><strong>再帰</strong>とは、<strong>関数が自分自身を呼び出す</strong>プログラミングの技法です。</p>
+  <p>最初は少し難しく聞こえるかもしれませんが、実は日常生活にも似たようなものがあります。</p>
+  <p>たとえば「入れ子になった箱を全部開けて中身を確認する」作業を考えてみましょう。箱を開けたらまた箱があって、それを開けたらまた箱があって…という繰り返しです。</p>
+  <p>再帰を使うと、このような「同じ構造が繰り返される」問題をシンプルなコードで解決できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">再帰の基本イメージ</div>
+    <div class="example-code">def count_down(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("発射！")<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count_down(n - 1)&nbsp;&nbsp;# 自分自身を呼び出す！<br><br>count_down(3)<br># 3<br># 2<br># 1<br># 発射！</div>
+    <div class="example-explanation">
+      <code>count_down</code> 関数の中で <code>count_down(n - 1)</code> と自分自身を呼び出しています。<br>
+      これが再帰です！
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🛑 ベースケースと再帰ケース</h2>
+  <p>再帰関数には必ず2つの部分が必要です。</p>
+  <ul>
+    <li><strong>ベースケース（終了条件）</strong>：これ以上再帰しない条件。再帰を止めるための「出口」です。</li>
+    <li><strong>再帰ケース</strong>：自分自身を呼び出す部分。問題を少しずつ小さくしていきます。</li>
+  </ul>
+  <p>ベースケースがないと、関数が永遠に自分自身を呼び続ける「無限再帰」になってしまいます！</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">ベースケースと再帰ケースの構造</div>
+    <div class="example-code">def count_down(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# ベースケース（終了条件）<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("発射！")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;# ここで終了！<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 再帰ケース（問題を小さくして再帰）<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;count_down(n - 1)&nbsp;&nbsp;# n を 1 減らして呼び出す</div>
+    <div class="example-explanation">
+      <strong>ベースケース</strong>: <code>n == 0</code> のとき → 終了<br>
+      <strong>再帰ケース</strong>: <code>n > 0</code> のとき → <code>n - 1</code> で自分を呼ぶ
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔢 階乗（かいじょう）を再帰で計算する</h2>
+  <p>まず、<strong>階乗</strong>とは何かを説明します。</p>
+  <p>階乗は <code>n!</code> と書き、1 から n までの整数を全部かけ合わせた数です。</p>
+  <ul>
+    <li><code>1!</code> = 1（1だけ）</li>
+    <li><code>3!</code> = 3 × 2 × 1 = 6</li>
+    <li><code>5!</code> = 5 × 4 × 3 × 2 × 1 = 120</li>
+  </ul>
+  <p>特別なルールとして、<code>0! = 1</code> と定義されています（覚えておきましょう）。</p>
+  <p>階乗には面白いパターンがあります：<code>n! = n × (n-1)!</code></p>
+  <p>たとえば <code>5! = 5 × 4!</code>、<code>4! = 4 × 3!</code> … というように、「n の階乗は、n に (n-1) の階乗をかけたもの」と表せます。これはまさに再帰のパターンです！</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">階乗を再帰で実装する</div>
+    <div class="example-code">def factorial(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# ベースケース：0! = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# 再帰ケース：n! = n × (n-1)!<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * factorial(n - 1)<br><br>print(factorial(0))&nbsp;&nbsp;# 1<br>print(factorial(3))&nbsp;&nbsp;# 6<br>print(factorial(5))&nbsp;&nbsp;# 120</div>
+    <div class="example-explanation">
+      <code>factorial(5)</code> を呼ぶと…<br>
+      → <code>5 * factorial(4)</code><br>
+      → <code>5 * 4 * factorial(3)</code><br>
+      → <code>5 * 4 * 3 * factorial(2)</code><br>
+      → <code>5 * 4 * 3 * 2 * factorial(1)</code><br>
+      → <code>5 * 4 * 3 * 2 * 1 * factorial(0)</code><br>
+      → <code>5 * 4 * 3 * 2 * 1 * 1 = 120</code>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⚠️ 無限再帰に注意！</h2>
+  <p>ベースケースを書き忘れると、関数が永遠に自分自身を呼び続けてしまいます。これを<strong>無限再帰</strong>と言います。</p>
+  <p>Pythonでは一定の深さを超えると自動的に <code>RecursionError</code> というエラーが発生して止まりますが、プログラムがクラッシュしてしまいます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">危険な例：ベースケースなし</div>
+    <div class="example-code"># ❌ これはダメ！無限再帰になる<br>def bad_count(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;bad_count(n - 1)&nbsp;&nbsp;# 止まらない！<br><br># ✅ これが正しい<br>def good_count(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:&nbsp;&nbsp;# ベースケースが必要<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;good_count(n - 1)</div>
+    <div class="example-explanation">
+      再帰関数を書くときは、<strong>必ずベースケースを最初に考えましょう</strong>。<br>
+      「どうなったら再帰を止めるか？」を先に決めることが大切です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><strong>再帰</strong>とは、関数が自分自身を呼び出す技法</li>
+    <li><strong>ベースケース</strong>（終了条件）が必ず必要 — ないと無限再帰になる</li>
+    <li><strong>再帰ケース</strong>で問題を少しずつ小さくして、ベースケースに近づける</li>
+    <li>階乗は再帰の代表的な例：<code>n! = n × (n-1)!</code>、<code>0! = 1</code></li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

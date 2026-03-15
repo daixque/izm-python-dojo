@@ -1,0 +1,171 @@
+required_packages:
+  - sqlite3
+
+initial_code: |
+  import sqlite3
+
+  class StudentDB:
+      def __init__(self):
+          # Create an in-memory SQLite database
+          # Connect using sqlite3.connect(":memory:")
+          # Create the table with: "CREATE TABLE students (name TEXT, score REAL)"
+          # Commit the change with conn.commit()
+          pass
+
+      def add_student(self, name, scores):
+          # name: student's name (string)
+          # scores: list of scores (e.g. [85, 90, 88])
+          # Loop through scores and INSERT each one into the database
+          # Use: "INSERT INTO students VALUES (?, ?)"
+          # Commit the changes with conn.commit() at the end
+          pass
+
+      def get_average(self, name):
+          # name: student's name (string)
+          # Use "SELECT AVG(score) FROM students WHERE name = ?" to get the average
+          # Extract the result with fetchone()[0]
+          # If result is None, raise ValueError
+          # Return the average score (float)
+          pass
+
+      def top_students(self, n):
+          # n: number of top students to return (integer)
+          # Execute: "SELECT name, AVG(score) as avg FROM students GROUP BY name ORDER BY avg DESC LIMIT ?"
+          # Return the result of fetchall() (a list of tuples)
+          pass
+
+  # Test it out
+  db = StudentDB()
+  db.add_student("Alice", [85, 90, 88])
+  db.add_student("Bob", [70, 75, 80])
+  db.add_student("Charlie", [95, 92, 98])
+  print(db.get_average("Alice"))
+  print(db.top_students(2))
+
+solution_code: |
+  import sqlite3
+
+  class StudentDB:
+      def __init__(self):
+          self.conn = sqlite3.connect(":memory:")
+          cursor = self.conn.cursor()
+          cursor.execute("CREATE TABLE students (name TEXT, score REAL)")
+          self.conn.commit()
+
+      def add_student(self, name, scores):
+          cursor = self.conn.cursor()
+          for score in scores:
+              cursor.execute("INSERT INTO students VALUES (?, ?)", (name, score))
+          self.conn.commit()
+
+      def get_average(self, name):
+          cursor = self.conn.cursor()
+          cursor.execute("SELECT AVG(score) FROM students WHERE name = ?", (name,))
+          result = cursor.fetchone()[0]
+          if result is None:
+              raise ValueError(f"Student not found: {name}")
+          return result
+
+      def top_students(self, n):
+          cursor = self.conn.cursor()
+          cursor.execute(
+              "SELECT name, AVG(score) as avg FROM students GROUP BY name ORDER BY avg DESC LIMIT ?",
+              (n,)
+          )
+          return cursor.fetchall()
+
+  # Test it out
+  db = StudentDB()
+  db.add_student("Alice", [85, 90, 88])
+  db.add_student("Bob", [70, 75, 80])
+  db.add_student("Charlie", [95, 92, 98])
+  print(db.get_average("Alice"))
+  print(db.top_students(2))
+
+initial_files: []
+
+tests:
+  - name: "Check table creation"
+    description: "Does __init__ correctly create the students table?"
+    code: |
+      try:
+          import sqlite3
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'StudentDB' not in exec_globals:
+              result = {"passed": False, "message": "✗ StudentDB class is not defined"}
+          else:
+              db = exec_globals['StudentDB']()
+              cursor = db.conn.cursor()
+              cursor.execute("SELECT * FROM students")
+              result = {"passed": True, "message": "✓ students table was created successfully"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check add_student and get_average"
+    description: "Can we add a student and retrieve the correct average?"
+    code: |
+      try:
+          import sqlite3
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'StudentDB' not in exec_globals:
+              result = {"passed": False, "message": "✗ StudentDB class is not defined"}
+          else:
+              db = exec_globals['StudentDB']()
+              db.add_student("Alice", [85, 90, 88])
+              avg = db.get_average("Alice")
+              expected = (85 + 90 + 88) / 3
+              if abs(avg - expected) < 0.01:
+                  result = {"passed": True, "message": "✓ get_average works correctly"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: {expected:.2f}, Actual: {avg:.2f}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check ValueError for unknown student"
+    description: "Does get_average raise ValueError for a student who doesn't exist?"
+    code: |
+      try:
+          import sqlite3
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'StudentDB' not in exec_globals:
+              result = {"passed": False, "message": "✗ StudentDB class is not defined"}
+          else:
+              db = exec_globals['StudentDB']()
+              try:
+                  db.get_average("Unknown Student")
+                  result = {"passed": False, "message": "✗ ValueError was not raised"}
+              except ValueError:
+                  result = {"passed": True, "message": "✓ ValueError raised correctly for unknown student"}
+              except Exception as e:
+                  result = {"passed": False, "message": f"✗ Expected ValueError but got {type(e).__name__}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check top_students ranking"
+    description: "Does top_students(2) return the top 2 students in the correct order?"
+    code: |
+      try:
+          import sqlite3
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'StudentDB' not in exec_globals:
+              result = {"passed": False, "message": "✗ StudentDB class is not defined"}
+          else:
+              db = exec_globals['StudentDB']()
+              db.add_student("Alice", [85, 90, 88])
+              db.add_student("Bob", [70, 75, 80])
+              db.add_student("Charlie", [95, 92, 98])
+              top = db.top_students(2)
+              if len(top) == 2 and top[0][0] == "Charlie" and top[1][0] == "Alice":
+                  result = {"passed": True, "message": "✓ top_students(2) works correctly"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected [('Charlie', ...), ('Alice', ...)], Actual: {top}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

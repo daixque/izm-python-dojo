@@ -1,0 +1,119 @@
+lesson:
+  number: "07_02"
+  id: "07_02_exception_types"
+  title: "例外の種類"
+
+content: |
+  <section class="section">
+    <h2>🔍 Pythonの主な例外の種類</h2>
+    <p>Pythonにはさまざまな種類の例外があります。</p>
+    <p>それぞれの例外は、どんな問題が起きたかを表しています。</p>
+    <p>よく使う例外の種類を覚えておきましょう。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">ValueError（値エラー）</div>
+      <div class="example-code">int("abc")&nbsp;&nbsp;# ValueError<br>int("3.14")&nbsp;# ValueError<br># 値の形式が間違っている場合</div>
+      <div class="example-explanation">
+        正しい型だけど値が不正な場合に発生します。<br>
+        例：文字列を数値に変換しようとしたが、数値の形式ではない。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">TypeError（型エラー）</div>
+      <div class="example-code">"hello" + 5&nbsp;&nbsp;# TypeError<br>len(42)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# TypeError<br># 型が間違っている場合</div>
+      <div class="example-explanation">
+        型が間違っている操作をしたときに発生します。<br>
+        例：文字列と数値を足し算しようとした。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">IndexError（インデックスエラー）</div>
+      <div class="example-code">lst = [1, 2, 3]<br>lst[5]&nbsp;&nbsp;# IndexError<br># リストの範囲外を参照した場合</div>
+      <div class="example-explanation">
+        リストや文字列の存在しないインデックスにアクセスしたときに発生します。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">KeyError（キーエラー）</div>
+      <div class="example-code">d = {"name": "太郎"}<br>d["age"]&nbsp;&nbsp;# KeyError<br># 辞書に存在しないキーを参照した場合</div>
+      <div class="example-explanation">
+        辞書に存在しないキーにアクセスしたときに発生します。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">ZeroDivisionError（ゼロ除算エラー）</div>
+      <div class="example-code">10 / 0&nbsp;&nbsp;# ZeroDivisionError<br>10 // 0&nbsp;# ZeroDivisionError<br># 0 で割り算した場合</div>
+      <div class="example-explanation">
+        0 で割り算しようとしたときに発生します。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔀 複数の except を使う</h2>
+    <p>複数の種類のエラーに対応するために、<code>except</code> を複数書くことができます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">複数の except</div>
+      <div class="example-code">def divide(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a / b<br>&nbsp;&nbsp;&nbsp;&nbsp;except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("0 で割ることはできません")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br>&nbsp;&nbsp;&nbsp;&nbsp;except TypeError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("数値以外は使えません")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None</div>
+      <div class="example-explanation">
+        それぞれの例外に対して別々の処理を書けます。<br>
+        最初にマッチした <code>except</code> だけが実行されます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">1つの except で複数の例外をまとめる</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = int("abc") / 0<br>except (ValueError, ZeroDivisionError):<br>&nbsp;&nbsp;&nbsp;&nbsp;print("ValueError か ZeroDivisionError が発生しました")</div>
+      <div class="example-explanation">
+        <code>except (エラー1, エラー2):</code> のように、タプルで複数の例外を1つの <code>except</code> でまとめて扱えます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🌐 Exception で全ての例外をキャッチする</h2>
+    <p><code>Exception</code> はほぼ全ての例外の親クラスです。</p>
+    <p><code>except Exception:</code> と書くと、どんな例外でもキャッチできます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Exception を使う</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;# 何かの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("abc")<br>except Exception as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"何かのエラー: {type(e).__name__}: {e}")<br><br># 出力: 何かのエラー: ValueError: invalid literal...</div>
+      <div class="example-explanation">
+        <code>type(e).__name__</code> でエラーの種類の名前を取得できます。<br>
+        ただし、具体的なエラーの種類を指定する方が、より良いプログラムになります。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">例外の優先順位（具体的なものを先に）</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = 10 / 0<br>except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("0 で割りました")&nbsp;&nbsp;# こちらが実行される<br>except Exception:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("その他のエラー")&nbsp;&nbsp;# 実行されない</div>
+      <div class="example-explanation">
+        複数の <code>except</code> がある場合、上から順に確認されます。<br>
+        具体的な例外を上に書き、<code>Exception</code> などの汎用的なものは下に書きましょう。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>ValueError</code>: 値の形式が正しくない</li>
+      <li><code>TypeError</code>: 型が間違っている操作をした</li>
+      <li><code>IndexError</code>: リストなどの範囲外にアクセスした</li>
+      <li><code>KeyError</code>: 辞書に存在しないキーにアクセスした</li>
+      <li><code>ZeroDivisionError</code>: 0 で割り算した</li>
+      <li>複数の <code>except</code> でそれぞれの例外に対応できる</li>
+      <li><code>Exception</code> でほぼ全ての例外をキャッチできる</li>
+    </ul>
+  </section>

@@ -1,0 +1,48 @@
+lesson:
+  number: "14_02"
+  id: "14_02_sql_advanced"
+  title: "WHERE, Aggregation, ORDER BY"
+
+content: |
+  <section class="section">
+    <h2>🔍 Filtering with WHERE</h2>
+    <p>In the previous lesson we retrieved all rows. In practice, you usually want only the rows that match a certain condition. That's what the <strong>WHERE clause</strong> is for.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Filtering with WHERE</div>
+      <div class="example-code">cursor.execute(<br>    "SELECT * FROM users WHERE age >= ?",<br>    (25,)<br>)<br>rows = cursor.fetchall()<br># [(1, 'Alice', 25), (2, 'Bob', 30)]</div>
+      <div class="example-explanation"><code>WHERE column condition</code> filters rows. <code>&gt;=</code> means "greater than or equal to", <code>=</code> means "equal to", and <code>&lt;</code> means "less than". Pass the <code>?</code> value as a tuple.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Sorting with ORDER BY</div>
+      <div class="example-code">cursor.execute("SELECT * FROM users ORDER BY age")<br># ascending order (smallest first)<br><br>cursor.execute("SELECT * FROM users ORDER BY age DESC")<br># descending order (largest first)</div>
+      <div class="example-explanation"><code>ORDER BY column</code> sorts results in ascending order. Add <code>DESC</code> to sort in descending order.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Aggregate functions (COUNT, AVG, MAX, MIN)</div>
+      <div class="example-code">cursor.execute("SELECT COUNT(*) FROM users")<br>print(cursor.fetchone())  # (3,) → 3 rows<br><br>cursor.execute("SELECT AVG(age) FROM users")<br>print(cursor.fetchone())  # (25.67,) → average age<br><br>cursor.execute("SELECT MAX(age), MIN(age) FROM users")<br>print(cursor.fetchone())  # (30, 22) → max and min</div>
+      <div class="example-explanation">Aggregate functions let you calculate counts, averages, maximums, and minimums in a single SQL statement. <code>fetchone()</code> retrieves only the first row of results.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Grouping with GROUP BY</div>
+      <div class="example-code">cursor.execute(<br>    "SELECT age, COUNT(*) FROM users GROUP BY age"<br>)<br>rows = cursor.fetchall()<br># Returns the count of users for each age</div>
+      <div class="example-explanation"><code>GROUP BY column</code> groups rows with the same value together, used in combination with aggregate functions.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 Common SQL Statement Summary</h2>
+    <ul>
+      <li><code>SELECT * FROM t WHERE condition</code> → fetch rows matching a condition</li>
+      <li><code>ORDER BY column</code> → sort ascending (<code>DESC</code> for descending)</li>
+      <li><code>COUNT(*)</code> → count rows</li>
+      <li><code>AVG(column)</code> → calculate average</li>
+      <li><code>MAX(column)</code> / <code>MIN(column)</code> → find maximum / minimum</li>
+      <li><code>GROUP BY column</code> → aggregate per group</li>
+    </ul>
+  </section>

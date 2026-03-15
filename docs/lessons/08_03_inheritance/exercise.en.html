@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson08_03: Inheritance</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson08_03: Inheritance</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement a base class <code>Shape</code> and a class <code>Rectangle</code> that inherits from it.</p>
+<h3>Shape class</h3>
+<ul>
+  <li>Has a <code>name</code> attribute (set in <code>__init__</code>)</li>
+  <li><code>area()</code> method returns <code>0</code></li>
+</ul>
+<h3>Rectangle class (inherits from Shape)</h3>
+<ul>
+  <li>Has <code>width</code> and <code>height</code> attributes</li>
+  <li><code>area()</code> method returns <code>width * height</code></li>
+</ul>
+<h3>Example Output</h3>
+<pre>  r = Rectangle(4, 5)
+print(r.area())                     # 20
+print(isinstance(r, Shape))         # True
+print(isinstance(r, Rectangle))     # True</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Define <code>class Shape:</code> with <code>__init__(self, name)</code> and <code>area(self)</code></li>
+                            <li>Define <code>class Rectangle(Shape):</code> to inherit from Shape</li>
+                            <li>In Rectangle's <code>__init__(self, width, height)</code>, also call <code>super().__init__("Rectangle")</code> to initialize the parent</li>
+                            <li>Rectangle's <code>area()</code> returns <code>self.width * self.height</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Basic Shape class:<br>
+<code>class Shape:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = name</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>def area(self):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 0</code>
+</li>
+                            <li>Inheriting in Rectangle:<br>
+<code>class Rectangle(Shape):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, width, height):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>super().__init__("Rectangle")</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.width = width</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.height = height</code>
+</li>
+                            <li>Override area() in Rectangle:<br>
+<code>def area(self):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return self.width * self.height</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "08_03_inheritance";
+        const INITIAL_CODE = "class Shape:\n    # Write your code here\n    # Set name attribute in __init__(self, name)\n    # area(self) returns 0\n    pass\n\nclass Rectangle(Shape):\n    # Inherit from Shape\n    # Set width and height in __init__(self, width, height)\n    # area(self) returns width * height\n    pass\n\nr = Rectangle(4, 5)\nprint(r.area())                    # 20\nprint(isinstance(r, Shape))        # True\nprint(isinstance(r, Rectangle))    # True\n";
+        const SOLUTION_CODE = "class Shape:\n    def __init__(self, name):\n        self.name = name\n\n    def area(self):\n        return 0\n\nclass Rectangle(Shape):\n    def __init__(self, width, height):\n        super().__init__(\"Rectangle\")\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height\n\nr = Rectangle(4, 5)\nprint(r.area())\nprint(isinstance(r, Shape))\nprint(isinstance(r, Rectangle))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Rectangle\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Rectangle is not defined\"}\n    else:\n        r = exec_globals[\u0027Rectangle\u0027](4, 5)\n        test_result = r.area()\n        if test_result == 20:\n            result = {\"passed\": True, \"message\": \"\u2713 Rectangle(4, 5).area() = 20 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Rectangle(4, 5).area() should return 20. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Rectangle(4, 5).area() should return 20", "name": "Check Rectangle(4, 5).area()"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Rectangle\u0027 not in exec_globals or \u0027Shape\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Rectangle or Shape is not defined\"}\n    else:\n        r = exec_globals[\u0027Rectangle\u0027](1, 2)\n        Shape = exec_globals[\u0027Shape\u0027]\n        if isinstance(r, Shape):\n            result = {\"passed\": True, \"message\": \"\u2713 isinstance(Rectangle(1,2), Shape) = True Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": \"\u2717 Rectangle does not inherit from Shape\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Rectangle instance should also be an instance of Shape", "name": "Check isinstance(Rectangle(1,2), Shape)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Shape\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Shape is not defined\"}\n    else:\n        s = exec_globals[\u0027Shape\u0027](\"test\")\n        test_result = s.area()\n        if test_result == 0:\n            result = {\"passed\": True, \"message\": \"\u2713 Shape.area() = 0 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Shape.area() should return 0. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Shape\u0027s area() should return 0", "name": "Check Shape().area()"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Rectangle\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Rectangle is not defined\"}\n    else:\n        r = exec_globals[\u0027Rectangle\u0027](3, 7)\n        test_result = r.area()\n        if test_result == 21:\n            result = {\"passed\": True, \"message\": \"\u2713 Rectangle(3, 7).area() = 21 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Rectangle(3, 7).area() should return 21. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Rectangle(3, 7).area() should return 21", "name": "Check Rectangle(3, 7).area()"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

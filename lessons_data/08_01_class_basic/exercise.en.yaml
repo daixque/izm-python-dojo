@@ -1,0 +1,38 @@
+lesson:
+  number: "08_01"
+  id: "08_01_class_basic"
+  title: "Class Basics"
+description: "Define a class with attributes and methods to create objects."
+
+task_description: |
+  <p>Implement the class <code>Animal</code>.</p>
+  <p>It has two attributes, <code>name</code> and <code>sound</code>, and a <code>speak()</code> method that returns the string <code>"{name} says {sound}"</code>.</p>
+  <h3>Example Output</h3>
+  <pre>  dog = Animal("Dog", "Woof")
+  print(dog.speak())   # Dog says Woof
+
+  cat = Animal("Cat", "Meow")
+  print(cat.speak())   # Cat says Meow</pre>
+
+instructions:
+  - "Define the class with <code>class Animal:</code>"
+  - "Initialize the <code>name</code> and <code>sound</code> attributes in <code>__init__(self, name, sound)</code>"
+  - "Define a <code>speak(self)</code> method that returns the string <code>\"{name} says {sound}\"</code>"
+  - "An f-string like <code>f\"{self.name} says {self.sound}\"</code> is handy here"
+
+hints:
+  - hint: |
+      Basic class structure:<br>
+      <code>class Animal:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name, sound):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.sound = ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def speak(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      Setting attributes:<br>
+      <code>self.name = name</code><br>
+      <code>self.sound = sound</code>
+  - hint: |
+      Build the return value of speak() with an f-string:<br>
+      <code>return f"{self.name} says {self.sound}"</code>

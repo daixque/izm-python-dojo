@@ -766,65 +766,719 @@ save_tasks(tasks, "tasks.json")
 
 ---
 
-## 📊 学習の進め方
+### 第7章：エラーと例外処理
 
-### 推奨学習順序
-1. 第1章（レッスン1-5）：プログラミングの基本とデバッグを習得
-2. 第2章（レッスン6-8）：条件分岐をマスター
-3. 第3章（レッスン9-11）：繰り返し処理を学ぶ
-4. 第4章（レッスン12-15）：データ構造を理解
-5. 第5章（レッスン16-17）：関数で再利用可能なコードを書く
-6. 第6章（レッスン18-21）：実践的なプログラムを作成
+#### 📝 レッスン22: try/except の基礎 (07_01_try_except)
+**ステータス:** 未実装
+**学習内容:**
+- エラー（例外）とは何か
+- `try` / `except` ブロックの基本構文
+- 例外が発生したときの処理の流れ
+- エラーメッセージの活用
 
-### 各レッスンの標準的な学習時間
-- 説明学習：15-20分
-- 演習課題：20-30分
-- 合計：約40-50分
+**演習課題:**
+- 安全な整数変換関数の実装
+  - 関数 `safe_int(value)` を実装
+  - 文字列を整数に変換して返す
+  - 変換できない場合（ValueError）は `None` を返す
+  - テスト例：
+    - `safe_int("42")` → `42`
+    - `safe_int("abc")` → `None`
+    - `safe_int("3.14")` → `None`
 
-### 習得目標
-このカリキュラムを完了することで、以下ができるようになります：
-- ✅ 基本的なPythonプログラムを自分で書ける
-- ✅ 条件分岐と繰り返しを使った複雑なロジックを実装できる
-- ✅ データ構造（リスト・辞書）を効果的に使える
-- ✅ 関数を使ってコードを整理できる
-- ✅ 実用的な小規模プログラムを作成できる
-- ✅ エラーを読み取って自分でデバッグできる
+模範解答コード
 
-## 🎯 次のステップ
+```python
+def safe_int(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
 
-このカリキュラム完了後、以下の学習に進むことができます：
-- オブジェクト指向プログラミング（クラスとオブジェクト）
-- 外部ライブラリの活用（Pygame, Matplotlibなど）
-- Webスクレイピング
-- データ分析とグラフ作成
-- GUIアプリケーション開発
+print(safe_int("42"))    # 42
+print(safe_int("abc"))   # None
+print(safe_int("3.14"))  # None
+```
 
-## 📝 実装優先度
+---
 
-### フェーズ1（基礎固め） - 優先度：高
-- [x] レッスン2: 変数と計算
-- [x] レッスン3: データ型と変換
-- [x] レッスン4: ユーザー入力
-- [x] レッスン5: デバッグの基礎
-- [x] レッスン6: 条件分岐の基礎
-- [x] レッスン7: else と elif
+#### 📝 レッスン23: 例外の種類 (07_02_exception_types)
+**ステータス:** 未実装
+**学習内容:**
+- 代表的な組み込み例外（`ValueError`, `TypeError`, `IndexError`, `KeyError`, `ZeroDivisionError`）
+- 複数の `except` による使い分け
+- `Exception` による汎用キャッチ
 
-### フェーズ2（制御構造） - 優先度：中
-- [ ] レッスン8: 論理演算子
-- [ ] レッスン9: for ループの基礎
-- [ ] レッスン10: for ループの応用
-- [ ] レッスン11: while ループ
+**演習課題:**
+- 安全な除算関数の実装
+  - 関数 `safe_divide(a, b)` を実装
+  - `a ÷ b` を計算して返す
+  - `b` がゼロの場合は `"ZeroDivisionError"` を返す
+  - 数値以外が渡された場合は `"TypeError"` を返す
+  - テスト例：
+    - `safe_divide(10, 2)` → `5.0`
+    - `safe_divide(10, 0)` → `"ZeroDivisionError"`
+    - `safe_divide(10, "a")` → `"TypeError"`
 
-### フェーズ3（データ構造） - 優先度：中
-- [ ] レッスン12: リストの基礎
-- [ ] レッスン13: リストの操作
-- [ ] レッスン14: for ループとリスト
-- [ ] レッスン15: 辞書の基礎
+模範解答コード
 
-### フェーズ4（関数と実践） - 優先度：低
-- [ ] レッスン16: 関数の基礎
-- [ ] レッスン17: 関数の応用
-- [ ] レッスン18: テキストベースゲーム
-- [ ] レッスン19: データ集計プログラム
-- [ ] レッスン20: ファイル操作の基礎
-- [ ] レッスン21: 最終プロジェクト
+```python
+def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "ZeroDivisionError"
+    except TypeError:
+        return "TypeError"
+
+print(safe_divide(10, 2))   # 5.0
+print(safe_divide(10, 0))   # "ZeroDivisionError"
+print(safe_divide(10, "a")) # "TypeError"
+```
+
+---
+
+#### 📝 レッスン24: finally と raise (07_03_finally_raise)
+**ステータス:** 未実装
+**学習内容:**
+- `finally` ブロック（必ず実行される処理）
+- `else` ブロック（例外がなかった場合の処理）
+- `raise` による例外の送出
+- カスタム例外クラスの基礎
+
+**演習課題:**
+- 年齢バリデーション関数の実装
+  - 関数 `validate_age(age)` を実装
+  - `age` が 0〜150 の整数であれば `age` をそのまま返す
+  - 範囲外の場合は `ValueError` を `raise` する
+  - テスト例：
+    - `validate_age(20)` → `20`
+    - `validate_age(-1)` → `ValueError` が発生
+    - `validate_age(200)` → `ValueError` が発生
+
+模範解答コード
+
+```python
+def validate_age(age):
+    if age < 0 or age > 150:
+        raise ValueError(f"年齢が範囲外です: {age}")
+    return age
+
+print(validate_age(20))  # 20
+try:
+    validate_age(-1)
+except ValueError as e:
+    print(e)  # 年齢が範囲外です: -1
+```
+
+---
+
+### 第8章：クラスとオブジェクト指向プログラミング
+
+#### 📝 レッスン25: クラスの基礎 (08_01_class_basic)
+**ステータス:** 未実装
+**学習内容:**
+- クラスとオブジェクトとは何か
+- `class` による定義
+- `__init__` メソッド（コンストラクタ）
+- インスタンスの生成と属性へのアクセス
+
+**演習課題:**
+- `Animal` クラスの実装
+  - `name`（名前）と `sound`（鳴き声）を持つ
+  - メソッド `speak()` は `"{name}は{sound}と鳴きます"` という文字列を返す
+  - テスト例：
+    - `Animal("犬", "ワン").speak()` → `"犬はワンと鳴きます"`
+    - `Animal("猫", "ニャー").speak()` → `"猫はニャーと鳴きます"`
+
+模範解答コード
+
+```python
+class Animal:
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+
+    def speak(self):
+        return f"{self.name}は{self.sound}と鳴きます"
+
+dog = Animal("犬", "ワン")
+print(dog.speak())  # 犬はワンと鳴きます
+```
+
+---
+
+#### 📝 レッスン26: メソッドとインスタンス (08_02_class_methods)
+**ステータス:** 未実装
+**学習内容:**
+- インスタンスメソッドの定義と呼び出し
+- `self` の役割
+- 属性の更新
+- 複数インスタンスの独立性
+
+**演習課題:**
+- `Counter` クラスの実装
+  - 初期値 `0` のカウンターを持つ
+  - `increment()` で 1 増やす
+  - `reset()` で 0 に戻す
+  - `get_count()` で現在の値を返す
+  - テスト例：
+    - `c = Counter(); c.increment(); c.increment(); c.get_count()` → `2`
+    - `c.reset(); c.get_count()` → `0`
+
+模範解答コード
+
+```python
+class Counter:
+    def __init__(self):
+        self.count = 0
+
+    def increment(self):
+        self.count += 1
+
+    def reset(self):
+        self.count = 0
+
+    def get_count(self):
+        return self.count
+
+c = Counter()
+c.increment()
+c.increment()
+print(c.get_count())  # 2
+c.reset()
+print(c.get_count())  # 0
+```
+
+---
+
+#### 📝 レッスン27: 継承 (08_03_inheritance)
+**ステータス:** 未実装
+**学習内容:**
+- 継承の概念（親クラス・子クラス）
+- `super()` による親クラスの呼び出し
+- メソッドのオーバーライド
+- `isinstance()` による型チェック
+
+**演習課題:**
+- `Shape`（図形）基底クラスと `Rectangle`（長方形）の実装
+  - `Shape` は `name` 属性を持ち、`area()` は `0` を返す
+  - `Rectangle` は `width` と `height` を持ち、`area()` で面積を返す
+  - テスト例：
+    - `Rectangle(4, 5).area()` → `20`
+    - `Rectangle(3, 3).area()` → `9`
+    - `isinstance(Rectangle(1, 2), Shape)` → `True`
+
+模範解答コード
+
+```python
+class Shape:
+    def __init__(self, name):
+        self.name = name
+
+    def area(self):
+        return 0
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        super().__init__("長方形")
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+r = Rectangle(4, 5)
+print(r.area())              # 20
+print(isinstance(r, Shape))  # True
+```
+
+---
+
+### 第9章：再帰関数
+
+#### 📝 レッスン28: 再帰の基礎 (09_01_recursion_basic)
+**ステータス:** 未実装
+**学習内容:**
+- 再帰とは何か
+- 基底ケース（ベースケース）と再帰ケース
+- 再帰を使った階乗の計算
+- 無限再帰の危険性
+
+**演習課題:**
+- 階乗を計算する関数の実装
+  - 関数 `factorial(n)` を実装
+  - n の階乗（n!）を再帰で計算して返す
+  - `n == 0` のとき `1` を返す（基底ケース）
+  - テスト例：
+    - `factorial(0)` → `1`
+    - `factorial(5)` → `120`
+    - `factorial(10)` → `3628800`
+
+模範解答コード
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(0))   # 1
+print(factorial(5))   # 120
+print(factorial(10))  # 3628800
+```
+
+注意:
+
+この教材は中学生向けです。階乗の定義は未学習のため、説明ページあるいは課題のページにてそれが何かを説明する必要があります。また、再帰の概念も初めてのため、基底ケースと再帰ケースの説明を丁寧に行う必要があります。無限再帰の危険性についても、簡単な例を用いて説明することが重要です。
+
+---
+
+#### 📝 レッスン29: 再帰の応用 (09_02_recursion_advanced)
+**ステータス:** 未実装
+**学習内容:**
+- フィボナッチ数列と再帰
+- 再帰とループの比較
+- メモ化による最適化の考え方
+
+**演習課題:**
+- フィボナッチ数列の n 番目を返す関数の実装
+  - 関数 `fibonacci(n)` を実装
+  - `fibonacci(0)` → `0`、`fibonacci(1)` → `1`
+  - それ以降は `fibonacci(n-1) + fibonacci(n-2)`
+  - テスト例：
+    - `fibonacci(0)` → `0`
+    - `fibonacci(6)` → `8`
+    - `fibonacci(10)` → `55`
+
+模範解答コード
+
+```python
+def fibonacci(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+print(fibonacci(0))   # 0
+print(fibonacci(6))   # 8
+print(fibonacci(10))  # 55
+```
+
+
+注意:
+フィボナッチ数列とは何かについて、説明ページあるいは課題のページにて説明する必要があります。
+
+---
+
+### 第10章：アルゴリズム入門
+
+#### 📝 レッスン30: 探索アルゴリズム (10_01_search)
+**ステータス:** 未実装
+**学習内容:**
+- 線形探索（リストを先頭から順に調べる）
+- 二分探索（ソート済みリストを半分ずつ絞る）
+- 計算量の考え方（O(n) と O(log n)）
+
+**演習課題:**
+- 線形探索関数の実装
+  - 関数 `linear_search(items, target)` を実装
+  - `items` リストの中から `target` を探し、インデックスを返す
+  - 見つからなければ `-1` を返す
+  - テスト例：
+    - `linear_search([3, 1, 4, 1, 5], 4)` → `2`
+    - `linear_search([3, 1, 4, 1, 5], 9)` → `-1`
+
+模範解答コード
+
+```python
+def linear_search(items, target):
+    for i, item in enumerate(items):
+        if item == target:
+            return i
+    return -1
+
+print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+```
+
+---
+
+#### 📝 レッスン31: ソートアルゴリズム (10_02_sort)
+**ステータス:** 未実装
+**学習内容:**
+- バブルソートの仕組み
+- 選択ソートの仕組み
+- 組み込み `sorted()` との比較
+
+**演習課題:**
+- バブルソートの実装
+  - 関数 `bubble_sort(numbers)` を実装
+  - リストを昇順にソートした新しいリストを返す
+  - 組み込みの `sort()` / `sorted()` は使わない
+  - テスト例：
+    - `bubble_sort([5, 3, 8, 1, 2])` → `[1, 2, 3, 5, 8]`
+    - `bubble_sort([1])` → `[1]`
+    - `bubble_sort([-3, 0, -1, 2])` → `[-3, -1, 0, 2]`
+
+模範解答コード
+
+```python
+def bubble_sort(numbers):
+    arr = numbers[:]
+    n = len(arr)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+print(bubble_sort([5, 3, 8, 1, 2]))    # [1, 2, 3, 5, 8]
+print(bubble_sort([-3, 0, -1, 2]))     # [-3, -1, 0, 2]
+```
+
+---
+
+### 第11章：NumPy基礎
+
+#### 📝 レッスン32: 配列の作成と操作 (11_01_numpy_array)
+**ステータス:** 未実装
+**学習内容:**
+- NumPy とは何か
+- `np.array()` による配列作成
+- 配列の形状（`shape`）と型（`dtype`）
+- インデックス・スライス操作
+
+**演習課題:**
+- 配列の合計・平均を計算する関数の実装
+  - 関数 `array_stats(data)` を実装
+  - NumPy 配列に変換してから `sum` と `mean` を計算
+  - `{"sum": 合計, "mean": 平均}` の辞書を返す
+  - テスト例：
+    - `array_stats([1, 2, 3, 4, 5])` → `{"sum": 15.0, "mean": 3.0}`
+
+模範解答コード
+
+```python
+import numpy as np
+
+def array_stats(data):
+    arr = np.array(data)
+    return {"sum": float(arr.sum()), "mean": float(arr.mean())}
+
+print(array_stats([1, 2, 3, 4, 5]))  # {"sum": 15.0, "mean": 3.0}
+```
+
+---
+
+#### 📝 レッスン33: 数値計算と統計 (11_02_numpy_math)
+**ステータス:** 未実装
+**学習内容:**
+- 配列同士の演算（ブロードキャスト）
+- `np.zeros()`, `np.ones()`, `np.arange()`
+- 統計関数（`min`, `max`, `std`）
+- 2次元配列の基礎
+
+**演習課題:**
+- 標準化（正規化）関数の実装
+  - 関数 `normalize(data)` を実装
+  - 各要素を `(x - min) / (max - min)` で 0〜1 の範囲に変換
+  - NumPy 配列で返す
+  - テスト例：
+    - `normalize([0, 5, 10])` → `[0.0, 0.5, 1.0]`
+    - `normalize([2, 4, 6, 8])` → `[0.0, 0.333..., 0.666..., 1.0]`
+
+模範解答コード
+
+```python
+import numpy as np
+
+def normalize(data):
+    arr = np.array(data, dtype=float)
+    return (arr - arr.min()) / (arr.max() - arr.min())
+
+print(normalize([0, 5, 10]))     # [0.  0.5 1. ]
+print(normalize([2, 4, 6, 8]))   # [0.   0.333 0.667 1.  ]
+```
+
+---
+
+### 第12章：Pandasを使用したデータ分析
+
+#### 📝 レッスン34: DataFrameの基礎 (12_01_pandas_basic)
+**ステータス:** 未実装
+**学習内容:**
+- Pandas とは何か
+- `DataFrame` の作成
+- 列・行の選択
+- `head()`, `tail()`, `info()`, `describe()`
+
+**演習課題:**
+- DataFrame から特定列の平均を返す関数の実装
+  - 関数 `column_mean(df, column)` を実装
+  - 指定した列の平均値を返す
+  - テスト例：
+    - 列 `"score"` が `[80, 90, 70]` のとき → `80.0`
+
+模範解答コード
+
+```python
+import pandas as pd
+
+def column_mean(df, column):
+    return df[column].mean()
+
+df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
+print(column_mean(df, "score"))  # 80.0
+```
+
+---
+
+#### 📝 レッスン35: データ集計とフィルタリング (12_02_pandas_analysis)
+**ステータス:** 未実装
+**学習内容:**
+- 条件によるフィルタリング
+- `groupby()` による集計
+- `sort_values()` による並べ替え
+- 欠損値（`NaN`）の扱い
+
+**演習課題:**
+- 合格者（60点以上）のみを抽出して平均点を返す関数の実装
+  - 関数 `passing_average(df, score_col, threshold=60)` を実装
+  - `score_col` 列が `threshold` 以上の行だけを抽出し、その平均を返す
+  - テスト例：
+    - スコアが `[50, 70, 80, 40, 90]` のとき → `80.0`（70,80,90の平均）
+
+模範解答コード
+
+```python
+import pandas as pd
+
+def passing_average(df, score_col, threshold=60):
+    passing = df[df[score_col] >= threshold]
+    return passing[score_col].mean()
+
+df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+print(passing_average(df, "score"))  # 80.0
+```
+
+---
+
+### 第13章：グラフ描画（Matplotlib）
+
+#### 📝 レッスン36: 基本的なグラフ (13_01_plot_basic)
+**ステータス:** 未実装
+**学習内容:**
+- Matplotlib とは何か
+- 折れ線グラフ（`plot()`）
+- 棒グラフ（`bar()`）
+- タイトル・軸ラベルの設定
+
+**演習課題:**
+- 月別売上データを棒グラフで描画する
+  - 月（1〜6月）と売上データを棒グラフで表示
+  - タイトルを「月別売上」、x軸を「月」、y軸を「売上（万円）」に設定
+  - 初期コード：データは変数として用意済み
+  - ユーザーはグラフ描画コードを実装
+
+模範解答コード
+
+```python
+import matplotlib.pyplot as plt
+
+months = [1, 2, 3, 4, 5, 6]
+sales = [120, 150, 130, 170, 160, 200]
+
+plt.bar(months, sales)
+plt.title("月別売上")
+plt.xlabel("月")
+plt.ylabel("売上（万円）")
+plt.show()
+```
+
+---
+
+#### 📝 レッスン37: グラフのカスタマイズ (13_02_plot_advanced)
+**ステータス:** 未実装
+**学習内容:**
+- 複数データの重ね描き
+- 凡例（`legend()`）
+- グリッド（`grid()`）
+- 散布図（`scatter()`）
+
+**演習課題:**
+- 2つのデータ系列を持つ折れ線グラフの描画
+  - 「気温」と「降水量」を同一グラフに折れ線で描画
+  - 凡例・タイトル・軸ラベルを設定
+  - 初期コード：データは変数として用意済み
+
+模範解答コード
+
+```python
+import matplotlib.pyplot as plt
+
+months = list(range(1, 13))
+temperature = [5, 6, 10, 15, 20, 24, 28, 29, 25, 19, 13, 7]
+rainfall = [50, 55, 110, 130, 140, 160, 180, 150, 200, 140, 90, 60]
+
+plt.plot(months, temperature, label="気温(℃)")
+plt.plot(months, rainfall, label="降水量(mm)")
+plt.title("月別気温と降水量")
+plt.xlabel("月")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+---
+
+### 第14章：データベースとSQLの基礎
+
+#### 📝 レッスン38: SQLの基礎（CREATE・INSERT・SELECT）(14_01_sql_basic)
+**ステータス:** 未実装
+**学習内容:**
+- データベース・テーブルとは何か
+- `CREATE TABLE` でテーブルを作成
+- `INSERT INTO` でデータを追加
+- `SELECT` でデータを取得
+- Python の `sqlite3` モジュール
+
+**演習課題:**
+- `users` テーブルを作成してデータを挿入・取得する
+  - `sqlite3.connect(":memory:")` でインメモリDBを使用
+  - `id`（INTEGER）・`name`（TEXT）・`age`（INTEGER）の3列を持つテーブルを作成
+  - 3件のデータを挿入
+  - 全件を SELECT して返す関数 `get_all_users(conn)` を実装
+  - テスト例：挿入した3件が正しく取得できるか
+
+模範解答コード
+
+```python
+import sqlite3
+
+conn = sqlite3.connect(":memory:")
+cursor = conn.cursor()
+
+cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+    (1, "Alice", 25),
+    (2, "Bob", 30),
+    (3, "Charlie", 22),
+])
+conn.commit()
+
+def get_all_users(conn):
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    return cursor.fetchall()
+
+print(get_all_users(conn))
+# [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]
+```
+
+---
+
+#### 📝 レッスン39: WHERE・集計・ORDER BY (14_02_sql_advanced)
+**ステータス:** 未実装
+**学習内容:**
+- `WHERE` による条件絞り込み
+- `COUNT`, `AVG`, `MAX`, `MIN` などの集計関数
+- `ORDER BY` による並べ替え
+- `GROUP BY` による集計
+
+**演習課題:**
+- 年齢が指定値以上のユーザーを取得する関数の実装
+  - 関数 `get_adult_users(conn, min_age)` を実装
+  - `min_age` 以上の `age` を持つユーザーを `age` 昇順で返す
+  - テスト例：`min_age=25` のとき Alice(25)・Bob(30) が返る
+
+模範解答コード
+
+```python
+import sqlite3
+
+def get_adult_users(conn, min_age):
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE age >= ? ORDER BY age", (min_age,))
+    return cursor.fetchall()
+
+conn = sqlite3.connect(":memory:")
+cursor = conn.cursor()
+cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+    (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+])
+conn.commit()
+
+print(get_adult_users(conn, 25))
+# [(1, 'Alice', 25), (2, 'Bob', 30)]
+```
+
+---
+
+### 第15章：上級者向けの課題
+
+#### 📝 レッスン40: 総合プロジェクト (15_01_advanced_project)
+**ステータス:** 未実装
+**学習内容:**
+- 第7〜14章の知識を総合的に活用
+- クラス・例外処理・データ分析・SQLを組み合わせる
+- 設計・実装・テストのサイクルを体験
+
+**演習課題:**
+- 成績管理システムの実装
+  - SQLite データベースに生徒の成績を保存・集計するシステム
+  - 必須機能：
+    1. `StudentDB` クラスの実装（`__init__` でDB接続・テーブル作成）
+    2. `add_student(name, scores)` で生徒と点数リストを登録
+    3. `get_average(name)` で特定生徒の平均点を返す
+    4. `top_students(n)` で平均点上位 n 名を返す
+  - 例外処理：存在しない生徒名の場合は `ValueError` を発生させる
+  - テスト：各メソッドが正しく動作するかを個別にチェック
+
+模範解答コード
+
+```python
+import sqlite3
+
+class StudentDB:
+    def __init__(self):
+        self.conn = sqlite3.connect(":memory:")
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "CREATE TABLE students (name TEXT, score REAL)"
+        )
+        self.conn.commit()
+
+    def add_student(self, name, scores):
+        cursor = self.conn.cursor()
+        for score in scores:
+            cursor.execute("INSERT INTO students VALUES (?, ?)", (name, score))
+        self.conn.commit()
+
+    def get_average(self, name):
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "SELECT AVG(score) FROM students WHERE name = ?", (name,)
+        )
+        result = cursor.fetchone()[0]
+        if result is None:
+            raise ValueError(f"生徒が見つかりません: {name}")
+        return result
+
+    def top_students(self, n):
+        cursor = self.conn.cursor()
+        cursor.execute(
+            "SELECT name, AVG(score) as avg FROM students GROUP BY name ORDER BY avg DESC LIMIT ?",
+            (n,)
+        )
+        return cursor.fetchall()
+
+db = StudentDB()
+db.add_student("Alice", [85, 90, 88])
+db.add_student("Bob", [70, 75, 72])
+db.add_student("Charlie", [95, 92, 98])
+print(db.get_average("Alice"))  # 87.666...
+print(db.top_students(2))       # [('Charlie', 95.0), ('Alice', 87.666...)]
+```

@@ -1,0 +1,129 @@
+initial_code: |
+  class Counter:
+      # Write your code here
+      # Initialize count to 0 in __init__
+      # increment() increases count by 1
+      # reset() resets count to 0
+      # get_count() returns the current count
+      pass
+
+  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())  # 2
+  c.reset()
+  print(c.get_count())  # 0
+
+solution_code: |
+  class Counter:
+      def __init__(self):
+          self.count = 0
+
+      def increment(self):
+          self.count += 1
+
+      def reset(self):
+          self.count = 0
+
+      def get_count(self):
+          return self.count
+
+  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())
+  c.reset()
+  print(c.get_count())
+
+initial_files: []
+
+tests:
+  - name: "Check increment() and get_count()"
+    description: "get_count() should return 2 after calling increment() twice"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Counter is not defined"}
+          else:
+              c = exec_globals['Counter']()
+              c.increment()
+              c.increment()
+              count = c.get_count()
+              if count == 2:
+                  result = {"passed": True, "message": "✓ increment() × 2 → get_count() = 2 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ get_count() should return 2. Actual: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check reset()"
+    description: "get_count() should return 0 after calling reset()"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Counter is not defined"}
+          else:
+              c = exec_globals['Counter']()
+              c.increment()
+              c.increment()
+              c.increment()
+              c.reset()
+              count = c.get_count()
+              if count == 0:
+                  result = {"passed": True, "message": "✓ get_count() = 0 after reset() Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ get_count() should return 0 after reset(). Actual: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check initial value"
+    description: "Initial count of Counter() should be 0"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Counter is not defined"}
+          else:
+              c = exec_globals['Counter']()
+              count = c.get_count()
+              if count == 0:
+                  result = {"passed": True, "message": "✓ Initial count = 0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Initial count should be 0. Actual: {count}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check independence of multiple instances"
+    description: "Two Counter instances should operate independently"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Counter' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Counter is not defined"}
+          else:
+              c1 = exec_globals['Counter']()
+              c2 = exec_globals['Counter']()
+              c1.increment()
+              c1.increment()
+              c1.increment()
+              c2.increment()
+              if c1.get_count() == 3 and c2.get_count() == 1:
+                  result = {"passed": True, "message": "✓ c1=3, c2=1 instances operate independently Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ c1={c1.get_count()}, c2={c2.get_count()} — instances are not independent"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

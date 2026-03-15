@@ -1,0 +1,122 @@
+enable_matplotlib: true
+
+initial_code: |
+  import matplotlib.pyplot as plt
+
+  # データ（1〜12月の気温と降水量）
+  months = list(range(1, 13))
+  temperature = [5, 6, 10, 15, 20, 24, 28, 29, 25, 19, 13, 7]
+  rainfall = [50, 55, 110, 130, 140, 160, 180, 150, 200, 140, 90, 60]
+
+  # ここにコードを書いてください
+  # plt.plot() で気温の折れ線グラフを描く（label="Temperature (°C)"）
+  # plt.plot() で降水量の折れ線グラフを描く（label="Rainfall (mm)"）
+  # plt.title() でタイトルを "Monthly Temperature and Rainfall" に設定
+  # plt.xlabel() でx軸ラベルを "Month" に設定
+  # plt.legend() で凡例を表示
+  # plt.grid(True) でグリッド線を表示
+  # plt.show() でグラフを表示
+
+solution_code: |
+  import matplotlib.pyplot as plt
+
+  months = list(range(1, 13))
+  temperature = [5, 6, 10, 15, 20, 24, 28, 29, 25, 19, 13, 7]
+  rainfall = [50, 55, 110, 130, 140, 160, 180, 150, 200, 140, 90, 60]
+
+  plt.plot(months, temperature, label="Temperature (°C)")
+  plt.plot(months, rainfall, label="Rainfall (mm)")
+  plt.title("Monthly Temperature and Rainfall")
+  plt.xlabel("Month")
+  plt.legend()
+  plt.grid(True)
+  plt.show()
+
+initial_files: []
+
+tests:
+  - name: "コードがエラーなく実行できるか"
+    description: "グラフ描画コードが正しく実行されるか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          with patch('matplotlib.pyplot.show'):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          result = {"passed": True, "message": "✓ コードがエラーなく実行されました"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ 実行エラー: {str(e)}"}
+      result
+
+  - name: "plt.plot() が2回呼ばれているか"
+    description: "2つのデータ系列がプロットされているか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          plot_calls = []
+          orig_plot = plt.plot
+          def mock_plot(*args, **kwargs):
+              plot_calls.append((args, kwargs))
+              return orig_plot(*args, **kwargs)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.plot', side_effect=mock_plot):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if len(plot_calls) >= 2:
+              result = {"passed": True, "message": f"✓ plt.plot() が {len(plot_calls)} 回呼ばれています"}
+          else:
+              result = {"passed": False, "message": f"✗ plt.plot() を2回呼んでください（現在: {len(plot_calls)} 回）"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "plt.legend() で凡例が表示されているか"
+    description: "plt.legend() が呼ばれているか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          legend_called = []
+          def mock_legend(*args, **kwargs):
+              legend_called.append(True)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.legend', side_effect=mock_legend):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if legend_called:
+              result = {"passed": True, "message": "✓ plt.legend() が呼ばれています"}
+          else:
+              result = {"passed": False, "message": "✗ plt.legend() で凡例を表示してください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "plt.show() が呼ばれているか"
+    description: "plt.show() でグラフが表示されるか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          show_called = []
+          def mock_show(*args, **kwargs):
+              show_called.append(True)
+          with patch('matplotlib.pyplot.show', side_effect=mock_show):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          if show_called:
+              result = {"passed": True, "message": "✓ plt.show() が呼ばれています"}
+          else:
+              result = {"passed": False, "message": "✗ plt.show() でグラフを表示してください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

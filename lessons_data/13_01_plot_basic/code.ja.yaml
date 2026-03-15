@@ -1,0 +1,123 @@
+enable_matplotlib: true
+
+initial_code: |
+  import matplotlib.pyplot as plt
+
+  # データ（1〜6月の売上）
+  months = [1, 2, 3, 4, 5, 6]
+  sales = [120, 150, 130, 170, 160, 200]
+
+  # ここにコードを書いてください
+  # plt.bar() で棒グラフを描く
+  # plt.title() でタイトルを "Monthly Sales" に設定
+  # plt.xlabel() でx軸ラベルを "Month" に設定
+  # plt.ylabel() でy軸ラベルを "Sales (10k yen)" に設定
+  # plt.show() でグラフを表示
+
+solution_code: |
+  import matplotlib.pyplot as plt
+
+  months = [1, 2, 3, 4, 5, 6]
+  sales = [120, 150, 130, 170, 160, 200]
+
+  plt.bar(months, sales)
+  plt.title("Monthly Sales")
+  plt.xlabel("Month")
+  plt.ylabel("Sales (10k yen)")
+  plt.show()
+
+initial_files: []
+
+tests:
+  - name: "コードがエラーなく実行できるか"
+    description: "グラフ描画コードが正しく実行されるか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch, MagicMock
+          with patch('matplotlib.pyplot.show'):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          result = {"passed": True, "message": "✓ コードがエラーなく実行されました"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ 実行エラー: {str(e)}"}
+      result
+
+  - name: "plt.bar() で棒グラフが描かれているか"
+    description: "plt.bar(months, sales) が呼ばれているか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch, call
+          bar_args = []
+          orig_bar = plt.bar
+          def mock_bar(*args, **kwargs):
+              bar_args.append(args)
+              return orig_bar(*args, **kwargs)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.bar', side_effect=mock_bar):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if bar_args:
+              result = {"passed": True, "message": "✓ plt.bar() が呼ばれています"}
+          else:
+              result = {"passed": False, "message": "✗ plt.bar() を使って棒グラフを描いてください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "タイトルが設定されているか"
+    description: "plt.title() が呼ばれているか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          title_args = []
+          def mock_title(*args, **kwargs):
+              title_args.extend(args)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.title', side_effect=mock_title):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if title_args:
+              result = {"passed": True, "message": f"✓ タイトルが設定されています: {title_args[0]}"}
+          else:
+              result = {"passed": False, "message": "✗ plt.title() でタイトルを設定してください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "x軸・y軸のラベルが設定されているか"
+    description: "plt.xlabel() と plt.ylabel() が呼ばれているか確認する"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          xlabel_args = []
+          ylabel_args = []
+          def mock_xlabel(*args, **kwargs): xlabel_args.extend(args)
+          def mock_ylabel(*args, **kwargs): ylabel_args.extend(args)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.xlabel', side_effect=mock_xlabel):
+                  with patch('matplotlib.pyplot.ylabel', side_effect=mock_ylabel):
+                      exec_globals = {}
+                      exec(user_code, exec_globals)
+          x_ok = bool(xlabel_args)
+          y_ok = bool(ylabel_args)
+          if x_ok and y_ok:
+              result = {"passed": True, "message": f"✓ x軸ラベル「{xlabel_args[0]}」とy軸ラベル「{ylabel_args[0]}」が設定されています"}
+          elif not x_ok:
+              result = {"passed": False, "message": "✗ plt.xlabel() でx軸ラベルを設定してください"}
+          else:
+              result = {"passed": False, "message": "✗ plt.ylabel() でy軸ラベルを設定してください"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

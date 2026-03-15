@@ -1,0 +1,107 @@
+lesson:
+  number: "08_01"
+  id: "08_01_class_basic"
+  title: "クラスの基礎"
+
+content: |
+  <section class="section">
+    <h2>🧱 クラスとオブジェクトとは何か</h2>
+    <p>プログラムでは、関連するデータと処理をひとまとめにして扱いたい場面があります。</p>
+    <p><strong>クラス（class）</strong>とは、データ（属性）と処理（メソッド）をまとめて定義する「設計図」のようなものです。</p>
+    <p><strong>オブジェクト（object）</strong>とは、その設計図をもとに作られた「実体」のことです。</p>
+    <p>例えば、「犬」というクラスを定義して、「ポチ」「タロ」などの個別の犬オブジェクトを作ることができます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">クラスとオブジェクトのイメージ</div>
+      <div class="example-code"># クラス = 設計図<br>class Dog:<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br># オブジェクト = 設計図から作られた実体<br>dog1 = Dog()&nbsp;&nbsp;# 「ポチ」<br>dog2 = Dog()&nbsp;&nbsp;# 「タロ」</div>
+      <div class="example-explanation">
+        <code>Dog</code> クラスという設計図から、<code>dog1</code>、<code>dog2</code> という別々のオブジェクトを作れます。<br>
+        それぞれは独立した存在です。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 クラスの定義</h2>
+    <p>Pythonでは <code>class</code> キーワードを使ってクラスを定義します。</p>
+    <p>クラス名は大文字で始めるのが習慣です（例：<code>Dog</code>、<code>Animal</code>）。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">クラスの基本構文</div>
+      <div class="example-code">class クラス名:<br>&nbsp;&nbsp;&nbsp;&nbsp;def メソッド名(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 処理</div>
+      <div class="example-explanation">
+        <strong>ポイント：</strong><br>
+        - <code>class</code> のあとにクラス名を書く<br>
+        - クラス名は大文字で始める（慣習）<br>
+        - 行末に <code>:</code> を書く<br>
+        - クラスの中の定義はインデント（4スペース）で書く
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚙️ __init__ コンストラクタ</h2>
+    <p><code>__init__</code> は「コンストラクタ」と呼ばれる特別なメソッドです。</p>
+    <p>オブジェクトを作るときに自動的に呼ばれ、初期設定を行います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">__init__ の使い方</div>
+      <div class="example-code">class Dog:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, breed):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.breed = breed<br><br>dog = Dog("ポチ", "柴犬")<br>print(dog.name)&nbsp;&nbsp;&nbsp;# ポチ<br>print(dog.breed)&nbsp;&nbsp;# 柴犬</div>
+      <div class="example-explanation">
+        <code>self.name = name</code> で、<code>name</code> という<strong>属性（インスタンス変数）</strong>を設定しています。<br>
+        <code>self</code> は「このオブジェクト自身」を指します。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">複数のオブジェクトを作る</div>
+      <div class="example-code">class Dog:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, breed):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.breed = breed<br><br>dog1 = Dog("ポチ", "柴犬")<br>dog2 = Dog("タロ", "トイプードル")<br><br>print(dog1.name)&nbsp;&nbsp;# ポチ<br>print(dog2.name)&nbsp;&nbsp;# タロ</div>
+      <div class="example-explanation">
+        同じクラスから異なるデータを持つオブジェクトをいくつでも作れます。<br>
+        それぞれのオブジェクトは独立しています。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔧 メソッドの定義</h2>
+    <p>クラスの中に関数を定義したものを<strong>メソッド</strong>と言います。</p>
+    <p>メソッドの第1引数は必ず <code>self</code>（このオブジェクト自身）にします。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">メソッドを持つクラス</div>
+      <div class="example-code">class Dog:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, breed):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.breed = breed<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def bark(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{self.name}：ワン！")<br><br>dog = Dog("ポチ", "柴犬")<br>dog.bark()&nbsp;&nbsp;# ポチ：ワン！</div>
+      <div class="example-explanation">
+        <code>dog.bark()</code> でメソッドを呼び出します。<br>
+        メソッドの中では <code>self.name</code> のように属性にアクセスできます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">戻り値を持つメソッド</div>
+      <div class="example-code">class Rectangle:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, width, height):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.width = width<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.height = height<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def area(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.width * self.height<br><br>rect = Rectangle(4, 5)<br>print(rect.area())&nbsp;&nbsp;# 20</div>
+      <div class="example-explanation">
+        メソッドも普通の関数と同じように <code>return</code> で値を返せます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><strong>クラス</strong>はデータと処理をまとめた「設計図」</li>
+      <li><strong>オブジェクト</strong>はクラスから作られた「実体」</li>
+      <li><code>class クラス名:</code> でクラスを定義する</li>
+      <li><code>__init__</code> はオブジェクト作成時に自動で呼ばれるコンストラクタ</li>
+      <li><code>self.属性名 = 値</code> で属性（インスタンス変数）を設定する</li>
+      <li>クラス名に続けて <code>()</code> を書くとオブジェクトが作れる（インスタンス化）</li>
+    </ul>
+  </section>

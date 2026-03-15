@@ -1,0 +1,106 @@
+initial_code: |
+  def validate_age(age):
+      # ここにコードを書いてください
+      # age が 0 以上 150 以下なら age を返す
+      # それ以外は ValueError を raise する
+      pass
+
+  print(validate_age(25))   # 25
+  print(validate_age(0))    # 0
+  print(validate_age(150))  # 150
+  # validate_age(-1)        # ValueError
+  # validate_age(200)       # ValueError
+
+solution_code: |
+  def validate_age(age):
+      if age < 0 or age > 150:
+          raise ValueError(f"無効な年齢です: {age}")
+      return age
+
+  print(validate_age(25))
+  print(validate_age(0))
+  print(validate_age(150))
+
+initial_files: []
+
+tests:
+  - name: "validate_age(25) の確認"
+    description: "validate_age(25) が 25 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 validate_age が定義されていません"}
+          else:
+              test_result = exec_globals['validate_age'](25)
+              if test_result == 25:
+                  result = {"passed": True, "message": "✓ validate_age(25) = 25 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ validate_age(25) は 25 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "validate_age(-1) の確認"
+    description: "validate_age(-1) が ValueError を raise するか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 validate_age が定義されていません"}
+          else:
+              try:
+                  exec_globals['validate_age'](-1)
+                  result = {"passed": False, "message": "✗ validate_age(-1) は ValueError を raise するはずです"}
+              except ValueError:
+                  result = {"passed": True, "message": "✓ validate_age(-1) が ValueError を raise しました 正解です"}
+              except Exception as e:
+                  result = {"passed": False, "message": f"✗ ValueError ではなく {type(e).__name__} が発生しました"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "validate_age(200) の確認"
+    description: "validate_age(200) が ValueError を raise するか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 validate_age が定義されていません"}
+          else:
+              try:
+                  exec_globals['validate_age'](200)
+                  result = {"passed": False, "message": "✗ validate_age(200) は ValueError を raise するはずです"}
+              except ValueError:
+                  result = {"passed": True, "message": "✓ validate_age(200) が ValueError を raise しました 正解です"}
+              except Exception as e:
+                  result = {"passed": False, "message": f"✗ ValueError ではなく {type(e).__name__} が発生しました"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "validate_age(0) と validate_age(150) の確認"
+    description: "境界値 0 と 150 が正常に返るか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 validate_age が定義されていません"}
+          else:
+              r0 = exec_globals['validate_age'](0)
+              r150 = exec_globals['validate_age'](150)
+              if r0 == 0 and r150 == 150:
+                  result = {"passed": True, "message": "✓ validate_age(0) = 0、validate_age(150) = 150 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 境界値が正しくありません。validate_age(0)={r0}, validate_age(150)={r150}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

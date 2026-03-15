@@ -70,7 +70,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -95,6 +95,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -157,6 +158,8 @@
         const LESSON_ID = "01_01_hello";
         const INITIAL_CODE = "# Write your code here\n";
         const SOLUTION_CODE = "print(\"Hello, World!\")\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"en\"\nimport sys\nfrom io import StringIO\n\n# Capture standard output\nold_stdout = sys.stdout\nsys.stdout = StringIO()\n\ntry:\n    exec(user_code)\n    output = sys.stdout.getvalue()\nfinally:\n    sys.stdout = old_stdout\n\n# Check output\nexpected = \"Hello, World!\\n\"\nif output == expected:\n    result = {\"passed\": True, \"message\": \"\u2713 Correct!\"}\nelse:\n    result = {\"passed\": False, \"message\": f\"\u2717 Output is different.\\nExpected: {repr(expected)}\\nActual: {repr(output)}\"}\n\nresult\n", "description": "Check if \u0027Hello, World!\u0027 is displayed correctly", "name": "Test 1: Display Hello, World!"}];
         
@@ -175,7 +178,9 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

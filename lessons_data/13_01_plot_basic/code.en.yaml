@@ -1,0 +1,122 @@
+enable_matplotlib: true
+
+initial_code: |
+  import matplotlib.pyplot as plt
+
+  # Data (monthly sales Jan–Jun)
+  months = [1, 2, 3, 4, 5, 6]
+  sales = [120, 150, 130, 170, 160, 200]
+
+  # Write your code here:
+  # Use plt.bar() to draw a bar chart
+  # Use plt.title() to set the title to "Monthly Sales"
+  # Use plt.xlabel() to set the x-axis label to "Month"
+  # Use plt.ylabel() to set the y-axis label to "Sales (10k yen)"
+  # Use plt.show() to display the chart
+
+solution_code: |
+  import matplotlib.pyplot as plt
+
+  months = [1, 2, 3, 4, 5, 6]
+  sales = [120, 150, 130, 170, 160, 200]
+
+  plt.bar(months, sales)
+  plt.title("Monthly Sales")
+  plt.xlabel("Month")
+  plt.ylabel("Sales (10k yen)")
+  plt.show()
+
+initial_files: []
+
+tests:
+  - name: "Code runs without errors"
+    description: "Check that the chart drawing code executes correctly"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          with patch('matplotlib.pyplot.show'):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          result = {"passed": True, "message": "✓ Code executed without errors"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Execution error: {str(e)}"}
+      result
+
+  - name: "plt.bar() is used to draw the chart"
+    description: "Check that plt.bar(months, sales) is called"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          bar_args = []
+          orig_bar = plt.bar
+          def mock_bar(*args, **kwargs):
+              bar_args.append(args)
+              return orig_bar(*args, **kwargs)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.bar', side_effect=mock_bar):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if bar_args:
+              result = {"passed": True, "message": "✓ plt.bar() is called"}
+          else:
+              result = {"passed": False, "message": "✗ Use plt.bar() to draw a bar chart"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Title is set correctly"
+    description: "Check that plt.title('Monthly Sales') is called"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          title_args = []
+          def mock_title(*args, **kwargs): title_args.extend(args)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.title', side_effect=mock_title):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if title_args and "Monthly Sales" in str(title_args[0]):
+              result = {"passed": True, "message": "✓ Title is set to 'Monthly Sales'"}
+          else:
+              result = {"passed": False, "message": f"✗ Use plt.title('Monthly Sales') to set the title (current: {title_args})"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "x-axis and y-axis labels are set"
+    description: "Check that plt.xlabel() and plt.ylabel() are called"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          xlabel_args = []
+          ylabel_args = []
+          def mock_xlabel(*args, **kwargs): xlabel_args.extend(args)
+          def mock_ylabel(*args, **kwargs): ylabel_args.extend(args)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.xlabel', side_effect=mock_xlabel):
+                  with patch('matplotlib.pyplot.ylabel', side_effect=mock_ylabel):
+                      exec_globals = {}
+                      exec(user_code, exec_globals)
+          x_ok = bool(xlabel_args)
+          y_ok = bool(ylabel_args)
+          if x_ok and y_ok:
+              result = {"passed": True, "message": "✓ Both x-axis and y-axis labels are set"}
+          elif not x_ok:
+              result = {"passed": False, "message": "✗ Use plt.xlabel() to set the x-axis label"}
+          else:
+              result = {"passed": False, "message": "✗ Use plt.ylabel() to set the y-axis label"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

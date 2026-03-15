@@ -1,0 +1,37 @@
+lesson:
+  number: "12_01"
+  id: "12_01_pandas_basic"
+  title: "DataFrame Basics"
+description: "Learn basic DataFrame operations and implement a function that calculates the mean of a column."
+
+task_description: |
+  <p>Implement the function <code>column_mean(df, column)</code>.</p>
+  <p>This function returns the <strong>mean (average)</strong> of the specified column in a DataFrame.</p>
+  <h3>Arguments</h3>
+  <ul>
+    <li><code>df</code>: A Pandas DataFrame</li>
+    <li><code>column</code>: The name of the column to average (string)</li>
+  </ul>
+  <h3>Example</h3>
+  <pre>  import pandas as pd
+  df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
+  print(column_mean(df, "score"))  # 80.0</pre>
+
+instructions:
+  - "Write <code>import pandas as pd</code> at the top of your code"
+  - "Use <code>df[column]</code> to extract the specified column"
+  - "Use Pandas' <code>.mean()</code> method to calculate the average"
+  - "Return the result with a <code>return</code> statement"
+
+hints:
+  - hint: |
+      To extract a column:<br>
+      <code>df[column]</code><br>
+      This gives you a Series (a one-dimensional array of that column's data).
+  - hint: |
+      Use <code>.mean()</code> to calculate the average:<br>
+      <code>df[column].mean()</code>
+  - hint: |
+      The complete solution is quite simple:<br>
+      <code>def column_mean(df, column):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return df[column].mean()</code>

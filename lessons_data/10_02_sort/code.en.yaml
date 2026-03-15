@@ -1,0 +1,126 @@
+initial_code: |
+  def bubble_sort(numbers):
+      # Write your code here
+      # Create a copy with numbers.copy()
+      # Use nested loops to compare and swap neighbors
+      # Do NOT use sort() or sorted()!
+      pass
+
+  print(bubble_sort([5, 3, 8, 1, 2]))   # [1, 2, 3, 5, 8]
+  print(bubble_sort([-3, 0, -1, 2]))    # [-3, -1, 0, 2]
+  print(bubble_sort([1]))               # [1]
+
+solution_code: |
+  def bubble_sort(numbers):
+      result = numbers.copy()
+      n = len(result)
+      for i in range(n):
+          for j in range(n - 1 - i):
+              if result[j] > result[j + 1]:
+                  result[j], result[j + 1] = result[j + 1], result[j]
+      return result
+
+  print(bubble_sort([5, 3, 8, 1, 2]))
+  print(bubble_sort([-3, 0, -1, 2]))
+  print(bubble_sort([1]))
+
+initial_files: []
+
+tests:
+  - name: "Check bubble_sort([5,3,8,1,2])"
+    description: "Sorting [5,3,8,1,2] ascending should give [1,2,3,5,8]"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
+          else:
+              test_result = exec_globals['bubble_sort']([5, 3, 8, 1, 2])
+              if test_result == [1, 2, 3, 5, 8]:
+                  result = {"passed": True, "message": "✓ bubble_sort([5,3,8,1,2]) = [1,2,3,5,8] Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([5,3,8,1,2]) should return [1,2,3,5,8]. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check bubble_sort([-3,0,-1,2])"
+    description: "List with negative numbers should also sort correctly"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
+          else:
+              test_result = exec_globals['bubble_sort']([-3, 0, -1, 2])
+              if test_result == [-3, -1, 0, 2]:
+                  result = {"passed": True, "message": "✓ bubble_sort([-3,0,-1,2]) = [-3,-1,0,2] Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([-3,0,-1,2]) should return [-3,-1,0,2]. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check bubble_sort([1])"
+    description: "A single-element list should return [1]"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
+          else:
+              test_result = exec_globals['bubble_sort']([1])
+              if test_result == [1]:
+                  result = {"passed": True, "message": "✓ bubble_sort([1]) = [1] Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ bubble_sort([1]) should return [1]. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Original list is not modified"
+    description: "bubble_sort should return a new list and not change the original"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
+          else:
+              original = [5, 3, 8, 1, 2]
+              original_copy = original.copy()
+              test_result = exec_globals['bubble_sort'](original)
+              if original == original_copy:
+                  result = {"passed": True, "message": "✓ Original list was not modified"}
+              else:
+                  result = {"passed": False, "message": "✗ The original list was modified. Use numbers.copy() to return a new list"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check sort()/sorted() not used"
+    description: "Implementation should not use sort() or sorted()"
+    code: |
+      try:
+          import inspect
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'bubble_sort' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function bubble_sort is not defined"}
+          else:
+              source = inspect.getsource(exec_globals['bubble_sort'])
+              if '.sort(' in source or 'sorted(' in source:
+                  result = {"passed": False, "message": "✗ Please implement the bubble sort algorithm without using sort() or sorted()"}
+              else:
+                  result = {"passed": True, "message": "✓ Implementation does not use sort()/sorted()"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

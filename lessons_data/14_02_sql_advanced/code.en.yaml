@@ -1,0 +1,152 @@
+required_packages:
+  - sqlite3
+
+initial_code: |
+  import sqlite3
+
+  # Database setup
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25),
+      (2, "Bob", 30),
+      (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_adult_users(conn, min_age):
+      # Write your code here:
+      # Get a cursor: cursor = conn.cursor()
+      # Filter by age: WHERE age >= ?
+      # Sort by age: ORDER BY age
+      # Return all results: return cursor.fetchall()
+      pass
+
+  print(get_adult_users(conn, 25))  # [(1, 'Alice', 25), (2, 'Bob', 30)]
+  print(get_adult_users(conn, 30))  # [(2, 'Bob', 30)]
+
+solution_code: |
+  import sqlite3
+
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_adult_users(conn, min_age):
+      cursor = conn.cursor()
+      cursor.execute("SELECT * FROM users WHERE age >= ? ORDER BY age", (min_age,))
+      return cursor.fetchall()
+
+  print(get_adult_users(conn, 25))
+  print(get_adult_users(conn, 30))
+
+initial_files: []
+
+tests:
+  - name: "get_adult_users function is defined"
+    description: "Check that the function get_adult_users is defined"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_adult_users is not defined"}
+          else:
+              result = {"passed": True, "message": "✓ Function get_adult_users is defined"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Correct filtering with min_age=25"
+    description: "Check that users with age >= 25 are returned in age order"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_adult_users is not defined"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 25)
+              expected = [(1, 'Alice', 25), (2, 'Bob', 30)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ Correct! (min_age=25)"}
+              else:
+                  result = {"passed": False, "message": f"✗ Result does not match expected: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Correct filtering with min_age=30"
+    description: "Check that only users with age >= 30 are returned"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_adult_users is not defined"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 30)
+              expected = [(2, 'Bob', 30)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ Correct! (min_age=30)"}
+              else:
+                  result = {"passed": False, "message": f"✗ Result does not match expected: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Results are sorted by age"
+    description: "Check that ORDER BY age returns rows in ascending order"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (3, "Charlie", 22), (1, "Alice", 25), (2, "Bob", 30)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_adult_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function get_adult_users is not defined"}
+          else:
+              r = exec_globals['get_adult_users'](conn, 22)
+              ages = [row[2] for row in r]
+              if ages == sorted(ages):
+                  result = {"passed": True, "message": f"✓ Results are sorted by age (ascending): {ages}"}
+              else:
+                  result = {"passed": False, "message": f"✗ Use ORDER BY age to sort results. Actual order: {ages}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

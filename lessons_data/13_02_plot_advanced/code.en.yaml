@@ -1,0 +1,122 @@
+enable_matplotlib: true
+
+initial_code: |
+  import matplotlib.pyplot as plt
+
+  # Data (monthly temperature and rainfall, Jan–Dec)
+  months = list(range(1, 13))
+  temperature = [5, 6, 10, 15, 20, 24, 28, 29, 25, 19, 13, 7]
+  rainfall = [50, 55, 110, 130, 140, 160, 180, 150, 200, 140, 90, 60]
+
+  # Write your code here:
+  # Use plt.plot() to draw a line chart for temperature (label="Temperature (°C)")
+  # Use plt.plot() to draw a line chart for rainfall (label="Rainfall (mm)")
+  # Use plt.title() to set the title to "Monthly Temperature and Rainfall"
+  # Use plt.xlabel() to set the x-axis label to "Month"
+  # Use plt.legend() to show the legend
+  # Use plt.grid(True) to show gridlines
+  # Use plt.show() to display the chart
+
+solution_code: |
+  import matplotlib.pyplot as plt
+
+  months = list(range(1, 13))
+  temperature = [5, 6, 10, 15, 20, 24, 28, 29, 25, 19, 13, 7]
+  rainfall = [50, 55, 110, 130, 140, 160, 180, 150, 200, 140, 90, 60]
+
+  plt.plot(months, temperature, label="Temperature (°C)")
+  plt.plot(months, rainfall, label="Rainfall (mm)")
+  plt.title("Monthly Temperature and Rainfall")
+  plt.xlabel("Month")
+  plt.legend()
+  plt.grid(True)
+  plt.show()
+
+initial_files: []
+
+tests:
+  - name: "Code runs without errors"
+    description: "Check that the chart drawing code executes correctly"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          with patch('matplotlib.pyplot.show'):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          result = {"passed": True, "message": "✓ Code executed without errors"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Execution error: {str(e)}"}
+      result
+
+  - name: "plt.plot() is called twice"
+    description: "Check that two data series are plotted"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          plot_calls = []
+          orig_plot = plt.plot
+          def mock_plot(*args, **kwargs):
+              plot_calls.append((args, kwargs))
+              return orig_plot(*args, **kwargs)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.plot', side_effect=mock_plot):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if len(plot_calls) >= 2:
+              result = {"passed": True, "message": f"✓ plt.plot() is called {len(plot_calls)} times"}
+          else:
+              result = {"passed": False, "message": f"✗ Call plt.plot() twice — once for each data series (current: {len(plot_calls)} time(s))"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "plt.legend() is called"
+    description: "Check that a legend is shown"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          legend_called = []
+          def mock_legend(*args, **kwargs):
+              legend_called.append(True)
+          with patch('matplotlib.pyplot.show'):
+              with patch('matplotlib.pyplot.legend', side_effect=mock_legend):
+                  exec_globals = {}
+                  exec(user_code, exec_globals)
+          if legend_called:
+              result = {"passed": True, "message": "✓ plt.legend() is called"}
+          else:
+              result = {"passed": False, "message": "✗ Use plt.legend() to show a legend"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "plt.show() is called"
+    description: "Check that plt.show() is called to display the chart"
+    code: |
+      try:
+          import matplotlib
+          matplotlib.use('agg')
+          import matplotlib.pyplot as plt
+          from unittest.mock import patch
+          show_called = []
+          def mock_show(*args, **kwargs):
+              show_called.append(True)
+          with patch('matplotlib.pyplot.show', side_effect=mock_show):
+              exec_globals = {}
+              exec(user_code, exec_globals)
+          if show_called:
+              result = {"passed": True, "message": "✓ plt.show() is called"}
+          else:
+              result = {"passed": False, "message": "✗ Use plt.show() to display the chart"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

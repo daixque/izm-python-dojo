@@ -1,0 +1,34 @@
+lesson:
+  number: "14_01"
+  id: "14_01_sql_basic"
+  title: "SQL Basics"
+description: "Understand the basic concepts of databases and tables, and learn to use SELECT, INSERT, and CREATE TABLE with Python's sqlite3 module."
+
+task_description: |
+  <p>Implement the function <code>get_all_users(conn)</code>.</p>
+  <p>It should retrieve <strong>all rows</strong> from the <code>users</code> table and return them.</p>
+  <h3>Table contents</h3>
+  <pre>  id | name    | age
+  ---+---------+----
+   1 | Alice   |  25
+   2 | Bob     |  30
+   3 | Charlie |  22</pre>
+  <h3>Expected return value</h3>
+  <pre>  [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]</pre>
+
+instructions:
+  - "The table creation and data insertion code is already provided"
+  - "Get a cursor with <code>conn.cursor()</code>"
+  - "Execute the query with <code>cursor.execute(\"SELECT * FROM users\")</code>"
+  - "Return all results using <code>cursor.fetchall()</code>"
+
+hints:
+  - hint: |
+      Basic SELECT structure:<br>
+      <code>cursor = conn.cursor()</code><br>
+      <code>cursor.execute("SELECT * FROM users")</code><br>
+      <code>return cursor.fetchall()</code>
+  - hint: |
+      <code>SELECT * FROM table_name</code> fetches all columns and all rows.<br>
+      <code>fetchall()</code> returns the results as a list of tuples.<br>
+      Example: <code>[(1, 'Alice', 25), (2, 'Bob', 30)]</code>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン11_02: 数値計算と統計</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン11_02: 数値計算と統計</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>normalize(data)</code> を実装しましょう。</p>
+<p>数値のリスト <code>data</code> を受け取り、<strong>min-max正規化</strong>した結果を返します。</p>
+<h3>min-max正規化とは</h3>
+<p>データの最小値を0、最大値を1になるよう変換する方法です。</p>
+<p>計算式: <code>(x - 最小値) / (最大値 - 最小値)</code></p>
+<h3>実行例</h3>
+<pre>  print(normalize([0, 5, 10]))
+# [0.0, 0.5, 1.0]
+
+print(normalize([2, 4, 6, 8]))
+# [0.0, 0.333..., 0.666..., 1.0]</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>関数シグネチャ <code>def normalize(data):</code> は用意済みです</li>
+                            <li><code>np.array(data, dtype=float)</code> でリストを浮動小数点数の NumPy 配列に変換します</li>
+                            <li><code>arr.min()</code> と <code>arr.max()</code> で最小値・最大値を取得します</li>
+                            <li>計算式 <code>(arr - arr.min()) / (arr.max() - arr.min())</code> を実装します</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>まず NumPy 配列（float型）に変換します：<br>
+<code>arr = np.array(data, dtype=float)</code>
+</li>
+                            <li>最小値と最大値を取得します：<br>
+<code>min_val = arr.min()</code><br>
+<code>max_val = arr.max()</code>
+</li>
+                            <li>正規化の計算式を適用して返します：<br>
+<code>return (arr - arr.min()) / (arr.max() - arr.min())</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "11_02_numpy_math";
+        const INITIAL_CODE = "import numpy as np\n\ndef normalize(data):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # min-max \u6b63\u898f\u5316: (x - \u6700\u5c0f\u5024) / (\u6700\u5927\u5024 - \u6700\u5c0f\u5024)\n    pass\n\nprint(normalize([0, 5, 10]))    # [0.  0.5 1. ]\nprint(normalize([2, 4, 6, 8]))  # [0.   0.333... 0.666... 1.  ]\n";
+        const SOLUTION_CODE = "import numpy as np\n\ndef normalize(data):\n    arr = np.array(data, dtype=float)\n    return (arr - arr.min()) / (arr.max() - arr.min())\n\nprint(normalize([0, 5, 10]))\nprint(normalize([2, 4, 6, 8]))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = ["numpy"];
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    import numpy as np\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027normalize\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 normalize \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        result_arr = exec_globals[\u0027normalize\u0027]([0, 5, 10])\n        if np.allclose(result_arr, [0.0, 0.5, 1.0]):\n            result = {\"passed\": True, \"message\": \"\u2713 normalize([0,5,10]) \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024 [0.0, 0.5, 1.0] \u3068\u7570\u306a\u308a\u307e\u3059: {result_arr}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "[0.0, 0.5, 1.0] \u306b\u306a\u308b\u304b", "name": "normalize([0,5,10]) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    import numpy as np\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027normalize\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 normalize \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        result_arr = exec_globals[\u0027normalize\u0027]([2, 4, 6, 8])\n        expected = [0.0, 1/3, 2/3, 1.0]\n        if np.allclose(result_arr, expected):\n            result = {\"passed\": True, \"message\": \"\u2713 normalize([2,4,6,8]) \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024 [0.0, 0.333, 0.666, 1.0] \u3068\u7570\u306a\u308a\u307e\u3059: {result_arr}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "[0.0, 0.333..., 0.666..., 1.0] \u306b\u306a\u308b\u304b", "name": "normalize([2,4,6,8]) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    import numpy as np\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027normalize\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 normalize \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        result_arr = exec_globals[\u0027normalize\u0027]([10, 20, 30, 40, 50])\n        min_val = float(np.min(result_arr))\n        if np.isclose(min_val, 0.0):\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u898f\u5316\u5f8c\u306e\u6700\u5c0f\u5024\u304c 0.0 \u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u6700\u5c0f\u5024\u306f 0.0 \u306e\u306f\u305a\u3067\u3059: {min_val}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u6b63\u898f\u5316\u5f8c\u306e\u6700\u5c0f\u5024\u304c 0.0 \u306b\u306a\u308b\u304b", "name": "\u6700\u5c0f\u5024\u304c 0.0 \u306b\u306a\u308b\u304b\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    import numpy as np\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027normalize\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 normalize \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        result_arr = exec_globals[\u0027normalize\u0027]([10, 20, 30, 40, 50])\n        max_val = float(np.max(result_arr))\n        if np.isclose(max_val, 1.0):\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u898f\u5316\u5f8c\u306e\u6700\u5927\u5024\u304c 1.0 \u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u6700\u5927\u5024\u306f 1.0 \u306e\u306f\u305a\u3067\u3059: {max_val}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u6b63\u898f\u5316\u5f8c\u306e\u6700\u5927\u5024\u304c 1.0 \u306b\u306a\u308b\u304b", "name": "\u6700\u5927\u5024\u304c 1.0 \u306b\u306a\u308b\u304b\u78ba\u8a8d"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

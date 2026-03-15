@@ -1,0 +1,122 @@
+initial_code: |
+  class Shape:
+      # ここにコードを書いてください
+      # __init__(self, name) で name 属性を設定する
+      # area(self) は 0 を返す
+      pass
+
+  class Rectangle(Shape):
+      # Shape を継承する
+      # __init__(self, width, height) で width と height を設定する
+      # area(self) は width * height を返す
+      pass
+
+  r = Rectangle(4, 5)
+  print(r.area())                    # 20
+  print(isinstance(r, Shape))        # True
+  print(isinstance(r, Rectangle))    # True
+
+solution_code: |
+  class Shape:
+      def __init__(self, name):
+          self.name = name
+
+      def area(self):
+          return 0
+
+  class Rectangle(Shape):
+      def __init__(self, width, height):
+          super().__init__("Rectangle")
+          self.width = width
+          self.height = height
+
+      def area(self):
+          return self.width * self.height
+
+  r = Rectangle(4, 5)
+  print(r.area())
+  print(isinstance(r, Shape))
+  print(isinstance(r, Rectangle))
+
+initial_files: []
+
+tests:
+  - name: "Rectangle(4, 5).area() の確認"
+    description: "Rectangle(4, 5).area() が 20 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Rectangle が定義されていません"}
+          else:
+              r = exec_globals['Rectangle'](4, 5)
+              test_result = r.area()
+              if test_result == 20:
+                  result = {"passed": True, "message": "✓ Rectangle(4, 5).area() = 20 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ Rectangle(4, 5).area() は 20 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "isinstance(Rectangle(1,2), Shape) の確認"
+    description: "Rectangle のインスタンスが Shape のインスタンスでもあるか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals or 'Shape' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Rectangle または Shape が定義されていません"}
+          else:
+              r = exec_globals['Rectangle'](1, 2)
+              Shape = exec_globals['Shape']
+              if isinstance(r, Shape):
+                  result = {"passed": True, "message": "✓ isinstance(Rectangle(1,2), Shape) = True 正解です"}
+              else:
+                  result = {"passed": False, "message": "✗ Rectangle は Shape を継承していません"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Shape().area() の確認"
+    description: "Shape の area() が 0 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Shape' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Shape が定義されていません"}
+          else:
+              s = exec_globals['Shape']("テスト")
+              test_result = s.area()
+              if test_result == 0:
+                  result = {"passed": True, "message": "✓ Shape.area() = 0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ Shape.area() は 0 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Rectangle(3, 7).area() の確認"
+    description: "Rectangle(3, 7).area() が 21 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Rectangle が定義されていません"}
+          else:
+              r = exec_globals['Rectangle'](3, 7)
+              test_result = r.area()
+              if test_result == 21:
+                  result = {"passed": True, "message": "✓ Rectangle(3, 7).area() = 21 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ Rectangle(3, 7).area() は 21 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

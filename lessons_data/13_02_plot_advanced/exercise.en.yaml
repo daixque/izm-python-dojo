@@ -1,0 +1,36 @@
+lesson:
+  number: "13_02"
+  id: "13_02_plot_advanced"
+  title: "Customizing Charts"
+description: "Learn to plot multiple data series on one chart and customize it with legends, gridlines, scatter plots, and more."
+
+task_description: |
+  <p>Complete a program that draws both <strong>temperature</strong> and <strong>rainfall</strong> data for January through December on a single chart.</p>
+  <h3>What to implement</h3>
+  <ul>
+    <li>Use <code>plt.plot(months, temperature, label="Temperature (°C)")</code> to draw the temperature line</li>
+    <li>Use <code>plt.plot(months, rainfall, label="Rainfall (mm)")</code> to draw the rainfall line</li>
+    <li>Use <code>plt.title("Monthly Temperature and Rainfall")</code> to set the chart title</li>
+    <li>Use <code>plt.xlabel("Month")</code> to set the x-axis label</li>
+    <li>Use <code>plt.legend()</code> to display the legend</li>
+    <li>Use <code>plt.grid(True)</code> to show gridlines</li>
+    <li>Use <code>plt.show()</code> to display the chart</li>
+  </ul>
+  <p>After running your code, two line charts will appear in the "Graph Output" area.</p>
+
+instructions:
+  - "Call <code>plt.plot()</code> twice to overlay multiple data series on the same chart"
+  - "Pass a <code>label=</code> argument to each <code>plt.plot()</code> call — these labels appear in the legend when you call <code>plt.legend()</code>"
+  - "Use <code>plt.grid(True)</code> to add gridlines, making the chart easier to read"
+
+hints:
+  - hint: |
+      Basic structure for two data series:<br>
+      <code>plt.plot(months, temperature, label="Temperature (°C)")</code><br>
+      <code>plt.plot(months, rainfall, label="Rainfall (mm)")</code><br>
+      <code>plt.legend()</code>
+  - hint: |
+      To add a legend and gridlines:<br>
+      <code>plt.legend()</code>  # show legend<br>
+      <code>plt.grid(True)</code>  # show gridlines<br>
+      Call these before <code>plt.show()</code>.

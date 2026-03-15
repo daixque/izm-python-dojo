@@ -1,0 +1,53 @@
+lesson:
+  number: "14_01"
+  id: "14_01_sql_basic"
+  title: "SQLの基礎"
+
+content: |
+  <section class="section">
+    <h2>🗄️ データベースとテーブルとは</h2>
+    <p><strong>データベース</strong>とは、たくさんのデータを整理して保存しておく「倉庫」のようなものです。スマートフォンのアプリや Webサービスは、ほぼすべてデータベースを使ってユーザー情報や投稿を管理しています。</p>
+    <p>データベースの中では、データは<strong>テーブル（表）</strong>として保存されます。テーブルはExcelのシートのようなもので、行（レコード）と列（カラム）で構成されています。</p>
+  </section>
+
+  <section class="section">
+    <h2>🔤 SQL とは</h2>
+    <p><strong>SQL（エスキューエル）</strong>は、データベースに命令を出すための言語です。データを追加・取得・更新・削除するときに使います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">sqlite3 のインポートと接続</div>
+      <div class="example-code">import sqlite3<br><br># メモリ上にデータベースを作成（終了すると消える）<br>conn = sqlite3.connect(":memory:")<br>cursor = conn.cursor()</div>
+      <div class="example-explanation"><code>sqlite3</code> は Python 標準ライブラリなので追加インストール不要です。<code>":memory:"</code> を使うとファイルを作らずメモリ上だけにデータベースを作れます。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">テーブルを作成する（CREATE TABLE）</div>
+      <div class="example-code">cursor.execute(<br>    "CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)"<br>)</div>
+      <div class="example-explanation"><code>CREATE TABLE テーブル名 (列名 型, ...)</code> でテーブルを作ります。<code>INTEGER</code> は整数、<code>TEXT</code> は文字列を表す型です。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">データを挿入する（INSERT INTO）</div>
+      <div class="example-code">cursor.execute(<br>    "INSERT INTO users VALUES (?, ?, ?)",<br>    (1, "Alice", 25)<br>)<br>conn.commit()</div>
+      <div class="example-explanation"><code>INSERT INTO テーブル名 VALUES (...)</code> でデータを1行追加します。<code>?</code> はプレースホルダーで、実際の値は第2引数のタプルで渡します。<code>conn.commit()</code> で変更を確定します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">データを取得する（SELECT）</div>
+      <div class="example-code">cursor.execute("SELECT * FROM users")<br>rows = cursor.fetchall()<br>print(rows)<br># [(1, 'Alice', 25), (2, 'Bob', 30)]</div>
+      <div class="example-explanation"><code>SELECT * FROM テーブル名</code> で全列・全行を取得します。<code>fetchall()</code> は結果をタプルのリストとして返します。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 sqlite3 の基本的な流れ</h2>
+    <ol>
+      <li><code>sqlite3.connect(":memory:")</code> でデータベースに接続する</li>
+      <li><code>conn.cursor()</code> でカーソルを取得する</li>
+      <li><code>cursor.execute(SQL文)</code> でSQL命令を実行する</li>
+      <li>変更をする場合は <code>conn.commit()</code> で確定する</li>
+      <li>データを取得する場合は <code>cursor.fetchall()</code> で結果を得る</li>
+    </ol>
+  </section>

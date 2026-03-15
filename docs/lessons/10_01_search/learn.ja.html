@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン10_01: 探索アルゴリズム</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">探索アルゴリズム</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔍 探索アルゴリズムとは</h2>
+  <p><strong>探索アルゴリズム</strong>とは、リスト（配列）の中から特定の値を見つけるための方法（手順）のことです。</p>
+  <p>たとえば、電話帳から特定の名前を探したり、棚から特定の本を探したりすることは、日常的な「探索」の例です。</p>
+  <p>コンピュータでは、大量のデータから素早く目的のデータを見つけるために、効率的な探索アルゴリズムが必要です。</p>
+  <p>今回は代表的な2つの探索方法を学びます：<strong>線形探索</strong>と<strong>二分探索</strong>です。</p>
+</section>
+
+<section class="section">
+  <h2>📋 線形探索（せんけいたんさく）</h2>
+  <p><strong>線形探索</strong>とは、リストの<strong>先頭から順番に1つずつ</strong>調べていく方法です。</p>
+  <p>探したい値と一致するものが見つかればそのインデックス（位置）を返し、最後まで見つからなければ -1 を返します。</p>
+  <p>シンプルで確実な方法ですが、リストが長いほど時間がかかります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">線形探索の実装</div>
+    <div class="example-code">def linear_search(items, target):<br>&nbsp;&nbsp;&nbsp;&nbsp;for i in range(len(items)):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if items[i] == target:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return i&nbsp;&nbsp;# 見つかった！インデックスを返す<br>&nbsp;&nbsp;&nbsp;&nbsp;return -1&nbsp;&nbsp;# 見つからなかった<br><br>numbers = [3, 1, 4, 1, 5, 9, 2, 6]<br>print(linear_search(numbers, 5))&nbsp;&nbsp;# 4<br>print(linear_search(numbers, 7))&nbsp;&nbsp;# -1</div>
+    <div class="example-explanation">
+      <code>range(len(items))</code> で 0 から最後のインデックスまでループします。<br>
+      一致したらすぐにインデックスを返し、ループを終了します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📖 二分探索（にぶんたんさく）</h2>
+  <p><strong>二分探索</strong>とは、<strong>ソート済み（並び替え済み）のリスト</strong>を使って、<strong>毎回探索範囲を半分に絞り込む</strong>方法です。</p>
+  <p>辞書で言葉を調べるときのことを想像してみてください。「ち」という行を探すとき、辞書の真ん中を開いて「な行」だったら前半を、「あ行」だったら後半を探しますよね。これが二分探索のイメージです。</p>
+  <p>具体的な手順：</p>
+  <ol>
+    <li>リストの真ん中の要素を見る</li>
+    <li>目的の値より大きければ、前半を無視して後半を探す</li>
+    <li>目的の値より小さければ、後半を無視して前半を探す</li>
+    <li>一致したら見つかり！一致するものがなければ -1</li>
+  </ol>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">二分探索のイメージ</div>
+    <div class="example-code"># ソート済みリストで 7 を探す<br>items = [1, 3, 5, 7, 9, 11, 13]<br>#&nbsp;インデックス: 0  1  2  3  4   5   6<br><br># ステップ1: 真ん中 (index=3) = 7 → 一致！<br># 答え: index = 3<br><br># もし 11 を探すなら...<br># ステップ1: 真ん中 (index=3) = 7 → 11 > 7 なので後半を探す<br># ステップ2: 後半の真ん中 (index=5) = 11 → 一致！<br># 答え: index = 5</div>
+    <div class="example-explanation">
+      二分探索は毎回探索範囲を半分にします。<br>
+      100万個のデータでも最大20回程度で見つかります！
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⏱️ O記法（オーダー記法）で速さを比べる</h2>
+  <p><strong>O記法（Big-O記法）</strong>とは、アルゴリズムの速さをざっくり表す書き方です。</p>
+  <p>「n個のデータに対して、どれくらいの処理が必要か」を表します。</p>
+  <ul>
+    <li><strong>O(n)</strong> ：データが n 個あると、最大 n 回処理が必要。データが2倍になると時間も2倍。</li>
+    <li><strong>O(log n)</strong>：データが n 個あっても、処理回数はずっと少ない。データが2倍になっても時間はほんの少し増えるだけ。</li>
+  </ul>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">線形探索 vs 二分探索の速さ比較</div>
+    <div class="example-code"># データ数と最大探索回数の比較<br>#<br># データ数 | 線形探索 O(n) | 二分探索 O(log n)<br># ---------|--------------|------------------<br>#       10 |           10 |                4<br>#      100 |          100 |                7<br>#     1000 |         1000 |               10<br>#  1000000 |      1000000 |               20<br>#<br># 1,000,000個のデータから探す場合：<br># 線形探索: 最大 1,000,000 回<br># 二分探索: 最大 20 回！（ただしソート済みが必要）</div>
+    <div class="example-explanation">
+      二分探索はとても速いですが、<strong>必ずソート済みのリストが必要</strong>です。<br>
+      ソートされていないリストには線形探索を使います。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><strong>線形探索</strong>：先頭から順に調べる。ソート不要。計算量 O(n)。</li>
+    <li><strong>二分探索</strong>：ソート済みリストを半分ずつ絞り込む。計算量 O(log n)。</li>
+    <li><strong>O記法</strong>：アルゴリズムの速さを表す記法。O(n) より O(log n) の方が速い。</li>
+    <li>データがソートされているなら二分探索が断然速い！</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

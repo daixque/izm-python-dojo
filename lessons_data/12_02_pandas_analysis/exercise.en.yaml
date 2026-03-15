@@ -1,0 +1,40 @@
+lesson:
+  number: "12_02"
+  id: "12_02_pandas_analysis"
+  title: "Data Aggregation and Filtering"
+description: "Use conditional filtering to implement a function that calculates the average of scores above a passing threshold."
+
+task_description: |
+  <p>Implement the function <code>passing_average(df, score_col, threshold=60)</code>.</p>
+  <p>It filters rows where the score in <code>score_col</code> is greater than or equal to <code>threshold</code>, then returns the <strong>mean</strong> of those scores.</p>
+  <h3>Arguments</h3>
+  <ul>
+    <li><code>df</code>: A Pandas DataFrame</li>
+    <li><code>score_col</code>: The name of the column containing scores (string)</li>
+    <li><code>threshold</code>: The minimum passing score (default is <code>60</code>)</li>
+  </ul>
+  <h3>Example</h3>
+  <pre>  import pandas as pd
+  df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(df, "score", threshold=60))  # 80.0
+  # Mean of 70, 80, 90 = 80.0</pre>
+
+instructions:
+  - "Write <code>import pandas as pd</code> at the top of your code"
+  - "Use <code>df[df[score_col] >= threshold]</code> to filter rows at or above the threshold"
+  - "Return the mean of <code>score_col</code> in the filtered data using <code>.mean()</code>"
+  - "Include the default argument <code>threshold=60</code> in the function signature"
+
+hints:
+  - hint: |
+      How to write conditional filtering:<br>
+      <code>passing = df[df[score_col] >= threshold]</code><br>
+      This keeps only rows where the score meets or exceeds the threshold.
+  - hint: |
+      After filtering, calculate the mean:<br>
+      <code>passing[score_col].mean()</code>
+  - hint: |
+      The complete solution looks like this:<br>
+      <code>def passing_average(df, score_col, threshold=60):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>passing = df[df[score_col] >= threshold]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return passing[score_col].mean()</code>

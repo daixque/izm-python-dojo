@@ -1,0 +1,34 @@
+lesson:
+  number: "13_01"
+  id: "13_01_plot_basic"
+  title: "Basic Charts"
+description: "Learn to visualize data by drawing a bar chart with Matplotlib."
+
+task_description: |
+  <p>Complete a program that displays monthly sales data (January to June) as a <strong>bar chart</strong>.</p>
+  <h3>What to implement</h3>
+  <ul>
+    <li>Use <code>plt.bar(months, sales)</code> to draw the bar chart</li>
+    <li>Use <code>plt.title("Monthly Sales")</code> to set the chart title</li>
+    <li>Use <code>plt.xlabel("Month")</code> to set the x-axis label</li>
+    <li>Use <code>plt.ylabel("Sales (10k yen)")</code> to set the y-axis label</li>
+    <li>Use <code>plt.show()</code> to display the chart</li>
+  </ul>
+  <p>After running your code, the chart will appear in the "Graph Output" area below the console.</p>
+
+instructions:
+  - "Pass <strong>x-axis data</strong> (months) as the first argument and <strong>bar heights</strong> (sales) as the second argument to <code>plt.bar(x, y)</code>"
+  - "<code>plt.title()</code>, <code>plt.xlabel()</code>, and <code>plt.ylabel()</code> each take a string argument"
+  - "Always call <code>plt.show()</code> at the end — without it, the chart won't be displayed"
+
+hints:
+  - hint: |
+      Basic bar chart structure:<br>
+      <code>plt.bar(months, sales)</code><br>
+      <code>plt.title("Monthly Sales")</code><br>
+      <code>plt.xlabel("Month")</code><br>
+      <code>plt.ylabel("Sales (10k yen)")</code><br>
+      <code>plt.show()</code>
+  - hint: |
+      The arguments to <code>plt.bar()</code> are <code>(x_data, heights)</code> in that order.<br>
+      Pass months (1–6) for the x-axis and sales (120, 150, ...) for the bar heights.

@@ -194,6 +194,211 @@
           "available": true
         }
       ]
+    },
+    {
+      "id": "chapter7",
+      "number": 7,
+      "title": "エラーと例外処理",
+      "description": "エラーを安全に処理する方法を学びます",
+      "lessons": [
+        {
+          "id": "07_01_try_except",
+          "number": "07_01",
+          "title": "try/except の基礎",
+          "description": "try/except を使って、エラーが起きても安全に動作する関数を実装します。",
+          "available": true
+        },
+        {
+          "id": "07_02_exception_types",
+          "number": "07_02",
+          "title": "例外の種類",
+          "description": "複数の例外の種類を使い分けて、安全な割り算関数を実装します。",
+          "available": true
+        },
+        {
+          "id": "07_03_finally_raise",
+          "number": "07_03",
+          "title": "finally と raise",
+          "description": "raise を使って入力値を検証する関数を実装します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter8",
+      "number": 8,
+      "title": "クラスとオブジェクト指向",
+      "description": "クラスを使ったプログラムの設計方法を学びます",
+      "lessons": [
+        {
+          "id": "08_01_class_basic",
+          "number": "08_01",
+          "title": "クラスの基礎",
+          "description": "クラスを定義して、属性とメソッドを持つオブジェクトを作ります。",
+          "available": true
+        },
+        {
+          "id": "08_02_class_methods",
+          "number": "08_02",
+          "title": "メソッドとインスタンス",
+          "description": "状態を持つクラスを実装して、メソッドによる属性の更新を練習します。",
+          "available": true
+        },
+        {
+          "id": "08_03_inheritance",
+          "number": "08_03",
+          "title": "継承",
+          "description": "継承を使って、基底クラスと派生クラスを実装します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter9",
+      "number": 9,
+      "title": "再帰関数",
+      "description": "自分自身を呼び出す関数の考え方を学びます",
+      "lessons": [
+        {
+          "id": "09_01_recursion_basic",
+          "number": "09_01",
+          "title": "再帰の基礎",
+          "description": "再帰を使って階乗を計算する関数を実装します。",
+          "available": true
+        },
+        {
+          "id": "09_02_recursion_advanced",
+          "number": "09_02",
+          "title": "再帰の応用",
+          "description": "再帰を使ってフィボナッチ数列のn番目の値を返す関数を実装します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter10",
+      "number": 10,
+      "title": "アルゴリズム入門",
+      "description": "探索とソートの基本的なアルゴリズムを学びます",
+      "lessons": [
+        {
+          "id": "10_01_search",
+          "number": "10_01",
+          "title": "探索アルゴリズム",
+          "description": "線形探索を実装して、リストの中から目的の値のインデックスを返す関数を作ります。",
+          "available": true
+        },
+        {
+          "id": "10_02_sort",
+          "number": "10_02",
+          "title": "ソートアルゴリズム",
+          "description": "バブルソートを使って数値リストを昇順に並び替える関数を実装します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter11",
+      "number": 11,
+      "title": "NumPy基礎",
+      "description": "数値計算ライブラリNumPyの使い方を学びます",
+      "lessons": [
+        {
+          "id": "11_01_numpy_array",
+          "number": "11_01",
+          "title": "配列の作成と操作",
+          "description": "NumPy配列を作成し、合計と平均を計算する関数を実装します。",
+          "available": true
+        },
+        {
+          "id": "11_02_numpy_math",
+          "number": "11_02",
+          "title": "数値計算と統計",
+          "description": "NumPyを使ったmin-max正規化を実装し、データを0〜1の範囲に変換します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter12",
+      "number": 12,
+      "title": "Pandasデータ分析",
+      "description": "データ分析ライブラリPandasの使い方を学びます",
+      "lessons": [
+        {
+          "id": "12_01_pandas_basic",
+          "number": "12_01",
+          "title": "DataFrameの基礎",
+          "description": "DataFrameの基本操作を学び、列の平均値を計算する関数を実装します。",
+          "available": true
+        },
+        {
+          "id": "12_02_pandas_analysis",
+          "number": "12_02",
+          "title": "データ集計とフィルタリング",
+          "description": "条件フィルタリングを使って、合格点以上のスコアの平均を計算する関数を実装します。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter13",
+      "number": 13,
+      "title": "グラフ描画（Matplotlib）",
+      "description": "データを視覚化してグラフを描く方法を学びます",
+      "lessons": [
+        {
+          "id": "13_01_plot_basic",
+          "number": "13_01",
+          "title": "基本的なグラフ",
+          "description": "Matplotlibを使って棒グラフを描き、データを視覚化する方法を学びます。",
+          "available": true
+        },
+        {
+          "id": "13_02_plot_advanced",
+          "number": "13_02",
+          "title": "グラフのカスタマイズ",
+          "description": "複数のデータ系列を1つのグラフに描き、凡例・グリッド線・散布図などのカスタマイズ方法を学びます。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter14",
+      "number": 14,
+      "title": "データベースとSQL",
+      "description": "SQLiteを使ったデータベース操作を学びます",
+      "lessons": [
+        {
+          "id": "14_01_sql_basic",
+          "number": "14_01",
+          "title": "SQLの基礎",
+          "description": "データベースとテーブルの基本概念を理解し、Pythonのsqlite3モジュールでSELECT・INSERT・CREATE TABLEを使う方法を学びます。",
+          "available": true
+        },
+        {
+          "id": "14_02_sql_advanced",
+          "number": "14_02",
+          "title": "WHERE・集計・ORDER BY",
+          "description": "WHEREによる絞り込み、COUNT・AVG・MAX・MINなどの集計関数、ORDER BYによる並べ替えを学びます。",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter15",
+      "number": 15,
+      "title": "上級者向けの課題",
+      "description": "これまでの知識を総合した実践的なプロジェクトに挑戦します",
+      "lessons": [
+        {
+          "id": "15_01_advanced_project",
+          "number": "15_01",
+          "title": "総合プロジェクト：成績管理システム",
+          "description": "クラス・sqlite3・例外処理を組み合わせて、生徒の成績を管理するシステムを実装します。",
+          "available": true
+        }
+      ]
     }
   ]
 }

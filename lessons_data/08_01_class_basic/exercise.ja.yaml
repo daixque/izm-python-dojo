@@ -1,0 +1,38 @@
+lesson:
+  number: "08_01"
+  id: "08_01_class_basic"
+  title: "クラスの基礎"
+description: "クラスを定義して、属性とメソッドを持つオブジェクトを作ります。"
+
+task_description: |
+  <p>クラス <code>Animal</code> を実装しましょう。</p>
+  <p><code>name</code>（名前）と <code>sound</code>（鳴き声）の2つの属性を持ち、<code>speak()</code> メソッドで「{name}は{sound}と鳴きます」という文字列を返します。</p>
+  <h3>実行例</h3>
+  <pre>  dog = Animal("犬", "ワン")
+  print(dog.speak())   # 犬はワンと鳴きます
+
+  cat = Animal("猫", "ニャー")
+  print(cat.speak())   # 猫はニャーと鳴きます</pre>
+
+instructions:
+  - "<code>class Animal:</code> でクラスを定義します"
+  - "<code>__init__(self, name, sound)</code> で <code>name</code> と <code>sound</code> 属性を初期化します"
+  - "<code>speak(self)</code> メソッドを定義して、<code>\"{name}は{sound}と鳴きます\"</code> という文字列を返します"
+  - "f文字列 <code>f\"{self.name}は{self.sound}と鳴きます\"</code> を使うと便利です"
+
+hints:
+  - hint: |
+      クラスの基本的な形：<br>
+      <code>class Animal:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name, sound):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.sound = ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def speak(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      属性の設定：<br>
+      <code>self.name = name</code><br>
+      <code>self.sound = sound</code>
+  - hint: |
+      speak() の戻り値はf文字列で作れます：<br>
+      <code>return f"{self.name}は{self.sound}と鳴きます"</code>

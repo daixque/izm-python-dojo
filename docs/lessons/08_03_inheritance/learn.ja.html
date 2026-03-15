@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン08_03: 継承</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">継承</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🧬 継承とは何か</h2>
+  <p><strong>継承（けいしょう）</strong>とは、あるクラスの機能を引き継いで、新しいクラスを作る仕組みです。</p>
+  <p>継承元のクラスを<strong>親クラス（スーパークラス）</strong>、継承して作ったクラスを<strong>子クラス（サブクラス）</strong>と呼びます。</p>
+  <p>子クラスは親クラスのメソッドや属性をそのまま使えます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">継承のイメージ</div>
+    <div class="example-code">class Animal:&nbsp;&nbsp;# 親クラス<br>&nbsp;&nbsp;&nbsp;&nbsp;def breathe(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("呼吸する")<br><br>class Dog(Animal):&nbsp;&nbsp;# Animal を継承<br>&nbsp;&nbsp;&nbsp;&nbsp;def bark(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("ワン！")<br><br>dog = Dog()<br>dog.breathe()&nbsp;&nbsp;# 親クラスのメソッドが使える<br>dog.bark()&nbsp;&nbsp;&nbsp;&nbsp;# 子クラスのメソッド</div>
+    <div class="example-explanation">
+      <code>class Dog(Animal):</code> の <code>(Animal)</code> が「Animal を継承する」という意味です。<br>
+      <code>Dog</code> クラスは <code>Animal</code> クラスのメソッドをそのまま使えます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>⬆️ super() で親クラスを呼び出す</h2>
+  <p><code>super()</code> を使うと、子クラスから親クラスのメソッドを呼び出せます。</p>
+  <p>特に <code>__init__</code> でよく使います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">super() を使った __init__</div>
+    <div class="example-code">class Animal:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br><br>class Dog(Animal):<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, breed):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(name)&nbsp;&nbsp;# 親の __init__ を呼ぶ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.breed = breed<br><br>dog = Dog("ポチ", "柴犬")<br>print(dog.name)&nbsp;&nbsp;&nbsp;# ポチ（親クラスで設定）<br>print(dog.breed)&nbsp;&nbsp;# 柴犬（子クラスで設定）</div>
+    <div class="example-explanation">
+      <code>super().__init__(name)</code> で親クラスの <code>__init__</code> を呼び出しています。<br>
+      これで親クラスの初期化処理も実行されます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔄 メソッドのオーバーライド</h2>
+  <p>子クラスで親クラスと同じ名前のメソッドを定義すると、子クラスのメソッドで<strong>上書き（オーバーライド）</strong>されます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">メソッドのオーバーライド</div>
+    <div class="example-code">class Shape:<br>&nbsp;&nbsp;&nbsp;&nbsp;def area(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br><br>class Circle(Shape):<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, radius):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.radius = radius<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def area(self):&nbsp;&nbsp;# オーバーライド<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.radius ** 2 * 3.14<br><br>s = Shape()<br>print(s.area())&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 0（親クラスの area）<br>c = Circle(5)<br>print(c.area())&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 78.5（子クラスの area）</div>
+    <div class="example-explanation">
+      <code>Circle</code> クラスで <code>area()</code> を再定義することで、<code>Shape</code> の <code>area()</code> を上書きしています。<br>
+      <code>Circle</code> オブジェクトでは上書きした <code>area()</code> が実行されます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">super() でオーバーライドしつつ親も使う</div>
+    <div class="example-code">class Animal:<br>&nbsp;&nbsp;&nbsp;&nbsp;def describe(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "動物です"<br><br>class Dog(Animal):<br>&nbsp;&nbsp;&nbsp;&nbsp;def describe(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent = super().describe()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f"{parent}。犬です。"<br><br>dog = Dog()<br>print(dog.describe())&nbsp;&nbsp;# 動物です。犬です。</div>
+    <div class="example-explanation">
+      <code>super().describe()</code> で親クラスのメソッドを呼びつつ、追加の処理もできます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 isinstance() で型を確認する</h2>
+  <p><code>isinstance(オブジェクト, クラス)</code> で、オブジェクトがそのクラスのインスタンスかどうかを確認できます。</p>
+  <p>継承関係も考慮されます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">isinstance の使い方</div>
+    <div class="example-code">class Animal:<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>class Dog(Animal):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>dog = Dog()<br>print(isinstance(dog, Dog))&nbsp;&nbsp;&nbsp;&nbsp;# True<br>print(isinstance(dog, Animal))&nbsp;&nbsp;# True（継承関係）<br>print(isinstance(dog, int))&nbsp;&nbsp;&nbsp;&nbsp;# False</div>
+    <div class="example-explanation">
+      <code>Dog</code> は <code>Animal</code> を継承しているため、<code>Dog</code> のオブジェクトは <code>isinstance(dog, Animal)</code> でも <code>True</code> になります。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><strong>継承</strong>は親クラスの機能を引き継いで新しいクラスを作る仕組み</li>
+    <li><code>class 子クラス(親クラス):</code> で継承を定義する</li>
+    <li><code>super()</code> で親クラスのメソッドを呼び出せる</li>
+    <li><strong>オーバーライド</strong>: 子クラスで親クラスのメソッドを上書きできる</li>
+    <li><code>isinstance(obj, Class)</code> でオブジェクトの型を確認できる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

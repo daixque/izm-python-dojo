@@ -1,0 +1,40 @@
+lesson:
+  number: "12_02"
+  id: "12_02_pandas_analysis"
+  title: "データ集計とフィルタリング"
+description: "条件フィルタリングを使って、合格点以上のスコアの平均を計算する関数を実装します。"
+
+task_description: |
+  <p>関数 <code>passing_average(df, score_col, threshold=60)</code> を実装しましょう。</p>
+  <p>指定した列で <code>threshold</code>（しきい値）以上のスコアを持つ行だけを取り出し、その<strong>平均値</strong>を返します。</p>
+  <h3>引数</h3>
+  <ul>
+    <li><code>df</code>: PandasのDataFrame</li>
+    <li><code>score_col</code>: スコアが入っている列名（文字列）</li>
+    <li><code>threshold</code>: 合格ラインのスコア（デフォルトは <code>60</code>）</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  import pandas as pd
+  df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(df, "score", threshold=60))  # 80.0
+  # 70, 80, 90 の平均 = 80.0</pre>
+
+instructions:
+  - "<code>import pandas as pd</code> を先頭に書いてください"
+  - "<code>df[df[score_col] >= threshold]</code> で合格点以上の行を取り出します"
+  - "絞り込んだデータの <code>score_col</code> 列の平均（<code>.mean()</code>）を返します"
+  - "デフォルト引数 <code>threshold=60</code> を関数のシグネチャに含めてください"
+
+hints:
+  - hint: |
+      条件フィルタリングの書き方：<br>
+      <code>passing = df[df[score_col] >= threshold]</code><br>
+      これでthreshold以上のスコアを持つ行だけが残ります。
+  - hint: |
+      フィルタリングした後で平均を計算します：<br>
+      <code>passing[score_col].mean()</code>
+  - hint: |
+      完成形はこのようになります：<br>
+      <code>def passing_average(df, score_col, threshold=60):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>passing = df[df[score_col] >= threshold]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return passing[score_col].mean()</code>

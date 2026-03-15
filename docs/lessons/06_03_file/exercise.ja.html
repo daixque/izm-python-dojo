@@ -88,7 +88,7 @@
                 </div>
             </aside>
 
-            <!-- 右側：エディタとコンソール -->
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
             <div class="code-panel">
                 <!-- コードエディタ -->
                 <div class="editor-container">
@@ -113,6 +113,7 @@
                     <div id="console" class="console"></div>
                 </div>
             </div>
+
 
             <!-- ファイルエクスプローラー（右ペイン） -->
             <aside id="file-explorer" class="file-explorer">
@@ -175,6 +176,8 @@
         const LESSON_ID = "06_03_file";
         const INITIAL_CODE = "def save_memo(filename, content):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # with open(filename, \u0027w\u0027, encoding=\u0027utf-8\u0027) as f: \u3092\u4f7f\u3046\n    # f.write(content) \u3067\u30d5\u30a1\u30a4\u30eb\u306b\u66f8\u304d\u8fbc\u3080\n    pass\n\ndef load_memo(filename):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # try: \u3067 open \u3057\u3066 read() \u3057\u3066\u8fd4\u3059\n    # except FileNotFoundError: \u3067 None \u3092\u8fd4\u3059\n    pass\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nsave_memo(\"memo.txt\", \"\u3053\u308c\u306f\u30e1\u30e2\u3067\u3059\")\ncontent = load_memo(\"memo.txt\")\nprint(content)  # \"\u3053\u308c\u306f\u30e1\u30e2\u3067\u3059\"\n\nmissing = load_memo(\"notfound.txt\")\nprint(missing)  # None\n";
         const SOLUTION_CODE = "def save_memo(filename, content):\n    with open(filename, \u0027w\u0027, encoding=\u0027utf-8\u0027) as f:\n        f.write(content)\n\ndef load_memo(filename):\n    try:\n        with open(filename, \u0027r\u0027, encoding=\u0027utf-8\u0027) as f:\n            return f.read()\n    except FileNotFoundError:\n        return None\n\n# \u30c6\u30b9\u30c8\u5b9f\u884c\nsave_memo(\"memo.txt\", \"\u3053\u308c\u306f\u30e1\u30e2\u3067\u3059\")\ncontent = load_memo(\"memo.txt\")\nprint(content)\n\nmissing = load_memo(\"notfound.txt\")\nprint(missing)\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
 
         const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    exec_globals[\u0027save_memo\u0027](\"test_save.txt\", \"\u30c6\u30b9\u30c8\u5185\u5bb9\")\n\n    with open(\"test_save.txt\", \u0027r\u0027, encoding=\u0027utf-8\u0027) as f:\n        saved = f.read()\n\n    if saved == \"\u30c6\u30b9\u30c8\u5185\u5bb9\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30d5\u30a1\u30a4\u30eb\u3078\u306e\u4fdd\u5b58\u304c\u6b63\u3057\u304f\u52d5\u4f5c\u3057\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u4fdd\u5b58\u3055\u308c\u305f\u5185\u5bb9\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002\u671f\u5f85: \u0027\u30c6\u30b9\u30c8\u5185\u5bb9\u0027, \u5b9f\u969b: \u0027{saved}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "save_memo \u3092\u547c\u3073\u51fa\u3057\u3066\u30d5\u30a1\u30a4\u30eb\u304c\u6b63\u3057\u304f\u4fdd\u5b58\u3055\u308c\u3066\u3044\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "save_memo \u304c\u52d5\u4f5c\u3059\u308b\u304b"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    exec_globals[\u0027save_memo\u0027](\"test_load.txt\", \"\u8aad\u307f\u8fbc\u307f\u30c6\u30b9\u30c8\")\n    loaded = exec_globals[\u0027load_memo\u0027](\"test_load.txt\")\n\n    if loaded == \"\u8aad\u307f\u8fbc\u307f\u30c6\u30b9\u30c8\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u30d5\u30a1\u30a4\u30eb\u306e\u8aad\u307f\u8fbc\u307f\u304c\u6b63\u3057\u304f\u52d5\u4f5c\u3057\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u8aad\u307f\u8fbc\u3093\u3060\u5185\u5bb9\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002\u671f\u5f85: \u0027\u8aad\u307f\u8fbc\u307f\u30c6\u30b9\u30c8\u0027, \u5b9f\u969b: \u0027{loaded}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "save_memo \u3067\u4fdd\u5b58\u3057\u305f\u5185\u5bb9\u3092 load_memo \u3067\u6b63\u3057\u304f\u8aad\u307f\u8fbc\u3081\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "load_memo \u304c\u4fdd\u5b58\u3057\u305f\u5185\u5bb9\u3092\u8aad\u307f\u8fbc\u3081\u308b\u304b"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    result_val = exec_globals[\u0027load_memo\u0027](\"nonexistent_12345.txt\")\n\n    if result_val is None:\n        result = {\"passed\": True, \"message\": \"\u2713 \u5b58\u5728\u3057\u306a\u3044\u30d5\u30a1\u30a4\u30eb\u306f None \u3092\u8fd4\u3057\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u5b58\u5728\u3057\u306a\u3044\u30d5\u30a1\u30a4\u30eb\u306f None \u3092\u8fd4\u3059\u3079\u304d\u3067\u3059\u3002\u5b9f\u969b: {result_val}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u5b58\u5728\u3057\u306a\u3044\u30d5\u30a1\u30a4\u30eb\u3092\u8aad\u307f\u8fbc\u3082\u3046\u3068\u3057\u305f\u3068\u304d None \u304c\u8fd4\u3055\u308c\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "\u5b58\u5728\u3057\u306a\u3044\u30d5\u30a1\u30a4\u30eb\u306f None \u3092\u8fd4\u3059\u304b"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    exec_globals[\u0027save_memo\u0027](\"memo1.txt\", \"\u30e1\u30e21\")\n    exec_globals[\u0027save_memo\u0027](\"memo2.txt\", \"\u30e1\u30e22\")\n\n    content1 = exec_globals[\u0027load_memo\u0027](\"memo1.txt\")\n    content2 = exec_globals[\u0027load_memo\u0027](\"memo2.txt\")\n\n    if content1 == \"\u30e1\u30e21\" and content2 == \"\u30e1\u30e22\":\n        result = {\"passed\": True, \"message\": \"\u2713 \u8907\u6570\u306e\u30d5\u30a1\u30a4\u30eb\u3092\u6b63\u3057\u304f\u4fdd\u5b58\u30fb\u8aad\u307f\u8fbc\u307f\u3067\u304d\u3066\u3044\u307e\u3059\"}\n    else:\n        result = {\"passed\": False, \"message\": f\"\u2717 \u8907\u6570\u30d5\u30a1\u30a4\u30eb\u306e\u51e6\u7406\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002memo1=\u0027{content1}\u0027, memo2=\u0027{content2}\u0027\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u8907\u6570\u306e\u30d5\u30a1\u30a4\u30eb\u3092\u305d\u308c\u305e\u308c\u6b63\u3057\u304f\u4fdd\u5b58\u30fb\u8aad\u307f\u8fbc\u307f\u3067\u304d\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "\u8907\u6570\u306e\u30e1\u30e2\u3092\u4fdd\u5b58\u30fb\u8aad\u307f\u8fbc\u307f\u3067\u304d\u308b\u304b"}];
         
@@ -193,7 +196,9 @@
                 initialCode: INITIAL_CODE,
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
-                solutionCode: SOLUTION_CODE
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

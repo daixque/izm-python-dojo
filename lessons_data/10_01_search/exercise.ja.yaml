@@ -1,0 +1,40 @@
+lesson:
+  number: "10_01"
+  id: "10_01_search"
+  title: "探索アルゴリズム"
+description: "線形探索を実装して、リストの中から目的の値のインデックスを返す関数を作ります。"
+
+task_description: |
+  <p>関数 <code>linear_search(items, target)</code> を実装しましょう。</p>
+  <p>リスト <code>items</code> の中から <code>target</code> を線形探索（先頭から順番に調べる）で探し、見つかった場合はそのインデックスを返します。見つからない場合は <code>-1</code> を返します。</p>
+  <h3>実行例</h3>
+  <pre>  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+  print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+  print(linear_search([3, 1, 4, 1, 5], 1))  # 1 (最初に見つかった位置)</pre>
+
+instructions:
+  - "<code>for</code> ループで <code>range(len(items))</code> を使い、インデックス <code>i</code> を順番に調べる"
+  - "<code>items[i] == target</code> なら <code>i</code> を返す"
+  - "ループが終わっても見つからなかった場合は <code>-1</code> を返す"
+
+hints:
+  - hint: |
+      ループでインデックスを使いながら調べます：<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == ???:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code>
+  - hint: |
+      ループの後、見つからなかった場合に -1 を返します：<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      完成した関数はこうなります：<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>

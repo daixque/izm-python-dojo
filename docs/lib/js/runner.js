@@ -43,14 +43,6 @@ builtins.input = custom_input
         
         isReady = true;
         updateStatus('準備完了 ✓', true);
-        
-        // 実行ボタンを有効化
-        const runBtn = document.getElementById('btn-run');
-        if (runBtn) runBtn.disabled = false;
-        
-        const testBtn = document.getElementById('btn-test');
-        if (testBtn) testBtn.disabled = false;
-        
         console.log('Pyodide initialized successfully');
     } catch (error) {
         updateStatus('エラー: Python読み込み失敗', false);
@@ -203,7 +195,54 @@ function getInput(promptMessage) {
     }
 }
 
+// Matplotlib の初期化（agg バックエンド + base64 PNG 出力）
+async function initMatplotlib() {
+    if (!isReady || !pyodide) return;
+
+    updateStatus('matplotlib を読み込み中...', false);
+
+    // バックエンドをパッケージロード前に設定（wasm_backend が有効にならないように）
+    await pyodide.runPythonAsync(`
+import os
+os.environ['MPLBACKEND'] = 'Agg'
+    `);
+
+    await pyodide.loadPackage('matplotlib');
+
+    await pyodide.runPythonAsync(`
+import warnings
+import matplotlib
+import matplotlib.pyplot as plt
+import base64
+import io
+import js
+
+# 欠損グリフの警告を抑制
+warnings.filterwarnings('ignore', message='Glyph.*missing from current font')
+
+def _matplotlib_show(*args, **kwargs):
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', dpi=100)
+    buf.seek(0)
+    b64 = base64.b64encode(buf.read()).decode()
+    container = js.document.getElementById('matplotlib-output')
+    if container:
+        img = js.document.createElement('img')
+        img.src = 'data:image/png;base64,' + b64
+        container.appendChild(img)
+    plt.close()
+
+plt.show = _matplotlib_show
+    `);
+}
+
 // グローバルに公開
+// 追加パッケージのロード（numpy/pandas 等）
+async function loadPackages(packages) {
+    if (!isReady || !pyodide || !packages || packages.length === 0) return;
+    await pyodide.loadPackage(packages);
+}
+
 window.pyodideRunner = {
     init: initPyodide,
     run: runPythonCode,
@@ -211,5 +250,7 @@ window.pyodideRunner = {
     getPyodide: () => pyodide,
     fs: fileSystem,
     setInputMode: setInputMode,
-    getInput: getInput
+    getInput: getInput,
+    loadPackages: loadPackages,
+    initMatplotlib: initMatplotlib
 };
