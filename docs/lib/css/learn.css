@@ -129,6 +129,7 @@ body {
 /* コード例 */
 .examples {
     margin-top: 32px;
+    margin-bottom: 48px;
 }
 
 .examples h2 {
