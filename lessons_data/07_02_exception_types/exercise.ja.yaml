@@ -9,7 +9,7 @@ task_description: |
   <p><code>a</code> を <code>b</code> で割った結果を返します。</p>
   <p>エラーが発生した場合は、エラーの種類を文字列で返します。</p>
   <h3>実行例</h3>
-  <pre>  print(safe_divide(10, 2))    # 5.0
+  <pre>print(safe_divide(10, 2))    # 5.0
   print(safe_divide(10, 0))    # "ZeroDivisionError"
   print(safe_divide(10, "a"))  # "TypeError"</pre>
 

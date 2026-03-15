@@ -9,7 +9,7 @@ task_description: |
   <p>If <code>age</code> is between 0 and 150 (inclusive), return <code>age</code> as-is.</p>
   <p>If it is out of range, <code>raise</code> a <code>ValueError</code>.</p>
   <h3>Example Output</h3>
-  <pre>  print(validate_age(25))   # 25
+  <pre>print(validate_age(25))   # 25
   validate_age(-1)          # raises ValueError
   validate_age(200)         # raises ValueError</pre>
 

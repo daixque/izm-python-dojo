@@ -14,7 +14,7 @@ task_description: |
     <li><code>threshold</code>: The minimum passing score (default is <code>60</code>)</li>
   </ul>
   <h3>Example</h3>
-  <pre>  import pandas as pd
+  <pre>import pandas as pd
   df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
   print(passing_average(df, "score", threshold=60))  # 80.0
   # Mean of 70, 80, 90 = 80.0</pre>

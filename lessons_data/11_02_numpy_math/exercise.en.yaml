@@ -11,7 +11,7 @@ task_description: |
   <p>It rescales the data so the minimum value becomes 0 and the maximum value becomes 1.</p>
   <p>Formula: <code>(x - min) / (max - min)</code></p>
   <h3>Example Output</h3>
-  <pre>  print(normalize([0, 5, 10]))
+  <pre>print(normalize([0, 5, 10]))
   # [0.0, 0.5, 1.0]
 
   print(normalize([2, 4, 6, 8]))

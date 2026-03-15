@@ -15,7 +15,7 @@ task_description: |
     <li><code>top_students(self, n)</code>: 平均点の高い順に上位 <code>n</code> 人の <code>(名前, 平均点)</code> のリストを返す</li>
   </ul>
   <h3>実行例</h3>
-  <pre>  db = StudentDB()
+  <pre>db = StudentDB()
   db.add_student("Alice", [85, 90, 88])
   db.add_student("Bob", [70, 75, 80])
   db.add_student("Charlie", [95, 92, 98])

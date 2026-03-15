@@ -15,7 +15,7 @@ task_description: |
     <li><code>"divide"</code>: return <code>a / b</code> (return <code>None</code> if <code>b</code> is 0)</li>
   </ul>
   <h3>Example Output</h3>
-  <pre>  print(calculate(10, 5))                  # 15 (default is addition)
+  <pre>print(calculate(10, 5))                  # 15 (default is addition)
   print(calculate(10, 5, "subtract"))      # 5
   print(calculate(10, 5, "multiply"))      # 50
   print(calculate(10, 5, "divide"))        # 2.0

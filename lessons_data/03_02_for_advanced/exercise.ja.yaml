@@ -9,7 +9,7 @@ task_description: |
   <p>この関数は <strong>1 から n までの整数の合計</strong>を返します。</p>
   <h3>出力例</h3>
   <p>例えば <code>sum_numbers(5)</code> を呼び出すと：</p>
-  <pre>  1 + 2 + 3 + 4 + 5 = 15</pre>
+  <pre>1 + 2 + 3 + 4 + 5 = 15</pre>
   <p>なので <code>15</code> を返します。</p>
   <p><code>sum_numbers(10)</code> は <code>55</code> を、<code>sum_numbers(100)</code> は <code>5050</code> を返します。</p>
 

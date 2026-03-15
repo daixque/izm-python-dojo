@@ -13,7 +13,7 @@ task_description: |
     <li><code>5!</code> = 5 × 4 × 3 × 2 × 1 = 120</li>
   </ul>
   <h3>Example Output</h3>
-  <pre>  print(factorial(0))   # 1
+  <pre>print(factorial(0))   # 1
   print(factorial(5))   # 120
   print(factorial(10))  # 3628800</pre>
 

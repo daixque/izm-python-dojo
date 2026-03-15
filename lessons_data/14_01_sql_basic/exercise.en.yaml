@@ -8,13 +8,13 @@ task_description: |
   <p>Implement the function <code>get_all_users(conn)</code>.</p>
   <p>It should retrieve <strong>all rows</strong> from the <code>users</code> table and return them.</p>
   <h3>Table contents</h3>
-  <pre>  id | name    | age
+  <pre>id | name    | age
   ---+---------+----
    1 | Alice   |  25
    2 | Bob     |  30
    3 | Charlie |  22</pre>
   <h3>Expected return value</h3>
-  <pre>  [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]</pre>
+  <pre>[(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]</pre>
 
 instructions:
   - "The table creation and data insertion code is already provided"

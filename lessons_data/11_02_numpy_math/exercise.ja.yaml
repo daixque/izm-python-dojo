@@ -11,7 +11,7 @@ task_description: |
   <p>データの最小値を0、最大値を1になるよう変換する方法です。</p>
   <p>計算式: <code>(x - 最小値) / (最大値 - 最小値)</code></p>
   <h3>実行例</h3>
-  <pre>  print(normalize([0, 5, 10]))
+  <pre>print(normalize([0, 5, 10]))
   # [0.0, 0.5, 1.0]
 
   print(normalize([2, 4, 6, 8]))

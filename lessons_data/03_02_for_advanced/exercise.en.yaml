@@ -9,7 +9,7 @@ task_description: |
   <p>This function returns the <strong>sum of all integers from 1 to n</strong>.</p>
   <h3>Example Output</h3>
   <p>For example, calling <code>sum_numbers(5)</code> computes:</p>
-  <pre>  1 + 2 + 3 + 4 + 5 = 15</pre>
+  <pre>1 + 2 + 3 + 4 + 5 = 15</pre>
   <p>so it returns <code>15</code>.</p>
   <p><code>sum_numbers(10)</code> returns <code>55</code>, and <code>sum_numbers(100)</code> returns <code>5050</code>.</p>
 

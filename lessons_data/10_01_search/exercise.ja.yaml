@@ -8,7 +8,7 @@ task_description: |
   <p>関数 <code>linear_search(items, target)</code> を実装しましょう。</p>
   <p>リスト <code>items</code> の中から <code>target</code> を線形探索（先頭から順番に調べる）で探し、見つかった場合はそのインデックスを返します。見つからない場合は <code>-1</code> を返します。</p>
   <h3>実行例</h3>
-  <pre>  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+  <pre>print(linear_search([3, 1, 4, 1, 5], 4))  # 2
   print(linear_search([3, 1, 4, 1, 5], 9))  # -1
   print(linear_search([3, 1, 4, 1, 5], 1))  # 1 (最初に見つかった位置)</pre>
 

@@ -8,7 +8,7 @@ task_description: |
   <p>関数 <code>get_adult_users(conn, min_age)</code> を実装しましょう。</p>
   <p><code>users</code> テーブルから <code>age</code> が <code>min_age</code> 以上のユーザーを取得し、<strong>年齢の昇順</strong>で返す関数です。</p>
   <h3>実行例</h3>
-  <pre>  get_adult_users(conn, 25)
+  <pre>get_adult_users(conn, 25)
   # → [(1, 'Alice', 25), (2, 'Bob', 30)]
 
   get_adult_users(conn, 30)

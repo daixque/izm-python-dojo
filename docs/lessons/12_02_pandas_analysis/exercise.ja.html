@@ -55,7 +55,7 @@
   <li><code>threshold</code>: 合格ラインのスコア（デフォルトは <code>60</code>）</li>
 </ul>
 <h3>実行例</h3>
-<pre>  import pandas as pd
+<pre>import pandas as pd
 df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
 print(passing_average(df, "score", threshold=60))  # 80.0
 # 70, 80, 90 の平均 = 80.0</pre>

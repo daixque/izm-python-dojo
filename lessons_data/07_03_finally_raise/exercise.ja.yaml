@@ -9,7 +9,7 @@ task_description: |
   <p><code>age</code> が 0 以上 150 以下であれば <code>age</code> をそのまま返します。</p>
   <p>範囲外の場合は <code>ValueError</code> を <code>raise</code> します。</p>
   <h3>実行例</h3>
-  <pre>  print(validate_age(25))   # 25
+  <pre>print(validate_age(25))   # 25
   validate_age(-1)          # ValueError が発生
   validate_age(200)         # ValueError が発生</pre>
 

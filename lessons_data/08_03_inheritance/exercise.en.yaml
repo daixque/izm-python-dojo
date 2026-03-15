@@ -17,7 +17,7 @@ task_description: |
     <li><code>area()</code> method returns <code>width * height</code></li>
   </ul>
   <h3>Example Output</h3>
-  <pre>  r = Rectangle(4, 5)
+  <pre>r = Rectangle(4, 5)
   print(r.area())                     # 20
   print(isinstance(r, Shape))         # True
   print(isinstance(r, Rectangle))     # True</pre>

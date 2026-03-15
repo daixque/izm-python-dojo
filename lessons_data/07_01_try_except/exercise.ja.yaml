@@ -8,7 +8,7 @@ task_description: |
   <p>関数 <code>safe_int(value)</code> を実装しましょう。</p>
   <p>文字列 <code>value</code> を整数に変換して返します。変換できない場合（<code>ValueError</code> が発生した場合）は <code>None</code> を返します。</p>
   <h3>実行例</h3>
-  <pre>  print(safe_int("42"))    # 42
+  <pre>print(safe_int("42"))    # 42
   print(safe_int("abc"))   # None
   print(safe_int("3.14"))  # None</pre>
 

@@ -13,7 +13,7 @@ task_description: |
     <li><code>column</code>: The name of the column to average (string)</li>
   </ul>
   <h3>Example</h3>
-  <pre>  import pandas as pd
+  <pre>import pandas as pd
   df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
   print(column_mean(df, "score"))  # 80.0</pre>
 

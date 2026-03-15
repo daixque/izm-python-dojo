@@ -8,7 +8,7 @@ task_description: |
   <p>クラス <code>Animal</code> を実装しましょう。</p>
   <p><code>name</code>（名前）と <code>sound</code>（鳴き声）の2つの属性を持ち、<code>speak()</code> メソッドで「{name}は{sound}と鳴きます」という文字列を返します。</p>
   <h3>実行例</h3>
-  <pre>  dog = Animal("犬", "ワン")
+  <pre>dog = Animal("犬", "ワン")
   print(dog.speak())   # 犬はワンと鳴きます
 
   cat = Animal("猫", "ニャー")

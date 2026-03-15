@@ -9,7 +9,7 @@ task_description: |
   <p>数値のリスト <code>numbers</code> を昇順（小さい順）に並び替えた<strong>新しいリスト</strong>を返します。</p>
   <p><strong>注意：</strong><code>sort()</code> や <code>sorted()</code> は使わないで実装してください！</p>
   <h3>実行例</h3>
-  <pre>  print(bubble_sort([5, 3, 8, 1, 2]))     # [1, 2, 3, 5, 8]
+  <pre>print(bubble_sort([5, 3, 8, 1, 2]))     # [1, 2, 3, 5, 8]
   print(bubble_sort([-3, 0, -1, 2]))      # [-3, -1, 0, 2]
   print(bubble_sort([1]))                 # [1]</pre>
 

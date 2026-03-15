@@ -9,7 +9,7 @@ task_description: |
   <p><code>students</code> is a dictionary with student names as keys and scores as values. Return the score for the student specified by <code>name</code>.</p>
   <p>If the student does not exist in the dictionary, return <strong>-1</strong>.</p>
   <h3>Examples</h3>
-  <pre>  students = {"Alice": 85, "Bob": 92, "Charlie": 78}
+  <pre>students = {"Alice": 85, "Bob": 92, "Charlie": 78}
   get_score(students, "Alice")    # 85
   get_score(students, "Bob")      # 92
   get_score(students, "Dave")     # -1 (not found)</pre>
