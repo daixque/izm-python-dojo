@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #F0F0F0;
     height: 100vh;
     overflow: hidden;
 }
@@ -23,14 +23,15 @@ body {
 /* ヘッダー */
 .header {
     background: white;
-    padding: 16px 24px;
+    padding: 14px 24px;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    border-top: 3px solid #4F7FE7;
 }
 
 .site-title {
@@ -39,34 +40,37 @@ body {
 }
 
 .site-link {
-    color: #667eea;
+    color: #4F7FE7;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     transition: color 0.2s;
 }
 
 .site-link:hover {
-    color: #764ba2;
+    color: #142C49;
     text-decoration: underline;
 }
 
 .header h1 {
-    font-size: 24px;
-    color: #333;
+    font-size: 22px;
+    color: #142C49;
     flex: 1;
     min-width: 300px;
 }
 
 .status {
-    background: #f0f0f0;
-    padding: 8px 16px;
+    background: #FCFCFC;
+    border: 1px solid #e0e0e0;
+    padding: 6px 16px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 13px;
+    color: #666;
 }
 
 #status.ready {
     background: #d4edda;
+    border-color: #b8dfc4;
     color: #155724;
 }
 
@@ -93,8 +97,8 @@ body {
 }
 
 .language-select:hover {
-    border-color: #667eea;
-    background: #f8f9fa;
+    border-color: #4F7FE7;
+    background: #FCFCFC;
 }
 
 /* メインコンテンツ */
@@ -125,7 +129,7 @@ body {
 .task-panel {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -138,9 +142,9 @@ body {
 }
 
 .task-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #142C49;
     color: white;
-    padding: 20px 24px;
+    padding: 18px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -156,14 +160,14 @@ body {
 }
 
 .task-header h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
 .task-panel.collapsed .task-header h2 {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .task-toggle {
@@ -180,6 +184,7 @@ body {
     flex: 1;
     padding: 24px;
     overflow-y: auto;
+    background: white;
 }
 
 .task-panel.collapsed .task-content {
@@ -191,38 +196,39 @@ body {
 }
 
 .task-description h3 {
-    color: #667eea;
-    font-size: 18px;
+    color: #4F7FE7;
+    font-size: 17px;
     margin-bottom: 12px;
 }
 
 .task-description p {
     line-height: 1.8;
-    color: #333;
+    color: #444;
     margin-bottom: 12px;
 }
 
 .task-description code {
-    background: #f5f5f5;
+    background: #FCFCFC;
+    border: 1px solid #e8e8e8;
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
-    color: #e83e8c;
+    font-size: 13px;
+    color: #c0392b;
 }
 
 .instructions {
-    background: #fff9e6;
-    border-left: 4px solid #ffc107;
+    background: #fffbee;
+    border-left: 4px solid #F9D746;
     padding: 16px;
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
 .instructions h4 {
-    color: #ff8c00;
+    color: #8a6800;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .instructions ul {
@@ -232,19 +238,20 @@ body {
 .instructions li {
     margin-bottom: 6px;
     line-height: 1.6;
+    color: #555;
 }
 
 .hints {
-    background: #e7f3ff;
-    border-left: 4px solid #2196F3;
+    background: #edf3ff;
+    border-left: 4px solid #4F7FE7;
     padding: 16px;
     border-radius: 4px;
 }
 
 .hints h4 {
-    color: #1976D2;
+    color: #3a69d4;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .hints-toggle {
@@ -258,7 +265,7 @@ body {
 }
 
 .hints-toggle:hover {
-    color: #0d47a1;
+    color: #142C49;
 }
 
 .hints-icon {
@@ -300,7 +307,7 @@ body {
     flex: 1;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -308,9 +315,9 @@ body {
 }
 
 .editor-header {
-    background: #f8f9fa;
-    padding: 12px 20px;
-    border-bottom: 1px solid #e0e0e0;
+    background: #FCFCFC;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e8e8e8;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -318,7 +325,8 @@ body {
 
 .editor-label {
     font-weight: 600;
-    color: #333;
+    color: #142C49;
+    font-size: 13px;
 }
 
 .button-group {
@@ -336,7 +344,7 @@ body {
     height: 180px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -345,7 +353,7 @@ body {
 .console-header {
     background: #2d3748;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -353,6 +361,7 @@ body {
 
 .console-label {
     font-weight: 600;
+    font-size: 13px;
 }
 
 .console {
@@ -387,7 +396,7 @@ body {
 .test-results-container {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     padding: 20px;
     max-height: 300px;
     overflow-y: auto;
@@ -412,11 +421,11 @@ body {
 }
 
 .test-error {
-    background: #fff3cd;
-    color: #856404;
+    background: #fffbee;
+    color: #7a5c00;
     padding: 16px;
     border-radius: 8px;
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid #F9D746;
 }
 
 .test-item {
@@ -485,14 +494,14 @@ body {
 }
 
 .btn-primary {
-    background: #667eea;
+    background: #4F7FE7;
     color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: #5568d3;
+    background: #3a69d4;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 8px rgba(79, 127, 231, 0.3);
 }
 
 .btn-success {
@@ -507,46 +516,51 @@ body {
 }
 
 .btn-secondary {
-    background: #6c757d;
-    color: white;
+    background: white;
+    color: #142C49;
+    border: 1.5px solid #d0d0d0;
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #FCFCFC;
+    border-color: #b0b0b0;
 }
 
 .btn-small {
-    padding: 6px 12px;
-    background: #495057;
-    color: white;
+    padding: 5px 10px;
+    background: #FCFCFC;
+    color: #444;
+    border: 1px solid #ddd;
     font-size: 12px;
 }
 
 .btn-small:hover {
-    background: #343a40;
+    background: #f0f0f0;
+    border-color: #bbb;
 }
 
 .btn-link {
     background: transparent;
-    color: #667eea;
+    color: #4F7FE7;
     text-decoration: none;
     padding: 8px 16px;
 }
 
 .btn-link:hover {
-    background: #f0f0f0;
+    background: #edf3ff;
 }
 
 /* フッター */
 .footer {
     background: white;
-    padding: 16px 24px;
+    padding: 14px 24px;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    border-bottom: 3px solid #F9D746;
 }
 
 .footer-nav {
@@ -568,11 +582,11 @@ body {
     .main-content.task-collapsed.explorer-collapsed {
         grid-template-columns: 1fr 200px;
     }
-    
+
     .task-panel {
         display: none;
     }
-    
+
     .file-explorer {
         display: none !important;
     }
@@ -586,26 +600,26 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
     }
-    
+
     .task-panel {
         max-height: 300px;
     }
-    
+
     .footer {
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .footer-nav {
         width: 100%;
         justify-content: space-between;
     }
-    
+
     .btn {
         width: auto;
         flex: 1;
     }
-    
+
     .file-explorer {
         display: none !important;
     }
@@ -616,17 +630,17 @@ body {
     display: flex;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(20, 44, 73, 0.1);
     overflow: hidden;
     flex-direction: column;
 }
 
 .file-explorer-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #142C49;
     color: white;
     padding: 12px 8px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -656,7 +670,7 @@ body {
 }
 
 .file-explorer-header:hover {
-    background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+    background: #1e3f6a;
 }
 
 .file-explorer-toggle {
@@ -679,32 +693,33 @@ body {
     flex: 0 0 auto;
     max-height: 200px;
     overflow-y: auto;
-    background: #f8f9fa;
-    border-bottom: 1px solid #e0e0e0;
+    background: #FCFCFC;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .file-list-item {
-    padding: 10px 16px;
+    padding: 9px 16px;
     cursor: pointer;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 14px;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 13px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background 0.2s;
+    color: #333;
 }
 
 .file-list-item:hover {
-    background: #e9ecef;
+    background: #edf3ff;
 }
 
 .file-list-item.active {
-    background: #667eea;
+    background: #4F7FE7;
     color: white;
 }
 
 .file-list-item.active:hover {
-    background: #5568d3;
+    background: #3a69d4;
 }
 
 .file-name {
@@ -726,13 +741,13 @@ body {
     padding: 4px;
     border-radius: 4px;
     font-size: 12px;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: all 0.2s;
 }
 
 .file-action-btn:hover {
     opacity: 1;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .file-list-item.active .file-action-btn:hover {
@@ -759,8 +774,8 @@ body {
 .file-empty-state {
     padding: 40px 20px;
     text-align: center;
-    color: #999;
-    font-size: 14px;
+    color: #aaa;
+    font-size: 13px;
 }
 
 .file-explorer.collapsed .file-explorer-body {
@@ -791,7 +806,7 @@ body {
 
 /* Matplotlib グラフ出力エリア */
 .matplotlib-container {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e8e8e8;
     border-radius: 4px;
     margin-top: 8px;
     background: #fff;
@@ -803,8 +818,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 6px 12px;
-    background: #f5f5f5;
-    border-bottom: 1px solid #e0e0e0;
+    background: #FCFCFC;
+    border-bottom: 1px solid #e8e8e8;
     border-radius: 4px 4px 0 0;
 }
 
@@ -829,7 +844,6 @@ body {
 
 /* ===== Matplotlib レッスン専用レイアウト（左右分割）===== */
 
-/* has-matplotlib 時: ファイルエクスプローラーを非表示、グリッドを2列に変更 */
 .main-content.has-matplotlib {
     grid-template-columns: 380px 1fr;
 }
@@ -842,7 +856,6 @@ body {
     display: none;
 }
 
-/* コードとグラフを横並びにするコンテナ */
 .code-graph-container {
     display: flex;
     flex-direction: row;
@@ -851,17 +864,16 @@ body {
     height: 100%;
 }
 
-/* コードパネルを固定幅に変更（デフォルト55%） */
 .code-graph-container .code-panel {
     flex: 0 0 55%;
     min-width: 280px;
 }
 
-/* リサイザー（ドラッグ可能な区切り線） */
+/* リサイザー */
 .resizer {
     width: 6px;
     cursor: col-resize;
-    background: #e0e0e0;
+    background: #e8e8e8;
     flex-shrink: 0;
     transition: background 0.15s;
     position: relative;
@@ -875,13 +887,13 @@ body {
     transform: translate(-50%, -50%);
     width: 2px;
     height: 40px;
-    background: #bbb;
+    background: #ccc;
     border-radius: 2px;
 }
 
 .resizer:hover,
 .resizer.dragging {
-    background: #9c27b0;
+    background: #4F7FE7;
 }
 
 .resizer.dragging::after {

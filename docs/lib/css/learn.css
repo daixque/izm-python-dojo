@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #F0F0F0;
     min-height: 100vh;
     padding: 24px;
 }
@@ -17,13 +17,13 @@ body {
     margin: 0 auto;
     background: white;
     border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(20, 44, 73, 0.12);
     overflow: hidden;
 }
 
 /* ヘッダー */
 .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #142C49;
     color: white;
     padding: 32px 40px;
 }
@@ -33,11 +33,11 @@ body {
 }
 
 .site-link {
-    color: white;
+    color: #F9D746;
     text-decoration: none;
     font-size: 18px;
-    font-weight: 500;
-    opacity: 0.9;
+    font-weight: 600;
+    opacity: 0.95;
     transition: opacity 0.2s;
 }
 
@@ -54,7 +54,7 @@ body {
 
 .lesson-meta {
     font-size: 14px;
-    opacity: 0.9;
+    opacity: 0.8;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -69,7 +69,7 @@ body {
     padding: 6px 12px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -77,17 +77,18 @@ body {
 }
 
 .language-select:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.22);
 }
 
 .language-select option {
-    background: #667eea;
+    background: #142C49;
     color: white;
 }
 
 /* コンテンツ */
 .content {
     padding: 40px;
+    background: white;
 }
 
 .section {
@@ -99,16 +100,16 @@ body {
 }
 
 .section h2 {
-    font-size: 24px;
-    color: #333;
+    font-size: 22px;
+    color: #142C49;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #4F7FE7;
 }
 
 .section p {
     line-height: 1.8;
-    color: #555;
+    color: #444;
     margin-bottom: 16px;
     font-size: 16px;
 }
@@ -118,12 +119,13 @@ body {
 }
 
 .section code {
-    background: #f5f5f5;
-    padding: 3px 8px;
+    background: #FCFCFC;
+    border: 1px solid #e8e8e8;
+    padding: 2px 7px;
     border-radius: 4px;
     font-family: 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
-    color: #e83e8c;
+    font-size: 13.5px;
+    color: #c0392b;
 }
 
 /* コード例 */
@@ -133,19 +135,19 @@ body {
 }
 
 .examples h2 {
-    font-size: 24px;
-    color: #333;
+    font-size: 22px;
+    color: #142C49;
     margin-bottom: 24px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #4F7FE7;
 }
 
 .example-item {
-    background: #f8f9fa;
+    background: #FCFCFC;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #4F7FE7;
 }
 
 .example-item:last-child {
@@ -153,9 +155,9 @@ body {
 }
 
 .example-title {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    color: #333;
+    color: #142C49;
     margin-bottom: 12px;
 }
 
@@ -172,16 +174,16 @@ body {
 }
 
 .example-explanation {
-    color: #666;
+    color: #555;
     font-size: 14px;
     line-height: 1.6;
 }
 
 /* フッター */
 .footer {
-    background: #f8f9fa;
+    background: #FCFCFC;
     padding: 24px 40px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #e8e8e8;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -191,7 +193,7 @@ body {
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -200,23 +202,25 @@ body {
 }
 
 .btn-primary {
-    background: #667eea;
+    background: #4F7FE7;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #5568d3;
+    background: #3a69d4;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(79, 127, 231, 0.3);
 }
 
 .btn-secondary {
-    background: #6c757d;
-    color: white;
+    background: white;
+    color: #142C49;
+    border: 1.5px solid #d0d0d0;
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #f5f5f5;
+    border-color: #b0b0b0;
 }
 
 /* レスポンシブ */
@@ -224,25 +228,25 @@ body {
     body {
         padding: 12px;
     }
-    
+
     .header {
         padding: 24px;
     }
-    
+
     .header h1 {
         font-size: 24px;
     }
-    
+
     .content {
         padding: 24px;
     }
-    
+
     .footer {
         padding: 16px 24px;
         flex-direction: column;
         gap: 12px;
     }
-    
+
     .btn {
         width: 100%;
         text-align: center;
