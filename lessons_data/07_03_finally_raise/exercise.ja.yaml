@@ -1,0 +1,35 @@
+lesson:
+  number: "07_03"
+  id: "07_03_finally_raise"
+  title: "finally と raise"
+description: "raise を使って入力値を検証する関数を実装します。"
+
+task_description: |
+  <p>関数 <code>validate_age(age)</code> を実装しましょう。</p>
+  <p><code>age</code> が 0 以上 150 以下であれば <code>age</code> をそのまま返します。</p>
+  <p>範囲外の場合は <code>ValueError</code> を <code>raise</code> します。</p>
+  <h3>実行例</h3>
+  <pre>  print(validate_age(25))   # 25
+  validate_age(-1)          # ValueError が発生
+  validate_age(200)         # ValueError が発生</pre>
+
+instructions:
+  - "関数シグネチャ <code>def validate_age(age):</code> は用意済みです"
+  - "<code>age &lt; 0</code> または <code>age &gt; 150</code> の場合に <code>ValueError</code> を <code>raise</code> します"
+  - "正常な場合は <code>age</code> をそのまま <code>return</code> します"
+  - "エラーメッセージは自由に設定してください"
+
+hints:
+  - hint: |
+      条件によって ValueError を raise します：<br>
+      <code>def validate_age(age):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if age &lt; 0 or age &gt; 150:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>raise ValueError("...")</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return age</code>
+  - hint: |
+      raise の書き方：<br>
+      <code>raise ValueError("年齢が無効です")</code><br>
+      エラーメッセージには、何が問題かを書くといいです。
+  - hint: |
+      2つの条件を <code>or</code> でつなげます：<br>
+      <code>if age &lt; 0 or age &gt; 150:</code>

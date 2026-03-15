@@ -1,0 +1,113 @@
+initial_code: |
+  import pandas as pd
+
+  def passing_average(df, score_col, threshold=60):
+      # Write your code here
+      # Filter rows where score_col >= threshold, then return the mean
+      pass
+
+  # Create a test DataFrame and check your result
+  test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(test_df, "score", threshold=60))  # 80.0
+
+solution_code: |
+  import pandas as pd
+
+  def passing_average(df, score_col, threshold=60):
+      passing = df[df[score_col] >= threshold]
+      return passing[score_col].mean()
+
+  test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(test_df, "score", threshold=60))
+
+initial_files: []
+
+required_packages:
+  - numpy
+  - pandas
+
+tests:
+  - name: "Basic test: default threshold=60"
+    description: "scores [50, 70, 80, 40, 90] with threshold=60 should return 80.0"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function passing_average is not defined"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score", threshold=60)
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ passing_average = 80.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 80.0, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Default argument test: omitting threshold"
+    description: "When threshold is omitted, the default value of 60 should be used"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function passing_average is not defined"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score")
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ Default threshold=60 returns 80.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 80.0 (default threshold=60), Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Higher threshold test"
+    description: "threshold=80 should return the mean of [80, 90] = 85.0"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function passing_average is not defined"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score", threshold=80)
+              if r == 85.0:
+                  result = {"passed": True, "message": "✓ threshold=80 returns 85.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 85.0, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Different column name test"
+    description: "Filtering should work correctly on a 'points' column"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function passing_average is not defined"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie", "Dave"], "points": [55, 75, 65, 45]})
+              r = exec_globals['passing_average'](test_df, "points", threshold=60)
+              expected = (75 + 65) / 2
+              if abs(r - expected) < 0.01:
+                  result = {"passed": True, "message": f"✓ points column threshold=60 returns {r:.1f} Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: {expected:.1f}, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

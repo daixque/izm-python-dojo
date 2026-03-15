@@ -1,0 +1,44 @@
+lesson:
+  number: "09_01"
+  id: "09_01_recursion_basic"
+  title: "再帰の基礎"
+description: "再帰を使って階乗を計算する関数を実装します。"
+
+task_description: |
+  <p>関数 <code>factorial(n)</code> を再帰を使って実装しましょう。</p>
+  <p><code>n</code> の階乗（<code>n!</code>）を返します。階乗とは 1 から n までの整数をすべてかけ合わせた数です。</p>
+  <ul>
+    <li><code>0!</code> = 1（特別なルール）</li>
+    <li><code>1!</code> = 1</li>
+    <li><code>5!</code> = 5 × 4 × 3 × 2 × 1 = 120</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  print(factorial(0))   # 1
+  print(factorial(5))   # 120
+  print(factorial(10))  # 3628800</pre>
+
+instructions:
+  - "ベースケース：<code>n == 0</code> のとき <code>1</code> を返す"
+  - "再帰ケース：<code>n * factorial(n - 1)</code> を返す"
+  - "<code>if</code> 文でベースケースと再帰ケースを分岐させる"
+
+hints:
+  - hint: |
+      まずベースケースを書きましょう：<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      0の階乗は何でしたか？
+  - hint: |
+      次に再帰ケースを書きます：<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return n * factorial(???)</code><br>
+      <code>n!</code> は <code>n × (n-1)!</code> なので、<code>factorial</code> に何を渡せばよいですか？
+  - hint: |
+      完成した関数はこうなります：<br>
+      <code>def factorial(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return n * factorial(n - 1)</code>

@@ -1,0 +1,106 @@
+initial_code: |
+  import numpy as np
+
+  def array_stats(data):
+      # ここにコードを書いてください
+      # data を NumPy 配列に変換して、合計と平均を求める
+      pass
+
+  print(array_stats([1, 2, 3, 4, 5]))   # {"sum": 15.0, "mean": 3.0}
+  print(array_stats([10, 20, 30]))       # {"sum": 60.0, "mean": 20.0}
+
+solution_code: |
+  import numpy as np
+
+  def array_stats(data):
+      arr = np.array(data)
+      return {"sum": float(arr.sum()), "mean": float(arr.mean())}
+
+  print(array_stats([1, 2, 3, 4, 5]))
+  print(array_stats([10, 20, 30]))
+
+initial_files: []
+
+required_packages:
+  - numpy
+
+tests:
+  - name: "array_stats([1,2,3,4,5]) の確認"
+    description: "合計が 15.0、平均が 3.0 になるか"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 array_stats が定義されていません"}
+          else:
+              r = exec_globals['array_stats']([1, 2, 3, 4, 5])
+              if r.get('sum') == 15.0 and r.get('mean') == 3.0:
+                  result = {"passed": True, "message": "✓ array_stats([1,2,3,4,5]) 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "array_stats([10,20,30]) の確認"
+    description: "合計が 60.0、平均が 20.0 になるか"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 array_stats が定義されていません"}
+          else:
+              r = exec_globals['array_stats']([10, 20, 30])
+              if r.get('sum') == 60.0 and r.get('mean') == 20.0:
+                  result = {"passed": True, "message": "✓ array_stats([10,20,30]) 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "戻り値の型の確認"
+    description: "sum と mean が float 型で返されるか"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 array_stats が定義されていません"}
+          else:
+              r = exec_globals['array_stats']([2, 4, 6])
+              if isinstance(r.get('sum'), float) and isinstance(r.get('mean'), float):
+                  result = {"passed": True, "message": "✓ sum と mean が正しく float 型です"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum と mean は float 型にしてください: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "単一要素のテスト"
+    description: "array_stats([42]) で sum=42.0, mean=42.0 になるか"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 array_stats が定義されていません"}
+          else:
+              r = exec_globals['array_stats']([42])
+              if r.get('sum') == 42.0 and r.get('mean') == 42.0:
+                  result = {"passed": True, "message": "✓ array_stats([42]) 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

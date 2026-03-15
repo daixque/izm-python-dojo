@@ -1,0 +1,44 @@
+lesson:
+  number: "09_02"
+  id: "09_02_recursion_advanced"
+  title: "再帰の応用"
+description: "再帰を使ってフィボナッチ数列のn番目の値を返す関数を実装します。"
+
+task_description: |
+  <p>関数 <code>fibonacci(n)</code> を再帰を使って実装しましょう。</p>
+  <p>フィボナッチ数列のn番目の値を返します。</p>
+  <ul>
+    <li><code>fibonacci(0)</code> → <code>0</code></li>
+    <li><code>fibonacci(1)</code> → <code>1</code></li>
+    <li><code>fibonacci(n)</code> → <code>fibonacci(n-1) + fibonacci(n-2)</code>（n ≥ 2 のとき）</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  print(fibonacci(0))   # 0
+  print(fibonacci(1))   # 1
+  print(fibonacci(6))   # 8
+  print(fibonacci(10))  # 55</pre>
+
+instructions:
+  - "ベースケース1：<code>n == 0</code> のとき <code>0</code> を返す"
+  - "ベースケース2：<code>n == 1</code> のとき <code>1</code> を返す"
+  - "再帰ケース：<code>fibonacci(n-1) + fibonacci(n-2)</code> を返す"
+
+hints:
+  - hint: |
+      ベースケースは2つあります：<br>
+      <code>def fibonacci(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 1:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      再帰ケースでは2つの再帰呼び出しを足します：<br>
+      <code>return fibonacci(n - 1) + fibonacci(???)</code>
+  - hint: |
+      完成した関数はこうなります：<br>
+      <code>def fibonacci(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 1:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return fibonacci(n - 1) + fibonacci(n - 2)</code>

@@ -124,7 +124,8 @@ async function initializeExercise(config = {}) {
         tests = [],
         initialFiles = [],
         solutionCode = '',
-        enableMatplotlib = false
+        enableMatplotlib = false,
+        requiredPackages = []
     } = config;
 
     // 初期コードを保存
@@ -181,6 +182,11 @@ async function initializeExercise(config = {}) {
     }
     
     await window.pyodideRunner.init();
+
+    // 追加パッケージのロード（numpy/pandas 等）
+    if (requiredPackages && requiredPackages.length > 0) {
+        await window.pyodideRunner.loadPackages(requiredPackages);
+    }
 
     // Matplotlib が有効な場合は初期化（ボタン有効化より前に完了させる）
     if (enableMatplotlib) {

@@ -237,6 +237,12 @@ plt.show = _matplotlib_show
 }
 
 // グローバルに公開
+// 追加パッケージのロード（numpy/pandas 等）
+async function loadPackages(packages) {
+    if (!isReady || !pyodide || !packages || packages.length === 0) return;
+    await pyodide.loadPackage(packages);
+}
+
 window.pyodideRunner = {
     init: initPyodide,
     run: runPythonCode,
@@ -245,5 +251,6 @@ window.pyodideRunner = {
     fs: fileSystem,
     setInputMode: setInputMode,
     getInput: getInput,
+    loadPackages: loadPackages,
     initMatplotlib: initMatplotlib
 };

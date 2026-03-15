@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson07_02: Types of Exceptions</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">Types of Exceptions</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔍 Common Python Exception Types</h2>
+  <p>Python has many types of exceptions.</p>
+  <p>Each exception represents what kind of problem occurred.</p>
+  <p>Let's learn the most commonly used exception types.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">ValueError (Value Error)</div>
+    <div class="example-code">int("abc")&nbsp;&nbsp;# ValueError<br>int("3.14")&nbsp;# ValueError<br># When the value format is incorrect</div>
+    <div class="example-explanation">
+      Raised when the type is correct but the value is inappropriate.<br>
+      Example: Trying to convert a string to a number, but the string is not a valid number format.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">TypeError (Type Error)</div>
+    <div class="example-code">"hello" + 5&nbsp;&nbsp;# TypeError<br>len(42)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# TypeError<br># When the type is wrong</div>
+    <div class="example-explanation">
+      Raised when an operation is performed on the wrong type.<br>
+      Example: Trying to add a string and a number together.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">IndexError (Index Error)</div>
+    <div class="example-code">lst = [1, 2, 3]<br>lst[5]&nbsp;&nbsp;# IndexError<br># When accessing outside list bounds</div>
+    <div class="example-explanation">
+      Raised when accessing an index that doesn't exist in a list or string.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">KeyError (Key Error)</div>
+    <div class="example-code">d = {"name": "Taro"}<br>d["age"]&nbsp;&nbsp;# KeyError<br># When accessing a key that doesn't exist in a dict</div>
+    <div class="example-explanation">
+      Raised when accessing a key that doesn't exist in a dictionary.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">ZeroDivisionError (Zero Division Error)</div>
+    <div class="example-code">10 / 0&nbsp;&nbsp;# ZeroDivisionError<br>10 // 0&nbsp;# ZeroDivisionError<br># When dividing by zero</div>
+    <div class="example-explanation">
+      Raised when attempting to divide by zero.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔀 Using Multiple except Clauses</h2>
+  <p>You can write multiple <code>except</code> clauses to handle different types of errors.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Multiple except clauses</div>
+    <div class="example-code">def divide(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a / b<br>&nbsp;&nbsp;&nbsp;&nbsp;except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Cannot divide by zero")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br>&nbsp;&nbsp;&nbsp;&nbsp;except TypeError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Only numbers are allowed")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None</div>
+    <div class="example-explanation">
+      You can write separate handling for each exception type.<br>
+      Only the first matching <code>except</code> clause is executed.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Catching multiple exceptions in one except</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = int("abc") / 0<br>except (ValueError, ZeroDivisionError):<br>&nbsp;&nbsp;&nbsp;&nbsp;print("A ValueError or ZeroDivisionError occurred")</div>
+    <div class="example-explanation">
+      Using <code>except (Error1, Error2):</code> with a tuple lets you handle multiple exceptions in a single <code>except</code> clause.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🌐 Catching All Exceptions with Exception</h2>
+  <p><code>Exception</code> is the parent class of almost all exceptions.</p>
+  <p>Writing <code>except Exception:</code> will catch almost any exception.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Using Exception</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("abc")<br>except Exception as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Some error: {type(e).__name__}: {e}")<br><br># Output: Some error: ValueError: invalid literal...</div>
+    <div class="example-explanation">
+      <code>type(e).__name__</code> gets the name of the exception type.<br>
+      However, specifying concrete exception types makes for better code.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Exception order (specific first)</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = 10 / 0<br>except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Divided by zero")&nbsp;&nbsp;# this runs<br>except Exception:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Other error")&nbsp;&nbsp;# not reached</div>
+    <div class="example-explanation">
+      When there are multiple <code>except</code> clauses, they are checked from top to bottom.<br>
+      Write specific exceptions first, and generic ones like <code>Exception</code> at the bottom.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li><code>ValueError</code>: Value format is incorrect</li>
+    <li><code>TypeError</code>: Operation performed on the wrong type</li>
+    <li><code>IndexError</code>: Accessed outside the bounds of a list</li>
+    <li><code>KeyError</code>: Accessed a key that doesn't exist in a dictionary</li>
+    <li><code>ZeroDivisionError</code>: Divided by zero</li>
+    <li>Multiple <code>except</code> clauses can handle different exception types</li>
+    <li><code>Exception</code> catches almost all exceptions</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

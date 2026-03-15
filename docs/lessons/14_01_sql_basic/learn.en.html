@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson14_01: SQL Basics</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">SQL Basics</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🗄️ What are Databases and Tables?</h2>
+  <p>A <strong>database</strong> is like a warehouse where you can store and organize large amounts of data. Almost every smartphone app and web service uses a database to manage user information and content.</p>
+  <p>Inside a database, data is stored in <strong>tables</strong>. A table works like a spreadsheet — it has rows (records) and columns (fields).</p>
+</section>
+
+<section class="section">
+  <h2>🔤 What is SQL?</h2>
+  <p><strong>SQL</strong> (Structured Query Language) is the language used to give instructions to a database — adding, retrieving, updating, and deleting data.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Importing sqlite3 and connecting</div>
+    <div class="example-code">import sqlite3<br><br># Create an in-memory database (gone when program ends)<br>conn = sqlite3.connect(":memory:")<br>cursor = conn.cursor()</div>
+    <div class="example-explanation"><code>sqlite3</code> is part of Python's standard library — no installation needed. Using <code>":memory:"</code> creates a database that lives only in RAM, which is perfect for learning and testing.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Creating a table (CREATE TABLE)</div>
+    <div class="example-code">cursor.execute(<br>    "CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)"<br>)</div>
+    <div class="example-explanation"><code>CREATE TABLE table_name (column_name type, ...)</code> creates a new table. <code>INTEGER</code> means a whole number and <code>TEXT</code> means a string.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Inserting data (INSERT INTO)</div>
+    <div class="example-code">cursor.execute(<br>    "INSERT INTO users VALUES (?, ?, ?)",<br>    (1, "Alice", 25)<br>)<br>conn.commit()</div>
+    <div class="example-explanation"><code>INSERT INTO table_name VALUES (...)</code> adds one row. The <code>?</code> marks are placeholders — pass the actual values as a tuple in the second argument. Call <code>conn.commit()</code> to save the changes.</div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Fetching data (SELECT)</div>
+    <div class="example-code">cursor.execute("SELECT * FROM users")<br>rows = cursor.fetchall()<br>print(rows)<br># [(1, 'Alice', 25), (2, 'Bob', 30)]</div>
+    <div class="example-explanation"><code>SELECT * FROM table_name</code> retrieves all columns and all rows. <code>fetchall()</code> returns the results as a list of tuples.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📝 Basic sqlite3 Workflow</h2>
+  <ol>
+    <li>Connect with <code>sqlite3.connect(":memory:")</code></li>
+    <li>Get a cursor with <code>conn.cursor()</code></li>
+    <li>Run SQL commands with <code>cursor.execute(sql)</code></li>
+    <li>Save changes with <code>conn.commit()</code></li>
+    <li>Read results with <code>cursor.fetchall()</code></li>
+  </ol>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

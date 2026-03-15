@@ -1,0 +1,113 @@
+initial_code: |
+  import pandas as pd
+
+  def passing_average(df, score_col, threshold=60):
+      # ここにコードを書いてください
+      # threshold以上のスコアの行を取り出し、その平均を返す
+      pass
+
+  # テスト用のDataFrameを作成して確認してみよう
+  test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(test_df, "score", threshold=60))  # 80.0
+
+solution_code: |
+  import pandas as pd
+
+  def passing_average(df, score_col, threshold=60):
+      passing = df[df[score_col] >= threshold]
+      return passing[score_col].mean()
+
+  test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+  print(passing_average(test_df, "score", threshold=60))
+
+initial_files: []
+
+required_packages:
+  - numpy
+  - pandas
+
+tests:
+  - name: "基本テスト: threshold=60 のデフォルト動作"
+    description: "スコア [50, 70, 80, 40, 90] でthreshold=60のとき 80.0 を返すか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 passing_average が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score", threshold=60)
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ passing_average = 80.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 80.0, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "デフォルト引数のテスト: threshold省略"
+    description: "threshold を指定しない場合、デフォルト値 60 が使われるか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 passing_average が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score")
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ デフォルト引数 threshold=60 で 80.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 80.0 (threshold=60のデフォルト), 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "高いthresholdでのテスト"
+    description: "threshold=80 のとき [80, 90] の平均 85.0 を返すか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 passing_average が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"score": [50, 70, 80, 40, 90]})
+              r = exec_globals['passing_average'](test_df, "score", threshold=80)
+              if r == 85.0:
+                  result = {"passed": True, "message": "✓ threshold=80 で 85.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 85.0, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "別の列名でのテスト"
+    description: "'points' 列でフィルタリングが正しく動くか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'passing_average' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 passing_average が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie", "Dave"], "points": [55, 75, 65, 45]})
+              r = exec_globals['passing_average'](test_df, "points", threshold=60)
+              expected = (75 + 65) / 2
+              if abs(r - expected) < 0.01:
+                  result = {"passed": True, "message": f"✓ points列 threshold=60 で {r:.1f} 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: {expected:.1f}, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

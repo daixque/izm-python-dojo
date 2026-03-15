@@ -1,0 +1,103 @@
+initial_code: |
+  def safe_divide(a, b):
+      # Write your code here
+      # Compute a / b and return the result
+      # Return "ZeroDivisionError" on zero division
+      # Return "TypeError" on type error
+      pass
+
+  print(safe_divide(10, 2))    # 5.0
+  print(safe_divide(10, 0))    # ZeroDivisionError
+  print(safe_divide(10, "a"))  # TypeError
+
+solution_code: |
+  def safe_divide(a, b):
+      try:
+          return a / b
+      except ZeroDivisionError:
+          return "ZeroDivisionError"
+      except TypeError:
+          return "TypeError"
+
+  print(safe_divide(10, 2))
+  print(safe_divide(10, 0))
+  print(safe_divide(10, "a"))
+
+initial_files: []
+
+tests:
+  - name: "Check safe_divide(10, 2)"
+    description: "safe_divide(10, 2) should return 5.0"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_divide is not defined"}
+          else:
+              test_result = exec_globals['safe_divide'](10, 2)
+              if test_result == 5.0:
+                  result = {"passed": True, "message": "✓ safe_divide(10, 2) = 5.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, 2) should return 5.0. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_divide(10, 0)"
+    description: "safe_divide(10, 0) should return \"ZeroDivisionError\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_divide is not defined"}
+          else:
+              test_result = exec_globals['safe_divide'](10, 0)
+              if test_result == "ZeroDivisionError":
+                  result = {"passed": True, "message": "✓ safe_divide(10, 0) = \"ZeroDivisionError\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, 0) should return \"ZeroDivisionError\". Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_divide(10, \"a\")"
+    description: "safe_divide(10, \"a\") should return \"TypeError\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_divide is not defined"}
+          else:
+              test_result = exec_globals['safe_divide'](10, "a")
+              if test_result == "TypeError":
+                  result = {"passed": True, "message": "✓ safe_divide(10, \"a\") = \"TypeError\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, \"a\") should return \"TypeError\". Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check safe_divide(7, 2)"
+    description: "safe_divide(7, 2) should return 3.5"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function safe_divide is not defined"}
+          else:
+              test_result = exec_globals['safe_divide'](7, 2)
+              if test_result == 3.5:
+                  result = {"passed": True, "message": "✓ safe_divide(7, 2) = 3.5 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(7, 2) should return 3.5. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

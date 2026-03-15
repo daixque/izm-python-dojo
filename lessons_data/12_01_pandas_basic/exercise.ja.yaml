@@ -1,0 +1,37 @@
+lesson:
+  number: "12_01"
+  id: "12_01_pandas_basic"
+  title: "DataFrameの基礎"
+description: "DataFrameの基本操作を学び、列の平均値を計算する関数を実装します。"
+
+task_description: |
+  <p>関数 <code>column_mean(df, column)</code> を実装しましょう。</p>
+  <p>DataFrameの指定した列の<strong>平均値</strong>を返す関数です。</p>
+  <h3>引数</h3>
+  <ul>
+    <li><code>df</code>: PandasのDataFrame</li>
+    <li><code>column</code>: 平均を計算したい列名（文字列）</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  import pandas as pd
+  df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
+  print(column_mean(df, "score"))  # 80.0</pre>
+
+instructions:
+  - "<code>import pandas as pd</code> を先頭に書いてください"
+  - "<code>df[column]</code> で指定した列を取り出せます"
+  - "Pandasの <code>.mean()</code> メソッドを使って平均値を計算します"
+  - "<code>return</code> で平均値を返します"
+
+hints:
+  - hint: |
+      列を取り出すには：<br>
+      <code>df[column]</code><br>
+      これで指定した列のデータ（Series）が取得できます。
+  - hint: |
+      平均値を計算するには <code>.mean()</code> を使います：<br>
+      <code>df[column].mean()</code>
+  - hint: |
+      完成形はとてもシンプルです：<br>
+      <code>def column_mean(df, column):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return df[column].mean()</code>

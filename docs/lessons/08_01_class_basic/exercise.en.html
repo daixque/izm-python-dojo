@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson08_01: Class Basics</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson08_01: Class Basics</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the class <code>Animal</code>.</p>
+<p>It has two attributes, <code>name</code> and <code>sound</code>, and a <code>speak()</code> method that returns the string <code>"{name} says {sound}"</code>.</p>
+<h3>Example Output</h3>
+<pre>  dog = Animal("Dog", "Woof")
+print(dog.speak())   # Dog says Woof
+
+cat = Animal("Cat", "Meow")
+print(cat.speak())   # Cat says Meow</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>Define the class with <code>class Animal:</code></li>
+                            <li>Initialize the <code>name</code> and <code>sound</code> attributes in <code>__init__(self, name, sound)</code></li>
+                            <li>Define a <code>speak(self)</code> method that returns the string <code>"{name} says {sound}"</code></li>
+                            <li>An f-string like <code>f"{self.name} says {self.sound}"</code> is handy here</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Basic class structure:<br>
+<code>class Animal:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name, sound):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = ???</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.sound = ???</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>def speak(self):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+</li>
+                            <li>Setting attributes:<br>
+<code>self.name = name</code><br>
+<code>self.sound = sound</code>
+</li>
+                            <li>Build the return value of speak() with an f-string:<br>
+<code>return f"{self.name} says {self.sound}"</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "08_01_class_basic";
+        const INITIAL_CODE = "class Animal:\n    # Write your code here\n    # Set name and sound in __init__\n    # Return \"{name} says {sound}\" from the speak() method\n    pass\n\ndog = Animal(\"Dog\", \"Woof\")\nprint(dog.speak())   # Dog says Woof\n\ncat = Animal(\"Cat\", \"Meow\")\nprint(cat.speak())   # Cat says Meow\n";
+        const SOLUTION_CODE = "class Animal:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        return f\"{self.name} says {self.sound}\"\n\ndog = Animal(\"Dog\", \"Woof\")\nprint(dog.speak())\n\ncat = Animal(\"Cat\", \"Meow\")\nprint(cat.speak())\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Animal\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Animal is not defined\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 Class Animal is defined\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Animal class is defined", "name": "Check Animal class definition"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Animal\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Animal is not defined\"}\n    else:\n        animal = exec_globals[\u0027Animal\u0027](\"Dog\", \"Woof\")\n        test_result = animal.speak()\n        expected = \"Dog says Woof\"\n        if test_result == expected:\n            result = {\"passed\": True, \"message\": f\"\u2713 Animal(\\\"Dog\\\", \\\"Woof\\\").speak() = \\\"{expected}\\\" Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Should return \\\"{expected}\\\". Actual: \\\"{test_result}\\\"\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "speak() should return \"Dog says Woof\"", "name": "Check Animal(\"Dog\", \"Woof\").speak()"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Animal\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Animal is not defined\"}\n    else:\n        animal = exec_globals[\u0027Animal\u0027](\"Cat\", \"Meow\")\n        test_result = animal.speak()\n        expected = \"Cat says Meow\"\n        if test_result == expected:\n            result = {\"passed\": True, \"message\": f\"\u2713 Animal(\\\"Cat\\\", \\\"Meow\\\").speak() = \\\"{expected}\\\" Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Should return \\\"{expected}\\\". Actual: \\\"{test_result}\\\"\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "speak() should return \"Cat says Meow\"", "name": "Check Animal(\"Cat\", \"Meow\").speak()"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027Animal\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Class Animal is not defined\"}\n    else:\n        animal = exec_globals[\u0027Animal\u0027](\"Bird\", \"Tweet\")\n        if animal.name == \"Bird\" and animal.sound == \"Tweet\":\n            result = {\"passed\": True, \"message\": \"\u2713 name and sound attributes are set correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 name={animal.name}, sound={animal.sound} \u2014 not set correctly\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "name and sound attributes are set correctly", "name": "Check name and sound attributes"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

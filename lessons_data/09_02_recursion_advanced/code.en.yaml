@@ -1,0 +1,104 @@
+initial_code: |
+  def fibonacci(n):
+      # Write your code here
+      # Base case 1: when n == 0, return 0
+      # Base case 2: when n == 1, return 1
+      # Recursive case: return fibonacci(n-1) + fibonacci(n-2)
+      pass
+
+  print(fibonacci(0))   # 0
+  print(fibonacci(1))   # 1
+  print(fibonacci(6))   # 8
+  print(fibonacci(10))  # 55
+
+solution_code: |
+  def fibonacci(n):
+      if n == 0:
+          return 0
+      if n == 1:
+          return 1
+      return fibonacci(n - 1) + fibonacci(n - 2)
+
+  print(fibonacci(0))
+  print(fibonacci(1))
+  print(fibonacci(6))
+  print(fibonacci(10))
+
+initial_files: []
+
+tests:
+  - name: "Check fibonacci(0)"
+    description: "fibonacci(0) should return 0 (base case)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function fibonacci is not defined"}
+          else:
+              test_result = exec_globals['fibonacci'](0)
+              if test_result == 0:
+                  result = {"passed": True, "message": "✓ fibonacci(0) = 0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(0) should return 0. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check fibonacci(1)"
+    description: "fibonacci(1) should return 1 (base case)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function fibonacci is not defined"}
+          else:
+              test_result = exec_globals['fibonacci'](1)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ fibonacci(1) = 1 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(1) should return 1. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check fibonacci(6)"
+    description: "fibonacci(6) should return 8"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function fibonacci is not defined"}
+          else:
+              test_result = exec_globals['fibonacci'](6)
+              if test_result == 8:
+                  result = {"passed": True, "message": "✓ fibonacci(6) = 8 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(6) should return 8. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check fibonacci(10)"
+    description: "fibonacci(10) should return 55"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function fibonacci is not defined"}
+          else:
+              test_result = exec_globals['fibonacci'](10)
+              if test_result == 55:
+                  result = {"passed": True, "message": "✓ fibonacci(10) = 55 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(10) should return 55. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

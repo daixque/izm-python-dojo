@@ -180,6 +180,7 @@
         const INITIAL_CODE = {{ initial_code|tojson }};
         const SOLUTION_CODE = {{ solution_code|tojson }};
         const ENABLE_MATPLOTLIB = {{ enable_matplotlib|tojson }};
+        const REQUIRED_PACKAGES = {{ required_packages|tojson }};
 
         const TESTS = {{ tests|tojson }};
         
@@ -199,7 +200,8 @@
                 tests: TESTS,
                 initialFiles: INITIAL_FILES,
                 solutionCode: SOLUTION_CODE,
-                enableMatplotlib: ENABLE_MATPLOTLIB
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
             });
         });
     </script>

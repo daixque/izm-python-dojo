@@ -29,7 +29,47 @@ chapters:
     title: "実践プロジェクト"
     description: "学んだことを活かして実用的なプログラムを作ります"
 
+  - id: "chapter7"
+    number: "07"
+    title: "エラーと例外処理"
+    description: "エラーを安全に処理する方法を学びます"
+
+  - id: "chapter8"
+    number: "08"
+    title: "クラスとオブジェクト指向"
+    description: "クラスを使ったプログラムの設計方法を学びます"
+
+  - id: "chapter9"
+    number: "09"
+    title: "再帰関数"
+    description: "自分自身を呼び出す関数の考え方を学びます"
+
+  - id: "chapter10"
+    number: "10"
+    title: "アルゴリズム入門"
+    description: "探索とソートの基本的なアルゴリズムを学びます"
+
+  - id: "chapter11"
+    number: "11"
+    title: "NumPy基礎"
+    description: "数値計算ライブラリNumPyの使い方を学びます"
+
+  - id: "chapter12"
+    number: "12"
+    title: "Pandasデータ分析"
+    description: "データ分析ライブラリPandasの使い方を学びます"
+
   - id: "chapter13"
     number: "13"
     title: "グラフ描画（Matplotlib）"
     description: "データを視覚化してグラフを描く方法を学びます"
+
+  - id: "chapter14"
+    number: "14"
+    title: "データベースとSQL"
+    description: "SQLiteを使ったデータベース操作を学びます"
+
+  - id: "chapter15"
+    number: "15"
+    title: "上級者向けの課題"
+    description: "これまでの知識を総合した実践的なプロジェクトに挑戦します"

@@ -1,0 +1,106 @@
+initial_code: |
+  class Animal:
+      # Write your code here
+      # Set name and sound in __init__
+      # Return "{name} says {sound}" from the speak() method
+      pass
+
+  dog = Animal("Dog", "Woof")
+  print(dog.speak())   # Dog says Woof
+
+  cat = Animal("Cat", "Meow")
+  print(cat.speak())   # Cat says Meow
+
+solution_code: |
+  class Animal:
+      def __init__(self, name, sound):
+          self.name = name
+          self.sound = sound
+
+      def speak(self):
+          return f"{self.name} says {self.sound}"
+
+  dog = Animal("Dog", "Woof")
+  print(dog.speak())
+
+  cat = Animal("Cat", "Meow")
+  print(cat.speak())
+
+initial_files: []
+
+tests:
+  - name: "Check Animal class definition"
+    description: "Animal class is defined"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Animal is not defined"}
+          else:
+              result = {"passed": True, "message": "✓ Class Animal is defined"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check Animal(\"Dog\", \"Woof\").speak()"
+    description: "speak() should return \"Dog says Woof\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Animal is not defined"}
+          else:
+              animal = exec_globals['Animal']("Dog", "Woof")
+              test_result = animal.speak()
+              expected = "Dog says Woof"
+              if test_result == expected:
+                  result = {"passed": True, "message": f"✓ Animal(\"Dog\", \"Woof\").speak() = \"{expected}\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Should return \"{expected}\". Actual: \"{test_result}\""}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check Animal(\"Cat\", \"Meow\").speak()"
+    description: "speak() should return \"Cat says Meow\""
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Animal is not defined"}
+          else:
+              animal = exec_globals['Animal']("Cat", "Meow")
+              test_result = animal.speak()
+              expected = "Cat says Meow"
+              if test_result == expected:
+                  result = {"passed": True, "message": f"✓ Animal(\"Cat\", \"Meow\").speak() = \"{expected}\" Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Should return \"{expected}\". Actual: \"{test_result}\""}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check name and sound attributes"
+    description: "name and sound attributes are set correctly"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Animal is not defined"}
+          else:
+              animal = exec_globals['Animal']("Bird", "Tweet")
+              if animal.name == "Bird" and animal.sound == "Tweet":
+                  result = {"passed": True, "message": "✓ name and sound attributes are set correctly"}
+              else:
+                  result = {"passed": False, "message": f"✗ name={animal.name}, sound={animal.sound} — not set correctly"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

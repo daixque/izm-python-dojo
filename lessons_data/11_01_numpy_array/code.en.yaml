@@ -1,0 +1,106 @@
+initial_code: |
+  import numpy as np
+
+  def array_stats(data):
+      # Write your code here
+      # Convert data to a NumPy array and compute the sum and mean
+      pass
+
+  print(array_stats([1, 2, 3, 4, 5]))   # {"sum": 15.0, "mean": 3.0}
+  print(array_stats([10, 20, 30]))       # {"sum": 60.0, "mean": 20.0}
+
+solution_code: |
+  import numpy as np
+
+  def array_stats(data):
+      arr = np.array(data)
+      return {"sum": float(arr.sum()), "mean": float(arr.mean())}
+
+  print(array_stats([1, 2, 3, 4, 5]))
+  print(array_stats([10, 20, 30]))
+
+initial_files: []
+
+required_packages:
+  - numpy
+
+tests:
+  - name: "Check array_stats([1,2,3,4,5])"
+    description: "sum should be 15.0 and mean should be 3.0"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function array_stats is not defined"}
+          else:
+              r = exec_globals['array_stats']([1, 2, 3, 4, 5])
+              if r.get('sum') == 15.0 and r.get('mean') == 3.0:
+                  result = {"passed": True, "message": "✓ array_stats([1,2,3,4,5]) Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected sum=15.0, mean=3.0. Got: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check array_stats([10,20,30])"
+    description: "sum should be 60.0 and mean should be 20.0"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function array_stats is not defined"}
+          else:
+              r = exec_globals['array_stats']([10, 20, 30])
+              if r.get('sum') == 60.0 and r.get('mean') == 20.0:
+                  result = {"passed": True, "message": "✓ array_stats([10,20,30]) Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected sum=60.0, mean=20.0. Got: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check return value types"
+    description: "sum and mean should be returned as float type"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function array_stats is not defined"}
+          else:
+              r = exec_globals['array_stats']([2, 4, 6])
+              if isinstance(r.get('sum'), float) and isinstance(r.get('mean'), float):
+                  result = {"passed": True, "message": "✓ sum and mean are correctly returned as float"}
+              else:
+                  result = {"passed": False, "message": f"✗ sum and mean should be float type. Got: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Single element test"
+    description: "array_stats([42]) should return sum=42.0, mean=42.0"
+    code: |
+      try:
+          import numpy as np
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'array_stats' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function array_stats is not defined"}
+          else:
+              r = exec_globals['array_stats']([42])
+              if r.get('sum') == 42.0 and r.get('mean') == 42.0:
+                  result = {"passed": True, "message": "✓ array_stats([42]) Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected sum=42.0, mean=42.0. Got: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

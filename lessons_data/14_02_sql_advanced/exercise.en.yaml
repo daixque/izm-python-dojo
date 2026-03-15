@@ -1,0 +1,33 @@
+lesson:
+  number: "14_02"
+  id: "14_02_sql_advanced"
+  title: "WHERE, Aggregation, ORDER BY"
+description: "Learn to filter rows with WHERE, use aggregate functions like COUNT, AVG, MAX, and MIN, and sort results with ORDER BY."
+
+task_description: |
+  <p>Implement the function <code>get_adult_users(conn, min_age)</code>.</p>
+  <p>It should fetch users from the <code>users</code> table whose <code>age</code> is greater than or equal to <code>min_age</code>, returned in <strong>ascending age order</strong>.</p>
+  <h3>Examples</h3>
+  <pre>  get_adult_users(conn, 25)
+  # → [(1, 'Alice', 25), (2, 'Bob', 30)]
+
+  get_adult_users(conn, 30)
+  # → [(2, 'Bob', 30)]</pre>
+
+instructions:
+  - "The table creation and data insertion code is already provided"
+  - "Use <code>WHERE age >= ?</code> to filter users by <code>min_age</code>"
+  - "Use <code>ORDER BY age</code> to sort results in ascending order"
+  - "Pass the placeholder value as a tuple: <code>(min_age,)</code>"
+
+hints:
+  - hint: |
+      Combining WHERE and ORDER BY:<br>
+      <code>cursor.execute(</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>"SELECT * FROM users WHERE age >= ? ORDER BY age",</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>(min_age,)</code><br>
+      <code>)</code>
+  - hint: |
+      Note the trailing comma in <code>(min_age,)</code>.<br>
+      This creates a one-element tuple.<br>
+      Writing <code>(min_age)</code> without the comma is just parentheses, not a tuple.

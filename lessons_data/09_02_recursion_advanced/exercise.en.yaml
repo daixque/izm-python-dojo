@@ -1,0 +1,44 @@
+lesson:
+  number: "09_02"
+  id: "09_02_recursion_advanced"
+  title: "Recursion in Practice"
+description: "Implement a function that returns the nth Fibonacci number using recursion."
+
+task_description: |
+  <p>Implement the function <code>fibonacci(n)</code> using recursion.</p>
+  <p>It should return the nth value in the Fibonacci sequence.</p>
+  <ul>
+    <li><code>fibonacci(0)</code> → <code>0</code></li>
+    <li><code>fibonacci(1)</code> → <code>1</code></li>
+    <li><code>fibonacci(n)</code> → <code>fibonacci(n-1) + fibonacci(n-2)</code> (when n ≥ 2)</li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  print(fibonacci(0))   # 0
+  print(fibonacci(1))   # 1
+  print(fibonacci(6))   # 8
+  print(fibonacci(10))  # 55</pre>
+
+instructions:
+  - "Base case 1: when <code>n == 0</code>, return <code>0</code>"
+  - "Base case 2: when <code>n == 1</code>, return <code>1</code>"
+  - "Recursive case: return <code>fibonacci(n-1) + fibonacci(n-2)</code>"
+
+hints:
+  - hint: |
+      There are two base cases:<br>
+      <code>def fibonacci(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 1:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      In the recursive case, add two recursive calls together:<br>
+      <code>return fibonacci(n - 1) + fibonacci(???)</code>
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def fibonacci(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 0:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if n == 1:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 1</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return fibonacci(n - 1) + fibonacci(n - 2)</code>

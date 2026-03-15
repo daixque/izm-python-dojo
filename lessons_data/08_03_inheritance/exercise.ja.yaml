@@ -1,0 +1,49 @@
+lesson:
+  number: "08_03"
+  id: "08_03_inheritance"
+  title: "継承"
+description: "継承を使って、基底クラスと派生クラスを実装します。"
+
+task_description: |
+  <p>基底クラス <code>Shape</code> と、それを継承した <code>Rectangle</code> クラスを実装しましょう。</p>
+  <h3>Shape クラス</h3>
+  <ul>
+    <li><code>name</code> 属性を持つ（<code>__init__</code> で設定）</li>
+    <li><code>area()</code> メソッドは <code>0</code> を返す</li>
+  </ul>
+  <h3>Rectangle クラス（Shape を継承）</h3>
+  <ul>
+    <li><code>width</code>（幅）と <code>height</code>（高さ）属性を持つ</li>
+    <li><code>area()</code> メソッドは <code>width * height</code> を返す</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  r = Rectangle(4, 5)
+  print(r.area())                     # 20
+  print(isinstance(r, Shape))         # True
+  print(isinstance(r, Rectangle))     # True</pre>
+
+instructions:
+  - "<code>class Shape:</code> を定義して <code>__init__(self, name)</code> と <code>area(self)</code> を実装します"
+  - "<code>class Rectangle(Shape):</code> を定義して Shape を継承します"
+  - "Rectangle の <code>__init__(self, width, height)</code> は <code>super().__init__(\"Rectangle\")</code> で親の初期化も行います"
+  - "Rectangle の <code>area()</code> は <code>self.width * self.height</code> を返します"
+
+hints:
+  - hint: |
+      Shape クラスの基本形：<br>
+      <code>class Shape:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, name):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.name = name</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def area(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return 0</code>
+  - hint: |
+      Rectangle クラスの継承：<br>
+      <code>class Rectangle(Shape):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self, width, height):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>super().__init__("Rectangle")</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.width = width</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.height = height</code>
+  - hint: |
+      Rectangle の area() をオーバーライドします：<br>
+      <code>def area(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return self.width * self.height</code>

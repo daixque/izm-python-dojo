@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン10_01: 探索アルゴリズム</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン10_01: 探索アルゴリズム</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>linear_search(items, target)</code> を実装しましょう。</p>
+<p>リスト <code>items</code> の中から <code>target</code> を線形探索（先頭から順番に調べる）で探し、見つかった場合はそのインデックスを返します。見つからない場合は <code>-1</code> を返します。</p>
+<h3>実行例</h3>
+<pre>  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+print(linear_search([3, 1, 4, 1, 5], 1))  # 1 (最初に見つかった位置)</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li><code>for</code> ループで <code>range(len(items))</code> を使い、インデックス <code>i</code> を順番に調べる</li>
+                            <li><code>items[i] == target</code> なら <code>i</code> を返す</li>
+                            <li>ループが終わっても見つからなかった場合は <code>-1</code> を返す</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>ループでインデックスを使いながら調べます：<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == ???:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code>
+</li>
+                            <li>ループの後、見つからなかった場合に -1 を返します：<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+</li>
+                            <li>完成した関数はこうなります：<br>
+<code>def linear_search(items, target):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "10_01_search";
+        const INITIAL_CODE = "def linear_search(items, target):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # for \u30eb\u30fc\u30d7\u3067\u5148\u982d\u304b\u3089\u9806\u756a\u306b\u8abf\u3079\u308b\n    # \u898b\u3064\u304b\u3063\u305f\u3089\u30a4\u30f3\u30c7\u30c3\u30af\u30b9\u3092\u8fd4\u3059\n    # \u898b\u3064\u304b\u3089\u306a\u304b\u3063\u305f\u3089 -1 \u3092\u8fd4\u3059\n    pass\n\nprint(linear_search([3, 1, 4, 1, 5], 4))  # 2\nprint(linear_search([3, 1, 4, 1, 5], 9))  # -1\n";
+        const SOLUTION_CODE = "def linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\nprint(linear_search([3, 1, 4, 1, 5], 4))\nprint(linear_search([3, 1, 4, 1, 5], 9))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 linear_search \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 4)\n        if test_result == 2:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 4) = 2 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 4) \u306f 2 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u5024 4 \u304c\u30a4\u30f3\u30c7\u30c3\u30af\u30b9 2 \u306b\u3042\u308b", "name": "linear_search([3,1,4,1,5], 4) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 linear_search \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 9)\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 9) = -1 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 9) \u306f -1 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u5024 9 \u306f\u30ea\u30b9\u30c8\u306b\u306a\u3044\u306e\u3067 -1 \u3092\u8fd4\u3059", "name": "linear_search([3,1,4,1,5], 9) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 linear_search \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([3, 1, 4, 1, 5], 1)\n        if test_result == 1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([3,1,4,1,5], 1) = 1 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([3,1,4,1,5], 1) \u306f 1 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u5024 1 \u306f\u30a4\u30f3\u30c7\u30c3\u30af\u30b9 1 \u3068 3 \u306b\u3042\u308b\u304c\u3001\u6700\u521d\u306e\u51fa\u73fe\uff081\uff09\u3092\u8fd4\u3059", "name": "linear_search([3,1,4,1,5], 1) \u306e\u78ba\u8a8d"}, {"code": "lang = \"ja\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027linear_search\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 linear_search \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        test_result = exec_globals[\u0027linear_search\u0027]([], 5)\n        if test_result == -1:\n            result = {\"passed\": True, \"message\": \"\u2713 linear_search([], 5) = -1 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 linear_search([], 5) \u306f -1 \u306b\u306a\u308b\u306f\u305a\u3067\u3059\u3002\u5b9f\u969b: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u7a7a\u306e\u30ea\u30b9\u30c8\u3067\u63a2\u7d22\u3059\u308b\u3068 -1 \u3092\u8fd4\u3059", "name": "\u7a7a\u30ea\u30b9\u30c8\u306e\u30c6\u30b9\u30c8"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

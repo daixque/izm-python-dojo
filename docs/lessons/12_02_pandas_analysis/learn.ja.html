@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン12_02: データ集計とフィルタリング</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">データ集計とフィルタリング</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔎 条件でデータを絞り込む（フィルタリング）</h2>
+  <p>Pandasでは、条件に合う行だけを取り出すことができます。これを<strong>フィルタリング</strong>と言います。</p>
+  <p>例えば「点数が70点以上の生徒だけを取り出す」といった操作が簡単にできます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">条件フィルタリングの基本</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie", "Dave"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90, 45]<br>})<br><br># 点数が70以上の行だけを取り出す<br>passing = df[df["score"] >= 70]<br>print(passing)<br>#       name  score<br># 0    Alice     80<br># 2  Charlie     90</div>
+    <div class="example-explanation">
+      <code>df[df["score"] >= 70]</code> で、score列が70以上の行だけを抽出できます。<br>
+      <code>df["score"] >= 70</code> の部分がTrue/Falseの条件式になり、Trueの行だけが残ります。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">複数条件のフィルタリング</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie", "Dave"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90, 45],<br>&nbsp;&nbsp;&nbsp;&nbsp;"class": ["A", "B", "A", "B"]<br>})<br><br># Aクラスかつ点数が70以上<br>result = df[(df["class"] == "A") &amp; (df["score"] >= 70)]<br>print(result)</div>
+    <div class="example-explanation">
+      複数条件を組み合わせるときは <code>&amp;</code>（AND）や <code>|</code>（OR）を使います。<br>
+      各条件を <code>()</code> で囲むのがポイントです。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📦 groupby()でグループ集計</h2>
+  <p><strong>groupby()</strong> を使うと、特定の列の値でデータをグループ分けして集計できます。</p>
+  <p>例えば「クラスごとの平均点」や「チームごとの合計得点」などが計算できます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">グループごとの集計</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"class": ["A", "B", "A", "B", "A"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 60, 90, 70, 85]<br>})<br><br># クラスごとの平均点<br>group_avg = df.groupby("class")["score"].mean()<br>print(group_avg)<br># class<br># A    85.0<br># B    65.0</div>
+    <div class="example-explanation">
+      <code>groupby("class")</code> でクラスごとにグループを作り、<br>
+      <code>["score"].mean()</code> でそれぞれのグループの平均点を計算します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔃 sort_values()で並び替え</h2>
+  <p><strong>sort_values()</strong> を使うと、指定した列の値でデータを並び替えられます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">昇順・降順に並び替え</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 55, 90]<br>})<br><br># 点数の低い順（昇順）<br>asc = df.sort_values("score")<br>print(asc)<br><br># 点数の高い順（降順）<br>desc = df.sort_values("score", ascending=False)<br>print(desc)</div>
+    <div class="example-explanation">
+      デフォルトは昇順（小さい順）です。<br>
+      <code>ascending=False</code> を指定すると降順（大きい順）になります。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>❓ 欠損値（NaN）の扱い</h2>
+  <p>実際のデータには、値が抜けていること（<strong>欠損値</strong>）がよくあります。</p>
+  <p>Pandasでは欠損値を <strong>NaN</strong>（Not a Number）として扱います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">NaNを含むデータの処理</div>
+    <div class="example-code">import pandas as pd<br>import numpy as np<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, np.nan, 90]<br>})<br><br># NaNを含む行を確認<br>print(df.isnull())<br><br># NaNを除いた平均（自動でNaNを無視する）<br>print(df["score"].mean())&nbsp;&nbsp;# 85.0</div>
+    <div class="example-explanation">
+      <code>isnull()</code> でどこにNaNがあるか確認できます。<br>
+      <code>mean()</code> などの集計関数は<strong>自動でNaNを無視</strong>して計算してくれます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">NaNを除く・埋める</div>
+    <div class="example-code">import pandas as pd<br>import numpy as np<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, np.nan, 90, np.nan, 70]<br>})<br><br># NaNの行を削除<br>clean = df.dropna()<br>print(clean)<br><br># NaNを0で埋める<br>filled = df.fillna(0)<br>print(filled)</div>
+    <div class="example-explanation">
+      <code>dropna()</code>：NaNを含む行を削除します。<br>
+      <code>fillna(値)</code>：NaNを指定した値で置き換えます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>df[df["列名"] 条件]</code> で条件に合う行だけを取り出せる</li>
+    <li>複数条件は <code>&amp;</code>（AND）や <code>|</code>（OR）で組み合わせる</li>
+    <li><code>groupby("列名")</code> でグループごとの集計ができる</li>
+    <li><code>sort_values("列名")</code> でデータを並び替えられる</li>
+    <li>欠損値（NaN）は <code>mean()</code> などで自動的に無視される</li>
+    <li><code>dropna()</code> や <code>fillna()</code> で欠損値を処理できる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

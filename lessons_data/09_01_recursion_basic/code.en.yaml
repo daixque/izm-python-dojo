@@ -1,0 +1,100 @@
+initial_code: |
+  def factorial(n):
+      # Write your code here
+      # Base case: when n == 0, return 1
+      # Recursive case: return n * factorial(n - 1)
+      pass
+
+  print(factorial(0))   # 1
+  print(factorial(5))   # 120
+  print(factorial(10))  # 3628800
+
+solution_code: |
+  def factorial(n):
+      if n == 0:
+          return 1
+      return n * factorial(n - 1)
+
+  print(factorial(0))
+  print(factorial(5))
+  print(factorial(10))
+
+initial_files: []
+
+tests:
+  - name: "Check factorial(0)"
+    description: "factorial(0) should return 1 (base case)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function factorial is not defined"}
+          else:
+              test_result = exec_globals['factorial'](0)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ factorial(0) = 1 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(0) should return 1. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check factorial(5)"
+    description: "factorial(5) should return 120"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function factorial is not defined"}
+          else:
+              test_result = exec_globals['factorial'](5)
+              if test_result == 120:
+                  result = {"passed": True, "message": "✓ factorial(5) = 120 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(5) should return 120. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check factorial(10)"
+    description: "factorial(10) should return 3628800"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function factorial is not defined"}
+          else:
+              test_result = exec_globals['factorial'](10)
+              if test_result == 3628800:
+                  result = {"passed": True, "message": "✓ factorial(10) = 3628800 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ factorial(10) should return 3628800. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check recursion is used"
+    description: "factorial function should use a recursive call"
+    code: |
+      try:
+          import inspect
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'factorial' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function factorial is not defined"}
+          else:
+              source = inspect.getsource(exec_globals['factorial'])
+              if 'factorial' in source.split('def factorial')[1]:
+                  result = {"passed": True, "message": "✓ Recursive call is present"}
+              else:
+                  result = {"passed": False, "message": "✗ Please call factorial recursively inside the function"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

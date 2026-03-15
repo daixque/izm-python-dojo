@@ -1,0 +1,35 @@
+lesson:
+  number: "07_03"
+  id: "07_03_finally_raise"
+  title: "finally and raise"
+description: "Use raise to implement a function that validates input values."
+
+task_description: |
+  <p>Implement the function <code>validate_age(age)</code>.</p>
+  <p>If <code>age</code> is between 0 and 150 (inclusive), return <code>age</code> as-is.</p>
+  <p>If it is out of range, <code>raise</code> a <code>ValueError</code>.</p>
+  <h3>Example Output</h3>
+  <pre>  print(validate_age(25))   # 25
+  validate_age(-1)          # raises ValueError
+  validate_age(200)         # raises ValueError</pre>
+
+instructions:
+  - "The function signature <code>def validate_age(age):</code> is already provided"
+  - "Raise a <code>ValueError</code> if <code>age &lt; 0</code> or <code>age &gt; 150</code>"
+  - "Return <code>age</code> as-is if it is a valid value"
+  - "You can set any error message you like"
+
+hints:
+  - hint: |
+      Raise a ValueError based on the condition:<br>
+      <code>def validate_age(age):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>if age &lt; 0 or age &gt; 150:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>raise ValueError("...")</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return age</code>
+  - hint: |
+      How to use raise:<br>
+      <code>raise ValueError("Invalid age")</code><br>
+      A good error message explains what went wrong.
+  - hint: |
+      Connect two conditions with <code>or</code>:<br>
+      <code>if age &lt; 0 or age &gt; 150:</code>

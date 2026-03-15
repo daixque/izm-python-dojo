@@ -1,0 +1,48 @@
+lesson:
+  number: "14_02"
+  id: "14_02_sql_advanced"
+  title: "WHERE・集計・ORDER BY"
+
+content: |
+  <section class="section">
+    <h2>🔍 WHERE句で絞り込む</h2>
+    <p>前のレッスンでは全件取得しましたが、条件に合うデータだけを取り出したいことが多くあります。そのときは <strong>WHERE句</strong> を使います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">WHERE で条件を指定する</div>
+      <div class="example-code">cursor.execute(<br>    "SELECT * FROM users WHERE age >= ?",<br>    (25,)<br>)<br>rows = cursor.fetchall()<br># [(1, 'Alice', 25), (2, 'Bob', 30)]</div>
+      <div class="example-explanation"><code>WHERE 列名 条件</code> で絞り込みます。<code>&gt;=</code> は「以上」、<code>=</code> は「等しい」、<code>&lt;</code> は「未満」です。<code>?</code> の値はタプルで渡します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">ORDER BY で並べ替える</div>
+      <div class="example-code">cursor.execute("SELECT * FROM users ORDER BY age")<br># 年齢の昇順<br><br>cursor.execute("SELECT * FROM users ORDER BY age DESC")<br># 年齢の降順（大きい順）</div>
+      <div class="example-explanation"><code>ORDER BY 列名</code> で昇順（小さい順）に並べ替えます。<code>DESC</code> をつけると降順（大きい順）になります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">集計関数（COUNT・AVG・MAX・MIN）</div>
+      <div class="example-code">cursor.execute("SELECT COUNT(*) FROM users")<br>print(cursor.fetchone())  # (3,) → 3件<br><br>cursor.execute("SELECT AVG(age) FROM users")<br>print(cursor.fetchone())  # (25.67,) → 平均年齢<br><br>cursor.execute("SELECT MAX(age), MIN(age) FROM users")<br>print(cursor.fetchone())  # (30, 22) → 最大・最小</div>
+      <div class="example-explanation">集計関数を使うと件数・平均・最大値・最小値などを1つのSQL文で求められます。<code>fetchone()</code> は結果の1行目だけを取得します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">GROUP BY でグループ集計する</div>
+      <div class="example-code">cursor.execute(<br>    "SELECT age, COUNT(*) FROM users GROUP BY age"<br>)<br>rows = cursor.fetchall()<br># 各年齢の人数が返される</div>
+      <div class="example-explanation"><code>GROUP BY 列名</code> で同じ値ごとにグループを作り、集計関数と組み合わせて使います。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 よく使うSQL文のまとめ</h2>
+    <ul>
+      <li><code>SELECT * FROM t WHERE 条件</code> → 条件に合うデータを取得</li>
+      <li><code>ORDER BY 列名</code> → 昇順に並べ替え（<code>DESC</code> で降順）</li>
+      <li><code>COUNT(*)</code> → 件数を数える</li>
+      <li><code>AVG(列名)</code> → 平均値を求める</li>
+      <li><code>MAX(列名)</code> / <code>MIN(列名)</code> → 最大値・最小値を求める</li>
+      <li><code>GROUP BY 列名</code> → グループごとに集計する</li>
+    </ul>
+  </section>

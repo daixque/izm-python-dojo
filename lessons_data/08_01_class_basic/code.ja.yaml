@@ -1,0 +1,106 @@
+initial_code: |
+  class Animal:
+      # ここにコードを書いてください
+      # __init__ で name と sound を設定する
+      # speak() メソッドで "{name}は{sound}と鳴きます" を返す
+      pass
+
+  dog = Animal("犬", "ワン")
+  print(dog.speak())   # 犬はワンと鳴きます
+
+  cat = Animal("猫", "ニャー")
+  print(cat.speak())   # 猫はニャーと鳴きます
+
+solution_code: |
+  class Animal:
+      def __init__(self, name, sound):
+          self.name = name
+          self.sound = sound
+
+      def speak(self):
+          return f"{self.name}は{self.sound}と鳴きます"
+
+  dog = Animal("犬", "ワン")
+  print(dog.speak())
+
+  cat = Animal("猫", "ニャー")
+  print(cat.speak())
+
+initial_files: []
+
+tests:
+  - name: "Animal クラスの定義確認"
+    description: "Animal クラスが定義されているか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Animal が定義されていません"}
+          else:
+              result = {"passed": True, "message": "✓ クラス Animal が定義されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Animal(\"犬\", \"ワン\").speak() の確認"
+    description: "speak() が \"犬はワンと鳴きます\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Animal が定義されていません"}
+          else:
+              animal = exec_globals['Animal']("犬", "ワン")
+              test_result = animal.speak()
+              expected = "犬はワンと鳴きます"
+              if test_result == expected:
+                  result = {"passed": True, "message": f"✓ Animal(\"犬\", \"ワン\").speak() = \"{expected}\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ \"{expected}\" になるはずです。実際: \"{test_result}\""}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "Animal(\"猫\", \"ニャー\").speak() の確認"
+    description: "speak() が \"猫はニャーと鳴きます\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Animal が定義されていません"}
+          else:
+              animal = exec_globals['Animal']("猫", "ニャー")
+              test_result = animal.speak()
+              expected = "猫はニャーと鳴きます"
+              if test_result == expected:
+                  result = {"passed": True, "message": f"✓ Animal(\"猫\", \"ニャー\").speak() = \"{expected}\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ \"{expected}\" になるはずです。実際: \"{test_result}\""}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "属性 name と sound の確認"
+    description: "name と sound 属性が正しく設定されているか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Animal' not in exec_globals:
+              result = {"passed": False, "message": "✗ クラス Animal が定義されていません"}
+          else:
+              animal = exec_globals['Animal']("鳥", "チュン")
+              if animal.name == "鳥" and animal.sound == "チュン":
+                  result = {"passed": True, "message": "✓ name と sound 属性が正しく設定されています"}
+              else:
+                  result = {"passed": False, "message": f"✗ name={animal.name}, sound={animal.sound} — 正しく設定されていません"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

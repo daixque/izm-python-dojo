@@ -1,0 +1,40 @@
+lesson:
+  number: "10_01"
+  id: "10_01_search"
+  title: "Search Algorithms"
+description: "Implement linear search to find the index of a target value in a list."
+
+task_description: |
+  <p>Implement the function <code>linear_search(items, target)</code>.</p>
+  <p>Search the list <code>items</code> for <code>target</code> using linear search (checking each element from the beginning). Return the index of the target if found, or <code>-1</code> if not found.</p>
+  <h3>Example Output</h3>
+  <pre>  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+  print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+  print(linear_search([3, 1, 4, 1, 5], 1))  # 1 (first occurrence)</pre>
+
+instructions:
+  - "Use a <code>for</code> loop with <code>range(len(items))</code> to check each index <code>i</code>"
+  - "If <code>items[i] == target</code>, return <code>i</code>"
+  - "If the loop finishes without finding the target, return <code>-1</code>"
+
+hints:
+  - hint: |
+      Loop through indices and compare each element:<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == ???:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code>
+  - hint: |
+      After the loop, return -1 if not found:<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      The completed function looks like this:<br>
+      <code>def linear_search(items, target):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(len(items)):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if items[i] == target:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return i</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return -1</code>

@@ -1,0 +1,102 @@
+lesson:
+  number: "09_01"
+  id: "09_01_recursion_basic"
+  title: "Recursion Basics"
+
+content: |
+  <section class="section">
+    <h2>🔄 What is Recursion?</h2>
+    <p><strong>Recursion</strong> is a programming technique where a <strong>function calls itself</strong>.</p>
+    <p>It might sound a bit tricky at first, but you can find similar ideas in everyday life.</p>
+    <p>Imagine opening a set of nested boxes — you open one box and find another box inside, open that one and find yet another box... and so on.</p>
+    <p>Recursion lets you solve problems with this kind of "repeating structure" using clean, simple code.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic Recursion Example</div>
+      <div class="example-code">def count_down(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Blast off!")<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count_down(n - 1)&nbsp;&nbsp;# calls itself!<br><br>count_down(3)<br># 3<br># 2<br># 1<br># Blast off!</div>
+      <div class="example-explanation">
+        Inside <code>count_down</code>, we call <code>count_down(n - 1)</code> — the function calling itself.<br>
+        That's recursion!
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🛑 Base Case and Recursive Case</h2>
+    <p>Every recursive function needs two parts:</p>
+    <ul>
+      <li><strong>Base case</strong>: The condition where recursion stops. It's the "exit" of the recursion.</li>
+      <li><strong>Recursive case</strong>: The part where the function calls itself, making the problem a little smaller each time.</li>
+    </ul>
+    <p>Without a base case, the function keeps calling itself forever — that's called <strong>infinite recursion</strong>!</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Structure of Base Case and Recursive Case</div>
+      <div class="example-code">def count_down(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# Base case (stop condition)<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Blast off!")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&nbsp;# stop here!<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# Recursive case (make problem smaller)<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;count_down(n - 1)&nbsp;&nbsp;# call with n reduced by 1</div>
+      <div class="example-explanation">
+        <strong>Base case</strong>: when <code>n == 0</code> → stop<br>
+        <strong>Recursive case</strong>: when <code>n > 0</code> → call with <code>n - 1</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔢 Calculating Factorial with Recursion</h2>
+    <p>First, let's explain what a <strong>factorial</strong> is.</p>
+    <p>A factorial is written as <code>n!</code> and means multiplying all integers from 1 up to n together.</p>
+    <ul>
+      <li><code>1!</code> = 1</li>
+      <li><code>3!</code> = 3 × 2 × 1 = 6</li>
+      <li><code>5!</code> = 5 × 4 × 3 × 2 × 1 = 120</li>
+    </ul>
+    <p>By special definition, <code>0! = 1</code> (remember this rule!).</p>
+    <p>There's a neat pattern in factorials: <code>n! = n × (n-1)!</code></p>
+    <p>For example, <code>5! = 5 × 4!</code>, <code>4! = 4 × 3!</code>... "the factorial of n equals n times the factorial of (n-1)." This is exactly the recursion pattern!</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Implementing Factorial Recursively</div>
+      <div class="example-code">def factorial(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# Base case: 0! = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# Recursive case: n! = n × (n-1)!<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * factorial(n - 1)<br><br>print(factorial(0))&nbsp;&nbsp;# 1<br>print(factorial(3))&nbsp;&nbsp;# 6<br>print(factorial(5))&nbsp;&nbsp;# 120</div>
+      <div class="example-explanation">
+        When we call <code>factorial(5)</code>:<br>
+        → <code>5 * factorial(4)</code><br>
+        → <code>5 * 4 * factorial(3)</code><br>
+        → <code>5 * 4 * 3 * factorial(2)</code><br>
+        → <code>5 * 4 * 3 * 2 * factorial(1)</code><br>
+        → <code>5 * 4 * 3 * 2 * 1 * factorial(0)</code><br>
+        → <code>5 * 4 * 3 * 2 * 1 * 1 = 120</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚠️ Watch Out for Infinite Recursion!</h2>
+    <p>If you forget the base case, the function will call itself forever. This is called <strong>infinite recursion</strong>.</p>
+    <p>Python will automatically raise a <code>RecursionError</code> after a certain depth to prevent a crash, but your program will still stop unexpectedly.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Dangerous Example: Missing Base Case</div>
+      <div class="example-code"># ❌ Bad! This causes infinite recursion<br>def bad_count(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;bad_count(n - 1)&nbsp;&nbsp;# never stops!<br><br># ✅ Good: base case included<br>def good_count(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:&nbsp;&nbsp;# base case needed!<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return<br>&nbsp;&nbsp;&nbsp;&nbsp;print(n)<br>&nbsp;&nbsp;&nbsp;&nbsp;good_count(n - 1)</div>
+      <div class="example-explanation">
+        When writing recursive functions, <strong>always think about the base case first</strong>.<br>
+        Ask yourself: "When should the recursion stop?"
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li><strong>Recursion</strong>: a function calling itself</li>
+      <li>A <strong>base case</strong> is always required — without it you get infinite recursion</li>
+      <li>The <strong>recursive case</strong> makes the problem smaller step by step, approaching the base case</li>
+      <li>Factorial is a classic example: <code>n! = n × (n-1)!</code>, <code>0! = 1</code></li>
+    </ul>
+  </section>

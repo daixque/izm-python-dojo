@@ -1,0 +1,48 @@
+lesson:
+  number: "13_02"
+  id: "13_02_plot_advanced"
+  title: "Customizing Charts"
+
+content: |
+  <section class="section">
+    <h2>📊 Plotting Multiple Data Series</h2>
+    <p>In the previous lesson you drew one dataset on one chart. By calling <code>plt.plot()</code> more than once, you can overlay <strong>multiple data series on the same chart</strong>.</p>
+    <p>This is great for comparing related data — like temperature vs. rainfall.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Drawing multiple line charts</div>
+      <div class="example-code">x = [1, 2, 3, 4, 5]<br>y1 = [10, 15, 12, 20, 18]<br>y2 = [5, 8, 7, 11, 9]<br><br>plt.plot(x, y1, label="Series A")<br>plt.plot(x, y2, label="Series B")<br>plt.legend()<br>plt.show()</div>
+      <div class="example-explanation">Calling <code>plt.plot()</code> twice draws two lines on the same chart. Use <code>label=</code> to name each series, then <code>plt.legend()</code> to show the legend.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Adding gridlines</div>
+      <div class="example-code">plt.plot(x, y1)<br>plt.grid(True)<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.grid(True)</code> adds graph-paper-style gridlines, making it easier to read exact values.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Drawing a scatter plot</div>
+      <div class="example-code">x = [1, 2, 3, 4, 5]<br>y = [10, 25, 15, 30, 20]<br><br>plt.scatter(x, y)<br>plt.title("Scatter Plot Example")<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.scatter(x, y)</code> draws a scatter plot — individual dots for each data point. Use it when you want to explore the relationship between two quantities.</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Changing colors and line styles</div>
+      <div class="example-code">plt.plot(x, y1, color="red", linestyle="--", label="Red dashed")<br>plt.plot(x, y2, color="blue", linestyle="-", label="Blue solid")<br>plt.legend()<br>plt.show()</div>
+      <div class="example-explanation">Use <code>color=</code> to set the color and <code>linestyle=</code> to change the line style. <code>"--"</code> is dashed and <code>"-"</code> is solid. This makes it easier to tell multiple series apart.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 Chart Customization Summary</h2>
+    <ul>
+      <li>Multiple <code>plt.plot()</code> calls → overlay multiple lines</li>
+      <li><code>label=</code> argument + <code>plt.legend()</code> → show a legend</li>
+      <li><code>plt.grid(True)</code> → add gridlines</li>
+      <li><code>plt.scatter(x, y)</code> → draw a scatter plot</li>
+      <li><code>color=</code>, <code>linestyle=</code> → change color and line style</li>
+    </ul>
+  </section>

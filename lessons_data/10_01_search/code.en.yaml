@@ -1,0 +1,99 @@
+initial_code: |
+  def linear_search(items, target):
+      # Write your code here
+      # Use a for loop to check each element from the beginning
+      # Return the index when found
+      # Return -1 if not found
+      pass
+
+  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+  print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+
+solution_code: |
+  def linear_search(items, target):
+      for i in range(len(items)):
+          if items[i] == target:
+              return i
+      return -1
+
+  print(linear_search([3, 1, 4, 1, 5], 4))
+  print(linear_search([3, 1, 4, 1, 5], 9))
+
+initial_files: []
+
+tests:
+  - name: "Check linear_search([3,1,4,1,5], 4)"
+    description: "Value 4 is at index 2"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function linear_search is not defined"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 4)
+              if test_result == 2:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 4) = 2 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 4) should return 2. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check linear_search([3,1,4,1,5], 9)"
+    description: "Value 9 is not in the list, so return -1"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function linear_search is not defined"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 9)
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 9) = -1 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 9) should return -1. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check linear_search([3,1,4,1,5], 1)"
+    description: "Value 1 appears at index 1 and 3 — return the first occurrence (1)"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function linear_search is not defined"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 1)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 1) = 1 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 1) should return 1. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Empty list test"
+    description: "Searching an empty list should return -1"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function linear_search is not defined"}
+          else:
+              test_result = exec_globals['linear_search']([], 5)
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ linear_search([], 5) = -1 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([], 5) should return -1. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

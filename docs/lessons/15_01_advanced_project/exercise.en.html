@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson15_01: Comprehensive Project: Grade Management System</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson15_01: Comprehensive Project: Grade Management System</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Complete the <code>StudentDB</code> class.</p>
+<p>This class uses a SQLite database to manage student names and test scores.</p>
+<h3>Methods to Implement</h3>
+<ul>
+  <li><code>__init__(self)</code>: Create an in-memory database and set up the <code>students</code> table</li>
+  <li><code>add_student(self, name, scores)</code>: Accept a student name and a list of scores, and insert each score into the database</li>
+  <li><code>get_average(self, name)</code>: Return the average score for the given student. Raise <code>ValueError</code> if the student does not exist</li>
+  <li><code>top_students(self, n)</code>: Return a list of <code>(name, average)</code> tuples for the top <code>n</code> students, sorted by average score descending</li>
+</ul>
+<h3>Example Output</h3>
+<pre>  db = StudentDB()
+db.add_student("Alice", [85, 90, 88])
+db.add_student("Bob", [70, 75, 80])
+db.add_student("Charlie", [95, 92, 98])
+
+print(db.get_average("Alice"))   # 87.666...
+print(db.top_students(2))        # [('Charlie', 95.0), ('Alice', 87.666...)]</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li><code>__init__</code>: Connect using <code>sqlite3.connect(":memory:")</code> and execute <code>CREATE TABLE students (name TEXT, score REAL)</code></li>
+                            <li><code>add_student</code>: Loop through the <code>scores</code> list and insert each score using <code>INSERT INTO students VALUES (?, ?)</code></li>
+                            <li><code>get_average</code>: Use <code>SELECT AVG(score) FROM students WHERE name = ?</code> to get the average; if the result is <code>None</code>, <code>raise ValueError</code></li>
+                            <li><code>top_students</code>: Use <code>GROUP BY name ORDER BY avg DESC LIMIT ?</code> to fetch the top <code>n</code> students and return the result of <code>fetchall()</code></li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Example implementation of <code>__init__</code>:<br>
+<code>self.conn = sqlite3.connect(":memory:")</code><br>
+<code>cursor = self.conn.cursor()</code><br>
+<code>cursor.execute("CREATE TABLE students (name TEXT, score REAL)")</code><br>
+<code>self.conn.commit()</code>
+</li>
+                            <li>Example implementation of <code>add_student</code>:<br>
+<code>cursor = self.conn.cursor()</code><br>
+<code>for score in scores:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>cursor.execute("INSERT INTO students VALUES (?, ?)", (name, score))</code><br>
+<code>self.conn.commit()</code>
+</li>
+                            <li>Example implementation of <code>get_average</code>:<br>
+<code>cursor = self.conn.cursor()</code><br>
+<code>cursor.execute("SELECT AVG(score) FROM students WHERE name = ?", (name,))</code><br>
+<code>result = cursor.fetchone()[0]</code><br>
+<code>if result is None:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>raise ValueError(f"Student not found: {name}")</code><br>
+<code>return result</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "15_01_advanced_project";
+        const INITIAL_CODE = "import sqlite3\n\nclass StudentDB:\n    def __init__(self):\n        # Create an in-memory SQLite database\n        # Connect using sqlite3.connect(\":memory:\")\n        # Create the table with: \"CREATE TABLE students (name TEXT, score REAL)\"\n        # Commit the change with conn.commit()\n        pass\n\n    def add_student(self, name, scores):\n        # name: student\u0027s name (string)\n        # scores: list of scores (e.g. [85, 90, 88])\n        # Loop through scores and INSERT each one into the database\n        # Use: \"INSERT INTO students VALUES (?, ?)\"\n        # Commit the changes with conn.commit() at the end\n        pass\n\n    def get_average(self, name):\n        # name: student\u0027s name (string)\n        # Use \"SELECT AVG(score) FROM students WHERE name = ?\" to get the average\n        # Extract the result with fetchone()[0]\n        # If result is None, raise ValueError\n        # Return the average score (float)\n        pass\n\n    def top_students(self, n):\n        # n: number of top students to return (integer)\n        # Execute: \"SELECT name, AVG(score) as avg FROM students GROUP BY name ORDER BY avg DESC LIMIT ?\"\n        # Return the result of fetchall() (a list of tuples)\n        pass\n\n# Test it out\ndb = StudentDB()\ndb.add_student(\"Alice\", [85, 90, 88])\ndb.add_student(\"Bob\", [70, 75, 80])\ndb.add_student(\"Charlie\", [95, 92, 98])\nprint(db.get_average(\"Alice\"))\nprint(db.top_students(2))\n";
+        const SOLUTION_CODE = "import sqlite3\n\nclass StudentDB:\n    def __init__(self):\n        self.conn = sqlite3.connect(\":memory:\")\n        cursor = self.conn.cursor()\n        cursor.execute(\"CREATE TABLE students (name TEXT, score REAL)\")\n        self.conn.commit()\n\n    def add_student(self, name, scores):\n        cursor = self.conn.cursor()\n        for score in scores:\n            cursor.execute(\"INSERT INTO students VALUES (?, ?)\", (name, score))\n        self.conn.commit()\n\n    def get_average(self, name):\n        cursor = self.conn.cursor()\n        cursor.execute(\"SELECT AVG(score) FROM students WHERE name = ?\", (name,))\n        result = cursor.fetchone()[0]\n        if result is None:\n            raise ValueError(f\"Student not found: {name}\")\n        return result\n\n    def top_students(self, n):\n        cursor = self.conn.cursor()\n        cursor.execute(\n            \"SELECT name, AVG(score) as avg FROM students GROUP BY name ORDER BY avg DESC LIMIT ?\",\n            (n,)\n        )\n        return cursor.fetchall()\n\n# Test it out\ndb = StudentDB()\ndb.add_student(\"Alice\", [85, 90, 88])\ndb.add_student(\"Bob\", [70, 75, 80])\ndb.add_student(\"Charlie\", [95, 92, 98])\nprint(db.get_average(\"Alice\"))\nprint(db.top_students(2))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = ["sqlite3"];
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    import sqlite3\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027StudentDB\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 StudentDB class is not defined\"}\n    else:\n        db = exec_globals[\u0027StudentDB\u0027]()\n        cursor = db.conn.cursor()\n        cursor.execute(\"SELECT * FROM students\")\n        result = {\"passed\": True, \"message\": \"\u2713 students table was created successfully\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does __init__ correctly create the students table?", "name": "Check table creation"}, {"code": "lang = \"en\"\ntry:\n    import sqlite3\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027StudentDB\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 StudentDB class is not defined\"}\n    else:\n        db = exec_globals[\u0027StudentDB\u0027]()\n        db.add_student(\"Alice\", [85, 90, 88])\n        avg = db.get_average(\"Alice\")\n        expected = (85 + 90 + 88) / 3\n        if abs(avg - expected) \u003c 0.01:\n            result = {\"passed\": True, \"message\": \"\u2713 get_average works correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected: {expected:.2f}, Actual: {avg:.2f}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Can we add a student and retrieve the correct average?", "name": "Check add_student and get_average"}, {"code": "lang = \"en\"\ntry:\n    import sqlite3\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027StudentDB\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 StudentDB class is not defined\"}\n    else:\n        db = exec_globals[\u0027StudentDB\u0027]()\n        try:\n            db.get_average(\"Unknown Student\")\n            result = {\"passed\": False, \"message\": \"\u2717 ValueError was not raised\"}\n        except ValueError:\n            result = {\"passed\": True, \"message\": \"\u2713 ValueError raised correctly for unknown student\"}\n        except Exception as e:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected ValueError but got {type(e).__name__}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does get_average raise ValueError for a student who doesn\u0027t exist?", "name": "Check ValueError for unknown student"}, {"code": "lang = \"en\"\ntry:\n    import sqlite3\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027StudentDB\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 StudentDB class is not defined\"}\n    else:\n        db = exec_globals[\u0027StudentDB\u0027]()\n        db.add_student(\"Alice\", [85, 90, 88])\n        db.add_student(\"Bob\", [70, 75, 80])\n        db.add_student(\"Charlie\", [95, 92, 98])\n        top = db.top_students(2)\n        if len(top) == 2 and top[0][0] == \"Charlie\" and top[1][0] == \"Alice\":\n            result = {\"passed\": True, \"message\": \"\u2713 top_students(2) works correctly\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected [(\u0027Charlie\u0027, ...), (\u0027Alice\u0027, ...)], Actual: {top}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "Does top_students(2) return the top 2 students in the correct order?", "name": "Check top_students ranking"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+lesson:
+  number: "11_01"
+  id: "11_01_numpy_array"
+  title: "Creating and Manipulating Arrays"
+description: "Create a NumPy array and implement a function that computes the sum and mean."
+
+task_description: |
+  <p>Implement the function <code>array_stats(data)</code>.</p>
+  <p>It receives a list of numbers <code>data</code> and returns a dictionary containing the <strong>sum and mean</strong>.</p>
+  <h3>Specification</h3>
+  <ul>
+    <li>Convert the argument <code>data</code> into a NumPy array</li>
+    <li>Compute the sum and mean</li>
+    <li>Return them as <code>{"sum": float(total), "mean": float(average)}</code></li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  print(array_stats([1, 2, 3, 4, 5]))
+  # {"sum": 15.0, "mean": 3.0}
+
+  print(array_stats([10, 20, 30]))
+  # {"sum": 60.0, "mean": 20.0}</pre>
+
+instructions:
+  - "The function signature <code>def array_stats(data):</code> is already provided"
+  - "Use <code>np.array(data)</code> to convert the list into a NumPy array"
+  - "Use <code>arr.sum()</code> for the sum and <code>arr.mean()</code> for the mean"
+  - "Wrap results with <code>float()</code> to return standard Python floats"
+
+hints:
+  - hint: |
+      First convert to a NumPy array:<br>
+      <code>arr = np.array(data)</code>
+  - hint: |
+      Use the <code>sum()</code> and <code>mean()</code> methods:<br>
+      <code>arr.sum()</code>  ← sum<br>
+      <code>arr.mean()</code> ← mean
+  - hint: |
+      Build and return a dictionary:<br>
+      <code>return {"sum": float(arr.sum()), "mean": float(arr.mean())}</code>

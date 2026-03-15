@@ -1,0 +1,134 @@
+lesson:
+  number: "15_01"
+  id: "15_01_advanced_project"
+  title: "Comprehensive Project: Grade Management System"
+
+content: |
+  <section class="section">
+    <h2>🎓 You've Come So Far — Well Done!</h2>
+    <p>From Chapter 7 through Chapter 14, you've learned an incredible amount.</p>
+    <p>Classes, databases, exception handling… every skill you've built along the way is about to come together into something real.</p>
+    <p>In this final project, you'll combine everything you've learned to build a <strong>fully functional grade management system</strong>.</p>
+    <p>When you finish, you'll look back and think: "I actually built that."</p>
+  </section>
+
+  <section class="section">
+    <h2>📋 Project Overview: Grade Management System</h2>
+    <p>You're going to build a system that manages student names and test scores.</p>
+    <ul>
+      <li>Register multiple scores for each student</li>
+      <li>Calculate the average score for a specific student</li>
+      <li>Show a ranking of the top N students by average score</li>
+      <li>Raise a meaningful error when an unknown student is searched</li>
+    </ul>
+    <p>This is the kind of tool a real teacher might actually use. Approach it with that mindset!</p>
+  </section>
+
+  <section class="section">
+    <h2>🔧 How the System Works</h2>
+    <p>This system is powered by three key technologies.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">① Classes (class)</div>
+      <div class="example-code">class StudentDB:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Initialize the database<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def add_student(self, name, scores):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Register a student<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+      <div class="example-explanation">
+        <strong>Classes</strong> group all the database operations together in one place.<br>
+        The <code>StudentDB</code> class contains methods for adding, searching, and aggregating student data.<br>
+        Using a class keeps the code organized and easy to understand.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">② sqlite3 (Database)</div>
+      <div class="example-code">import sqlite3<br><br>conn = sqlite3.connect(":memory:")<br>cursor = conn.cursor()<br>cursor.execute(<br>&nbsp;&nbsp;&nbsp;&nbsp;"CREATE TABLE students (name TEXT, score REAL)"<br>)<br>conn.commit()</div>
+      <div class="example-explanation">
+        <strong>sqlite3</strong> is a database library that comes built into Python — no installation needed.<br>
+        Using <code>":memory:"</code> stores data in RAM (it disappears when the program ends).<br>
+        You use SQL statements to add and query data.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">③ try/except (Exception Handling)</div>
+      <div class="example-code">def get_average(self, name):<br>&nbsp;&nbsp;&nbsp;&nbsp;# Search the database<br>&nbsp;&nbsp;&nbsp;&nbsp;result = cursor.fetchone()[0]<br>&nbsp;&nbsp;&nbsp;&nbsp;if result is None:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(f"Student not found: {name}")<br>&nbsp;&nbsp;&nbsp;&nbsp;return result</div>
+      <div class="example-explanation">
+        <strong>Exception handling</strong> lets you raise a meaningful error when a student doesn't exist.<br>
+        <code>raise ValueError(...)</code> deliberately triggers an error to inform the caller of the problem.<br>
+        This is what makes programs <em>robust</em> — they handle unexpected inputs gracefully.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 SQL Statements Review</h2>
+    <p>This project uses three types of SQL statements.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Inserting Data (INSERT)</div>
+      <div class="example-code">cursor.execute(<br>&nbsp;&nbsp;&nbsp;&nbsp;"INSERT INTO students VALUES (?, ?)",<br>&nbsp;&nbsp;&nbsp;&nbsp;(name, score)<br>)</div>
+      <div class="example-explanation">
+        <code>?</code> is a placeholder. Values from the tuple in the second argument are substituted in order.<br>
+        Always use placeholders instead of embedding strings directly — this prevents SQL injection attacks.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Calculating Averages (SELECT AVG)</div>
+      <div class="example-code">cursor.execute(<br>&nbsp;&nbsp;&nbsp;&nbsp;"SELECT AVG(score) FROM students WHERE name = ?",<br>&nbsp;&nbsp;&nbsp;&nbsp;(name,)<br>)<br>result = cursor.fetchone()[0]</div>
+      <div class="example-explanation">
+        <code>AVG(score)</code> calculates the average of all matching scores.<br>
+        <code>WHERE name = ?</code> filters records to a specific student.<br>
+        <code>fetchone()</code> retrieves one row, and <code>[0]</code> extracts the first column value.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Building a Ranking (GROUP BY / ORDER BY)</div>
+      <div class="example-code">cursor.execute(<br>&nbsp;&nbsp;&nbsp;&nbsp;"SELECT name, AVG(score) as avg FROM students "<br>&nbsp;&nbsp;&nbsp;&nbsp;"GROUP BY name ORDER BY avg DESC LIMIT ?",<br>&nbsp;&nbsp;&nbsp;&nbsp;(n,)<br>)<br>return cursor.fetchall()</div>
+      <div class="example-explanation">
+        <code>GROUP BY name</code> groups rows by student name.<br>
+        <code>ORDER BY avg DESC</code> sorts by average score from highest to lowest.<br>
+        <code>LIMIT ?</code> returns only the top N results.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🗺️ Design First, Then Code</h2>
+    <p>When building something large, resist the urge to start typing immediately. <strong>Think about the design first.</strong></p>
+    <p>For this system, ask yourself:</p>
+    <ul>
+      <li><strong>What do I need to store?</strong> → Student names and scores</li>
+      <li><strong>What operations are needed?</strong> → Add, get average, get ranking</li>
+      <li><strong>Where can errors happen?</strong> → When searching for a student who doesn't exist</li>
+    </ul>
+    <p>Having clear answers before writing a single line of code will keep you on track.</p>
+  </section>
+
+  <section class="section">
+    <h2>🧩 Break Big Problems Into Small Pieces</h2>
+    <p>"Build a grade management system" might sound overwhelming. But broken into steps, it's very manageable.</p>
+    <ol>
+      <li>Start with <code>__init__</code> — just create the table</li>
+      <li>Then implement <code>add_student</code> — insert one record at a time</li>
+      <li>Next, make <code>get_average</code> calculate and return a value</li>
+      <li>Finally, build <code>top_students</code> to produce the ranking</li>
+    </ol>
+    <p>Test each method as you go. You don't need to get everything right at once.</p>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li><strong>Classes</strong>: Group related operations together</li>
+      <li><strong>sqlite3</strong>: Manage data persistently using SQL</li>
+      <li><strong>raise / try/except</strong>: Handle errors properly to build robust programs</li>
+      <li><strong>Design</strong>: Clarify what you're building before writing code</li>
+      <li><strong>Decomposition</strong>: Break big problems into small, solvable steps</li>
+    </ul>
+    <p>This is the culmination of everything you've learned. Take a deep breath — you're ready for this!</p>
+  </section>

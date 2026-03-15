@@ -1,0 +1,45 @@
+lesson:
+  number: "10_02"
+  id: "10_02_sort"
+  title: "ソートアルゴリズム"
+description: "バブルソートを使って数値リストを昇順に並び替える関数を実装します。"
+
+task_description: |
+  <p>関数 <code>bubble_sort(numbers)</code> をバブルソートで実装しましょう。</p>
+  <p>数値のリスト <code>numbers</code> を昇順（小さい順）に並び替えた<strong>新しいリスト</strong>を返します。</p>
+  <p><strong>注意：</strong><code>sort()</code> や <code>sorted()</code> は使わないで実装してください！</p>
+  <h3>実行例</h3>
+  <pre>  print(bubble_sort([5, 3, 8, 1, 2]))     # [1, 2, 3, 5, 8]
+  print(bubble_sort([-3, 0, -1, 2]))      # [-3, -1, 0, 2]
+  print(bubble_sort([1]))                 # [1]</pre>
+
+instructions:
+  - "<code>numbers.copy()</code> でコピーを作り、元のリストを変更しないようにする"
+  - "外側のループで n 回パスする：<code>for i in range(n):</code>"
+  - "内側のループで隣り合う要素を比べる：<code>for j in range(n - 1 - i):</code>"
+  - "<code>result[j] > result[j+1]</code> なら <code>result[j], result[j+1] = result[j+1], result[j]</code> で交換"
+  - "最後に <code>result</code> を返す"
+
+hints:
+  - hint: |
+      まずコピーを作ってリストの長さを取得します：<br>
+      <code>def bubble_sort(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = numbers.copy()</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>n = len(result)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>for j in range(n - 1 - i):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code># ここに比較と交換を書く</code>
+  - hint: |
+      隣り合う要素を比べて、逆順なら交換します：<br>
+      <code>if result[j] > result[j + 1]:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result[j], result[j + 1] = result[j + 1], result[j]</code>
+  - hint: |
+      完成した関数はこうなります：<br>
+      <code>def bubble_sort(numbers):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>result = numbers.copy()</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>n = len(result)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>for i in range(n):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>for j in range(n - 1 - i):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>if result[j] > result[j + 1]:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>result[j], result[j + 1] = result[j + 1], result[j]</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return result</code>

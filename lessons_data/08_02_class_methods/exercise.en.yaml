@@ -1,0 +1,46 @@
+lesson:
+  number: "08_02"
+  id: "08_02_class_methods"
+  title: "Methods and Instances"
+description: "Implement a class with state and practice updating attributes with methods."
+
+task_description: |
+  <p>Implement the class <code>Counter</code>.</p>
+  <p>It should have the following methods:</p>
+  <ul>
+    <li><code>increment()</code>: increase the count by 1</li>
+    <li><code>reset()</code>: reset the count to 0</li>
+    <li><code>get_count()</code>: return the current count</li>
+  </ul>
+  <h3>Example Output</h3>
+  <pre>  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())  # 2
+  c.reset()
+  print(c.get_count())  # 0</pre>
+
+instructions:
+  - "Define the class with <code>class Counter:</code>"
+  - "Initialize the count to 0 in <code>__init__</code> with <code>self.count = 0</code>"
+  - "In <code>increment(self)</code>, increase <code>self.count</code> by 1"
+  - "In <code>reset(self)</code>, set <code>self.count</code> back to 0"
+  - "In <code>get_count(self)</code>, return <code>self.count</code>"
+
+hints:
+  - hint: |
+      Class structure:<br>
+      <code>class Counter:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.count = 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def increment(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.count += 1</code>
+  - hint: |
+      reset and get_count:<br>
+      <code>def reset(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>self.count = 0</code><br>
+      <code>def get_count(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return self.count</code>
+  - hint: |
+      <code>self.count += 1</code> is the same as <code>self.count = self.count + 1</code>.<br>
+      Use this pattern when updating an attribute's value.

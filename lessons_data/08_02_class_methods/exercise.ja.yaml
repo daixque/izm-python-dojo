@@ -1,0 +1,46 @@
+lesson:
+  number: "08_02"
+  id: "08_02_class_methods"
+  title: "メソッドとインスタンス"
+description: "状態を持つクラスを実装して、メソッドによる属性の更新を練習します。"
+
+task_description: |
+  <p>クラス <code>Counter</code> を実装しましょう。</p>
+  <p>以下のメソッドを持ちます：</p>
+  <ul>
+    <li><code>increment()</code>: カウントを 1 増やす</li>
+    <li><code>reset()</code>: カウントを 0 に戻す</li>
+    <li><code>get_count()</code>: 現在のカウントを返す</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  c = Counter()
+  c.increment()
+  c.increment()
+  print(c.get_count())  # 2
+  c.reset()
+  print(c.get_count())  # 0</pre>
+
+instructions:
+  - "<code>class Counter:</code> でクラスを定義します"
+  - "<code>__init__</code> でカウントを 0 に初期化します（<code>self.count = 0</code>）"
+  - "<code>increment(self)</code> で <code>self.count</code> を 1 増やします"
+  - "<code>reset(self)</code> で <code>self.count</code> を 0 に戻します"
+  - "<code>get_count(self)</code> で <code>self.count</code> を返します"
+
+hints:
+  - hint: |
+      クラスの構造：<br>
+      <code>class Counter:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def __init__(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.count = 0</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>def increment(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>self.count += 1</code>
+  - hint: |
+      reset と get_count：<br>
+      <code>def reset(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>self.count = 0</code><br>
+      <code>def get_count(self):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return self.count</code>
+  - hint: |
+      <code>self.count += 1</code> は <code>self.count = self.count + 1</code> と同じです。<br>
+      属性の値を変更するときはこの書き方を使います。

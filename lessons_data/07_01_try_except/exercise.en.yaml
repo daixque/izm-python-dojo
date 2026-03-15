@@ -1,0 +1,36 @@
+lesson:
+  number: "07_01"
+  id: "07_01_try_except"
+  title: "try/except Basics"
+description: "Use try/except to implement a function that works safely even when an error occurs."
+
+task_description: |
+  <p>Implement the function <code>safe_int(value)</code>.</p>
+  <p>It converts the string <code>value</code> to an integer and returns it. If the conversion fails (a <code>ValueError</code> is raised), return <code>None</code>.</p>
+  <h3>Example Output</h3>
+  <pre>  print(safe_int("42"))    # 42
+  print(safe_int("abc"))   # None
+  print(safe_int("3.14"))  # None</pre>
+
+instructions:
+  - "The function signature <code>def safe_int(value):</code> is already provided"
+  - "Use <code>int(value)</code> inside a <code>try:</code> block to attempt the conversion"
+  - "Catch the error using <code>except ValueError:</code>"
+  - "Return the converted integer if the conversion succeeds"
+  - "Return <code>None</code> if the conversion fails"
+
+hints:
+  - hint: |
+      Basic try/except structure:<br>
+      <code>def safe_int(value):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>try:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return int(value)</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>except ValueError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      Return <code>None</code> when the error occurs:<br>
+      <code>except ValueError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return None</code>
+  - hint: |
+      Strings like <code>"3.14"</code> that contain a decimal point cannot be converted by <code>int()</code>, so they raise a <code>ValueError</code>.<br>
+      <code>float("3.14")</code> succeeds, but <code>int("3.14")</code> raises an error.

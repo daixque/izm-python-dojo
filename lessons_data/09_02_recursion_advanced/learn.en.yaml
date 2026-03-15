@@ -1,0 +1,103 @@
+lesson:
+  number: "09_02"
+  id: "09_02_recursion_advanced"
+  title: "Recursion in Practice"
+
+content: |
+  <section class="section">
+    <h2>🐚 What is the Fibonacci Sequence?</h2>
+    <p>The <strong>Fibonacci sequence</strong> is a series of numbers that follows this rule:</p>
+    <ul>
+      <li>The first two numbers are <code>0</code> and <code>1</code></li>
+      <li>Every number after that is the <strong>sum of the two numbers before it</strong></li>
+    </ul>
+    <p>Here's what it looks like:</p>
+    <p><code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...</code></p>
+    <ul>
+      <li>Index 0 = 0</li>
+      <li>Index 1 = 1</li>
+      <li>Index 2 = 0 + 1 = 1</li>
+      <li>Index 3 = 1 + 1 = 2</li>
+      <li>Index 4 = 1 + 2 = 3</li>
+      <li>Index 5 = 2 + 3 = 5</li>
+      <li>Index 6 = 3 + 5 = 8</li>
+    </ul>
+    <p>The Fibonacci sequence appears everywhere in nature — in the number of flower petals and in the spiral of a seashell!</p>
+  </section>
+
+  <section class="section">
+    <h2>🔄 Implementing Fibonacci with Recursion</h2>
+    <p>We can write <code>fibonacci(n)</code> as a formula:</p>
+    <ul>
+      <li><code>fibonacci(0) = 0</code> (base case)</li>
+      <li><code>fibonacci(1) = 1</code> (base case)</li>
+      <li><code>fibonacci(n) = fibonacci(n-1) + fibonacci(n-2)</code> (recursive case)</li>
+    </ul>
+    <p>This translates directly into recursive code!</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Recursive Fibonacci Implementation</div>
+      <div class="example-code">def fibonacci(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# Base cases (two of them!)<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# Recursive case<br>&nbsp;&nbsp;&nbsp;&nbsp;return fibonacci(n - 1) + fibonacci(n - 2)<br><br>print(fibonacci(0))&nbsp;&nbsp;# 0<br>print(fibonacci(6))&nbsp;&nbsp;# 8<br>print(fibonacci(10)) # 55</div>
+      <div class="example-explanation">
+        Notice there are two base cases!<br>
+        <code>fibonacci(0)</code> and <code>fibonacci(1)</code> are the "foundation" of the recursion.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔁 Recursion vs Loops: Which Should You Use?</h2>
+    <p>Most things you can do with recursion can also be done with a loop. Let's compare both approaches.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Factorial: Recursive vs Loop</div>
+      <div class="example-code"># Recursive version<br>def factorial_recursive(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return n * factorial_recursive(n - 1)<br><br># Loop version<br>def factorial_loop(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;result = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1, n + 1):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result *= i<br>&nbsp;&nbsp;&nbsp;&nbsp;return result<br><br>print(factorial_recursive(5))&nbsp;&nbsp;# 120<br>print(factorial_loop(5))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 120</div>
+      <div class="example-explanation">
+        Both give the same result.<br>
+        <strong>Recursion</strong>: often closer to the math formula, can be easier to read<br>
+        <strong>Loops</strong>: generally faster and use less memory
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🐢 The Problem with Naive Fibonacci Recursion</h2>
+    <p>The recursive Fibonacci has a serious problem: it calculates the same values over and over again.</p>
+    <p>When computing <code>fibonacci(5)</code>, this is what happens inside:</p>
+    <p><code>fibonacci(5)</code><br>
+    → <code>fibonacci(4)</code> + <code>fibonacci(3)</code><br>
+    → (<code>fibonacci(3)</code> + <code>fibonacci(2)</code>) + (<code>fibonacci(2)</code> + <code>fibonacci(1)</code>)<br>
+    → ...</p>
+    <p><code>fibonacci(3)</code> is computed twice, <code>fibonacci(2)</code> three times! As n grows larger, the redundant work explodes.</p>
+  </section>
+
+  <section class="section">
+    <h2>⚡ Speed it Up with Memoization</h2>
+    <p><strong>Memoization</strong> is the technique of storing the result of a computation so that when the same input appears again, we return the stored result instead of recomputing.</p>
+    <p>Think of it as taking notes — you "memo" the answer so you don't have to recalculate it.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Fibonacci with Memoization</div>
+      <div class="example-code"># Dictionary to store computed results<br>memo = {}<br><br>def fibonacci_fast(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;# If already computed, return stored result<br>&nbsp;&nbsp;&nbsp;&nbsp;if n in memo:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return memo[n]<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# Base cases<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;# Compute and store result<br>&nbsp;&nbsp;&nbsp;&nbsp;result = fibonacci_fast(n-1) + fibonacci_fast(n-2)<br>&nbsp;&nbsp;&nbsp;&nbsp;memo[n] = result<br>&nbsp;&nbsp;&nbsp;&nbsp;return result<br><br>print(fibonacci_fast(10))&nbsp;&nbsp;# 55<br>print(fibonacci_fast(30))&nbsp;&nbsp;# 832040</div>
+      <div class="example-explanation">
+        By saving results in the <code>memo</code> dictionary, we never repeat the same calculation.<br>
+        This makes the Fibonacci computation dramatically faster!
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li><strong>Fibonacci sequence</strong>: each number is the sum of the two before it</li>
+      <li>Recursion can implement Fibonacci cleanly, but naively repeats the same calculations</li>
+      <li>Recursion is often closer to the math formula, but loops are usually faster</li>
+      <li><strong>Memoization</strong>: store computed results in a dictionary and reuse them for huge speed gains</li>
+    </ul>
+  </section>

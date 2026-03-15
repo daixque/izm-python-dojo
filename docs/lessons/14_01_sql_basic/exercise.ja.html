@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演習課題 - レッスン14_01: SQLの基礎</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">📝 レッスン14_01: SQLの基礎</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">準備中...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>課題</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 課題内容</h3>
+                        <p>関数 <code>get_all_users(conn)</code> を実装しましょう。</p>
+<p>テーブル <code>users</code> から<strong>全件</strong>を取得して返す関数です。</p>
+<h3>テーブルの内容</h3>
+<pre>  id | name    | age
+---+---------+----
+ 1 | Alice   |  25
+ 2 | Bob     |  30
+ 3 | Charlie |  22</pre>
+<h3>期待する戻り値</h3>
+<pre>  [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ やること</h4>
+                        <ul>
+                            <li>テーブルの作成とデータの挿入はすでに用意されています</li>
+                            <li><code>conn.cursor()</code> でカーソルを取得します</li>
+                            <li><code>cursor.execute("SELECT * FROM users")</code> で全件を取得するSQL文を実行します</li>
+                            <li><code>cursor.fetchall()</code> で結果を全件取得して <code>return</code> します</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 ヒント
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>SELECT文の基本：<br>
+<code>cursor = conn.cursor()</code><br>
+<code>cursor.execute("SELECT * FROM users")</code><br>
+<code>return cursor.fetchall()</code>
+</li>
+                            <li><code>SELECT * FROM テーブル名</code> で全列・全行を取得できます。<br>
+<code>fetchall()</code> は結果をタプルのリストとして返します。<br>
+例: <code>[(1, 'Alice', 25), (2, 'Bob', 30)]</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 コードエディタ</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ 実行</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ テスト</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 リセット</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 解答を見る</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 実行結果</span>
+                        <button id="btn-clear" class="btn btn-small">クリア</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">ファイル</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">ファイルを選択してください</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+                <a href="learn.ja.html" class="btn btn-link">📚 説明に戻る</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">テスト結果</h3>
+                <button id="btn-close-results" class="btn btn-small">閉じる</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">目次に戻る</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "14_01_sql_basic";
+        const INITIAL_CODE = "import sqlite3\n\n# \u30e1\u30e2\u30ea\u4e0a\u306b\u30c7\u30fc\u30bf\u30d9\u30fc\u30b9\u3092\u4f5c\u6210\nconn = sqlite3.connect(\":memory:\")\ncursor = conn.cursor()\n\n# \u30c6\u30fc\u30d6\u30eb\u3092\u4f5c\u6210\ncursor.execute(\"CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)\")\n\n# \u30c7\u30fc\u30bf\u3092\u633f\u5165\ncursor.executemany(\"INSERT INTO users VALUES (?, ?, ?)\", [\n    (1, \"Alice\", 25),\n    (2, \"Bob\", 30),\n    (3, \"Charlie\", 22),\n])\nconn.commit()\n\ndef get_all_users(conn):\n    # \u3053\u3053\u306b\u30b3\u30fc\u30c9\u3092\u66f8\u3044\u3066\u304f\u3060\u3055\u3044\n    # cursor = conn.cursor() \u3067\u30ab\u30fc\u30bd\u30eb\u3092\u53d6\u5f97\n    # cursor.execute(\"SELECT * FROM users\") \u3067\u30c7\u30fc\u30bf\u3092\u53d6\u5f97\n    # cursor.fetchall() \u3067\u5168\u4ef6\u53d6\u5f97\u3057\u3066 return \u3059\u308b\n    pass\n\nprint(get_all_users(conn))\n";
+        const SOLUTION_CODE = "import sqlite3\n\nconn = sqlite3.connect(\":memory:\")\ncursor = conn.cursor()\ncursor.execute(\"CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)\")\ncursor.executemany(\"INSERT INTO users VALUES (?, ?, ?)\", [\n    (1, \"Alice\", 25), (2, \"Bob\", 30), (3, \"Charlie\", 22),\n])\nconn.commit()\n\ndef get_all_users(conn):\n    cursor = conn.cursor()\n    cursor.execute(\"SELECT * FROM users\")\n    return cursor.fetchall()\n\nprint(get_all_users(conn))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = ["sqlite3"];
+
+        const TESTS = [{"code": "lang = \"ja\"\ntry:\n    import sqlite3\n    conn = sqlite3.connect(\":memory:\")\n    cursor = conn.cursor()\n    cursor.execute(\"CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)\")\n    cursor.executemany(\"INSERT INTO users VALUES (?, ?, ?)\", [\n        (1, \"Alice\", 25), (2, \"Bob\", 30), (3, \"Charlie\", 22)\n    ])\n    conn.commit()\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_all_users\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_all_users \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        result = {\"passed\": True, \"message\": \"\u2713 \u95a2\u6570 get_all_users \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u3059\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u95a2\u6570 get_all_users \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "get_all_users \u95a2\u6570\u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u308b\u304b"}, {"code": "lang = \"ja\"\ntry:\n    import sqlite3\n    conn = sqlite3.connect(\":memory:\")\n    cursor = conn.cursor()\n    cursor.execute(\"CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)\")\n    cursor.executemany(\"INSERT INTO users VALUES (?, ?, ?)\", [\n        (1, \"Alice\", 25), (2, \"Bob\", 30), (3, \"Charlie\", 22)\n    ])\n    conn.commit()\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_all_users\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_all_users \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        r = exec_globals[\u0027get_all_users\u0027](conn)\n        expected = [(1, \u0027Alice\u0027, 25), (2, \u0027Bob\u0027, 30), (3, \u0027Charlie\u0027, 22)]\n        if r == expected:\n            result = {\"passed\": True, \"message\": \"\u2713 \u6b63\u89e3\u3067\u3059\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 \u671f\u5f85\u5024\u3068\u7570\u306a\u308a\u307e\u3059: {r}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "\u51683\u4ef6\u306e\u30e6\u30fc\u30b6\u30fc\u30c7\u30fc\u30bf\u304c\u6b63\u3057\u304f\u8fd4\u3055\u308c\u308b\u304b\u78ba\u8a8d\u3059\u308b", "name": "get_all_users \u304c\u5168\u4ef6\u53d6\u5f97\u3067\u304d\u308b\u304b"}, {"code": "lang = \"ja\"\ntry:\n    import sqlite3\n    conn = sqlite3.connect(\":memory:\")\n    cursor = conn.cursor()\n    cursor.execute(\"CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)\")\n    cursor.executemany(\"INSERT INTO users VALUES (?, ?, ?)\", [\n        (1, \"Alice\", 25), (2, \"Bob\", 30), (3, \"Charlie\", 22)\n    ])\n    conn.commit()\n    exec_globals = {}\n    exec(user_code, exec_globals)\n    if \u0027get_all_users\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 \u95a2\u6570 get_all_users \u304c\u5b9a\u7fa9\u3055\u308c\u3066\u3044\u307e\u305b\u3093\"}\n    else:\n        r = exec_globals[\u0027get_all_users\u0027](conn)\n        if isinstance(r, list):\n            result = {\"passed\": True, \"message\": f\"\u2713 \u30ea\u30b9\u30c8\u304c\u8fd4\u3055\u308c\u3066\u3044\u307e\u3059\uff08{len(r)} \u4ef6\uff09\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 cursor.fetchall() \u3067\u30ea\u30b9\u30c8\u3092\u8fd4\u3057\u3066\u304f\u3060\u3055\u3044\u3002\u5b9f\u969b\u306e\u578b: {type(r)}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 \u30a8\u30e9\u30fc: {str(e)}\"}\nresult\n", "description": "fetchall() \u306e\u623b\u308a\u5024\u304c\u30ea\u30b9\u30c8\u5f62\u5f0f\u304b\u78ba\u8a8d\u3059\u308b", "name": "\u623b\u308a\u5024\u304c\u30ea\u30b9\u30c8\uff08\u30bf\u30d7\u30eb\u306e\u30ea\u30b9\u30c8\uff09\u304b"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン07_03: finally と raise</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">finally と raise</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔒 finally ブロック</h2>
+  <p><code>finally</code> ブロックに書いた処理は、エラーが起きても起きなくても<strong>必ず実行</strong>されます。</p>
+  <p>ファイルを閉じる、接続を切るなど「後片付け」に使います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">finally の基本</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("処理中...")<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("abc")&nbsp;&nbsp;# エラー発生<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("エラーをキャッチ")<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("必ず実行されます")<br><br># 出力:<br># 処理中...<br># エラーをキャッチ<br># 必ず実行されます</div>
+    <div class="example-explanation">
+      <code>finally:</code> の中の処理は、エラーが起きても起きなくても実行されます。<br>
+      「どんな場合でも最後にやること」を書きます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">エラーがないときの finally</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("処理中...")<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("42")&nbsp;&nbsp;# 成功<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("エラーをキャッチ")&nbsp;&nbsp;# 実行されない<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("必ず実行されます")&nbsp;&nbsp;# 実行される<br><br># 出力:<br># 処理中...<br># 必ず実行されます</div>
+    <div class="example-explanation">
+      エラーがなくても <code>finally</code> は実行されます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✅ else ブロック</h2>
+  <p><code>else</code> ブロックに書いた処理は、<code>try</code> ブロックで<strong>エラーが起きなかったとき</strong>だけ実行されます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">else の使い方</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("42")<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("変換エラー")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"変換成功: {x}")&nbsp;&nbsp;# エラーがないときだけ実行<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("処理完了")<br><br># 出力:<br># 変換成功: 42<br># 処理完了</div>
+    <div class="example-explanation">
+      <code>else:</code> はエラーが起きなかったときの処理です。<br>
+      <code>try</code> → エラーなし → <code>else</code> → <code>finally</code> の順に実行されます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🚀 raise で例外を発生させる</h2>
+  <p><code>raise</code> を使うと、自分でエラーを発生させることができます。</p>
+  <p>入力値の検証など、意図的にエラーを出したい場合に使います。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">raise の基本</div>
+    <div class="example-code">def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("年齢は 0 以上でなければなりません")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>check_age(25)&nbsp;&nbsp;&nbsp;# 25<br>check_age(-1)&nbsp;&nbsp;&nbsp;# ValueError: 年齢は 0 以上でなければなりません</div>
+    <div class="example-explanation">
+      <code>raise ValueError("メッセージ")</code> で例外を発生させます。<br>
+      呼び出し元では <code>try/except</code> でキャッチできます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">raise した例外をキャッチする</div>
+    <div class="example-code">def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("年齢は 0 以上です")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = check_age(-1)<br>except ValueError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"入力エラー: {e}")<br><br># 出力: 入力エラー: 年齢は 0 以上です</div>
+    <div class="example-explanation">
+      <code>raise</code> で発生させた例外は、普通の例外と同じように <code>try/except</code> でキャッチできます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🏗️ カスタム例外クラス</h2>
+  <p>自分だけの例外クラスを作ることもできます。</p>
+  <p><code>Exception</code> を継承してクラスを定義します。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">カスタム例外の定義と使い方</div>
+    <div class="example-code">class NegativeAgeError(Exception):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise NegativeAgeError(f"年齢 {age} は無効です")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;check_age(-5)<br>except NegativeAgeError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"カスタムエラー: {e}")</div>
+    <div class="example-explanation">
+      <code>class MyError(Exception): pass</code> でカスタム例外が作れます。<br>
+      自分のプログラムで意味のある名前のエラーを定義できます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>finally:</code> はエラーの有無にかかわらず必ず実行される</li>
+    <li><code>else:</code> はエラーが起きなかったときだけ実行される</li>
+    <li><code>raise 例外クラス("メッセージ")</code> で意図的に例外を発生させられる</li>
+    <li><code>Exception</code> を継承してカスタム例外を作ることができる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

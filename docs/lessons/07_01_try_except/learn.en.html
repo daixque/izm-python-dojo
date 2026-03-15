@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Lesson07_01: try/except Basics</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">try/except Basics</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 Learn</span>
+                <div id="language-switcher">
+                        <a href="learn.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>💥 What Are Errors (Exceptions)?</h2>
+  <p>When running a program, unexpected problems can occur.</p>
+  <p>For example, if you try to convert a non-numeric string to an integer, or open a file that doesn't exist, an <strong>error (exception)</strong> is raised.</p>
+  <p>When an error occurs, the program normally stops at that point.</p>
+  <p>In Python, these runtime errors are called <strong>exceptions</strong>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Example of an error occurring</div>
+    <div class="example-code">int("abc")&nbsp;&nbsp;# Error!<br># ValueError: invalid literal for int() with base 10: 'abc'</div>
+    <div class="example-explanation">
+      <code>"abc"</code> cannot be converted to a number, so a <code>ValueError</code> is raised.<br>
+      Without handling this, the program stops here.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🛡️ How to Write a try/except Block</h2>
+  <p>Using <code>try</code> and <code>except</code>, you can handle errors <strong>without stopping the program</strong>.</p>
+  <p>Write the risky code inside the <code>try</code> block, and write what to do if an error occurs inside the <code>except</code> block.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Basic try/except syntax</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;# Code that might raise an error<br>&nbsp;&nbsp;&nbsp;&nbsp;operation<br>except ErrorType:<br>&nbsp;&nbsp;&nbsp;&nbsp;# Code to run if an error occurs<br>&nbsp;&nbsp;&nbsp;&nbsp;operation</div>
+    <div class="example-explanation">
+      <strong>Key points:</strong><br>
+      - Write the "code to try" inside <code>try:</code><br>
+      - Write the "error handling" inside <code>except:</code><br>
+      - If no error occurs, the <code>except</code> block is not executed
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Using try/except</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;number = int("abc")<br>&nbsp;&nbsp;&nbsp;&nbsp;print(number)<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("Could not convert to a number")<br><br># Output: Could not convert to a number</div>
+    <div class="example-explanation">
+      When <code>int("abc")</code> raises an error, the code inside <code>except ValueError:</code> is executed.<br>
+      The program continues without crashing.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔄 Flow When an Exception Occurs</h2>
+  <p>Let's look at how the flow works in a try/except block.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Flow when an error occurs</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("step 1")&nbsp;&nbsp;# executed<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("abc")&nbsp;&nbsp;# error here<br>&nbsp;&nbsp;&nbsp;&nbsp;print("step 2")&nbsp;&nbsp;# skipped<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("caught error")&nbsp;&nbsp;# executed<br><br>print("program continues")&nbsp;&nbsp;# executed</div>
+    <div class="example-explanation">
+      Code after the error line inside the <code>try</code> block is skipped.<br>
+      After the <code>except</code> block finishes, the program continues from where it left off.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Flow when no error occurs</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("step 1")&nbsp;&nbsp;# executed<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("42")&nbsp;&nbsp;&nbsp;# success<br>&nbsp;&nbsp;&nbsp;&nbsp;print("step 2")&nbsp;&nbsp;# executed<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("caught error")&nbsp;&nbsp;# not executed<br><br>print("program continues")&nbsp;&nbsp;# executed</div>
+    <div class="example-explanation">
+      If no error occurs, the <code>except</code> block is not executed.<br>
+      After the entire <code>try</code> block runs successfully, the program moves on.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📋 Using Error Messages</h2>
+  <p>Writing <code>except ErrorType as e:</code> lets you receive detailed error information in the variable <code>e</code>.</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Displaying an error message</div>
+    <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;number = int("hello")<br>except ValueError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"An error occurred: {e}")<br><br># Output: An error occurred: invalid literal for int() with base 10: 'hello'</div>
+    <div class="example-explanation">
+      Using <code>as e</code> captures the exception object, and you can display the error message with f-strings.<br>
+      This is very helpful for debugging.
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">Creating a safe conversion function</div>
+    <div class="example-code">def safe_int(value):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return int(value)<br>&nbsp;&nbsp;&nbsp;&nbsp;except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None<br><br>print(safe_int("42"))&nbsp;&nbsp;&nbsp;&nbsp;# 42<br>print(safe_int("abc"))&nbsp;&nbsp;&nbsp;# None<br>print(safe_int("3.14"))&nbsp;&nbsp;# None</div>
+    <div class="example-explanation">
+      By returning <code>None</code> when an error occurs, you can create a safe function for callers to use.<br>
+      This pattern is commonly used in Python programs.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 Summary</h2>
+  <ul>
+    <li>Errors (exceptions) are problems that occur while a program is running</li>
+    <li>Write risky code inside the <code>try:</code> block</li>
+    <li>Write error handling code inside <code>except ErrorType:</code></li>
+    <li>Code after the error line in the <code>try</code> block is skipped</li>
+    <li>Use <code>except Error as e:</code> to receive detailed error information</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.en.html" class="btn btn-primary">
+                    Start Exercise →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

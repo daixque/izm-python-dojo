@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン08_02: メソッドとインスタンス</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">メソッドとインスタンス</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🔧 インスタンスメソッドとは</h2>
+  <p>クラスの中で定義された関数を<strong>メソッド</strong>と言います。</p>
+  <p>特に、オブジェクト（インスタンス）に対して動作するメソッドを<strong>インスタンスメソッド</strong>と呼びます。</p>
+  <p>インスタンスメソッドは、必ず第1引数に <code>self</code> を取ります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">インスタンスメソッドの基本</div>
+    <div class="example-code">class Counter:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count = 0<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def increment(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count += 1<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def get_count(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.count<br><br>c = Counter()<br>c.increment()<br>c.increment()<br>print(c.get_count())&nbsp;&nbsp;# 2</div>
+    <div class="example-explanation">
+      <code>increment()</code> メソッドが呼ばれるたびに <code>self.count</code> が 1 増えます。<br>
+      <code>get_count()</code> で現在のカウントを取得できます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎯 self の役割</h2>
+  <p><code>self</code> はメソッドの中で「このオブジェクト自身」を指します。</p>
+  <p><code>self.属性名</code> でそのオブジェクトの属性にアクセスできます。</p>
+  <p><code>self.メソッド名()</code> でそのオブジェクトの他のメソッドを呼び出せます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">self を使った属性の操作</div>
+    <div class="example-code">class BankAccount:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, balance):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.balance = balance&nbsp;&nbsp;# 残高<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def deposit(self, amount):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.balance += amount&nbsp;&nbsp;# 残高を増やす<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def withdraw(self, amount):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.balance -= amount&nbsp;&nbsp;# 残高を減らす<br><br>account = BankAccount(1000)<br>account.deposit(500)<br>account.withdraw(200)<br>print(account.balance)&nbsp;&nbsp;# 1300</div>
+    <div class="example-explanation">
+      <code>self.balance</code> はこのオブジェクトの残高を指します。<br>
+      <code>deposit</code> や <code>withdraw</code> メソッドで残高を変更できます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">self でメソッドを呼び出す</div>
+    <div class="example-code">class Circle:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, radius):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.radius = radius<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def diameter(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.radius * 2<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def circumference(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 他のメソッドを self で呼び出す<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.diameter() * 3.14<br><br>c = Circle(5)<br>print(c.diameter())&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 10<br>print(c.circumference())&nbsp;&nbsp;# 31.4</div>
+    <div class="example-explanation">
+      メソッドの中から他のメソッドを呼び出すときは <code>self.メソッド名()</code> と書きます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔄 属性の更新</h2>
+  <p>メソッドを呼び出すと、オブジェクトの属性を変更できます。</p>
+  <p>この変更は、同じオブジェクトに対して保持されます。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">状態を持つオブジェクト</div>
+    <div class="example-code">class Timer:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.seconds = 0<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def tick(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.seconds += 1<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def reset(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.seconds = 0<br><br>t = Timer()<br>t.tick()<br>t.tick()<br>t.tick()<br>print(t.seconds)&nbsp;&nbsp;# 3<br>t.reset()<br>print(t.seconds)&nbsp;&nbsp;# 0</div>
+    <div class="example-explanation">
+      <code>tick()</code> を呼ぶたびに <code>seconds</code> が増えます。<br>
+      <code>reset()</code> で 0 に戻せます。オブジェクトは状態を保持します。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🏠 複数インスタンスの独立性</h2>
+  <p>同じクラスから作ったオブジェクトでも、それぞれは独立した状態を持ちます。</p>
+  <p>片方のオブジェクトを変更しても、もう片方には影響しません。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">インスタンスは独立している</div>
+    <div class="example-code">class Counter:<br>&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count = 0<br><br>&nbsp;&nbsp;&nbsp;&nbsp;def increment(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.count += 1<br><br>c1 = Counter()<br>c2 = Counter()<br><br>c1.increment()<br>c1.increment()<br>c1.increment()<br><br>c2.increment()<br><br>print(c1.count)&nbsp;&nbsp;# 3<br>print(c2.count)&nbsp;&nbsp;# 1（c1 と独立している）</div>
+    <div class="example-explanation">
+      <code>c1</code> と <code>c2</code> は別々のオブジェクトです。<br>
+      <code>c1</code> を変更しても、<code>c2</code> には影響しません。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li>インスタンスメソッドは必ず第1引数に <code>self</code> を取る</li>
+    <li><code>self</code> はメソッド内で「このオブジェクト自身」を指す</li>
+    <li><code>self.属性名</code> で属性にアクセス・変更できる</li>
+    <li><code>self.メソッド名()</code> で同じオブジェクトの他のメソッドを呼べる</li>
+    <li>同じクラスのインスタンスはそれぞれ独立した状態を持つ</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

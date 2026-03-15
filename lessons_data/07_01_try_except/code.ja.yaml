@@ -1,0 +1,100 @@
+initial_code: |
+  def safe_int(value):
+      # ここにコードを書いてください
+      # value を整数に変換して返す
+      # 変換できない場合は None を返す
+      pass
+
+  print(safe_int("42"))    # 42
+  print(safe_int("abc"))   # None
+  print(safe_int("3.14"))  # None
+
+solution_code: |
+  def safe_int(value):
+      try:
+          return int(value)
+      except ValueError:
+          return None
+
+  print(safe_int("42"))
+  print(safe_int("abc"))
+  print(safe_int("3.14"))
+
+initial_files: []
+
+tests:
+  - name: "safe_int(\"42\") の確認"
+    description: "safe_int(\"42\") が 42 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_int が定義されていません"}
+          else:
+              test_result = exec_globals['safe_int']("42")
+              if test_result == 42:
+                  result = {"passed": True, "message": "✓ safe_int(\"42\") = 42 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"42\") は 42 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_int(\"abc\") の確認"
+    description: "safe_int(\"abc\") が None を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_int が定義されていません"}
+          else:
+              test_result = exec_globals['safe_int']("abc")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ safe_int(\"abc\") = None 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"abc\") は None になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_int(\"3.14\") の確認"
+    description: "safe_int(\"3.14\") が None を返すか（小数点を含む文字列）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_int が定義されていません"}
+          else:
+              test_result = exec_globals['safe_int']("3.14")
+              if test_result is None:
+                  result = {"passed": True, "message": "✓ safe_int(\"3.14\") = None 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"3.14\") は None になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_int(\"-5\") の確認"
+    description: "safe_int(\"-5\") が -5 を返すか（負の数）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_int' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_int が定義されていません"}
+          else:
+              test_result = exec_globals['safe_int']("-5")
+              if test_result == -5:
+                  result = {"passed": True, "message": "✓ safe_int(\"-5\") = -5 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_int(\"-5\") は -5 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

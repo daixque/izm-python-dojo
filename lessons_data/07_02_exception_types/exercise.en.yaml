@@ -1,0 +1,40 @@
+lesson:
+  number: "07_02"
+  id: "07_02_exception_types"
+  title: "Types of Exceptions"
+description: "Implement a safe division function that handles multiple exception types."
+
+task_description: |
+  <p>Implement the function <code>safe_divide(a, b)</code>.</p>
+  <p>It returns the result of dividing <code>a</code> by <code>b</code>.</p>
+  <p>If an error occurs, return the name of the error type as a string.</p>
+  <h3>Example Output</h3>
+  <pre>  print(safe_divide(10, 2))    # 5.0
+  print(safe_divide(10, 0))    # "ZeroDivisionError"
+  print(safe_divide(10, "a"))  # "TypeError"</pre>
+
+instructions:
+  - "The function signature <code>def safe_divide(a, b):</code> is already provided"
+  - "Compute and return <code>a / b</code> inside a <code>try:</code> block"
+  - "Catch division by zero with <code>except ZeroDivisionError:</code> and return the string <code>\"ZeroDivisionError\"</code>"
+  - "Catch type errors with <code>except TypeError:</code> and return the string <code>\"TypeError\"</code>"
+
+hints:
+  - hint: |
+      Basic structure using multiple except clauses:<br>
+      <code>def safe_divide(a, b):</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>try:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return a / b</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>except ZeroDivisionError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>except TypeError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>return ???</code>
+  - hint: |
+      Return the name of the error as a string:<br>
+      <code>except ZeroDivisionError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "ZeroDivisionError"</code><br>
+      <code>except TypeError:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>return "TypeError"</code>
+  - hint: |
+      Dividing with a non-number like <code>10 / "a"</code> raises a <code>TypeError</code>.<br>
+      Dividing by zero like <code>10 / 0</code> raises a <code>ZeroDivisionError</code>.

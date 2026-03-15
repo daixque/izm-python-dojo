@@ -1,0 +1,104 @@
+initial_code: |
+  def fibonacci(n):
+      # ここにコードを書いてください
+      # ベースケース1：n == 0 のとき 0 を返す
+      # ベースケース2：n == 1 のとき 1 を返す
+      # 再帰ケース：fibonacci(n-1) + fibonacci(n-2) を返す
+      pass
+
+  print(fibonacci(0))   # 0
+  print(fibonacci(1))   # 1
+  print(fibonacci(6))   # 8
+  print(fibonacci(10))  # 55
+
+solution_code: |
+  def fibonacci(n):
+      if n == 0:
+          return 0
+      if n == 1:
+          return 1
+      return fibonacci(n - 1) + fibonacci(n - 2)
+
+  print(fibonacci(0))
+  print(fibonacci(1))
+  print(fibonacci(6))
+  print(fibonacci(10))
+
+initial_files: []
+
+tests:
+  - name: "fibonacci(0) の確認"
+    description: "fibonacci(0) が 0 を返すか（ベースケース）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 fibonacci が定義されていません"}
+          else:
+              test_result = exec_globals['fibonacci'](0)
+              if test_result == 0:
+                  result = {"passed": True, "message": "✓ fibonacci(0) = 0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(0) は 0 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "fibonacci(1) の確認"
+    description: "fibonacci(1) が 1 を返すか（ベースケース）"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 fibonacci が定義されていません"}
+          else:
+              test_result = exec_globals['fibonacci'](1)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ fibonacci(1) = 1 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(1) は 1 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "fibonacci(6) の確認"
+    description: "fibonacci(6) が 8 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 fibonacci が定義されていません"}
+          else:
+              test_result = exec_globals['fibonacci'](6)
+              if test_result == 8:
+                  result = {"passed": True, "message": "✓ fibonacci(6) = 8 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(6) は 8 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "fibonacci(10) の確認"
+    description: "fibonacci(10) が 55 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'fibonacci' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 fibonacci が定義されていません"}
+          else:
+              test_result = exec_globals['fibonacci'](10)
+              if test_result == 55:
+                  result = {"passed": True, "message": "✓ fibonacci(10) = 55 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ fibonacci(10) は 55 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

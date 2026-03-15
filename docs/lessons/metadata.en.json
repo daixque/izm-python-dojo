@@ -196,6 +196,152 @@
       ]
     },
     {
+      "id": "chapter7",
+      "number": 7,
+      "title": "Error Handling",
+      "description": "Learn to handle errors safely with exceptions",
+      "lessons": [
+        {
+          "id": "07_01_try_except",
+          "number": "07_01",
+          "title": "try/except Basics",
+          "description": "Use try/except to implement a function that works safely even when an error occurs.",
+          "available": true
+        },
+        {
+          "id": "07_02_exception_types",
+          "number": "07_02",
+          "title": "Types of Exceptions",
+          "description": "Implement a safe division function that handles multiple exception types.",
+          "available": true
+        },
+        {
+          "id": "07_03_finally_raise",
+          "number": "07_03",
+          "title": "finally and raise",
+          "description": "Use raise to implement a function that validates input values.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter8",
+      "number": 8,
+      "title": "Classes and OOP",
+      "description": "Learn to design programs using classes and objects",
+      "lessons": [
+        {
+          "id": "08_01_class_basic",
+          "number": "08_01",
+          "title": "Class Basics",
+          "description": "Define a class with attributes and methods to create objects.",
+          "available": true
+        },
+        {
+          "id": "08_02_class_methods",
+          "number": "08_02",
+          "title": "Methods and Instances",
+          "description": "Implement a class with state and practice updating attributes with methods.",
+          "available": true
+        },
+        {
+          "id": "08_03_inheritance",
+          "number": "08_03",
+          "title": "Inheritance",
+          "description": "Use inheritance to implement a base class and a derived class.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter9",
+      "number": 9,
+      "title": "Recursion",
+      "description": "Learn the concept of functions that call themselves",
+      "lessons": [
+        {
+          "id": "09_01_recursion_basic",
+          "number": "09_01",
+          "title": "Recursion Basics",
+          "description": "Implement a factorial function using recursion.",
+          "available": true
+        },
+        {
+          "id": "09_02_recursion_advanced",
+          "number": "09_02",
+          "title": "Recursion in Practice",
+          "description": "Implement a function that returns the nth Fibonacci number using recursion.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter10",
+      "number": 10,
+      "title": "Introduction to Algorithms",
+      "description": "Learn fundamental search and sort algorithms",
+      "lessons": [
+        {
+          "id": "10_01_search",
+          "number": "10_01",
+          "title": "Search Algorithms",
+          "description": "Implement linear search to find the index of a target value in a list.",
+          "available": true
+        },
+        {
+          "id": "10_02_sort",
+          "number": "10_02",
+          "title": "Sort Algorithms",
+          "description": "Implement bubble sort to sort a list of numbers in ascending order.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter11",
+      "number": 11,
+      "title": "NumPy Basics",
+      "description": "Learn the NumPy library for numerical computation",
+      "lessons": [
+        {
+          "id": "11_01_numpy_array",
+          "number": "11_01",
+          "title": "Creating and Manipulating Arrays",
+          "description": "Create a NumPy array and implement a function that computes the sum and mean.",
+          "available": true
+        },
+        {
+          "id": "11_02_numpy_math",
+          "number": "11_02",
+          "title": "Numerical Computation and Statistics",
+          "description": "Implement min-max normalization using NumPy to scale data into the 0–1 range.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter12",
+      "number": 12,
+      "title": "Pandas Data Analysis",
+      "description": "Learn the Pandas library for data analysis",
+      "lessons": [
+        {
+          "id": "12_01_pandas_basic",
+          "number": "12_01",
+          "title": "DataFrame Basics",
+          "description": "Learn basic DataFrame operations and implement a function that calculates the mean of a column.",
+          "available": true
+        },
+        {
+          "id": "12_02_pandas_analysis",
+          "number": "12_02",
+          "title": "Data Aggregation and Filtering",
+          "description": "Use conditional filtering to implement a function that calculates the average of scores above a passing threshold.",
+          "available": true
+        }
+      ]
+    },
+    {
       "id": "chapter13",
       "number": 13,
       "title": "Graph Drawing (Matplotlib)",
@@ -206,6 +352,50 @@
           "number": "13_01",
           "title": "Basic Charts",
           "description": "Learn to visualize data by drawing a bar chart with Matplotlib.",
+          "available": true
+        },
+        {
+          "id": "13_02_plot_advanced",
+          "number": "13_02",
+          "title": "Customizing Charts",
+          "description": "Learn to plot multiple data series on one chart and customize it with legends, gridlines, scatter plots, and more.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter14",
+      "number": 14,
+      "title": "Databases and SQL",
+      "description": "Learn database operations using SQLite",
+      "lessons": [
+        {
+          "id": "14_01_sql_basic",
+          "number": "14_01",
+          "title": "SQL Basics",
+          "description": "Understand the basic concepts of databases and tables, and learn to use SELECT, INSERT, and CREATE TABLE with Python's sqlite3 module.",
+          "available": true
+        },
+        {
+          "id": "14_02_sql_advanced",
+          "number": "14_02",
+          "title": "WHERE, Aggregation, ORDER BY",
+          "description": "Learn to filter rows with WHERE, use aggregate functions like COUNT, AVG, MAX, and MIN, and sort results with ORDER BY.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "chapter15",
+      "number": 15,
+      "title": "Advanced Projects",
+      "description": "Take on practical projects combining all your knowledge",
+      "lessons": [
+        {
+          "id": "15_01_advanced_project",
+          "number": "15_01",
+          "title": "Comprehensive Project: Grade Management System",
+          "description": "Implement a grade management system by combining classes, sqlite3, and exception handling.",
           "available": true
         }
       ]

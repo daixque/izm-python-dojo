@@ -1,0 +1,127 @@
+lesson:
+  number: "11_01"
+  id: "11_01_numpy_array"
+  title: "配列の作成と操作"
+
+content: |
+  <section class="section">
+    <h2>📦 NumPyとは何か</h2>
+    <p>NumPy（ナンパイ）は、Pythonで<strong>数値計算</strong>を高速に行うためのライブラリです。</p>
+    <p>Pythonの普通のリストでも計算はできますが、NumPyを使うと<strong>何倍も速く</strong>計算できます。</p>
+    <p>科学・数学・データ分析・人工知能など、あらゆる分野で使われている非常に重要なライブラリです。</p>
+    <p>NumPyを使うには、まず <code>import numpy as np</code> と書いてインポートします。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">NumPyのインポート</div>
+      <div class="example-code">import numpy as np<br><br># これで np という名前で NumPy の機能が使える</div>
+      <div class="example-explanation">
+        <code>as np</code> は「numpy を np という短い名前で使う」という意味です。<br>
+        NumPyを使うプログラムでは、この書き方が世界中で標準になっています。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔢 np.array() で配列を作る</h2>
+    <p>NumPyの配列（<strong>ndarray</strong>）は、<code>np.array()</code> を使って作成します。</p>
+    <p>Pythonのリストを渡すと、NumPy配列に変換されます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">配列の作成</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4, 5])<br>print(a)       # [1 2 3 4 5]<br>print(type(a)) # &lt;class 'numpy.ndarray'&gt;</div>
+      <div class="example-explanation">
+        リストを <code>np.array()</code> に渡すと NumPy 配列が作られます。<br>
+        NumPy 配列の型は <code>ndarray</code>（エヌディーアレイ）と言います。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">小数の配列</div>
+      <div class="example-code">import numpy as np<br><br>b = np.array([1.5, 2.5, 3.5])<br>print(b)       # [1.5 2.5 3.5]<br>print(b.dtype) # float64</div>
+      <div class="example-explanation">
+        小数を含む配列を作ると、自動的に浮動小数点数型（<code>float64</code>）になります。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📐 shape と dtype</h2>
+    <p>NumPy配列には <code>shape</code>（形状）と <code>dtype</code>（データ型）という属性があります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">shape と dtype を確認する</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40])<br>print(a.shape)  # (4,)  ← 要素が4個の1次元配列<br>print(a.dtype)  # int64 ← 整数型</div>
+      <div class="example-explanation">
+        <code>shape</code> は配列の「形」を表します。<code>(4,)</code> は「要素が4個の1次元配列」という意味です。<br>
+        <code>dtype</code> は配列に入っているデータの型（整数・小数など）を表します。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✂️ インデックスとスライス</h2>
+    <p>NumPy配列の要素へのアクセスは、Pythonのリストと同じ方法で行えます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">インデックスで要素を取得</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40, 50])<br>print(a[0])   # 10（最初の要素）<br>print(a[2])   # 30（3番目の要素）<br>print(a[-1])  # 50（最後の要素）</div>
+      <div class="example-explanation">
+        インデックスは <code>0</code> から始まります。<br>
+        マイナスのインデックスは後ろから数えます。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">スライスで部分配列を取得</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([10, 20, 30, 40, 50])<br>print(a[1:4])  # [20 30 40]<br>print(a[:3])   # [10 20 30]<br>print(a[2:])   # [30 40 50]</div>
+      <div class="example-explanation">
+        <code>a[開始:終了]</code> で部分配列を取り出せます。<br>
+        終了のインデックスの要素は含まれません（Pythonのリストと同じルール）。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>➕ 配列の四則演算</h2>
+    <p>NumPy配列は、<strong>要素ごとに</strong>計算が行われます。</p>
+    <p>これをPythonのリストと比べてみましょう。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">配列どうしの演算</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4])<br>b = np.array([10, 20, 30, 40])<br><br>print(a + b)   # [11 22 33 44]<br>print(b - a)   # [ 9 18 27 36]<br>print(a * b)   # [ 10  40  90 160]<br>print(b / a)   # [10. 10. 10. 10.]</div>
+      <div class="example-explanation">
+        各要素が対応する位置の要素と計算されます。<br>
+        <code>a + b</code> は <code>[1+10, 2+20, 3+30, 4+40]</code> と同じです。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">スカラーとの演算</div>
+      <div class="example-code">import numpy as np<br><br>a = np.array([1, 2, 3, 4, 5])<br><br>print(a * 2)    # [ 2  4  6  8 10]<br>print(a + 100)  # [101 102 103 104 105]<br>print(a ** 2)   # [ 1  4  9 16 25]</div>
+      <div class="example-explanation">
+        配列と数値（スカラー）の計算は、すべての要素に同じ計算が適用されます。<br>
+        これを<strong>ブロードキャスト</strong>と言います。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li><code>import numpy as np</code> で NumPy をインポートする</li>
+      <li><code>np.array([...])</code> でリストから NumPy 配列を作る</li>
+      <li><code>.shape</code> で配列の形、<code>.dtype</code> でデータ型を確認できる</li>
+      <li>インデックスとスライスはPythonリストと同じ使い方</li>
+      <li>配列どうしの <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> は要素ごとに計算される</li>
+    </ul>
+  </section>

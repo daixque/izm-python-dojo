@@ -1,0 +1,125 @@
+required_packages:
+  - sqlite3
+
+initial_code: |
+  import sqlite3
+
+  # メモリ上にデータベースを作成
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+
+  # テーブルを作成
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+
+  # データを挿入
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25),
+      (2, "Bob", 30),
+      (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_all_users(conn):
+      # ここにコードを書いてください
+      # cursor = conn.cursor() でカーソルを取得
+      # cursor.execute("SELECT * FROM users") でデータを取得
+      # cursor.fetchall() で全件取得して return する
+      pass
+
+  print(get_all_users(conn))
+
+solution_code: |
+  import sqlite3
+
+  conn = sqlite3.connect(":memory:")
+  cursor = conn.cursor()
+  cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+  cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+      (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22),
+  ])
+  conn.commit()
+
+  def get_all_users(conn):
+      cursor = conn.cursor()
+      cursor.execute("SELECT * FROM users")
+      return cursor.fetchall()
+
+  print(get_all_users(conn))
+
+initial_files: []
+
+tests:
+  - name: "get_all_users 関数が定義されているか"
+    description: "関数 get_all_users が定義されているか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_all_users が定義されていません"}
+          else:
+              result = {"passed": True, "message": "✓ 関数 get_all_users が定義されています"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "get_all_users が全件取得できるか"
+    description: "全3件のユーザーデータが正しく返されるか確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_all_users が定義されていません"}
+          else:
+              r = exec_globals['get_all_users'](conn)
+              expected = [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]
+              if r == expected:
+                  result = {"passed": True, "message": "✓ 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値と異なります: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "戻り値がリスト（タプルのリスト）か"
+    description: "fetchall() の戻り値がリスト形式か確認する"
+    code: |
+      try:
+          import sqlite3
+          conn = sqlite3.connect(":memory:")
+          cursor = conn.cursor()
+          cursor.execute("CREATE TABLE users (id INTEGER, name TEXT, age INTEGER)")
+          cursor.executemany("INSERT INTO users VALUES (?, ?, ?)", [
+              (1, "Alice", 25), (2, "Bob", 30), (3, "Charlie", 22)
+          ])
+          conn.commit()
+          exec_globals = {}
+          exec(user_code, exec_globals)
+          if 'get_all_users' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 get_all_users が定義されていません"}
+          else:
+              r = exec_globals['get_all_users'](conn)
+              if isinstance(r, list):
+                  result = {"passed": True, "message": f"✓ リストが返されています（{len(r)} 件）"}
+              else:
+                  result = {"passed": False, "message": f"✗ cursor.fetchall() でリストを返してください。実際の型: {type(r)}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

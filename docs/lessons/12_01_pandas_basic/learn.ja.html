@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>説明 - レッスン12_01: DataFrameの基礎</title>
+    <link rel="stylesheet" href="../../lib/css/learn.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python 道場</a>
+            </div>
+            <h1 id="lesson-title">DataFrameの基礎</h1>
+            <div class="lesson-meta">
+                <span id="lesson-type">📚 説明</span>
+                <div id="language-switcher">
+                        <a href="learn.en.html" class="language-link">English</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- コンテンツ -->
+        <main class="content" id="content">
+            <section class="section">
+  <h2>🐼 Pandasとは何か</h2>
+  <p>Pythonには、データを分析するための強力なライブラリがあります。その中でも特に有名なのが <strong>Pandas（パンダス）</strong> です。</p>
+  <p>Pandasを使うと、Excelのような<strong>表形式のデータ</strong>をPythonで簡単に操作できます。</p>
+  <p>学校の成績表や出席簿、アンケート結果など、行と列で整理されたデータを扱うのに最適です。</p>
+  <p>Pandasを使うには、まず <code>import pandas as pd</code> と書いてインポートします。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">Pandasのインポート</div>
+    <div class="example-code">import pandas as pd<br><br># pd という短い名前で使えるようになる</div>
+    <div class="example-explanation">
+      <code>as pd</code> と書くことで、長い <code>pandas</code> の代わりに短い <code>pd</code> という名前で使えます。<br>
+      これはPandasを使うときの定番の書き方です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 DataFrameとは</h2>
+  <p><strong>DataFrame（データフレーム）</strong> は、Pandasで最もよく使うデータ型です。</p>
+  <p>ExcelやGoogleスプレッドシートのような<strong>表（テーブル）</strong>だと考えてください。</p>
+  <p>行（レコード）と列（カラム）でデータが整理されています。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">辞書からDataFrameを作る</div>
+    <div class="example-code">import pandas as pd<br><br>data = {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70],<br>&nbsp;&nbsp;&nbsp;&nbsp;"grade": ["B", "A", "C"]<br>}<br><br>df = pd.DataFrame(data)<br>print(df)</div>
+    <div class="example-explanation">
+      辞書のキーが<strong>列名（カラム名）</strong>になります。<br>
+      辞書の値（リスト）が各列のデータになります。<br>
+      <code>df</code> という変数名がよく使われます（DataFrame の略）。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">DataFrameの表示</div>
+    <div class="example-code"># 出力イメージ：<br>#       name  score grade<br># 0    Alice     80     B<br># 1      Bob     90     A<br># 2  Charlie     70     C</div>
+    <div class="example-explanation">
+      左端の <code>0, 1, 2</code> は<strong>インデックス</strong>（行番号）です。<br>
+      上の <code>name, score, grade</code> は<strong>カラム名</strong>（列名）です。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔍 列と行の選択</h2>
+  <p>DataFrameから特定の列や行を取り出す方法を覚えましょう。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">列の選択</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70]<br>})<br><br># 1列だけ取り出す<br>scores = df["score"]<br>print(scores)<br># 0    80<br># 1    90<br># 2    70</div>
+    <div class="example-explanation">
+      <code>df["カラム名"]</code> で特定の列を取り出せます。<br>
+      取り出したデータは <strong>Series（シリーズ）</strong> というデータ型になります。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">行の選択（loc）</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70]<br>})<br><br># インデックス1の行を取り出す<br>row = df.loc[1]<br>print(row)<br># name     Bob<br># score     90</div>
+    <div class="example-explanation">
+      <code>df.loc[インデックス]</code> で特定の行を取り出せます。<br>
+      インデックスは0から始まります（0が1行目）。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📈 便利なメソッド</h2>
+  <p>DataFrameにはデータを素早く確認するための便利なメソッドがたくさんあります。</p>
+</section>
+
+<section class="examples">
+  <div class="example-item">
+    <div class="example-title">head() と tail()</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": ["Alice", "Bob", "Charlie", "Dave", "Eve"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70, 85, 95]<br>})<br><br>print(df.head(3))&nbsp;&nbsp;# 先頭3行を表示<br>print(df.tail(2))&nbsp;&nbsp;# 末尾2行を表示</div>
+    <div class="example-explanation">
+      <code>head(n)</code>：先頭のn行を表示します（デフォルトは5行）。<br>
+      <code>tail(n)</code>：末尾のn行を表示します（デフォルトは5行）。<br>
+      データが大きいときに全体を確認するのに便利です。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">describe()</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70, 85, 95]<br>})<br><br>print(df.describe())<br># &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score<br># count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.0<br># mean&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;84.0<br># std&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;....<br># min&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;70.0<br># max&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;95.0</div>
+    <div class="example-explanation">
+      <code>describe()</code> は数値データの統計情報を一覧表示します。<br>
+      件数（count）、平均（mean）、最小値（min）、最大値（max）などが一度に確認できます。
+    </div>
+  </div>
+
+  <div class="example-item">
+    <div class="example-title">mean() で平均を計算</div>
+    <div class="example-code">import pandas as pd<br><br>df = pd.DataFrame({<br>&nbsp;&nbsp;&nbsp;&nbsp;"score": [80, 90, 70]<br>})<br><br>avg = df["score"].mean()<br>print(avg)&nbsp;&nbsp;# 80.0</div>
+    <div class="example-explanation">
+      <code>df["カラム名"].mean()</code> で列の平均値を計算できます。<br>
+      他にも <code>.sum()</code>（合計）、<code>.max()</code>（最大）、<code>.min()</code>（最小）なども使えます。
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>💡 まとめ</h2>
+  <ul>
+    <li><code>import pandas as pd</code> でPandasをインポートする</li>
+    <li><code>pd.DataFrame(辞書)</code> でDataFrameを作成する</li>
+    <li>DataFrameはExcelのような表（行と列）で構成される</li>
+    <li><code>df["カラム名"]</code> で列を取り出す</li>
+    <li><code>df.loc[インデックス]</code> で行を取り出す</li>
+    <li><code>head()</code>、<code>tail()</code>、<code>describe()</code> でデータを素早く確認できる</li>
+    <li><code>.mean()</code> などのメソッドで統計計算ができる</li>
+  </ul>
+</section>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <a href="../../index.html" class="btn btn-secondary">← 目次に戻る</a>
+            <div style="display: flex; gap: 12px;">
+                <a href="exercise.ja.html" class="btn btn-primary">
+                    演習を始める →
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+initial_code: |
+  import pandas as pd
+
+  def column_mean(df, column):
+      # ここにコードを書いてください
+      # df[column] で列を取り出し、.mean() で平均値を計算して返す
+      pass
+
+  # テスト用のDataFrameを作成して確認してみよう
+  test_df = pd.DataFrame({
+      "name": ["Alice", "Bob", "Charlie"],
+      "score": [80, 90, 70]
+  })
+  print(column_mean(test_df, "score"))  # 80.0
+
+solution_code: |
+  import pandas as pd
+
+  def column_mean(df, column):
+      return df[column].mean()
+
+  test_df = pd.DataFrame({
+      "name": ["Alice", "Bob", "Charlie"],
+      "score": [80, 90, 70]
+  })
+  print(column_mean(test_df, "score"))
+
+initial_files: []
+
+required_packages:
+  - numpy
+  - pandas
+
+tests:
+  - name: "基本テスト: score列の平均"
+    description: "score列 [80, 90, 70] の平均が 80.0 になるか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 column_mean が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
+              r = exec_globals['column_mean'](test_df, "score")
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ column_mean(df, 'score') = 80.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 80.0, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "別の列でテスト: age列の平均"
+    description: "age列 [10, 20, 30] の平均が 20.0 になるか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 column_mean が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "age": [10, 20, 30]})
+              r = exec_globals['column_mean'](test_df, "age")
+              if r == 20.0:
+                  result = {"passed": True, "message": "✓ column_mean(df, 'age') = 20.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: 20.0, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "高得点データのテスト"
+    description: "points列 [100, 95, 85] の平均が 93.33... になるか"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 column_mean が定義されていません"}
+          else:
+              test_df = pd.DataFrame({"name": ["Dave", "Eve", "Frank"], "points": [100, 95, 85]})
+              r = exec_globals['column_mean'](test_df, "points")
+              expected = (100 + 95 + 85) / 3
+              if abs(r - expected) < 0.01:
+                  result = {"passed": True, "message": f"✓ column_mean(df, 'points') = {r:.2f} 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ 期待値: {expected:.2f}, 実際: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

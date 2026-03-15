@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4KVK1SY3P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4KVK1SY3P');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise - Lesson07_03: finally and raise</title>
+    <link rel="stylesheet" href="../../lib/css/exercise.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <div class="site-title">
+                <a href="../../index.html" class="site-link">🐍 IZM Python Dojo</a>
+            </div>
+            <h1 id="lesson-title">📝 Lesson07_03: finally and raise</h1>
+            <div class="header-right">
+                <div class="status">
+                    <span id="status">Preparing...</span>
+                </div>
+                <div id="language-switcher">
+                        <a href="exercise.ja.html" class="language-link">日本語</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <div class="main-content">
+            <!-- 左側：タスクパネル -->
+            <aside class="task-panel">
+                <div class="task-header">
+                    <h2>Task</h2>
+                    <span class="task-toggle">◀</span>
+                </div>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>📋 Task</h3>
+                        <p>Implement the function <code>validate_age(age)</code>.</p>
+<p>If <code>age</code> is between 0 and 150 (inclusive), return <code>age</code> as-is.</p>
+<p>If it is out of range, <code>raise</code> a <code>ValueError</code>.</p>
+<h3>Example Output</h3>
+<pre>  print(validate_age(25))   # 25
+validate_age(-1)          # raises ValueError
+validate_age(200)         # raises ValueError</pre>
+
+                    </div>
+                    <div class="instructions">
+                        <h4>✏️ Instructions</h4>
+                        <ul>
+                            <li>The function signature <code>def validate_age(age):</code> is already provided</li>
+                            <li>Raise a <code>ValueError</code> if <code>age &lt; 0</code> or <code>age &gt; 150</code></li>
+                            <li>Return <code>age</code> as-is if it is a valid value</li>
+                            <li>You can set any error message you like</li>
+                        </ul>
+                    </div>
+                    <div class="hints">
+                        <h4 class="hints-toggle">
+                            <span class="hints-icon">▶</span>
+                            💡 Hints
+                        </h4>
+                        <ul class="hints-content" style="display: none;">
+                            <li>Raise a ValueError based on the condition:<br>
+<code>def validate_age(age):</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>if age &lt; 0 or age &gt; 150:</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>raise ValueError("...")</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>return age</code>
+</li>
+                            <li>How to use raise:<br>
+<code>raise ValueError("Invalid age")</code><br>
+A good error message explains what went wrong.
+</li>
+                            <li>Connect two conditions with <code>or</code>:<br>
+<code>if age &lt; 0 or age &gt; 150:</code>
+</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 右側：エディタ・コンソール（＋グラフパネル） -->
+            <div class="code-panel">
+                <!-- コードエディタ -->
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <span class="editor-label">📝 Code Editor</span>
+                        <div class="button-group">
+                            <button id="btn-run" class="btn btn-primary" disabled>▶ Run</button>
+                            <button id="btn-test" class="btn btn-success" disabled>✓ Test</button>
+                            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+                            <button id="btn-solution" class="btn btn-warning">💡 View Answer</button>
+                        </div>
+                    </div>
+                    <div id="editor" class="editor"></div>
+                </div>
+
+                <!-- 出力コンソール -->
+                <div class="console-container">
+                    <div class="console-header">
+                        <span class="console-label">💻 Output</span>
+                        <button id="btn-clear" class="btn btn-small">Clear</button>
+                    </div>
+                    <div id="console" class="console"></div>
+                </div>
+            </div>
+
+
+            <!-- ファイルエクスプローラー（右ペイン） -->
+            <aside id="file-explorer" class="file-explorer">
+                <div class="file-explorer-header">
+                    <span class="file-explorer-icon">📁</span>
+                    <span class="file-explorer-label">Files</span>
+                    <span class="file-explorer-toggle">◀</span>
+                </div>
+                <div class="file-explorer-body">
+                    <div id="file-list" class="file-list"></div>
+                    <div id="file-content" class="file-content">
+                        <div class="file-empty-state">Select a file</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- フッター -->
+        <footer class="footer">
+            <div class="footer-nav">
+                <a href="../../index.html" class="btn btn-secondary">← Back to Menu</a>
+                <a href="learn.en.html" class="btn btn-link">📚 Back to Learn</a>
+            </div>
+            <div class="footer-next">
+                <!-- 次のレッスンがある場合はここに追加 -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- テスト結果モーダル（画面下部に表示） -->
+    <div id="test-results-overlay" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5); padding: 16px; z-index: 1000;">
+        <div class="test-results-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Test Results</h3>
+                <button id="btn-close-results" class="btn btn-small">Close</button>
+            </div>
+            <div id="test-results"></div>
+            <div style="margin-top: 16px; text-align: right;">
+                <a href="../../index.html" class="btn btn-link">Back to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+    <!-- Monaco Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+
+    <!-- 共通ライブラリ -->
+    <script src="../../lib/js/i18n.js"></script>
+    <script src="../../lib/js/progress.js"></script>
+    <script src="../../lib/js/runner.js"></script>
+    <script src="../../lib/js/editor.js"></script>
+    <script src="../../lib/js/tester.js"></script>
+    <script src="../../lib/js/fileviewer.js"></script>
+    <script src="../../lib/js/exercise-common.js"></script>
+    
+    <!-- アプリケーションスクリプト -->
+    <script>
+        const LESSON_ID = "07_03_finally_raise";
+        const INITIAL_CODE = "def validate_age(age):\n    # Write your code here\n    # Return age if it is between 0 and 150 (inclusive)\n    # Otherwise raise a ValueError\n    pass\n\nprint(validate_age(25))   # 25\nprint(validate_age(0))    # 0\nprint(validate_age(150))  # 150\n# validate_age(-1)        # ValueError\n# validate_age(200)       # ValueError\n";
+        const SOLUTION_CODE = "def validate_age(age):\n    if age \u003c 0 or age \u003e 150:\n        raise ValueError(f\"Invalid age: {age}\")\n    return age\n\nprint(validate_age(25))\nprint(validate_age(0))\nprint(validate_age(150))\n";
+        const ENABLE_MATPLOTLIB = false;
+        const REQUIRED_PACKAGES = [];
+
+        const TESTS = [{"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027validate_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function validate_age is not defined\"}\n    else:\n        test_result = exec_globals[\u0027validate_age\u0027](25)\n        if test_result == 25:\n            result = {\"passed\": True, \"message\": \"\u2713 validate_age(25) = 25 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 validate_age(25) should return 25. Actual: {test_result}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "validate_age(25) should return 25", "name": "Check validate_age(25)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027validate_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function validate_age is not defined\"}\n    else:\n        try:\n            exec_globals[\u0027validate_age\u0027](-1)\n            result = {\"passed\": False, \"message\": \"\u2717 validate_age(-1) should raise ValueError\"}\n        except ValueError:\n            result = {\"passed\": True, \"message\": \"\u2713 validate_age(-1) raised ValueError Correct!\"}\n        except Exception as e:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected ValueError but got {type(e).__name__}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "validate_age(-1) should raise ValueError", "name": "Check validate_age(-1)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027validate_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function validate_age is not defined\"}\n    else:\n        try:\n            exec_globals[\u0027validate_age\u0027](200)\n            result = {\"passed\": False, \"message\": \"\u2717 validate_age(200) should raise ValueError\"}\n        except ValueError:\n            result = {\"passed\": True, \"message\": \"\u2713 validate_age(200) raised ValueError Correct!\"}\n        except Exception as e:\n            result = {\"passed\": False, \"message\": f\"\u2717 Expected ValueError but got {type(e).__name__}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "validate_age(200) should raise ValueError", "name": "Check validate_age(200)"}, {"code": "lang = \"en\"\ntry:\n    exec_globals = {}\n    exec(user_code, exec_globals)\n\n    if \u0027validate_age\u0027 not in exec_globals:\n        result = {\"passed\": False, \"message\": \"\u2717 Function validate_age is not defined\"}\n    else:\n        r0 = exec_globals[\u0027validate_age\u0027](0)\n        r150 = exec_globals[\u0027validate_age\u0027](150)\n        if r0 == 0 and r150 == 150:\n            result = {\"passed\": True, \"message\": \"\u2713 validate_age(0) = 0, validate_age(150) = 150 Correct!\"}\n        else:\n            result = {\"passed\": False, \"message\": f\"\u2717 Boundary values incorrect. validate_age(0)={r0}, validate_age(150)={r150}\"}\nexcept Exception as e:\n    result = {\"passed\": False, \"message\": f\"\u2717 Error: {str(e)}\"}\nresult\n", "description": "validate_age(0) and validate_age(150) should return their values", "name": "Check boundary values 0 and 150"}];
+        
+        // 事前ロードするファイル（データ分析などのレッスンで使用）
+        const INITIAL_FILES = [];
+        
+        // ページ読み込み時に実行
+        window.addEventListener('DOMContentLoaded', async () => {
+            // 言語を初期化（ファイル名から自動判定）
+            if (window.i18n) {
+                window.i18n.init();
+            }
+            
+            setupButtons();
+            await initializeExercise({
+                initialCode: INITIAL_CODE,
+                tests: TESTS,
+                initialFiles: INITIAL_FILES,
+                solutionCode: SOLUTION_CODE,
+                enableMatplotlib: ENABLE_MATPLOTLIB,
+                requiredPackages: REQUIRED_PACKAGES
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+lesson:
+  number: "11_02"
+  id: "11_02_numpy_math"
+  title: "数値計算と統計"
+description: "NumPyを使ったmin-max正規化を実装し、データを0〜1の範囲に変換します。"
+
+task_description: |
+  <p>関数 <code>normalize(data)</code> を実装しましょう。</p>
+  <p>数値のリスト <code>data</code> を受け取り、<strong>min-max正規化</strong>した結果を返します。</p>
+  <h3>min-max正規化とは</h3>
+  <p>データの最小値を0、最大値を1になるよう変換する方法です。</p>
+  <p>計算式: <code>(x - 最小値) / (最大値 - 最小値)</code></p>
+  <h3>実行例</h3>
+  <pre>  print(normalize([0, 5, 10]))
+  # [0.0, 0.5, 1.0]
+
+  print(normalize([2, 4, 6, 8]))
+  # [0.0, 0.333..., 0.666..., 1.0]</pre>
+
+instructions:
+  - "関数シグネチャ <code>def normalize(data):</code> は用意済みです"
+  - "<code>np.array(data, dtype=float)</code> でリストを浮動小数点数の NumPy 配列に変換します"
+  - "<code>arr.min()</code> と <code>arr.max()</code> で最小値・最大値を取得します"
+  - "計算式 <code>(arr - arr.min()) / (arr.max() - arr.min())</code> を実装します"
+
+hints:
+  - hint: |
+      まず NumPy 配列（float型）に変換します：<br>
+      <code>arr = np.array(data, dtype=float)</code>
+  - hint: |
+      最小値と最大値を取得します：<br>
+      <code>min_val = arr.min()</code><br>
+      <code>max_val = arr.max()</code>
+  - hint: |
+      正規化の計算式を適用して返します：<br>
+      <code>return (arr - arr.min()) / (arr.max() - arr.min())</code>

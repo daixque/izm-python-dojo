@@ -1,0 +1,52 @@
+lesson:
+  number: "15_01"
+  id: "15_01_advanced_project"
+  title: "総合プロジェクト：成績管理システム"
+description: "クラス・sqlite3・例外処理を組み合わせて、生徒の成績を管理するシステムを実装します。"
+
+task_description: |
+  <p><code>StudentDB</code> クラスを完成させましょう。</p>
+  <p>このクラスは SQLite データベースを使って生徒の名前とテストの点数を管理します。</p>
+  <h3>実装するメソッド</h3>
+  <ul>
+    <li><code>__init__(self)</code>: メモリ上にデータベースを作り、<code>students</code> テーブルを作成する</li>
+    <li><code>add_student(self, name, scores)</code>: 生徒名と点数のリストを受け取り、1点ずつデータベースに登録する</li>
+    <li><code>get_average(self, name)</code>: 指定した生徒の平均点を返す。生徒が存在しない場合は <code>ValueError</code> を送出する</li>
+    <li><code>top_students(self, n)</code>: 平均点の高い順に上位 <code>n</code> 人の <code>(名前, 平均点)</code> のリストを返す</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  db = StudentDB()
+  db.add_student("Alice", [85, 90, 88])
+  db.add_student("Bob", [70, 75, 80])
+  db.add_student("Charlie", [95, 92, 98])
+
+  print(db.get_average("Alice"))   # 87.666...
+  print(db.top_students(2))        # [('Charlie', 95.0), ('Alice', 87.666...)]</pre>
+
+instructions:
+  - "<code>__init__</code>: <code>sqlite3.connect(\":memory:\")</code> で接続し、<code>CREATE TABLE students (name TEXT, score REAL)</code> を実行してテーブルを作成する"
+  - "<code>add_student</code>: <code>scores</code> のリストをループして、各点数を <code>INSERT INTO students VALUES (?, ?)</code> で登録する"
+  - "<code>get_average</code>: <code>SELECT AVG(score) FROM students WHERE name = ?</code> で平均を取得し、結果が <code>None</code> なら <code>ValueError</code> を <code>raise</code> する"
+  - "<code>top_students</code>: <code>GROUP BY name ORDER BY avg DESC LIMIT ?</code> を使って上位 <code>n</code> 人を取得し、<code>fetchall()</code> の結果を返す"
+
+hints:
+  - hint: |
+      <code>__init__</code> の実装例：<br>
+      <code>self.conn = sqlite3.connect(":memory:")</code><br>
+      <code>cursor = self.conn.cursor()</code><br>
+      <code>cursor.execute("CREATE TABLE students (name TEXT, score REAL)")</code><br>
+      <code>self.conn.commit()</code>
+  - hint: |
+      <code>add_student</code> の実装例：<br>
+      <code>cursor = self.conn.cursor()</code><br>
+      <code>for score in scores:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>cursor.execute("INSERT INTO students VALUES (?, ?)", (name, score))</code><br>
+      <code>self.conn.commit()</code>
+  - hint: |
+      <code>get_average</code> の実装例：<br>
+      <code>cursor = self.conn.cursor()</code><br>
+      <code>cursor.execute("SELECT AVG(score) FROM students WHERE name = ?", (name,))</code><br>
+      <code>result = cursor.fetchone()[0]</code><br>
+      <code>if result is None:</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<code>raise ValueError(f"生徒が見つかりません: {name}")</code><br>
+      <code>return result</code>

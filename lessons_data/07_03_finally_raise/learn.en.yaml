@@ -1,0 +1,98 @@
+lesson:
+  number: "07_03"
+  id: "07_03_finally_raise"
+  title: "finally and raise"
+
+content: |
+  <section class="section">
+    <h2>🔒 The finally Block</h2>
+    <p>Code in the <code>finally</code> block is <strong>always executed</strong>, whether or not an error occurs.</p>
+    <p>It's used for "cleanup" tasks such as closing files or disconnecting from a network.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic finally</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("processing...")<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("abc")&nbsp;&nbsp;# error occurs<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("caught error")<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("always runs")<br><br># Output:<br># processing...<br># caught error<br># always runs</div>
+      <div class="example-explanation">
+        Code inside <code>finally:</code> runs whether or not an error occurred.<br>
+        Write "what must always happen at the end" here.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">finally when no error occurs</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("processing...")<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("42")&nbsp;&nbsp;# success<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("caught error")&nbsp;&nbsp;# not executed<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("always runs")&nbsp;&nbsp;# executed<br><br># Output:<br># processing...<br># always runs</div>
+      <div class="example-explanation">
+        <code>finally</code> runs even when there is no error.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>✅ The else Block</h2>
+    <p>Code in the <code>else</code> block runs <strong>only when no error occurred</strong> in the <code>try</code> block.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Using else</div>
+      <div class="example-code">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int("42")<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("conversion error")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"success: {x}")&nbsp;&nbsp;# runs only if no error<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("done")<br><br># Output:<br># success: 42<br># done</div>
+      <div class="example-explanation">
+        <code>else:</code> contains code for when no error occurred.<br>
+        The order is: <code>try</code> → no error → <code>else</code> → <code>finally</code>.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🚀 Raising Exceptions with raise</h2>
+    <p>You can use <code>raise</code> to deliberately raise an error.</p>
+    <p>This is useful when validating input or signaling that something is wrong.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Basic raise</div>
+      <div class="example-code">def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Age must be 0 or greater")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>check_age(25)&nbsp;&nbsp;&nbsp;# 25<br>check_age(-1)&nbsp;&nbsp;&nbsp;# ValueError: Age must be 0 or greater</div>
+      <div class="example-explanation">
+        <code>raise ValueError("message")</code> raises an exception.<br>
+        The caller can catch it with <code>try/except</code>.
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">Catching a raised exception</div>
+      <div class="example-code">def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Age must be 0 or greater")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = check_age(-1)<br>except ValueError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Input error: {e}")<br><br># Output: Input error: Age must be 0 or greater</div>
+      <div class="example-explanation">
+        Exceptions raised with <code>raise</code> can be caught with <code>try/except</code> just like any other exception.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏗️ Custom Exception Classes</h2>
+    <p>You can create your own exception classes.</p>
+    <p>Define a class that inherits from <code>Exception</code>.</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">Defining and using a custom exception</div>
+      <div class="example-code">class NegativeAgeError(Exception):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br><br>def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise NegativeAgeError(f"Age {age} is invalid")<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;check_age(-5)<br>except NegativeAgeError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Custom error: {e}")</div>
+      <div class="example-explanation">
+        <code>class MyError(Exception): pass</code> creates a custom exception.<br>
+        You can define meaningful error names for your program.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 Summary</h2>
+    <ul>
+      <li><code>finally:</code> always runs regardless of whether an error occurred</li>
+      <li><code>else:</code> runs only when no error occurred in the <code>try</code> block</li>
+      <li><code>raise ExceptionClass("message")</code> deliberately raises an exception</li>
+      <li>Custom exceptions can be created by inheriting from <code>Exception</code></li>
+    </ul>
+  </section>

@@ -1,0 +1,122 @@
+initial_code: |
+  class Shape:
+      # Write your code here
+      # Set name attribute in __init__(self, name)
+      # area(self) returns 0
+      pass
+
+  class Rectangle(Shape):
+      # Inherit from Shape
+      # Set width and height in __init__(self, width, height)
+      # area(self) returns width * height
+      pass
+
+  r = Rectangle(4, 5)
+  print(r.area())                    # 20
+  print(isinstance(r, Shape))        # True
+  print(isinstance(r, Rectangle))    # True
+
+solution_code: |
+  class Shape:
+      def __init__(self, name):
+          self.name = name
+
+      def area(self):
+          return 0
+
+  class Rectangle(Shape):
+      def __init__(self, width, height):
+          super().__init__("Rectangle")
+          self.width = width
+          self.height = height
+
+      def area(self):
+          return self.width * self.height
+
+  r = Rectangle(4, 5)
+  print(r.area())
+  print(isinstance(r, Shape))
+  print(isinstance(r, Rectangle))
+
+initial_files: []
+
+tests:
+  - name: "Check Rectangle(4, 5).area()"
+    description: "Rectangle(4, 5).area() should return 20"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Rectangle is not defined"}
+          else:
+              r = exec_globals['Rectangle'](4, 5)
+              test_result = r.area()
+              if test_result == 20:
+                  result = {"passed": True, "message": "✓ Rectangle(4, 5).area() = 20 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Rectangle(4, 5).area() should return 20. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check isinstance(Rectangle(1,2), Shape)"
+    description: "Rectangle instance should also be an instance of Shape"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals or 'Shape' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Rectangle or Shape is not defined"}
+          else:
+              r = exec_globals['Rectangle'](1, 2)
+              Shape = exec_globals['Shape']
+              if isinstance(r, Shape):
+                  result = {"passed": True, "message": "✓ isinstance(Rectangle(1,2), Shape) = True Correct!"}
+              else:
+                  result = {"passed": False, "message": "✗ Rectangle does not inherit from Shape"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check Shape().area()"
+    description: "Shape's area() should return 0"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Shape' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Shape is not defined"}
+          else:
+              s = exec_globals['Shape']("test")
+              test_result = s.area()
+              if test_result == 0:
+                  result = {"passed": True, "message": "✓ Shape.area() = 0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Shape.area() should return 0. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check Rectangle(3, 7).area()"
+    description: "Rectangle(3, 7).area() should return 21"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'Rectangle' not in exec_globals:
+              result = {"passed": False, "message": "✗ Class Rectangle is not defined"}
+          else:
+              r = exec_globals['Rectangle'](3, 7)
+              test_result = r.area()
+              if test_result == 21:
+                  result = {"passed": True, "message": "✓ Rectangle(3, 7).area() = 21 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Rectangle(3, 7).area() should return 21. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

@@ -1,0 +1,39 @@
+lesson:
+  number: "11_01"
+  id: "11_01_numpy_array"
+  title: "配列の作成と操作"
+description: "NumPy配列を作成し、合計と平均を計算する関数を実装します。"
+
+task_description: |
+  <p>関数 <code>array_stats(data)</code> を実装しましょう。</p>
+  <p>数値のリスト <code>data</code> を受け取り、<strong>合計（sum）と平均（mean）</strong>を辞書で返します。</p>
+  <h3>仕様</h3>
+  <ul>
+    <li>引数 <code>data</code> をNumPy配列に変換する</li>
+    <li>合計と平均を計算する</li>
+    <li><code>{"sum": float(合計), "mean": float(平均)}</code> の形式で返す</li>
+  </ul>
+  <h3>実行例</h3>
+  <pre>  print(array_stats([1, 2, 3, 4, 5]))
+  # {"sum": 15.0, "mean": 3.0}
+
+  print(array_stats([10, 20, 30]))
+  # {"sum": 60.0, "mean": 20.0}</pre>
+
+instructions:
+  - "関数シグネチャ <code>def array_stats(data):</code> は用意済みです"
+  - "<code>np.array(data)</code> でリストをNumPy配列に変換します"
+  - "<code>arr.sum()</code> で合計、<code>arr.mean()</code> で平均を計算できます"
+  - "<code>float()</code> で数値をPythonのfloat型に変換して返します"
+
+hints:
+  - hint: |
+      まず NumPy 配列に変換します：<br>
+      <code>arr = np.array(data)</code>
+  - hint: |
+      <code>sum()</code> と <code>mean()</code> メソッドを使います：<br>
+      <code>arr.sum()</code>  ← 合計<br>
+      <code>arr.mean()</code> ← 平均
+  - hint: |
+      辞書を作って返します：<br>
+      <code>return {"sum": float(arr.sum()), "mean": float(arr.mean())}</code>

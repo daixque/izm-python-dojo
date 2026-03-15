@@ -1,0 +1,110 @@
+lesson:
+  number: "11_02"
+  id: "11_02_numpy_math"
+  title: "数値計算と統計"
+
+content: |
+  <section class="section">
+    <h2>📡 ブロードキャスト（配列と数値の計算）</h2>
+    <p>NumPyでは、配列と1つの数値（スカラー）を組み合わせた計算が簡単にできます。</p>
+    <p>この機能を<strong>ブロードキャスト</strong>と言い、全要素に同じ演算を一度に適用できます。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">ブロードキャストの例</div>
+      <div class="example-code">import numpy as np<br><br>scores = np.array([60, 75, 80, 90, 55])<br><br># 全員の点数に10点加点<br>boosted = scores + 10<br>print(boosted)  # [70 85 90 100 65]<br><br># 全員の点数を2倍<br>doubled = scores * 2<br>print(doubled)  # [120 150 160 180 110]</div>
+      <div class="example-explanation">
+        配列に数値を加算・乗算すると、すべての要素に同じ計算が適用されます。<br>
+        ループを書く必要がなく、コードが短くなります。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🏗️ 配列を作る便利な関数</h2>
+    <p>NumPyには、さまざまな配列を素早く作るための関数があります。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">np.zeros() と np.ones()</div>
+      <div class="example-code">import numpy as np<br><br># 全要素が 0 の配列<br>z = np.zeros(5)<br>print(z)  # [0. 0. 0. 0. 0.]<br><br># 全要素が 1 の配列<br>o = np.ones(4)<br>print(o)  # [1. 1. 1. 1.]</div>
+      <div class="example-explanation">
+        <code>np.zeros(n)</code> は n 個の 0 からなる配列を作ります。<br>
+        <code>np.ones(n)</code> は n 個の 1 からなる配列を作ります。<br>
+        初期値として使うことが多いです。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">np.arange()</div>
+      <div class="example-code">import numpy as np<br><br># 0 から 9 まで<br>a = np.arange(10)<br>print(a)  # [0 1 2 3 4 5 6 7 8 9]<br><br># 1 から 10 まで、2 ずつ<br>b = np.arange(1, 11, 2)<br>print(b)  # [1 3 5 7 9]</div>
+      <div class="example-explanation">
+        <code>np.arange(開始, 終了, ステップ)</code> で等差数列の配列を作ります。<br>
+        Pythonの <code>range()</code> と同じ使い方ですが、NumPy配列を返します。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📊 統計関数</h2>
+    <p>NumPyには、データを分析するための統計関数が多数用意されています。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">min, max, std</div>
+      <div class="example-code">import numpy as np<br><br>data = np.array([4, 8, 15, 16, 23, 42])<br><br>print(data.min())   # 4  ← 最小値<br>print(data.max())   # 42 ← 最大値<br>print(data.sum())   # 108 ← 合計<br>print(data.mean())  # 18.0 ← 平均<br>print(data.std())   # 13.0... ← 標準偏差</div>
+      <div class="example-explanation">
+        <code>min()</code> と <code>max()</code> は最小・最大値を返します。<br>
+        <code>std()</code> は<strong>標準偏差</strong>と言い、データのばらつき具合を表します。<br>
+        値が大きいほど、データがバラバラに散らばっています。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">関数形式でも使える</div>
+      <div class="example-code">import numpy as np<br><br>data = np.array([10, 20, 30, 40, 50])<br><br># メソッド形式<br>print(data.mean())    # 30.0<br><br># 関数形式（同じ結果）<br>print(np.mean(data))  # 30.0<br>print(np.min(data))   # 10<br>print(np.max(data))   # 50</div>
+      <div class="example-explanation">
+        <code>data.mean()</code> と <code>np.mean(data)</code> は同じ結果です。<br>
+        どちらの書き方でも動きますが、どちらか一方に統一すると読みやすいコードになります。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔲 2次元配列の基礎</h2>
+    <p>NumPyでは、リストのリストを使って<strong>2次元配列（行列）</strong>を作ることができます。</p>
+    <p>表やマトリクスのようなデータを扱うときに使います。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">2次元配列の作成</div>
+      <div class="example-code">import numpy as np<br><br>matrix = np.array([[1, 2, 3],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4, 5, 6],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[7, 8, 9]])<br><br>print(matrix)<br># [[1 2 3]<br>#  [4 5 6]<br>#  [7 8 9]]<br><br>print(matrix.shape)  # (3, 3) ← 3行3列</div>
+      <div class="example-explanation">
+        リストのリストを渡すと2次元配列が作れます。<br>
+        <code>shape</code> は <code>(行数, 列数)</code> を表します。
+      </div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">2次元配列の要素へのアクセス</div>
+      <div class="example-code">import numpy as np<br><br>matrix = np.array([[1, 2, 3],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4, 5, 6],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[7, 8, 9]])<br><br>print(matrix[0, 0])  # 1（1行目1列目）<br>print(matrix[1, 2])  # 6（2行目3列目）<br>print(matrix[2])     # [7 8 9]（3行目全体）</div>
+      <div class="example-explanation">
+        2次元配列には <code>[行, 列]</code> でアクセスします。<br>
+        行だけ指定すると、その行全体を取得できます。
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 まとめ</h2>
+    <ul>
+      <li>配列とスカラーの演算は<strong>ブロードキャスト</strong>で全要素に適用される</li>
+      <li><code>np.zeros(n)</code>, <code>np.ones(n)</code>, <code>np.arange()</code> で配列を素早く作れる</li>
+      <li><code>min()</code>, <code>max()</code>, <code>std()</code> などの統計メソッドが使える</li>
+      <li>2次元配列はリストのリストから作り、<code>[行, 列]</code> でアクセスする</li>
+    </ul>
+  </section>

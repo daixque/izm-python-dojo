@@ -1,0 +1,106 @@
+initial_code: |
+  def validate_age(age):
+      # Write your code here
+      # Return age if it is between 0 and 150 (inclusive)
+      # Otherwise raise a ValueError
+      pass
+
+  print(validate_age(25))   # 25
+  print(validate_age(0))    # 0
+  print(validate_age(150))  # 150
+  # validate_age(-1)        # ValueError
+  # validate_age(200)       # ValueError
+
+solution_code: |
+  def validate_age(age):
+      if age < 0 or age > 150:
+          raise ValueError(f"Invalid age: {age}")
+      return age
+
+  print(validate_age(25))
+  print(validate_age(0))
+  print(validate_age(150))
+
+initial_files: []
+
+tests:
+  - name: "Check validate_age(25)"
+    description: "validate_age(25) should return 25"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function validate_age is not defined"}
+          else:
+              test_result = exec_globals['validate_age'](25)
+              if test_result == 25:
+                  result = {"passed": True, "message": "✓ validate_age(25) = 25 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ validate_age(25) should return 25. Actual: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check validate_age(-1)"
+    description: "validate_age(-1) should raise ValueError"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function validate_age is not defined"}
+          else:
+              try:
+                  exec_globals['validate_age'](-1)
+                  result = {"passed": False, "message": "✗ validate_age(-1) should raise ValueError"}
+              except ValueError:
+                  result = {"passed": True, "message": "✓ validate_age(-1) raised ValueError Correct!"}
+              except Exception as e:
+                  result = {"passed": False, "message": f"✗ Expected ValueError but got {type(e).__name__}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check validate_age(200)"
+    description: "validate_age(200) should raise ValueError"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function validate_age is not defined"}
+          else:
+              try:
+                  exec_globals['validate_age'](200)
+                  result = {"passed": False, "message": "✗ validate_age(200) should raise ValueError"}
+              except ValueError:
+                  result = {"passed": True, "message": "✓ validate_age(200) raised ValueError Correct!"}
+              except Exception as e:
+                  result = {"passed": False, "message": f"✗ Expected ValueError but got {type(e).__name__}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Check boundary values 0 and 150"
+    description: "validate_age(0) and validate_age(150) should return their values"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'validate_age' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function validate_age is not defined"}
+          else:
+              r0 = exec_globals['validate_age'](0)
+              r150 = exec_globals['validate_age'](150)
+              if r0 == 0 and r150 == 150:
+                  result = {"passed": True, "message": "✓ validate_age(0) = 0, validate_age(150) = 150 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Boundary values incorrect. validate_age(0)={r0}, validate_age(150)={r150}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

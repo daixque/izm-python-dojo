@@ -1,0 +1,48 @@
+lesson:
+  number: "13_02"
+  id: "13_02_plot_advanced"
+  title: "グラフのカスタマイズ"
+
+content: |
+  <section class="section">
+    <h2>📊 複数のデータ系列を1つのグラフに描く</h2>
+    <p>前のレッスンでは1つのデータを1つのグラフに描きました。実は <code>plt.plot()</code> を複数回呼ぶだけで、<strong>1つのグラフに複数のデータ系列</strong>を重ねて表示できます。</p>
+    <p>気温と降水量など、異なるデータを比べたいときに便利です。</p>
+  </section>
+
+  <section class="examples">
+    <div class="example-item">
+      <div class="example-title">複数の折れ線グラフを描く</div>
+      <div class="example-code">x = [1, 2, 3, 4, 5]<br>y1 = [10, 15, 12, 20, 18]<br>y2 = [5, 8, 7, 11, 9]<br><br>plt.plot(x, y1, label="データA")<br>plt.plot(x, y2, label="データB")<br>plt.legend()<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.plot()</code> を2回呼ぶと2本の折れ線が同じグラフに描かれます。<code>label=</code> で各データに名前をつけ、<code>plt.legend()</code> で凡例を表示します。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">グリッド線を表示する</div>
+      <div class="example-code">plt.plot(x, y1)<br>plt.grid(True)<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.grid(True)</code> を呼ぶと方眼紙のようなグリッド線が表示され、値が読み取りやすくなります。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">散布図を描く</div>
+      <div class="example-code">x = [1, 2, 3, 4, 5]<br>y = [10, 25, 15, 30, 20]<br><br>plt.scatter(x, y)<br>plt.title("散布図の例")<br>plt.show()</div>
+      <div class="example-explanation"><code>plt.scatter(x, y)</code> で散布図（てんてんが並ぶグラフ）を描けます。2つの量の関係を見たいときに使います。</div>
+    </div>
+
+    <div class="example-item">
+      <div class="example-title">色と線のスタイルを変える</div>
+      <div class="example-code">plt.plot(x, y1, color="red", linestyle="--", label="赤い破線")<br>plt.plot(x, y2, color="blue", linestyle="-", label="青い実線")<br>plt.legend()<br>plt.show()</div>
+      <div class="example-explanation"><code>color=</code> で色を、<code>linestyle=</code> で線のスタイルを変えられます。<code>"--"</code> は破線、<code>"-"</code> は実線です。複数の系列を区別しやすくなります。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>📝 グラフのカスタマイズまとめ</h2>
+    <ul>
+      <li><code>plt.plot()</code> を複数回 → 複数の折れ線を重ねる</li>
+      <li><code>label=</code> 引数 + <code>plt.legend()</code> → 凡例を表示</li>
+      <li><code>plt.grid(True)</code> → グリッド線を表示</li>
+      <li><code>plt.scatter(x, y)</code> → 散布図を描く</li>
+      <li><code>color=</code>、<code>linestyle=</code> → 色・線のスタイルを変える</li>
+    </ul>
+  </section>

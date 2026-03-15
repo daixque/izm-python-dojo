@@ -1,0 +1,99 @@
+initial_code: |
+  def linear_search(items, target):
+      # ここにコードを書いてください
+      # for ループで先頭から順番に調べる
+      # 見つかったらインデックスを返す
+      # 見つからなかったら -1 を返す
+      pass
+
+  print(linear_search([3, 1, 4, 1, 5], 4))  # 2
+  print(linear_search([3, 1, 4, 1, 5], 9))  # -1
+
+solution_code: |
+  def linear_search(items, target):
+      for i in range(len(items)):
+          if items[i] == target:
+              return i
+      return -1
+
+  print(linear_search([3, 1, 4, 1, 5], 4))
+  print(linear_search([3, 1, 4, 1, 5], 9))
+
+initial_files: []
+
+tests:
+  - name: "linear_search([3,1,4,1,5], 4) の確認"
+    description: "値 4 がインデックス 2 にある"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 linear_search が定義されていません"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 4)
+              if test_result == 2:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 4) = 2 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 4) は 2 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "linear_search([3,1,4,1,5], 9) の確認"
+    description: "値 9 はリストにないので -1 を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 linear_search が定義されていません"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 9)
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 9) = -1 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 9) は -1 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "linear_search([3,1,4,1,5], 1) の確認"
+    description: "値 1 はインデックス 1 と 3 にあるが、最初の出現（1）を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 linear_search が定義されていません"}
+          else:
+              test_result = exec_globals['linear_search']([3, 1, 4, 1, 5], 1)
+              if test_result == 1:
+                  result = {"passed": True, "message": "✓ linear_search([3,1,4,1,5], 1) = 1 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([3,1,4,1,5], 1) は 1 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "空リストのテスト"
+    description: "空のリストで探索すると -1 を返す"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'linear_search' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 linear_search が定義されていません"}
+          else:
+              test_result = exec_globals['linear_search']([], 5)
+              if test_result == -1:
+                  result = {"passed": True, "message": "✓ linear_search([], 5) = -1 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ linear_search([], 5) は -1 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result

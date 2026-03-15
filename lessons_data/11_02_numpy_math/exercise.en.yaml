@@ -1,0 +1,36 @@
+lesson:
+  number: "11_02"
+  id: "11_02_numpy_math"
+  title: "Numerical Computation and Statistics"
+description: "Implement min-max normalization using NumPy to scale data into the 0–1 range."
+
+task_description: |
+  <p>Implement the function <code>normalize(data)</code>.</p>
+  <p>It receives a list of numbers <code>data</code> and returns the <strong>min-max normalized</strong> result.</p>
+  <h3>What is Min-Max Normalization?</h3>
+  <p>It rescales the data so the minimum value becomes 0 and the maximum value becomes 1.</p>
+  <p>Formula: <code>(x - min) / (max - min)</code></p>
+  <h3>Example Output</h3>
+  <pre>  print(normalize([0, 5, 10]))
+  # [0.0, 0.5, 1.0]
+
+  print(normalize([2, 4, 6, 8]))
+  # [0.0, 0.333..., 0.666..., 1.0]</pre>
+
+instructions:
+  - "The function signature <code>def normalize(data):</code> is already provided"
+  - "Use <code>np.array(data, dtype=float)</code> to convert the list to a float NumPy array"
+  - "Use <code>arr.min()</code> and <code>arr.max()</code> to get the minimum and maximum values"
+  - "Apply the formula <code>(arr - arr.min()) / (arr.max() - arr.min())</code> and return the result"
+
+hints:
+  - hint: |
+      First convert to a float NumPy array:<br>
+      <code>arr = np.array(data, dtype=float)</code>
+  - hint: |
+      Get the minimum and maximum:<br>
+      <code>min_val = arr.min()</code><br>
+      <code>max_val = arr.max()</code>
+  - hint: |
+      Apply the normalization formula and return:<br>
+      <code>return (arr - arr.min()) / (arr.max() - arr.min())</code>

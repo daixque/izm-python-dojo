@@ -1,0 +1,97 @@
+initial_code: |
+  import pandas as pd
+
+  def column_mean(df, column):
+      # Write your code here
+      # Extract the column with df[column] and calculate the average with .mean()
+      pass
+
+  # Create a test DataFrame and check your result
+  test_df = pd.DataFrame({
+      "name": ["Alice", "Bob", "Charlie"],
+      "score": [80, 90, 70]
+  })
+  print(column_mean(test_df, "score"))  # 80.0
+
+solution_code: |
+  import pandas as pd
+
+  def column_mean(df, column):
+      return df[column].mean()
+
+  test_df = pd.DataFrame({
+      "name": ["Alice", "Bob", "Charlie"],
+      "score": [80, 90, 70]
+  })
+  print(column_mean(test_df, "score"))
+
+initial_files: []
+
+required_packages:
+  - numpy
+  - pandas
+
+tests:
+  - name: "Basic test: mean of score column"
+    description: "score column [80, 90, 70] should have mean 80.0"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function column_mean is not defined"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "score": [80, 90, 70]})
+              r = exec_globals['column_mean'](test_df, "score")
+              if r == 80.0:
+                  result = {"passed": True, "message": "✓ column_mean(df, 'score') = 80.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 80.0, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "Different column test: mean of age column"
+    description: "age column [10, 20, 30] should have mean 20.0"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function column_mean is not defined"}
+          else:
+              test_df = pd.DataFrame({"name": ["Alice", "Bob", "Charlie"], "age": [10, 20, 30]})
+              r = exec_globals['column_mean'](test_df, "age")
+              if r == 20.0:
+                  result = {"passed": True, "message": "✓ column_mean(df, 'age') = 20.0 Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: 20.0, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result
+
+  - name: "High score data test"
+    description: "points column [100, 95, 85] should return the correct mean"
+    code: |
+      try:
+          import pandas as pd
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'column_mean' not in exec_globals:
+              result = {"passed": False, "message": "✗ Function column_mean is not defined"}
+          else:
+              test_df = pd.DataFrame({"name": ["Dave", "Eve", "Frank"], "points": [100, 95, 85]})
+              r = exec_globals['column_mean'](test_df, "points")
+              expected = (100 + 95 + 85) / 3
+              if abs(r - expected) < 0.01:
+                  result = {"passed": True, "message": f"✓ column_mean(df, 'points') = {r:.2f} Correct!"}
+              else:
+                  result = {"passed": False, "message": f"✗ Expected: {expected:.2f}, Actual: {r}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ Error: {str(e)}"}
+      result

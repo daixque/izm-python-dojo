@@ -1,0 +1,103 @@
+initial_code: |
+  def safe_divide(a, b):
+      # ここにコードを書いてください
+      # a / b を計算して返す
+      # ZeroDivisionError のときは "ZeroDivisionError" を返す
+      # TypeError のときは "TypeError" を返す
+      pass
+
+  print(safe_divide(10, 2))    # 5.0
+  print(safe_divide(10, 0))    # ZeroDivisionError
+  print(safe_divide(10, "a"))  # TypeError
+
+solution_code: |
+  def safe_divide(a, b):
+      try:
+          return a / b
+      except ZeroDivisionError:
+          return "ZeroDivisionError"
+      except TypeError:
+          return "TypeError"
+
+  print(safe_divide(10, 2))
+  print(safe_divide(10, 0))
+  print(safe_divide(10, "a"))
+
+initial_files: []
+
+tests:
+  - name: "safe_divide(10, 2) の確認"
+    description: "safe_divide(10, 2) が 5.0 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_divide が定義されていません"}
+          else:
+              test_result = exec_globals['safe_divide'](10, 2)
+              if test_result == 5.0:
+                  result = {"passed": True, "message": "✓ safe_divide(10, 2) = 5.0 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, 2) は 5.0 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_divide(10, 0) の確認"
+    description: "safe_divide(10, 0) が \"ZeroDivisionError\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_divide が定義されていません"}
+          else:
+              test_result = exec_globals['safe_divide'](10, 0)
+              if test_result == "ZeroDivisionError":
+                  result = {"passed": True, "message": "✓ safe_divide(10, 0) = \"ZeroDivisionError\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, 0) は \"ZeroDivisionError\" になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_divide(10, \"a\") の確認"
+    description: "safe_divide(10, \"a\") が \"TypeError\" を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_divide が定義されていません"}
+          else:
+              test_result = exec_globals['safe_divide'](10, "a")
+              if test_result == "TypeError":
+                  result = {"passed": True, "message": "✓ safe_divide(10, \"a\") = \"TypeError\" 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(10, \"a\") は \"TypeError\" になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
+
+  - name: "safe_divide(7, 2) の確認"
+    description: "safe_divide(7, 2) が 3.5 を返すか"
+    code: |
+      try:
+          exec_globals = {}
+          exec(user_code, exec_globals)
+
+          if 'safe_divide' not in exec_globals:
+              result = {"passed": False, "message": "✗ 関数 safe_divide が定義されていません"}
+          else:
+              test_result = exec_globals['safe_divide'](7, 2)
+              if test_result == 3.5:
+                  result = {"passed": True, "message": "✓ safe_divide(7, 2) = 3.5 正解です"}
+              else:
+                  result = {"passed": False, "message": f"✗ safe_divide(7, 2) は 3.5 になるはずです。実際: {test_result}"}
+      except Exception as e:
+          result = {"passed": False, "message": f"✗ エラー: {str(e)}"}
+      result
