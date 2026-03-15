@@ -60,17 +60,21 @@ body {
 }
 
 .status {
-    background: #FCFCFC;
     border: 1px solid #e0e0e0;
-    padding: 6px 16px;
     border-radius: 20px;
+    overflow: hidden;
+}
+
+#status {
+    display: block;
+    background: #FCFCFC;
+    padding: 6px 16px;
     font-size: 13px;
     color: #666;
 }
 
 #status.ready {
     background: #d4edda;
-    border-color: #b8dfc4;
     color: #155724;
 }
 
